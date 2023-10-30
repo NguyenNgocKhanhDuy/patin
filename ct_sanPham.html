@@ -80,57 +80,63 @@
                     </div>
                 </div>
                 <div class="right">
-                    <h2>Giày Patin SOFT A1</h2>
+                    <h2 id="name"></h2>
                     <div class="rating-star">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
-                        <span>(18 lượt đánh giá)</span>
+<!--                        <span>(18 lượt đánh giá)</span>-->
                     </div>
                     <div class="price-section">
-                        850,000₫
-                        <h5 class="price">1,065,000₫</h5>
+<!--                        850,000₫-->
+<!--                        <h5 class="price">1,065,000₫</h5>-->
                     </div>
                     <div class="colors">
                         <span>Màu sắc</span>
-                        <div class="check-color">
-                            <input type="radio" name="color">
-                        </div>
-                        <div class="check-color">
-                            <input type="radio" name="color">
-                        </div>
-                        <div class="check-color">
-                            <input type="radio" name="color">
+                        <div class="container-checkColor">
+<!--                            <div class="check-color">-->
+<!--                                <input type="radio" name="color">-->
+<!--                            </div>-->
+<!--                            <div class="check-color">-->
+<!--                                <input type="radio" name="color">-->
+<!--                            </div>-->
+<!--                            <div class="check-color">-->
+<!--                                <input type="radio" name="color">-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="sizes">
                         <span>Kích cỡ</span>
-                        <div class="check-size">
-                            S(31-34)
-                            <input type="radio" name="size">
-                        </div>
-                        <div class="check-size">
-                            M(35-38)
-                            <input type="radio" name="size">
-                        </div>
-                        <div class="check-size">
-                            L(39-42)
-                            <input type="radio" name="size">
+                        <div class="container-checkSize">
+<!--                            <div class="check-size">-->
+<!--                                S(31-34)-->
+<!--                                <input type="radio" name="size">-->
+<!--                            </div>-->
+<!--                            <div class="check-size">-->
+<!--                                M(35-38)-->
+<!--                                <input type="radio" name="size">-->
+<!--                            </div>-->
+<!--                            <div class="check-size">-->
+<!--                                L(39-42)-->
+<!--                                <input type="radio" name="size">-->
+<!--                            </div>-->
                         </div>
                     </div>
-
+                    <div class="deselect">
+                        <span>Bỏ Chọn</span>
+                    </div>
                     <div class="buy">
                         <div class="quantity">
-                            <i class="fa-solid fa-minus"></i>
+                            <i id="minus" class="fa-solid fa-minus"></i>
                             <input type="number" value="1">
-                            <i class="fa-solid fa-plus"></i>
+                            <i id="plus" class="fa-solid fa-plus"></i>
                         </div>
                        <div class="addTocart">
                            <a href="#">Thêm vào giỏ hàng</a>
                        </div>
-                        <span>
+                        <span id="addToLike">
                             <i class="fa-regular fa-heart"></i>
                         </span>
                     </div>
@@ -149,18 +155,40 @@
             <div class="info">
                 <div class="navigation">
                     <ul>
-                        <li><a href="#">Thông tin</a></li>
-                        <li><a href="#">Đánh giá</a></li>
+                        <li id="info"><a>Thông tin</a></li>
+                        <li id="review"><a>Đánh giá</a></li>
                     </ul>
                 </div>
                 <div class="info-text">
-                    <h3 class="title">Thông tin sản phẩm</h3>
-                    <p class="product-info">
-                        Thương hiệu SOFT, Màu sắc Đen, Hồng, Xanh dương, Kích cỡ S (31-34), M (35-38), L (39-42), Khả năng điều chỉnh Điều chỉnh được 4 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!, Khả năng trượt Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7, Phanh (thắng) Chất liệu nhựa, Có ở chân giày phải, Độ bám Bánh xe cao su độ đàn hồi và bám đường tốt, Khóa giày Khóa cổ giày: khóa đóng nhựa dẻo, Khóa thân giày: khóa dán ,Thân giày Khuôn vỏ nhựa chịu lực tốt, khả năng chống va đập cao
-                    </p>
+<!--                    <h3 class="title">Thông tin sản phẩm</h3>-->
+<!--                    <p class="product-info">-->
+<!--                        Thương hiệu SOFT, Màu sắc Đen, Hồng, Xanh dương, Kích cỡ S (31-34), M (35-38), L (39-42), Khả năng điều chỉnh Điều chỉnh được 4 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!, Khả năng trượt Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7, Phanh (thắng) Chất liệu nhựa, Có ở chân giày phải, Độ bám Bánh xe cao su độ đàn hồi và bám đường tốt, Khóa giày Khóa cổ giày: khóa đóng nhựa dẻo, Khóa thân giày: khóa dán ,Thân giày Khuôn vỏ nhựa chịu lực tốt, khả năng chống va đập cao-->
+<!--                    </p>-->
+                </div>
+                <div class="review">
+                    <div class="left">
+                        <p>Chưa có đánh giá nào</p>
+                    </div>
+                    <div class="right">
+                        <h3>Thêm đánh giá</h3>
+                        <p>Đánh giá của bạn</p>
+                        <div class="rating-star">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>Nhận xét của bạn</p>
+                        <textarea>
+
+                        </textarea>
+                        <div class="send">Gửi đi</div>
+                    </div>
                 </div>
             </div>
             <div class="related-product">
+                <h3>Sản phẩm liên quan</h3>
                 <div class="product-list" id="product-list">
                     <div class="product-item">
                         <a href="#">
