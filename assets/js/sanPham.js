@@ -182,6 +182,7 @@ function changeBG(input) {
 
 // List Sản phẩm
 var products = [
+    {id: 40, name: "Giày Patin SOFT A1", price: "1,065,000₫", priceSale: "850,000₫", colors: ["Đen", "Hồng", "Xanh dương"], sizes: ["S (31-34)", "M (35-38)", "L (39-42)"], images: ["https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-SOFT-A1-Hồng-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-SOFT-A1-Đen-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/12/drift-junior-pink-380x380.jpg", "https://xpatin.com/wp-content/uploads/2020/09/giay-patin-iskate-fb22-xanh-380x380.png", "https://xpatin.com/wp-content/uploads/2019/12/giay-patin-flying-eagle-k7-den-380x380.jpg",], info: ["Thương hiệu SOFT", "Màu sắc Đen, Hồng, Xanh dương", "Kích cỡ S (31-34), M (35-38), L (39-42)", "Khả năng điều chỉnh Điều chỉnh được 4 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra! ","Khả năng trượt Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7 ","Phanh (thắng) Chất liệu nhựa, Có ở chân giày phải ","Độ bám Bánh xe cao su độ đàn hồi và bám đường tốt", "Khóa giày Khóa cổ giày: khóa đóng nhựa dẻo, Khóa thân giày: khóa dán ,Thân giày Khuôn vỏ nhựa chịu lực tốt, khả năng chống va đập cao"]},
     {id: 1, image: "./assets/images/product/soft-a1/soft-a1-xanh.jpg", name: "Giày Patin SOFT A1", priceSale: "850,000₫", price: "1,065,000₫", color: ["Đen", "Hồng", "Xanh dương"]},
     {id: 2, image: "./assets/images/product/soft-a1/soft-a1-xanh.jpg", name: "2", priceSale: "850,000₫", price: "1,065,000₫"},
     {id: 3, image: "./assets/images/product/soft-a1/soft-a1-xanh.jpg", name: "3", priceSale: "850,000₫", price: "1,065,000₫"},
@@ -339,3 +340,6 @@ previousPage.addEventListener("click", function (){
     getProductNumberCurrentPage(currentPage);
     renderProduct();
 });
+
+"{id: 40, name: Giày Patin SOFT A1price: 1,065,000₫, priceSale: 850,000₫, colors: Đen, Hồng, Xanh dương, sizes: S (31-34), M (35-38), L (39-42), images: [https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-SOFT-A1-Hồng-380x380.jpg, https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-SOFT-A1-Đen-380x380.jpg, https://xpatin.com/wp-content/uploads/2019/12/drift-junior-pink-380x380.jpg, https://xpatin.com/wp-content/uploads/2020/09/giay-patin-iskate-fb22-xanh-380x380.png, https://xpatin.com/wp-content/uploads/2019/12/giay-patin-flying-eagle-k7-den-380x380.jpg, ], info: Thương hiệu SOFT, Màu sắc Đen, Hồng, Xanh dương Kích cỡ S (31-34), M (35-38), L (39-42), Khả năng điều chỉnh Điều chỉnh được 4 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra! ,Khả năng trượt Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7 ,Phanh (thắng) Chất liệu nhựa, Có ở chân giày phải ,Độ bám Bánh xe cao su độ đàn hồi và bám đường tốt, Khóa giày Khóa cổ giày: khóa đóng nhựa dẻo, Khóa thân giày: khóa dán ,Thân giày Khuôn vỏ nhựa chịu lực tốt, khả năng chống va đập cao"
+
