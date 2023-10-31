@@ -18,6 +18,7 @@ var infoText = document.querySelector(".info-text");
 var reviewText = document.querySelector(".review");
 
 
+// khởi tạo khi lấy dữ liệu từ local
 function initProduct() {
     imgMain.src = product.images[0];
     for (let i = 0; i < listImg.length; i++) {
@@ -57,7 +58,7 @@ function initProduct() {
 
 initProduct();
 
-
+// nhấn vào ảnh lớn
 var imgModal = document.getElementById("imageInModal");
 var modalImgClick = document.querySelector(".modal-img");
 var closeModalImg = document.getElementById("closeModalImg");
@@ -149,7 +150,6 @@ function select() {
             countColor = 0;
             countSize = 0;
             boxColor[i].classList.remove("selectActive");
-            boxSizes[i].classList.remove("selectActive");
             deselectBtn.style.visibility = "hidden";
         });
     }
@@ -169,7 +169,6 @@ function select() {
         deselectBtn.addEventListener("click", function (){
             countColor = 0;
             countSize = 0;
-            boxColor[i].classList.remove("selectActive");
             boxSizes[i].classList.remove("selectActive");
             deselectBtn.style.visibility = "hidden";
         });
@@ -242,6 +241,7 @@ review.addEventListener("click", function (){
     infoText.style.display = "none";
 })
 
+// rating star
 var stars = document.querySelectorAll(".rating-star i");
 for (let i = 0; i < stars.length; i++) {
     stars[i].addEventListener("click", function () {
@@ -254,3 +254,53 @@ for (let i = 0; i < stars.length; i++) {
         } 
     });
 }
+
+// hiên thị sản phẩm liên quan
+var relatedProducts = [
+    {id: 1, name: "Giày Patin Micro Delta X 2023", price: "", priceSale: "14,990,000₫" ,colors: ["pink", "blue"], sizes: ["27-29", "30-32", "33-35", "36-38"], images: ["https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg", "https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-1-380x380.jpg", "https://xpatin.com/wp-content/uploads/2023/05/thiet-ke-hop-dung-giay-patin-micro-delta-x-2023-380x380.jpg", "https://xpatin.com/wp-content/uploads/2023/05/giay-patin-micro-delta-x-2023-mau-hong-380x380.jpg", "https://xpatin.com/wp-content/uploads/2023/05/giay-patin-micro-delta-x-2023-mau-xanh-anh-2-380x380.jpg"], info: ["Thương hiệu MICRO – Thụy Sĩ", "Màu sắc: Hồng, Xanh dương", "Kích cỡ: 27-29, 30-32, 33-35, 36-38", "Khả năng điều chỉnh: Thay đổi được 3 kích cỡ khác nhau, rộng hơn khi chân trẻ to ra!", "Khả năng trượt: Bánh xe 72mm, Bánh xe 76mm, Vòng bi Slalom PRO9", "Độ bám: Bánh xe cao su độ đàn hồi và bám đường tốt", "Khung càng - Frames: Kích thước 231mm, Nhôm nguyên khối CNC", "Phanh (thắng): Không", "Khóa cổ giày: khóa dán cao cấp, Khóa thân giày: khóa cài nhựa cao cấp"]},
+    {id: 2, name: "Giày Patin Micro DELTA LIBERTY", price: "", priceSale: "12,290,000₫",  colors: ["gray"] , sizes: ["36-38", "39-40", "41-42", "43-44"], images: ["https://xpatin.com/wp-content/uploads/2022/01/525e5cf1ed-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/01/13664b915b-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/01/c057c9f26e-min-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/01/giay-patin-micro-delta-liberty-mau-bac-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/01/giay-patin-micro-delta-liberty-thuong-hieu-thuy-si-380x380.jpg"], info:["Thương hiệuMICRO – Thụy Sĩ", "Màu sắc: Bạc", "Kích cỡ: 36-38, 39-40, 41-42, 43-44", "Khả năng điều chỉnh: Size đơn (1 kích cỡ) không điều chỉnh, Size kép (2 kích cỡ)", "Độ bám: Bánh xe cao su độ đàn hồi và bám đường tốt", "Khả năng trượt: Bánh xe 64mm-68mm, Bánh xe 72mm, Bánh xe 76mm, Bánh xe 80mm, Độ cứng bánh xe 85A, Vòng bi Slalom PRO9", "Khung càng - Frames: Kích thước 231mm, Kích thước 243mm, Nhôm nguyên khối CNC", "Khóa cổ giày: khóa dán cao cấp, Khóa thân giày: khóa cài nhựa cao cấp", "Thân giày: Đế giày đúc full carbon, Vải & da cao cấp", "Phanh (thắng): Không"]},
+    {id: 3, name: "Giày Patin Micro Delta Junior", price: "", priceSale: "10,990,000₫",  colors: ["pink", "blue"] , sizes: ["27-29", "30-32", "33-35", "36-38"], images: ["https://xpatin.com/wp-content/uploads/2021/12/duoc-tao-thanh-boi-cong-nghe-tot-nhat-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/12/delta-junior-la-mau-giay-truot-rat-nhay-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/12/co-giay-composite-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/12/giay-patin-micro-delta-junior-mau-hong-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/12/giay-patin-micro-delta-junior-mau-xanh-anh-2-380x380.jpg"], info:["Thương hiệu: MICRO – Thụy Sĩ", "Màu sắc: Hồng, Xanh dương", "Kích cỡ: 27-29, 30-32, 33-35, 36-38", "Khả năng điều chỉnh: Thay đổi được 3 kích cỡ khác nhau, rộng hơn khi chân trẻ to ra!", "Khả năng trượt: ABEC7 PRO, Bánh xe 72mm, Bánh xe 76mm", "Độ bám: Bánh xe cao su độ đàn hồi và bám đường tốt", "Khung càng - Frames: Kích thước 231mm, Nhôm nguyên khối CNC", "Khóa cổ giày: khóa dán cao cấp, Khóa thân giày: khóa cài nhựa cao cấp", "Thân giày: Đế giày đúc full carbon, Vải & da cao cấp"]},
+    {id: 4, name: "Giày Patin Micro DELTA X", price: "", priceSale: "10,990,000₫",  colors: ["pink", "blue"] , sizes: ["27-29", "30-32", "33-35", "36-38"], images: ["https://xpatin.com/wp-content/uploads/2019/10/Giày-Patin-Micro-DELTA-X-Hồng-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/10/Giày-Patin-Micro-DELTA-X-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/01/giay-patin-micro-delta-liberty-380x380.jpg", "https://xpatin.com/wp-content/uploads/2023/05/giay-patin-micro-delta-force-ii-silver-380x380.jpg", "https://xpatin.com/wp-content/uploads/2022/07/giay-patin-dynamic-speed-thuong-hieu-thuy-si-380x380.jpg"], info:["Thương hiệu: MICRO – Thụy Sĩ ", "Màu sắc: Hồng, Xanh dương", "Kích cỡ: 27-29, 30-32, 33-35, 36-38", "Khả năng điều chỉnh: Thay đổi được 3 kích cỡ khác nhau, rộng hơn khi chân trẻ to ra!", "Khả năng trượt: Bánh xe 72mm, Bánh xe 76mm, Vòng bi ABEC9", "Độ bám: Bánh xe cao su độ đàn hồi và bám đường tốt", "Khung càng - Frames: Kích thước 231mm, Nhôm nguyên khối CNC", "Khóa giày: Khóa cổ giày: khóa dán cao cấp, Khóa thân giày: khóa cài nhựa cao cấp", "Thân giày: Đế giày đúc full carbon, Vải & da cao cấp"]}
+]
+
+function renderRelatedProduct() {
+    var html = "";
+    for(var i = 0; i < relatedProducts.length; i++) {
+            html += `<div class="product-item">`;
+            html += `<a href="./ct_sanPham.html">`;
+            html += `<img src= ${relatedProducts[i].images[0]} >`;
+            html += `<h4 class="name"> ${relatedProducts[i].name} </h4>`;
+            html += `<span class="price-section">` + relatedProducts[i].priceSale;
+            html += `<h5 class="price"> ${relatedProducts[i].price} </h5>`;
+            html += `</span>`;
+            html += `<ul>`;
+            html += `<li><i class="fa-solid fa-heart"></i></li>`;
+            html += `<li><i class="fa-solid fa-cart-shopping"></i></li>`;
+            html += `</ul>`;
+            html += `</a>`;
+            html += `</div>`;
+    }
+
+    document.querySelector(".related-product .product-list").innerHTML = html;
+}
+
+renderRelatedProduct();
+
+
+function showDetail(t) {
+    var t = document.querySelectorAll(".related-product .product-item");
+    for (let i = 0; i < t.length; i++) {
+        t[i].addEventListener("click", function () {
+            console.log(t[i]);
+            var index = i;
+            var product = JSON.stringify(relatedProducts[index]);
+            console.log(product)
+            localStorage.clear();
+            localStorage.setItem("san pham", product);
+        })
+    }
+}
+
+showDetail();
+
+
