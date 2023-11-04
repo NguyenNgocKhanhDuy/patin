@@ -132,6 +132,7 @@
     display: inline-block;
     margin: 0 16px;
     cursor: pointer;
+    border: 1px solid #ccc;
 }
 
 .selectActive {

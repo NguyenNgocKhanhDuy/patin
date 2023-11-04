@@ -144,6 +144,7 @@ header .user ul li:hover a {
     position: relative;
     cursor: pointer;
     padding-left: 60px;
+    transition: all 0.5s linear;
 }
 
 #category-search .category-title span {
@@ -183,10 +184,9 @@ header .user ul li:hover a {
     right: 0;
     user-select: none;
     height: 0;
-    overflow: hidden;
     opacity: 0;
+    overflow: hidden;
     z-index: 1;
-    transition: all 0.5s linear;
 }
 
 #category-search .category-title ul li {
