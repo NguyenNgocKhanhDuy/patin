@@ -119,8 +119,8 @@ function renderProductSale() {
                             <h5 class="price"> ${products[i].price} </h5>
                         </span> 
                         <ul>
-                            <li><i class="fa-solid fa-heart"></i></li>
-                            <li><i class="fa-solid fa-cart-shopping"></i></li>
+                            <li><i class="fa-solid fa-heart like"></i></li>
+                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>
                         </ul>
                     </a>
                   </div>`;
@@ -301,8 +301,8 @@ function renderProduct() {
             html += `<h5 class="price"> ${products[i].price} </h5>`;
             html += `</span>`;
             html += `<ul>`;
-            html += `<li><i class="fa-solid fa-heart"></i></li>`;
-            html += `<li><i class="fa-solid fa-cart-shopping"></i></li>`;
+            html += `<li><i class="fa-solid fa-heart like"></i></li>`;
+            html += `<li><i class="fa-solid fa-cart-shopping cart"></i></li>`;
             html += `</ul>`;
             html += `</a>`;
             html += `</div>`;
@@ -333,6 +333,9 @@ function pageNumber(current) {
     }else {
         // Trang 1
         if (current == 1) {
+            if (totalPage < 3){
+                afterPage = 1;
+            }
             for(var i = current; i <= afterPage+1; i++) {
                 if (i == current) {
                     html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
@@ -354,13 +357,27 @@ function pageNumber(current) {
 
         // Trang cuối
         if(current == totalPage) {
-            for(var i = current-2; i <= totalPage; i++) {
+            var iStart = 0;
+            if (current-2 < 1) {
+                iStart = current-1;
+            }else {
+                iStart = current-2;
+            }
+            for(var i = iStart; i <= totalPage; i++) {
                 if(i == current) {
                     html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
                 }else {
                     html += `<li class="numb" onclick="pageNumber(${i})"> <a> ${i} </a> </li>`;
                 }
             }
+
+            // for(var i = current-2; i <= totalPage; i++) {
+            //     if(i == current) {
+            //         html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
+            //     }else {
+            //         html += `<li class="numb" onclick="pageNumber(${i})"> <a> ${i} </a> </li>`;
+            //     }
+            // }
         }
     }
 

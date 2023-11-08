@@ -177,8 +177,8 @@ function renderProduct() {
             html += `<h5 class="price"> ${products[i].price} </h5>`;
             html += `</span>`;
             html += `<ul>`;
-            html += `<li><i class="fa-solid fa-heart"></i></li>`;
-            html += `<li><i class="fa-solid fa-cart-shopping"></i></li>`;
+            html += `<li><i class="fa-solid fa-heart like"></i></li>`;
+            html += `<li><i class="fa-solid fa-cart-shopping cart"></i></li>`;
             html += `</ul>`;
             html += `</a>`;
             html += `</div>`;

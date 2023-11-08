@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/lienHe.css">
+    <link rel="stylesheet" href="./assets/css/gioHang.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
     <title>Title</title>
 </head>
@@ -46,47 +46,82 @@
     </div>
 </header>
 
+    <div id="category-search">
+        <div class="container">
+
+            <div class="category-title" id="categoryAll">
+                <div class="category">
+                    <span>Danh Mục</span>
+                </div>
+                <ul id="list-cate" class="list list-category hideCategory">
+                    <!--                        <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
+                    <!--                        <li><a href="#">Giày patin dành cho người lớn</a></li>-->
+                    <!--                        <li><a href="#">Giày patin hãng Centosy</a></li>-->
+                    <!--                        <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
+                    <!--                        <li><a href="#">Giày patin hãng Courgar</a></li>-->
+                </ul>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Nhập vào sản phẩm" id="search">
+                <button id="searchBtn">Tìm Kiếm</button>
+            </div>
+        </div>
+    </div>
+
     <div id="image">
         <div class="container-img">
             <img src="./assets/images/patin.jpg" alt="">
-            <p>Liên hệ</p>
+            <p>Giỏ hàng</p>
         </div>
     </div>
 
     <div id="content">
         <div class="container">
-            <div class="contact-info">
-                <div class="info-section">
-                    <i class="fa-solid fa-phone"></i>
-                    <h3 class="title">Số điện thoại</h3>
-                    <p>+65 11.188.888</p>
-                </div>
-                <div class="info-section">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h3 class="title">Địa chỉ</h3>
-                    <p>Trường Đại học Nông Lâm</p>
-                </div>
-                <div class="info-section">
-                    <i class="fa-solid fa-envelope"></i>
-                    <h3 class="title">Email</h3>
-                    <p>patin@gmail.com</p>
-                </div>
+            <div class="title">
+                <h3>Sản phẩm</h3>
+                <h3>Giá</h3>
+                <h3>Số lượng</h3>
+                <h3>Tổng cộng</h3>
             </div>
-
-            <div class="location">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145947051154!2d106.78918677336857!3d10.871276389283322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1699256851992!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div class="message">
-                <h3>Gửi tin nhắn</h3>
-                <form>
-                    <div class="messageInput">
-                        <input type="text" placeholder="Họ tên">
-                        <input type="email" placeholder="Email">
+            <div class="product-list">
+                <div class="product-item">
+                    <div class="img-name">
+                        <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">
+                        <p class="name">Giày Patin Micro Delta X 2023</p>
                     </div>
-                    <textarea placeholder="Nội dung"></textarea>
-                    <input type="submit" value="Gửi">
-                </form>
+                    <p class="price">14,990,000₫</p>
+                    <p class="quantity">1</p>
+                    <p class="total">14,990,000₫</p>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="product-item">
+                    <div class="img-name">
+                        <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">
+                        <p class="name">Giày Patin Micro Delta X 2023</p>
+                    </div>
+                    <p class="price">14,990,000₫</p>
+                    <p class="quantity">1</p>
+                    <p class="total">14,990,000₫</p>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="product-item">
+                    <div class="img-name">
+                        <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">
+                        <p class="name">Giày Patin Micro Delta X 2023</p>
+                    </div>
+                    <p class="price">14,990,000₫</p>
+                    <p class="quantity">1</p>
+                    <p class="total">14,990,000₫</p>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="pay_total">
+                <h3>Giỏ hàng</h3>
+                <div class="price-total">
+                    <p>Tổng tiền</p>
+                    <p class="totalValue">14,990,000₫</p>
+                </div>
+                <button class="checkout">Thanh toán</button>
             </div>
         </div>
     </div>
@@ -127,6 +162,6 @@
     </footer>
 
     <script src="./assets/js/tenDanhMuc.js"></script>
-    <script src="./assets/js/lienHe.js"></script>
+    <script src="./assets/js/showDanhMuc.js"></script>
 </body>
 </html>

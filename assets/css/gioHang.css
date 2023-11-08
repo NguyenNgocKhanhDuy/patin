@@ -1,0 +1,117 @@
+
+
+/* Content */
+#content {
+    margin: 80px 0;
+}
+
+#content .title {
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 60% repeat(3, 1fr) 5%;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+#content .title h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+#content .title h3:first-child {
+    text-align: left;
+}
+
+#content .product-item {
+    padding: 30px 0;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 60% repeat(3, 1fr) 5%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+
+#content .product-item .img-name {
+    display: flex;
+    align-items: center;
+}
+
+#content .product-item .img-name img {
+    width: 100px;
+    height: 100px;
+    margin-right: 25px;
+}
+
+#content .product-item .img-name .name {
+    font-size: 18px;
+    color: #1c1c1c;
+}
+
+#content .product-item .price,
+#content .product-item .quantity,
+#content .product-item .total {
+    font-size: 18px;
+    color: #1c1c1c;
+    font-weight: 700;
+    text-align: center;
+}
+
+#content .product-item i {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #b2b2b2;
+    cursor: pointer;
+}
+
+#content .pay_total {
+    background: #f5f5f5;
+    padding: 30px;
+    padding-top: 20px;
+    margin-top: 50px;
+    width: 50%;
+    margin-left: auto;
+    box-shadow: 0 0 4px #ccc;
+}
+
+#content .pay_total h3 {
+    color: #1c1c1c;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 28px;
+}
+
+#content .pay_total .price-total {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 13px;
+    margin-bottom: 18px;
+}
+
+#content .pay_total .price-total p{
+    font-size: 16px;
+    color: #1c1c1c;
+    font-weight: 700;
+}
+
+#content .pay_total .price-total .totalValue {
+    font-size: 18px;
+    color: #dd2222;
+}
+
+#content .pay_total .checkout {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 28px 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #7fad39;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+}
+

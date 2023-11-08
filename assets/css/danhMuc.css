@@ -1,15 +1,4 @@
-/* Image */
-#image .container-img {
-    width: 100%;
-    height: 300px;
-    margin-top: 32px;
-}
 
-#image .container-img img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
 
 /* Content */
 #content .container {
