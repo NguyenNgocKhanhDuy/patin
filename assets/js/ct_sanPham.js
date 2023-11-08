@@ -53,6 +53,9 @@ function initProduct() {
     htmlInfo += `</p>`;
     infoText.innerHTML = htmlInfo;
 
+
+    var khuyenMai = document.querySelector(".moreInfo .khuyenMai");
+    khuyenMai.textContent = product.khuyenMai;
 }
 
 initProduct();
