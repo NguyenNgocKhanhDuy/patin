@@ -237,12 +237,14 @@ header .user ul li:hover a {
 }
 
 #category-search .search {
-    width: 430px;
+    /*width: 430px;*/
+    width: 50%;
     height: 48px;
     display: flex;
     align-items: center;
     border: 2px solid #ebebeb;
-    margin-right: 200px;
+    margin-right: 100px;
+    position: relative;
 }
 
 #category-search .search input {
@@ -277,6 +279,40 @@ header .user ul li:hover a {
     opacity: 0.8;
 }
 
+#category-search .search ul {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 70%;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#category-search .search ul li {
+    list-style: none;
+    padding: 16px;
+    padding-top: 0;
+    margin: 12px 0;
+}
+
+#category-search .search ul li a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #1c1c1c;
+    line-height: 40px;
+}
+
+#category-search .search .item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+#category-search .search .item img {
+    width: 50px;
+    margin-right: 24px;
+}
 
 /* Image */
 #image .container-img {

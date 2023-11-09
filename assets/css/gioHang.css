@@ -57,7 +57,40 @@
     text-align: center;
 }
 
-#content .product-item i {
+#content .product-item .quantity{
+    width: 120px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    background: #f5f5f5;
+    margin: 0 auto;
+}
+
+#content .product-item .quantity i {
+    color: #6f6f6f;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#content .product-item .quantity input {
+    height: 100%;
+    font-size: 16px;
+    color: #6f6f6f;
+    width: 40px;
+    border: none;
+    background: #f5f5f5;
+    text-align: center;
+    outline: none;
+}
+
+#content .product-item .quantity input::-webkit-inner-spin-button,
+#content .product-item .quantity input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+#content .product-item i.del {
     position: absolute;
     top: 50%;
     right: 5px;
