@@ -31,7 +31,7 @@ var products = [
     {id: 25, name: "Giày Patin Flying Eagle S6S+ (mẫu mới)", price: "", priceSale: "1,940,000₫",  khuyenMai: "", colors: ["black", "pink", "blue"] , sizes: ["S (28-32)", "M (33-37)", "L (38-42)"], images: ["https://xpatin.com/wp-content/uploads/2021/07/giay-truot-patin-flying-eagle-s6s-mau-hong-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/07/giay-truot-patin-flying-eagle-s6s-mau-den-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-Flying-Eagle-F3S-Đen-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-Flying-Eagle-NT-Combo-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/12/giay-patin-flying-eagle-f5s-eclipse-xpatin-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE","Màu sắc: Đen, Hồng, Xanh dương","Kích cỡ: S (28-32), M (33-37), L (38-42)","Khả năng điều chỉnh: Điều chỉnh được 5 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!","Khả năng trượt: Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7"]},
     {id: 26, name: "Giày Patin Flying Eagle S5S+ New", price: "", priceSale: "1,800,000₫",  khuyenMai: "", colors: ["black", "pink", "blue"] , sizes: ["S (28-32)"," M (33-37)", "L (38-42)"], images: ["https://xpatin.com/wp-content/uploads/2021/05/giay-patin-flying-eagle-s5s-new-mau-xanh-1-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/05/giay-patin-flying-eagle-s5s-new-mau-hong-1-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/05/giay-patin-flying-eagle-s5s-new-mau-den-1-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/05/giay-patin-flying-eagle-s5s-new-mau-xanh-1-380x380.jpg", "https://xpatin.com/wp-content/uploads/2021/05/giay-patin-flying-eagle-s5s-new-mau-hong-1-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE" ,"Màu sắc: Đen, Hồng, Xanh dương","Kích cỡ: S (28-32), M (33-37), L (38-42)","Khả năng điều chỉnh: Điều chỉnh được 5 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!","Khả năng trượt:Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7"]},
     {id: 27, name: "Giày Patin Lakoko", price: "1,850,000₫", priceSale: "1,650,000₫",  khuyenMai: "", colors: ["red", "pink"] , sizes: ["S (29-33)", "M (34-38)"], images: ["https://xpatin.com/wp-content/uploads/2019/12/giay-patin-papaison-tre-em-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-SOFT-C2-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2020/10/giay-patin-iskate-arrow-do-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-Flying-Eagle-S6S-Speed-Đen-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/12/giay-iskate-ichi-den-380x380.jpg"], info:["Màu sắc: Đỏ, Hồng","Kích cỡ: S (29-33), M (34-38)","Khả năng điều chỉnh: Điều chỉnh được 4 cỡ","Khả năng trượt: Vòng bi ABEC7"]},
-    {id: 28, name: "Giày Patin Flying Eagle S6S (hàng ngưng sản xuất)", price: "", priceSale: "1,650,000₫",  khuyenMai: "", colors: ["black", "pink", "blue"] , sizes: ["S (28-32)", "M (33-37)", "L (38-42)"], images: ["https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Hồng-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Đen-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Hồng-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE","Màu sắc: Đen, Hồng, Xanh dương","Kích cỡ: S(28 - 32), M(33 - 37), L(38 - 42)","Khả năng điều chỉnh: Điều chỉnh được 5 cỡ.","Khả năng trượt: Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Bánh xe 76mm, Vòng bi ABEC7"]},
+    {id: 28, name: "Giày Patin Flying Eagle S6S ", price: "", priceSale: "1,650,000₫",  khuyenMai: "", colors: ["black", "pink", "blue"] , sizes: ["S (28-32)", "M (33-37)", "L (38-42)"], images: ["https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Hồng-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Đen-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Xanh-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S6S-Hồng-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE","Màu sắc: Đen, Hồng, Xanh dương","Kích cỡ: S(28 - 32), M(33 - 37), L(38 - 42)","Khả năng điều chỉnh: Điều chỉnh được 5 cỡ.","Khả năng trượt: Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Bánh xe 76mm, Vòng bi ABEC7"]},
     {id: 29, name: "Giày Patin Flying Eagle BKB K8 (Mẫu mới)", price: "", priceSale: "1,550,000₫",  khuyenMai: "", colors: ["black", "pink", "blue"] , sizes: ["S (28-31)", "M (32-35)", "L (36-39)"], images: ["https://xpatin.com/wp-content/uploads/2020/10/giay-patin-flying-eagle-k8-den-2-380x380.jpg", "https://xpatin.com/wp-content/uploads/2020/10/giay-patin-flying-eagle-k8-xanh-2.jpg", "https://xpatin.com/wp-content/uploads/2020/10/giay-patin-flying-eagle-k8-hong-4-380x380.jpg", "https://xpatin.com/wp-content/uploads/2020/10/giay-patin-flying-eagle-k8-hong-380x380.jpg", "https://xpatin.com/wp-content/uploads/2020/10/giay-patin-flying-eagle-k8-xanh-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE","Màu sắc: Đen, Hồng, Xanh dương","Kích cỡ: S (28-31), M (32-35), L (36-39)","Khả năng điều chỉnh: Điều chỉnh được 4 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!","Khả năng trượt: Bánh xe 64mm-68mm, Bánh xe 70mm-72mm, Bánh xe 72mm-76mm, Vòng bi ABEC7"]},
     {id: 30, name: "Giày Patin Flying Eagle S5S", price: "", priceSale: "1,550,000₫",  khuyenMai: "", colors: ["pink", "black", "blue"] , sizes: ["S (28-32)", "M (33-37)", "L (38-42)"], images: ["https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S5S-Đen-Đỏ-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giầy-Patin-Flying-Eagle-S5S-Hồng-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/giay-patin-flying-eagle-f5s-eclipse-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/12/giay-patin-flying-eagle-f2-380x380.jpg", "https://xpatin.com/wp-content/uploads/2019/09/Giày-Patin-Flying-Eagle-F7-380x380.jpg"], info:["Thương hiệu: FLYING EAGLE","Màu sắc: Hồng, Đen, Xanh dương","Kích cỡ: S (28-32), M (33-37), L (38-42)","Khả năng điều chỉnh: Điều chỉnh được 5 cỡ. Có thể nới rộng giày Trượt khi chân trẻ to ra!","Khả năng trượt: Bánh xe 64mm-68mm, Bánh xe 68mm-70mm, Bánh xe 70mm-72mm, Vòng bi ABEC7"]},
 
@@ -119,8 +119,8 @@ function renderProductSale() {
                             <h5 class="price"> ${products[i].price} </h5>
                         </span> 
                         <ul>
-                            <li><i class="fa-solid fa-heart"></i></li>
-                            <li><i class="fa-solid fa-cart-shopping"></i></li>
+                            <li><i class="fa-solid fa-heart like"></i></li>
+                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>
                         </ul>
                     </a>
                   </div>`;
@@ -301,8 +301,8 @@ function renderProduct() {
             html += `<h5 class="price"> ${products[i].price} </h5>`;
             html += `</span>`;
             html += `<ul>`;
-            html += `<li><i class="fa-solid fa-heart"></i></li>`;
-            html += `<li><i class="fa-solid fa-cart-shopping"></i></li>`;
+            html += `<li><i class="fa-solid fa-heart like"></i></li>`;
+            html += `<li><i class="fa-solid fa-cart-shopping cart"></i></li>`;
             html += `</ul>`;
             html += `</a>`;
             html += `</div>`;
@@ -333,6 +333,9 @@ function pageNumber(current) {
     }else {
         // Trang 1
         if (current == 1) {
+            if (totalPage < 3){
+                afterPage = 1;
+            }
             for(var i = current; i <= afterPage+1; i++) {
                 if (i == current) {
                     html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
@@ -354,13 +357,27 @@ function pageNumber(current) {
 
         // Trang cuối
         if(current == totalPage) {
-            for(var i = current-2; i <= totalPage; i++) {
+            var iStart = 0;
+            if (current-2 < 1) {
+                iStart = current-1;
+            }else {
+                iStart = current-2;
+            }
+            for(var i = iStart; i <= totalPage; i++) {
                 if(i == current) {
                     html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
                 }else {
                     html += `<li class="numb" onclick="pageNumber(${i})"> <a> ${i} </a> </li>`;
                 }
             }
+
+            // for(var i = current-2; i <= totalPage; i++) {
+            //     if(i == current) {
+            //         html += `<li class="numb"> <a class="pageNumberActive"> ${i} </a> </li>`;
+            //     }else {
+            //         html += `<li class="numb" onclick="pageNumber(${i})"> <a> ${i} </a> </li>`;
+            //     }
+            // }
         }
     }
 

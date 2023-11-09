@@ -1,3 +1,7 @@
+:root {
+    --heightShowCate: 200px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -144,6 +148,7 @@ header .user ul li:hover a {
     position: relative;
     cursor: pointer;
     padding-left: 60px;
+    overflow: hidden;
     transition: all 0.5s linear;
 }
 
@@ -182,11 +187,38 @@ header .user ul li:hover a {
     position: absolute;
     left: 0;
     right: 0;
+    overflow: hidden;
     user-select: none;
     height: 0;
-    opacity: 0;
-    overflow: hidden;
     z-index: 1;
+}
+
+.showCategory {
+    animation: scrollDown 0.25s linear forwards;
+}
+
+.hideCategory {
+    animation: scrollUp 0.25s linear forwards;
+}
+
+@keyframes scrollDown {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: var(--heightShowCate);
+    }
+}
+
+@keyframes scrollUp {
+    0% {
+        height: var(--heightShowCate);
+    }
+
+    100% {
+        height: 0;
+    }
 }
 
 #category-search .category-title ul li {
@@ -205,12 +237,14 @@ header .user ul li:hover a {
 }
 
 #category-search .search {
-    width: 430px;
+    /*width: 430px;*/
+    width: 50%;
     height: 48px;
     display: flex;
     align-items: center;
     border: 2px solid #ebebeb;
-    margin-right: 200px;
+    margin-right: 100px;
+    position: relative;
 }
 
 #category-search .search input {
@@ -244,6 +278,79 @@ header .user ul li:hover a {
 #category-search .search button:hover {
     opacity: 0.8;
 }
+
+#category-search .search ul {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 70%;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#category-search .search ul li {
+    list-style: none;
+    padding: 16px;
+    padding-top: 0;
+    margin: 12px 0;
+}
+
+#category-search .search ul li a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #1c1c1c;
+    line-height: 40px;
+}
+
+#category-search .search .item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+#category-search .search .item img {
+    width: 50px;
+    margin-right: 24px;
+}
+
+/* Image */
+#image .container-img {
+    width: 100%;
+    height: 300px;
+    margin-top: 32px;
+    position: relative;
+}
+
+#image .container-img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0000004f;
+}
+
+#image .container-img img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+#image .container-img p {
+    position: absolute;
+    font-size: 50px;
+    color: #fff;
+    font-weight: 600;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 5px #000;
+    z-index: 1;
+}
+
+
 
 
 /* Footer */

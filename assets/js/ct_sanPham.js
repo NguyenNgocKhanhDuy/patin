@@ -281,8 +281,8 @@ function renderotherProduct() {
             html += `<h5 class="price"> ${otherProducts[i].price} </h5>`;
             html += `</span>`;
             html += `<ul>`;
-            html += `<li><i class="fa-solid fa-heart"></i></li>`;
-            html += `<li><i class="fa-solid fa-cart-shopping"></i></li>`;
+            html += `<li><i class="fa-solid fa-heart like"></i></li>`;
+            html += `<li><i class="fa-solid fa-cart-shopping cart"></i></li>`;
             html += `</ul>`;
             html += `</a>`;
             html += `</div>`;
@@ -294,7 +294,7 @@ function renderotherProduct() {
 renderotherProduct();
 
 
-function showDetail(t) {
+function showDetail() {
     var t = document.querySelectorAll(".other-product .product-item");
     for (let i = 0; i < t.length; i++) {
         t[i].addEventListener("click", function () {
