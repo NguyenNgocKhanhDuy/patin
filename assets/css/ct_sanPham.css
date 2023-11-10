@@ -124,6 +124,8 @@
 #content .product .right .colors span {
     font-size: 24px;
     color: #1c1c1c;
+    width: 100px;
+    margin-right: 20px;
 }
 
 #content .product .right .colors .check-color {
@@ -156,6 +158,8 @@
 #content .product .right .sizes span {
     font-size: 24px;
     color: #1c1c1c;
+    width: 100px;
+    margin-right: 20px;
 }
 
 #content .product .right .container-checkSize {
@@ -165,15 +169,12 @@
 }
 
 #content .product .right .sizes .check-size {
-    height: 30px;
-    display: inline-block;
     margin: 0 16px;
     cursor: pointer;
-    line-height: 30px;
     background-color: #ebebeb;
     font-size: 16px;
     position: relative;
-    padding: 0px 8px;
+    padding: 12px;
 }
 
 #content .product .right .sizes .check-size input {
@@ -190,14 +191,16 @@
     margin-bottom: 20px;
     background-color: #b2b2b2;
     display: inline-block;
-    padding: 4px 8px;
+    padding: 8px;
+    border-radius: 4px;
     cursor: pointer;
     visibility: hidden;
 }
 
 #content .product .right .deselect span {
     font-size: 16px;
-    color: #1c1c1c;
+    color: #fff;
+    padding: 12px;
 }
 
 #content .product .right .buy {
@@ -215,6 +218,7 @@
     background: #f5f5f5;
     margin-bottom: 5px;
     margin-right: 10px;
+    user-select: none;
 }
 
 #content .product .right .buy .quantity i {
@@ -241,7 +245,7 @@
     -webkit-appearance: none;
 }
 
-#content .product .right .buy .addTocart a {
+#content .product .right .buy .addTocart span {
     padding: 16px 28px 14px;
     margin-right: 6px;
     margin-bottom: 5px;
@@ -253,6 +257,12 @@
     background: #7fad39;
     letter-spacing: 2px;
     text-decoration: none;
+    transition: all 0.25s ease-in-out;
+}
+
+#content .product .right .buy .addTocart span:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
 }
 
 #content .product .right .buy span {
@@ -431,17 +441,28 @@
     height: 200px;
     resize: none;
     outline: none;
+    padding: 20px;
 }
 
 #content .review .right .send {
-    background-color: #1c1c1c;
+    color: #fff;
+    background-color: #7fad39;
     width: 100px;
     height: 40px;
     text-align: center;
     line-height: 40px;
     color: #fff;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
     margin-top: 24px;
     cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+#content .review .right .send:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
 }
 
 
@@ -548,4 +569,129 @@
     color: #fff;
     background-color: #7fad39;
     transform: rotate(360deg);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0000005c;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-container {
+    width: 80%;
+    height: 500px;
+    background-color: #fff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+}
+
+.modal-container .del {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-container h2 {
+    font-size: 30px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.modal-container .modal-detail {
+    display: flex;
+    height: 220px;
+}
+
+.modal-container .modal-detail .detail-info {
+    width: 50%;
+}
+
+.modal-container .modal-detail .detail-section {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    text-align: left;
+}
+
+.modal-container .modal-detail .detail-section:first-child {
+    margin-top: 0;
+}
+
+.modal-container .modal-detail .detail-section h3 {
+    font-size: 20px;
+    width: 50%;
+    font-weight: 600;
+}
+
+.modal-container .modal-detail .detail-section span {
+    font-size: 18px;
+    width: 50%;
+}
+
+.modal-container .modal-detail .detail-note {
+    width: 50%;
+    height: 100%;
+    padding: 20px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 4px #ccc;
+}
+
+.modal-container .modal-detail .detail-note h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-container .modal-detail .detail-note .note-content {
+    width: 100%;
+    height: 140px;
+    padding-right: 20px;
+    padding-left: 20px;
+    outline: none;
+    border: none;
+    resize: none;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.modal-container .complete {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    background-color: #7fad39;
+    color: #fff;
+    width: 150px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+}
+
+.modal-container .complete:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
+}
+
+.modal-container .complete span {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 40px;
 }

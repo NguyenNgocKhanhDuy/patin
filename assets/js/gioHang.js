@@ -33,3 +33,35 @@ function deleteProduct() {
 }
 
 deleteProduct();
+
+var detail = document.querySelector(".product-item .detail");
+
+var modal = document.querySelector(".modal");
+var modalContainer = document.querySelector(".modal-container");
+var modalDel = document.querySelector(".modal-container .del");
+var modalComplete = document.querySelector(".modal-container .complete");
+
+var note = document.querySelector(".detail-note .note-content");
+
+
+detail.addEventListener("click", function () {
+  modal.style.display = "flex";
+});
+
+modal.addEventListener("click", function () {
+   modal.style.display = "none";
+});
+
+modalDel.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+modalComplete.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+modalContainer.addEventListener("click", function () {
+   event.stopPropagation();
+});
+
+
