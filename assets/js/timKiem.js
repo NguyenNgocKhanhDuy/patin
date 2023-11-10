@@ -35,6 +35,7 @@ function renderValue(arrayValue) {
                  </li>`;
     }
     document.querySelector("#category-search .search ul").innerHTML = html;
+    document.querySelector("#category-search .search ul").style.boxShadow = "0px 4px 6px 2px #ccc";
     showDetailSearch();
 }
 
@@ -61,6 +62,7 @@ function search() {
         renderValue(valueShow);
     }else {
         renderValue([]);
+        document.querySelector("#category-search .search ul").style.boxShadow = "0 0 0 #fff";
     }
 }
 

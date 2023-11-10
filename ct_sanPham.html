@@ -135,7 +135,7 @@
                             <i id="plus" class="fa-solid fa-plus"></i>
                         </div>
                        <div class="addTocart">
-                           <a href="#">Thêm vào giỏ hàng</a>
+                           <span>Thêm vào giỏ hàng</span>
                        </div>
                         <span id="addToLike">
                             <i class="fa-regular fa-heart"></i>
@@ -185,9 +185,7 @@
                             <i class="fa-solid fa-star"></i>
                         </div>
                         <p>Nhận xét của bạn</p>
-                        <textarea>
-
-                        </textarea>
+                        <textarea></textarea>
                         <div class="send">Gửi đi</div>
                     </div>
                 </div>
@@ -218,6 +216,40 @@
                 <i id="previousImg" class="fa-solid fa-left-long"></i>
                 <i id="nextImg" class="fa-solid fa-right-long"></i>
                 <img id="imageInModal" src="" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-container">
+            <i class="fa-solid fa-xmark del"></i>
+            <h2>Chi tiết</h2>
+            <div class="modal-detail">
+                <div class="detail-info">
+                    <div class="detail-section">
+                        <h3 class="title">Màu sắc: </h3>
+                        <span class="selected color">Xanh dương</span>
+                    </div>
+                    <div class="detail-section">
+                        <h3 class="title">Kích thước: </h3>
+                        <span class="selected size">34</span>
+                    </div>
+                    <div class="detail-section">
+                        <h3 class="title">Số lượng: </h3>
+                        <span class="selected quantity">1</span>
+                    </div>
+                    <div class="detail-section">
+                        <h3 class="title">Tổng giá: </h3>
+                        <span class="selected price">14,000,000đ</span>
+                    </div>
+                </div>
+                <div class="detail-note">
+                    <h3>Ghi chú</h3>
+                    <textarea class="note-content"></textarea>
+                </div>
+            </div>
+            <div class="complete">
+                <span>Hoàn thành</span>
             </div>
         </div>
     </div>
@@ -256,6 +288,8 @@
             </div>
         </div>
     </footer>
+
+
 
     <script src="./assets/js/tenDanhMuc.js"></script>
     <script src="./assets/js/showDanhMuc.js"></script>
