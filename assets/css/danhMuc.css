@@ -150,6 +150,26 @@
     outline: none;
 }
 
+#content .left .filterBtn {
+    background-color: #7fad39;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+    margin-top: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+#content .left .filterBtn:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
+}
+
+
 #content .container .right {
     width: 75%;
 }

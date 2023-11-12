@@ -5,46 +5,46 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/taiKhoan.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
-    <title>Title</title>
+    <title>Tài khoản</title>
 </head>
 <body>
     <header>
-    <div class="container">
-        <img src="./assets/images/logo.PNG" alt="" class="logo">
-        <nav>
-            <ul class="menu">
-                <li><a href="#">TRANG CHỦ</a></li>
-                <li>
-                    <a href="#">SẢN PHẨM</a>
-                    <ul class="sub_menu list-category">
-                        <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
-                    </ul>
-                </li>
-                <li><a href="#">LIÊN HỆ</a></li>
-            </ul>
-        </nav>
-        <div class="user">
-            <ul>
-                <li>
-                    <a href="#">
-                        ĐĂNG NHẬP
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        ĐĂNG KÝ
-                    </a>
-                </li>
-                <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            </ul>
+        <div class="container">
+            <img src="./assets/images/logo.PNG" alt="" class="logo">
+            <nav>
+                <ul class="menu">
+                    <li><a href="./index.html">TRANG CHỦ</a></li>
+                    <li>
+                        <a href="./sanPham.html">SẢN PHẨM</a>
+                        <ul class="sub_menu list-category">
+                            <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
+                            <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
+                            <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
+                            <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
+                            <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
+                        </ul>
+                    </li>
+                    <li><a href="./lienHe.html">LIÊN HỆ</a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <ul>
+                    <li>
+                        <a href="./dangNhap.html">
+                            ĐĂNG NHẬP
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./dangKy.html">
+                            ĐĂNG KÝ
+                        </a>
+                    </li>
+                    <li><a href="./yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="./gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <div id="content">
         <div class="container">
@@ -78,24 +78,15 @@
                         <div class="info">
                             <div class="part name">
                                 <label>Tên:</label>
-                                <div class="info_in">
-                                    <span>Ho ten</span>
-                                    <div class="changeName changeInfo">Thay đổi</div>
-                                </div>
+                                <input type="text">
                             </div>
                             <div class="part email">
                                 <label>Email: </label>
-                                <div class="info_in">
-                                    <span>@gmail.com</span>
-                                    <div class="changeEmail changeInfo">Thay đổi</div>
-                                </div>
+                                <input type="email">
                             </div>
                             <div class="part phone">
                                 <label>Số điện thoại: </label>
-                                <div class="info_in">
-                                    <span>00000000</span>
-                                    <div class="changePhone changeInfo">Thay đổi</div>
-                                </div>
+                                <input type="tel" >
                             </div>
                             <div class="part gender">
                                 <label>Giới tính:</label>
@@ -174,10 +165,10 @@
         <div class="modal">
             <div class="modal-container">
                 <i class="fa-solid fa-x closeModal"></i>
-                <h3 class="title">Thay đổi thông tin</h3>
+                <h3 class="title">Thêm địa chỉ</h3>
                 <form>
-                    <input type="text" placeholder="Nhập thông tin của bạn">
-                    <button class="modal-save">Lưu</button>
+                    <input type="text" placeholder="Nhập địa chỉ của bạn">
+                    <button class="modal-save">Thêm</button>
                 </form>
             </div>
         </div>

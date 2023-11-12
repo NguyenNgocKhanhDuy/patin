@@ -30,6 +30,11 @@ var addressSection = document.querySelector(".address");
 
 var avatar = document.querySelector(".avatar img");
 var inputAvatar = document.querySelector(".avatar input");
+
+inputAvatar.addEventListener("change", function () {
+    avatar.src = URL.createObjectURL(inputAvatar.files[0]);
+});
+
 var orderSection = document.querySelector(".order");
 var noticeSection = document.querySelector(".notice");
 
@@ -62,29 +67,19 @@ showContent();
 
 
 
-
-
-
 var modal = document.querySelector(".modal");
-var changeInfos = document.querySelectorAll(".infomation .changeInfo");
 var modalContainer = document.querySelector(".modal .modal-container");
 var closeModal = document.querySelector(".modal .closeModal");
 var modalInput = document.querySelector(".modal-container input");
 var modalSave = document.querySelector(".modal .modal-save");
 
-function showModal() {
-    for (let i = 0; i < changeInfos.length; i++) {
-        changeInfos[i].addEventListener("click", function () {
-            if (i == 1){
-                modalInput.type = "email"
-            }else if (i == 2) {
-                modalInput.type = "tel"
-            }
-            modal.classList.add("showModal");
-        });
-    }
-}
-showModal();
+
+modalSave.addEventListener("click", function () {
+   var value = modalInput.value;
+   if (value.length <= 0) {
+       alert("Không được để trống");
+   }
+});
 
 closeModal.addEventListener("click", function () {
     modal.classList.remove("showModal");
@@ -98,29 +93,39 @@ modalContainer.addEventListener("click", function () {
    event.stopPropagation();
 });
 
+var inputList = document.querySelectorAll(".part input");
 
+function checkName() {
+    var value = inputList[0].value;
+    if (value.length <= 0) {
+        alert("Tên không được để trống");
+    }
+}
+function checkMail() {
+    var value = inputList[1].value;
+    if (value.length <= 0) {
+        alert("Email không được để trống");
+    }
+}
 
 function checkPhone() {
-    var phoneInput = modalInput.value;
+    var phoneInput = inputList[2].value;
 
     var charPhone = phoneInput.split("");
     if (charPhone.length >= 9 && charPhone.length <= 10) {
         for(var i = 0; i < charPhone.length; i++) {
             if(!(charPhone[i] >= '0' && charPhone[i] <= '9')){
-                alert("Không hợp lệ");
+                alert("Số điện thoại không hợp lệ");
                 return;
             }
         }
     }else if(charPhone.length == 0){
-        alert("Không được để trống");
+        alert("Số điện thoại không được để trống");
     }else {
-        alert("Không hợp lệ");
+        alert("Số điện thoại không hợp lệ");
     }
 }
 
-modalSave.addEventListener("click", function () {
-    checkPhone();
-});
 
 var daySelect = document.querySelector(".dob-input .day");
 var monthSelect = document.querySelector(".dob-input .month");
@@ -186,14 +191,16 @@ function checkDoB() {
 
 var saveAccountInfo = document.querySelector(".infomation .save");
 saveAccountInfo.addEventListener("click", function () {
+    checkName();
+    checkMail();
+    checkPhone();
    checkDoB();
 });
 
 
-var modalTitle = document.querySelector(".modal .title");
+
 var btnAddress = document.querySelector(".address .btn-address");
 btnAddress.addEventListener("click", function () {
-    modalTitle.textContent = "Thêm địa chỉ";
     modal.classList.add("showModal");
 });
 

@@ -83,11 +83,12 @@
 
 #content .right .infomation .wrapper{
     display: flex;
+    flex-direction: column-reverse;
     font-size: 18px;
+
 }
 
 #content .right .infomation .wrapper .info {
-    width: 80%;
     padding-right: 30px;
 }
 
@@ -106,28 +107,13 @@
     line-height: 40px;
 }
 
-#content .right .infomation .wrapper .info_in {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#content .right .infomation .wrapper .changeInfo {
-    display: inline-block;
-    width: 30%;
-    color: #ffff;
-    background-color: #7fad39;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid #000;
-    border-radius: 2px;
-}
-
-#content .right .infomation .wrapper .changeInfo:hover {
-    opacity: 0.8;
+#content .right .infomation .wrapper .part input {
+    width: 50%;
+    height: 40px;
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    font-size: 16px;
+    outline: none;
 }
 
 #content .right .infomation .wrapper .selectGender {
@@ -175,30 +161,30 @@
     text-align: center;
     border-radius: 2px;
     display: block;
-    margin-left: auto;
+    margin: 0 auto;
     cursor: pointer;
+    transition: all 0.25s ease-in-out;
 }
 
 #content .right .infomation .wrapper .save:hover {
     opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
 }
 
 #content .right .infomation .wrapper .avatar {
-    width: 20%;
     text-align: center;
 }
 
 #content .right .infomation .wrapper .avatar img {
     width: 100px;
     height: 100px;
-    margin-top: 100px;
     border: 1px solid #cccc;
     border-radius: 50%;
 }
 
 #content .right .infomation .wrapper .avatar .selectImg {
     position: relative;
-    width: 80%;
+    width: 200px;
     height: 40px;
     margin: 30px auto;
 }
@@ -361,7 +347,7 @@
     width: 80%;
     height: 40px;
     outline: none;
-    padding-left: 16px;
+    padding: 16px;
 }
 
 #content .modal .modal-container .modal-save {
