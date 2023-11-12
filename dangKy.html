@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/yeuThich.css">
+    <link rel="stylesheet" href="./assets/css/dangKy.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
-    <title>Title</title>
+    <title>Đăng ký</title>
 </head>
 <body>
     <header>
@@ -24,7 +24,7 @@
                             <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
                         </ul>
                     </li>
-                    <li><a href="./lienHe.html">LIÊN HỆ</a></li>
+                    <li><a href=./lienHe.html>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./dangKy.html">
+                        <a href="#">
                             ĐĂNG KÝ
                         </a>
                     </li>
@@ -46,62 +46,29 @@
         </div>
     </header>
 
-    <div id="category-search">
-        <div class="container">
-
-            <div class="category-title" id="categoryAll">
-                <div class="category">
-                    <span>Danh Mục</span>
-                </div>
-                <ul id="list-cate" class="list list-category hideCategory">
-                    <!--                        <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                    <!--                        <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Courgar</a></li>-->
-                </ul>
-            </div>
-            <div class="search">
-                <input type="text" placeholder="Nhập vào sản phẩm" id="search">
-                <button id="searchBtn">Tìm Kiếm</button>
-                <ul></ul>
-            </div>
-        </div>
-    </div>
-
-    <div id="image">
-        <div class="container-img">
-            <img src="./assets/images/patin.jpg" alt="">
-            <p class="title">Sản phẩm yêu thích</p>
-        </div>
-    </div>
-
     <div id="content">
         <div class="container">
-            <div class="product-list" id="product-list">
-<!--                                            <div class="product-item">-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="./assets/images/product/soft-a1/soft-a1-xanh.jpg" alt="">-->
-<!--                                                    <h4 class="name">Giày Patin SOFT A1</h4>-->
-<!--                                                    <span class="price-section">-->
-<!--                                                        850,000₫-->
-<!--                                                        <h5 class="price">1,065,000₫</h5>-->
-<!--                                                    </span>-->
-<!--                                                    <ul>-->
-<!--                                                        <li><i class="fa-solid fa-heart"></i></li>-->
-<!--                                                        <li><i class="fa-solid fa-cart-shopping"></i></li>-->
-<!--                                                    </ul>-->
-<!--                                                </a>-->
-<!--                                            </div>-->
-            </div>
-            <div class="pagination">
-                <ul>
-                    <li id="previousPage" class="arrowPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
-                    <ul id="number-page">
-                        <!--<li class="numb"><a href="#">1</a></li>-->
-                    </ul>
-                    <li id="nextPage" class="arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
-                </ul>
+            <div class="login">
+                <h3>Đăng Ký</h3>
+                <div action="">
+                    <div class="holder">
+                        <label>Họ tên</label>
+                        <input id="name" type="text">
+                    </div>
+                    <div class="holder">
+                        <label>Email</label>
+                        <input type="email">
+                    </div>
+                    <div class="holder">
+                        <label>Mật khẩu</label>
+                        <input type="password">
+                    </div>
+                    <div class="holder">
+                        <label>Số điện thoại</label>
+                        <input type="tel">
+                    </div>
+                    <button >Đăng Ký</button>
+                </div>
             </div>
         </div>
     </div>
@@ -142,8 +109,6 @@
     </footer>
 
     <script src="./assets/js/tenDanhMuc.js"></script>
-    <script src="./assets/js/showDanhMuc.js"></script>
-    <script src="./assets/js/timKiem.js"></script>
-    <script src="./assets/js/yeuThich.js"></script>
+    <script src="./assets/js/dangKy.js"></script>
 </body>
 </html>

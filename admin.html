@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
+    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
+    <title>Admin</title>
+</head>
+<body>
+    <header>
+    <div class="container">
+        <img src="./assets/images/logo.PNG" alt="" class="logo">
+        <nav>
+            <ul class="menu">
+                <li><a href="./index.html">TRANG CHỦ</a></li>
+                <li>
+                    <a href="./sanPham.html">SẢN PHẨM</a>
+                    <ul class="sub_menu list-category">
+                        <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
+                        <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
+                        <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
+                        <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
+                        <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
+                    </ul>
+                </li>
+                <li><a href="./lienHe.html">LIÊN HỆ</a></li>
+            </ul>
+        </nav>
+        <div class="user">
+            <ul>
+                <li>
+                    <a href="./dangNhap.html">
+                        ĐĂNG NHẬP
+                    </a>
+                </li>
+                <li>
+                    <a href="./dangKy.html">
+                        ĐĂNG KÝ
+                    </a>
+                </li>
+                <li><a href="./yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
+                <li><a href="./gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+    <div id="content">
+        <div class="container">
+            <div class="left">
+                <div class="account">
+                    <ul class="menu">
+                        <li class="activeAccountNav">
+                            <i class="fa-solid fa-bars-progress"></i>
+                            <span>Quản lý</span>
+                            <ul class="sub_menu showSubMenu">
+                                <li id="manageUser" class="activeAccountNav">Quản lý người dùng</li>
+                                <li id="manageProduct">Quản lý sản phẩm</li>
+                                <li id="manageBrand">Quản lý danh mục</li>
+                                <li id="manageOrder">Quản lý đơn hàng</li>
+                            </ul>
+                        </li>
+                        <li id="manageReport">
+                            <i class="fa-brands fa-wpforms"></i>
+                            <span>Báo cáo</span>
+                        </li>
+                        <li id="manageAccount">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Tài khoản</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="user section">
+                    <div class="total">
+                        <i class="fa-solid fa-users"></i>
+                        <div class="text">
+                            <h3>Tổng số tài khoản</h3>
+                            <p class="totalUser">0</p>
+                        </div>
+                    </div>
+                    <div class="search">
+                        <input type="text" placeholder="Nhập tìm kiếm">
+                        <button class="search-btn">Tìm kiếm</button>
+                    </div>
+                    <div class="user-list">
+                        <div class="title">
+                            <h4>STT</h4>
+                            <h4>Ảnh</h4>
+                            <h4>Tên</h4>
+                            <h4>Email</h4>
+                            <h4>SĐT</h4>
+                        </div>
+                        <div class="user-item">
+                            <p class="index">1</p>
+                            <img src="./assets/images/logo.PNG" alt="">
+                            <p class="name">Nguyyen Ngoc Khanh DUy</p>
+                            <p class="email">duynguyennghockhanh@fmail.com</p>
+                            <p class="phone">0839151003</p>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+                    </div>
+                    <div class="pagination">
+                        <ul>
+                            <li  class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <ul class="number-page">
+                                <!--<li class="numb"><a href="#">1</a></li>-->
+                            </ul>
+                            <li class=" nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="product section">
+                    <div class="total">
+                        <i class="fa-solid fa-shop"></i>
+                        <div class="text">
+                            <h3>Tổng số sản phẩm</h3>
+                            <p class="totalProduct">0</p>
+                        </div>
+                    </div>
+                    <div class="search">
+                        <input type="text" placeholder="Nhập tìm kiếm">
+                        <button class="search-btn">Tìm kiếm</button>
+                        <div class="add">
+                            Thêm sản phẩm
+                        </div>
+                    </div>
+                    <div class="product-list">
+                        <div class="title">
+                            <h4>STT</h4>
+                            <h4>Ảnh</h4>
+                            <h4>Tên</h4>
+                            <h4>Giá gốc</h4>
+                            <h4>Giá sale</h4>
+                            <h4>Màu</h4>
+                            <h4>Size</h4>
+                        </div>
+                        <div class="product-item">
+                            <p class="index">1</p>
+                            <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">
+                            <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>
+                            <p class="price">9,800,000₫</p>
+                            <p class="priceSale">9,800,000₫</p>
+                            <p class="color">Đỏ, xanh dương, hồng</p>
+                            <p class="size">36, 37, 38, 39, 40, 41, 42, 43, 44, 45</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+
+                    </div>
+                    <div class="pagination">
+                        <ul>
+                            <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <ul class="number-page">
+                                <!--<li class="numb"><a href="#">1</a></li>-->
+                            </ul>
+                            <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="brand section">
+                    <div class="title">
+                        <h3>Danh mục</h3>
+                        <div class="add">
+                            Thêm danh mục
+                        </div>
+                    </div>
+                    <div class="brand-list">
+                        <div class="brand-title">
+                            <h4>STT</h4>
+                            <h4>Tên</h4>
+                        </div>
+                        <div class="brand-item">
+                            <p class="index">1</p>
+                            <p class="name">Giày patin dành cho trẻ em</p>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+                        <div class="brand-item">
+                            <p class="index">2</p>
+                            <p class="name">Giày patin dành cho người lớn</p>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+                        <div class="brand-item">
+                            <p class="index">3</p>
+                            <p class="name">Giày patin hãng Micro</p>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+                        <div class="brand-item">
+                            <p class="index">4</p>
+                            <p class="name">Giày patin hãng Flying Eagle</p>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order section">
+                    <div class="total">
+                        <i class="fa-solid fa-shop"></i>
+                        <div class="text">
+                            <h3>Tổng số đơn hàng</h3>
+                            <p class="totalOrder">0</p>
+                        </div>
+                    </div>
+                    <div class="search">
+                        <input type="text" placeholder="Nhập tìm kiếm">
+                        <button class="search-btn">Tìm kiếm</button>
+                    </div>
+                    <div class="order-list">
+                        <div class="title">
+                            <h4>STT</h4>
+                            <h4>Mã đơn hàng</h4>
+                            <h4>Tên sản phẩm</h4>
+                            <h4>Số điện thoại</h4>
+                            <h4>Ngày đặt</h4>
+                            <h4>Tình trạng</h4>
+                        </div>
+                        <div class="order-item">
+                            <p class="index">1</p>
+                            <p class="id">DH01</p>
+                            <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>
+                            <p class="phone">0839151003</p>
+                            <p class="date">11/11/2023</p>
+                            <p class="state">Đã giao</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
+                            <i class="fa-solid fa-xmark del"></i>
+                        </div>
+
+                    </div>
+                    <div class="pagination">
+                        <ul>
+                            <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <ul class="number-page">
+                                <!--<li class="numb"><a href="#">1</a></li>-->
+                            </ul>
+                            <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="report section">
+                    <div class="tk_sale">
+                        <div class="sale">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <div class="text">
+                                <p>Doanh thu hôm nay</p>
+                                <h4 class="todaySale">0 VNĐ</h4>
+                            </div>
+                        </div>
+                        <div class="sale">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <div class="text">
+                                <p>Tổng doanh thu</p>
+                                <h4 class="totalSale">0 VNĐ</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bill section">
+                        <div class="search">
+                            <input type="text" placeholder="Nhập tìm kiếm">
+                            <button class="search-btn">Tìm kiếm</button>
+                        </div>
+                        <div class="bill-list">
+                            <div class="title">
+                                <h4>STT</h4>
+                                <h4>Mã đơn hàng</h4>
+                                <h4>Tên sản phẩm</h4>
+                                <h4>Số điện thoại</h4>
+                                <h4>Ngày đặt</h4>
+                            </div>
+                            <div class="bill-item">
+                                <p class="index">1</p>
+                                <p class="id">DH01</p>
+                                <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>
+                                <p class="phone">0839151003</p>
+                                <p class="date">11/11/2023</p>
+                                <i class="fa-solid fa-clipboard detail"></i>
+                                <i class="fa-solid fa-xmark del"></i>
+                            </div>
+
+                        </div>
+                        <div class="pagination">
+                            <ul>
+                                <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                                <ul class="number-page">
+                                    <!--<li class="numb"><a href="#">1</a></li>-->
+                                </ul>
+                                <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="person section">
+                    <div class="top">
+                        <h3>Thông tin tài khoản</h3>
+                        <div class="logout">Thoát</div>
+                    </div>
+
+                    <div class="info">
+                        <div class="holder">
+                            <label>Họ Tên</label>
+                            <input type="text" >
+                        </div>
+                        <div class="holder">
+                            <label>Email</label>
+                            <input type="email">
+                        </div>
+                        <div class="holder">
+                            <label>Mật khẩu</label>
+                            <input type="password">
+                        </div>
+
+                        <div class="save">
+                            Lưu
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-product">
+        <div class="modal-container modal-containerProduct">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Thêm sản phẩm</h3>
+            <form>
+                <div class="wrapper">
+                    <div class="main">
+                        <div class="hold">
+                            <label>Tên sản phẩm</label>
+                            <input type="text">
+                        </div>
+                        <div class="hold-2">
+                            <div class="hold">
+                                <label>Giá gốc</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold">
+                                <label>Giá Sale</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="hold-2">
+                            <div class="hold">
+                                <label>Màu sắc</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold">
+                                <label>Size</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more">
+                        <div class="hold">
+                            <label>Thông tin khác</label>
+                            <textarea></textarea>
+                        </div>
+                        <div class="chooseImg">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+                <button class="add">Thêm</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal modal-brand">
+        <div class="modal-container modal-containerBrand">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Thêm danh mục</h3>
+            <form action="">
+                <input type="text" placeholder="Nhập tên danh mục">
+                <button class="add">Thêm</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container">
+            <div class="info">
+                <img src="./assets/images/logo.PNG" alt="">
+                <p>
+                    Địa chỉ: Trường Đại học Nông Lâm Thành Phố Hồ Chí Minh
+                </p>
+                <p>
+                    Số điện thoại:
+                    <a href="tel:+">+65 11.188.888</a>
+                </p>
+
+                <p>
+                    Email:
+                    <a href="mailto:">patin@gmail.com</a>
+                </p>
+            </div>
+            <div class="subscribe">
+                <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
+                <div class="holder">
+                    <input type="email" id="email" placeholder="Nhập vào email của bạn ">
+                    <input type="submit" id="btn" value="Đăng Ký">
+                </div>
+                <div class="social-media">
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/tenDanhMuc.js"></script>
+    <script src="./assets/js/admin.js"></script>
+</body>
+</html>

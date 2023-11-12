@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/lienHe.css">
+    <link rel="stylesheet" href="./assets/css/dangNhap.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
-    <title>Liên hệ</title>
+    <title>Đăng Nhập</title>
 </head>
 <body>
     <header>
@@ -24,7 +24,7 @@
                         <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
                     </ul>
                 </li>
-                <li><a href="#">LIÊN HỆ</a></li>
+                <li><a href=./lienHe.html>LIÊN HỆ</a></li>
             </ul>
         </nav>
         <div class="user">
@@ -46,46 +46,21 @@
     </div>
 </header>
 
-    <div id="image">
-        <div class="container-img">
-            <img src="./assets/images/patin.jpg" alt="">
-            <p>Liên hệ</p>
-        </div>
-    </div>
-
     <div id="content">
         <div class="container">
-            <div class="contact-info">
-                <div class="info-section">
-                    <i class="fa-solid fa-phone"></i>
-                    <h3 class="title">Số điện thoại</h3>
-                    <p>+65 11.188.888</p>
-                </div>
-                <div class="info-section">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h3 class="title">Địa chỉ</h3>
-                    <p>Trường Đại học Nông Lâm</p>
-                </div>
-                <div class="info-section">
-                    <i class="fa-solid fa-envelope"></i>
-                    <h3 class="title">Email</h3>
-                    <p>patin@gmail.com</p>
-                </div>
-            </div>
-
-            <div class="location">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145947051154!2d106.78918677336857!3d10.871276389283322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1699256851992!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div class="message">
-                <h3>Gửi tin nhắn</h3>
-                <form>
-                    <div class="messageInput">
-                        <input type="text" placeholder="Họ tên">
-                        <input type="email" placeholder="Email">
+            <div class="login">
+                <h3>Đăng Nhập</h3>
+                <form action="">
+                    <div class="holder">
+                        <label>Email</label>
+                        <input type="email">
                     </div>
-                    <textarea placeholder="Nội dung"></textarea>
-                    <input type="submit" value="Gửi">
+                    <div class="holder">
+                        <label>Mật khẩu</label>
+                        <input type="password">
+                    </div>
+                    <button type="submit">Đăng Nhập</button>
+                    <a href="./dangKy.html">Tạo tài khoản</a>
                 </form>
             </div>
         </div>
@@ -127,6 +102,6 @@
     </footer>
 
     <script src="./assets/js/tenDanhMuc.js"></script>
-    <script src="./assets/js/lienHe.js"></script>
+    <script src="./assets/js/dangNhap.js"></script>
 </body>
 </html>
