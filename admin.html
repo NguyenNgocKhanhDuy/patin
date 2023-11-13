@@ -85,6 +85,9 @@
                     <div class="search">
                         <input type="text" placeholder="Nhập tìm kiếm">
                         <button class="search-btn">Tìm kiếm</button>
+                        <div class="add">
+                            Thêm người dùng
+                        </div>
                     </div>
                     <div class="user-list">
                         <div class="title">
@@ -100,6 +103,7 @@
                             <p class="name">Nguyyen Ngoc Khanh DUy</p>
                             <p class="email">duynguyennghockhanh@fmail.com</p>
                             <p class="phone">0839151003</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
                     </div>
@@ -178,21 +182,25 @@
                         <div class="brand-item">
                             <p class="index">1</p>
                             <p class="name">Giày patin dành cho trẻ em</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
                         <div class="brand-item">
                             <p class="index">2</p>
                             <p class="name">Giày patin dành cho người lớn</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
                         <div class="brand-item">
                             <p class="index">3</p>
                             <p class="name">Giày patin hãng Micro</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
                         <div class="brand-item">
                             <p class="index">4</p>
                             <p class="name">Giày patin hãng Flying Eagle</p>
+                            <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
                     </div>
@@ -271,6 +279,7 @@
                                 <h4>Tên sản phẩm</h4>
                                 <h4>Số điện thoại</h4>
                                 <h4>Ngày đặt</h4>
+                                <h4>Tình trạng</h4>
                             </div>
                             <div class="bill-item">
                                 <p class="index">1</p>
@@ -278,6 +287,7 @@
                                 <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>
                                 <p class="phone">0839151003</p>
                                 <p class="date">11/11/2023</p>
+                                <p class="state">Đã giao</p>
                                 <i class="fa-solid fa-clipboard detail"></i>
                                 <i class="fa-solid fa-xmark del"></i>
                             </div>
@@ -321,6 +331,74 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal modal-user">
+        <div class="modal-container modalConUser modal-containerUser">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Thêm người dùng</h3>
+            <form>
+                <div class="wrapper">
+                    <div class="main">
+                        <div class="hold">
+                            <label>Tên</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="hold">
+                            <label>Email</label>
+                            <input type="email">
+                        </div>
+
+                    </div>
+                    <div class="more">
+                        <div class="hold">
+                            <label>Số điện thoại</label>
+                            <input type="tel">
+                        </div>
+                        <div class="chooseImg">
+                            <input type="file">
+                        </div>
+
+                    </div>
+                </div>
+                <button class="add">Thêm</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal modal-Edituser">
+        <div class="modal-container modalConUser modal-containerEditUser">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Sửa người dùng</h3>
+            <form>
+                <div class="wrapper">
+                    <div class="main">
+                        <div class="hold">
+                            <label>Tên</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="hold">
+                            <label>Email</label>
+                            <input type="email">
+                        </div>
+
+                    </div>
+                    <div class="more">
+                        <div class="hold">
+                            <label>Số điện thoại</label>
+                            <input type="tel">
+                        </div>
+                        <div class="chooseImg">
+                            <input type="file">
+                        </div>
+
+                    </div>
+                </div>
+                <button class="add">Sửa</button>
+            </form>
         </div>
     </div>
 
@@ -374,6 +452,93 @@
         </div>
     </div>
 
+    <div class="modal modal-Editproduct">
+        <div class="modal-container modal-containerEditProduct">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Sửa sản phẩm</h3>
+            <form>
+                <div class="wrapper">
+                    <div class="main">
+                        <div class="hold">
+                            <label>Tên sản phẩm</label>
+                            <input type="text">
+                        </div>
+                        <div class="hold-2">
+                            <div class="hold">
+                                <label>Giá gốc</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold">
+                                <label>Giá Sale</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="hold-2">
+                            <div class="hold">
+                                <label>Màu sắc</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold">
+                                <label>Size</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more">
+                        <div class="hold">
+                            <label>Thông tin khác</label>
+                            <textarea></textarea>
+                        </div>
+                        <div class="chooseImg">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+                <button class="add">Sửa</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal modal-EditOrder">
+        <div class="modal-container modal-containerEditOrder">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Sửa đơn hàng</h3>
+            <form>
+                <div class="wrapper">
+                    <div class="main">
+                        <div class="hold">
+                            <label>Mã đơn hàng</label>
+                            <input type="text">
+                        </div>
+                        <div class="hold">
+                            <label>Tên sản phẩm</label>
+                            <input type="text">
+                        </div>
+                        <div class="hold">
+                            <label>Tình trạng</label>
+                            <input type="text">
+                        </div>
+
+                    </div>
+                    <div class="more">
+                        <div class="hold">
+                            <label>Ngày đặt</label>
+                            <input type="date">
+                        </div>
+                        <div class="hold">
+                            <label>Thông tin khác</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add">Sửa</button>
+            </form>
+        </div>
+    </div>
+
     <div class="modal modal-brand">
         <div class="modal-container modal-containerBrand">
             <i class="fa-solid fa-xmark del"></i>
@@ -385,6 +550,16 @@
         </div>
     </div>
 
+    <div class="modal modal-Editbrand">
+        <div class="modal-container modal-containerEditBrand">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Sửa danh mục</h3>
+            <form action="">
+                <input type="text" placeholder="Nhập tên danh mục">
+                <button class="add">Sửa</button>
+            </form>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
