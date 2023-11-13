@@ -159,6 +159,7 @@
 
 #content .pay_total .checkout {
     width: 100%;
+    text-align: center;
     font-size: 14px;
     padding: 10px 28px 10px;
     color: #ffffff;
@@ -168,6 +169,16 @@
     letter-spacing: 2px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    transition:  all 0.25s ease-in-out;
+}
+
+#content .pay_total .checkout:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
 }
 
 .modal {

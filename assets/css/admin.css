@@ -70,8 +70,9 @@
     width: 80%;
 }
 
+/* USER */
 #content .right .user {
-    display: none;
+    /*display: none;*/
 }
 
 #content .right .user .total {
@@ -133,6 +134,7 @@
     margin-right: auto;
 }
 
+
 #content .right .user-list {
     margin-top: 40px;
     background-color: #283e57;
@@ -144,7 +146,7 @@
 
 #content .right .user-list .title {
     display: grid;
-    grid-template-columns: 5% 5% repeat(3, 1fr) 5%;
+    grid-template-columns: 5% 5% repeat(3, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -159,7 +161,7 @@
 
 #content .right .user-list .user-item {
     display: grid;
-    grid-template-columns: 5% 5% repeat(3, 1fr) 5%;
+    grid-template-columns: 5% 5% repeat(3, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -176,6 +178,12 @@
 
 #content .right .user-list .user-item p {
     font-size: 16px;
+}
+
+#content .right .user-list .user-item .detail {
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
 }
 
 #content .right .user-list .user-item .del {
@@ -376,7 +384,7 @@
 
 #content .right .brand .brand-list .brand-title {
     display: grid;
-    grid-template-columns: 5% 1fr 5%;
+    grid-template-columns: 5% 1fr 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -391,7 +399,7 @@
 
 #content .right .brand-list .brand-item {
     display: grid;
-    grid-template-columns: 5% 1fr 5%;
+    grid-template-columns: 5% 1fr 5% 5%;
     align-items: center;
     text-align: center;
     grid-column-gap: 20px;
@@ -501,7 +509,7 @@
 
 /* REPORT */
 #content .right .report {
-    /*display: none;*/
+    display: none;
 }
 
 #content .right .tk_sale {
@@ -556,7 +564,7 @@
 
 #content .right .bill-list .title {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(5, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -571,7 +579,7 @@
 
 #content .right .bill-list .bill-item {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(5, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -807,15 +815,25 @@
     box-shadow: 0 0 4px 3px #ccc;
 }
 
-.modal-containerBrand {
+.modal-containerBrand, .modal-containerEditBrand {
     height: 300px;
 }
 
-.modal-brand form {
+.modalConUser {
+    height: 400px;
+}
+
+.modalConUser input[type = "file"] {
+    margin-top: 30px;
+}
+
+.modal-brand form,
+.modal-Editbrand form{
     text-align: center;
 }
 
-.modal-brand input {
+.modal-brand input,
+.modal-Editbrand input{
     height: 40px;
     width: 60%;
     padding: 0 16px;
