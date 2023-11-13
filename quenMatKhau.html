@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./assets/css/dangNhap.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
-    <title>Đăng Nhập</title>    
+    <title>Quên Mật Khẩu</title>    
 </head>
 <body>
     <header>
@@ -71,7 +71,7 @@
 <div id="image">
     <div class="container-img">
         <img src="./assets/images/patin.jpg" alt="">
-        <p class="title">Đăng Nhập</p>
+        <p class="title">Quên Mật Khẩu</p>
     </div>
 </div>
 <div class="auth-wrapper">
@@ -79,7 +79,7 @@
         <div class="auth-action-left">
             <div class="auth-form-outer">
                 <h2 class="auth-form-title">
-                    Đăng Nhập
+                    Quên Mật Khẩu
                 </h2>
                 <div class="auth-external-container">
                     <div class="auth-external-list">
@@ -90,29 +90,33 @@
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>
-                    <p class="auth-sgt">hoặc đăng nhập với:</p>
+                    <p class="auth-sgt">Quên mật khẩu? Vui lòng nhập tên đăng nhập hoặc địa chỉ email. Bạn sẽ nhận được một mật khẩu mới qua email.</p>
                 </div>
-                <form onsubmit="login()"class="login-form">
-                    <input id="email" type="email" class="auth-form-input" placeholder="Email">
-                    <div class="input-icon">
-                        <input id="password" type="password" class="auth-form-input" placeholder="Mật Khẩu">
+                <form class="login-form">
+                    <input type="email" class="auth-form-input" placeholder="Email">
+                    <!-- <div class="input-icon">
+                        <input type="password" class="auth-form-input" placeholder="Mật Khẩu">
                         <i class="fa fa-eye show-password"></i>
-                    </div>
-                    <label class="btn active">
-                        <input type="checkbox" name='email1' checked>
+                    </div> -->
+                    <!-- <label class="btn active">
+                         <input type="checkbox" name='email1' checked>
                         <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
-                        <span> Lưu tài khoản </span>
-                    </label>
+                        <span> Lưu tài khoản </span> 
+                        
+                    </label> -->
+                    <!-- <form action="?" method="POST">
+                        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                        <br/>
+                        <input type="submit" value="Submit">
+                      </form> -->
                     <div class="footer-action">
-                        
-                        <input id="btnlogin" type="submit" value="Đăng Nhập"  class="auth-submit">
-                        
-                        <a href="dangKy.html" class="auth-btn-direct">Đăng Ký</a>
+                        <input type="submit" value="Đăng Nhập" class="auth-submit">
+                        <a href="#" class="auth-btn-direct">Gửi Yêu Cầu</a>
                     </div>
                 </form>
-                <div class="auth-forgot-password">
-                    <a href="quenMatKhau.html"> Quên Mật Khẩu</a>
-                </div>
+                <!-- <div class="auth-forgot-password">
+                    <a href="#"> Gửi Yêu Cầu </a>
+                </div> -->
             </div>
         </div>
         <div class="auth-action-right">
@@ -162,5 +166,6 @@
 <script src="./assets/js/dangNhap.js"></script>
 <script src="./assets/js/sanPham.js"></script>
 <script src="./assets/js/productPage.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
