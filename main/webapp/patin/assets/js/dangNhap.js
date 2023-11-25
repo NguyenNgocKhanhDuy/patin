@@ -15,7 +15,7 @@ submit.addEventListener("click", function (){
         if (email == "admin" && pass == "123"){
             location.href = "./admin.html";
         }else if (email == "user" && pass == "123") {
-            location.href = "./index.html";
+            location.href = "./index.jsp";
         }else{
             alert("Sai thông tin");
         }

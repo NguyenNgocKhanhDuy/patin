@@ -1,22 +1,28 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html; charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/home.css">
-    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/css/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/fontawesome/css/all.min.css">
     <title>Trang Chủ</title>
 </head>
 <body>
     <header>
     <div class="container">
-        <img src="./assets/images/logo.PNG" alt="" class="logo">
+        <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">
         <nav>
             <ul class="menu">
                 <li><a href="#">TRANG CHỦ</a></li>
                 <li>
                     <a href="./sanPham.html">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
+                        <c:forEach var="i" items="${category}">
+                            <li><a href="#">${i}</a></li>
+                        </c:forEach>
                         <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
                         <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
                         <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
@@ -62,7 +68,7 @@
                 </ul>
             </div>
             <div class="search">
-                <input type="text" placeholder="Nhập vào sản phẩm" id="search">
+                <input type="text" placeholder="Nhập vào sản phẩm" id="search" name="search">
                 <button id="searchBtn">Tìm Kiếm</button>
                 <ul>
                     <!--                        <li>-->
@@ -80,7 +86,7 @@
 
     <div id="image">
         <div class="container-img">
-            <img src="./assets/images/patin.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/patin/assets/images/patin.jpg" alt="">
             <a href="./sanPham.html" class="shop">Xem sản phẩm</a>
         </div>
     </div>
@@ -93,7 +99,7 @@
                     <div class="carousel" id="carousel">
                         <!--                                <div class="product-item">-->
                         <!--                                    <a href="#">-->
-                        <!--                                        <img src="./assets/images/product/calary-C9-den-banchay.jpg" alt="">-->
+                        <!--                                        <img src="${pageContext.request.contextPath}/patin/assets/images/product/calary-C9-den-banchay.jpg" alt="">-->
                         <!--                                        <h4>Giày Patin Calary C9</h4>-->
                         <!--                                        <span class="price-section"></span>-->
                         <!--                                        <h5>1,490,000₫</h5>-->
@@ -119,7 +125,7 @@
     <footer>
         <div class="container">
             <div class="info">
-                <img src="./assets/images/logo.PNG" alt="">
+                <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="">
                 <p>
                     Địa chỉ: Trường Đại học Nông Lâm Thành Phố Hồ Chí Minh
                 </p>
@@ -151,8 +157,9 @@
         </div>
     </footer>
 
-    <script src="./assets/js/tenDanhMuc.js"></script>
-    <script src="./assets/js/showDanhMuc.js"></script>
-    <script src="./assets/js/home.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/showDanhMuc.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/timKiem.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/home.js"></script>
 </body>
 </html>

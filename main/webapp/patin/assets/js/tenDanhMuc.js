@@ -1,5 +1,5 @@
-var tenDanhMuc = ["Giày patin dành cho trẻ em", "Giày patin dành cho người lớn", "Giày patin hãng Flying Eagle", "Giày patin hãng Micro"];
 
+var tenDanhMuc = ["1", "2"]
 function renderCategory() {
     var html = "";
     for (let i = 0; i < tenDanhMuc.length; i++) {
