@@ -1,10 +1,10 @@
 var category = document.getElementById("categoryAll");
 var listCategory = document.getElementById("list-cate");
-var categoryAllLi = document.querySelectorAll("#list-cate li");
 // ẩn hiện danh mục
 
 
 category.addEventListener("click", function (){
+    var categoryAllLi = document.querySelectorAll("#list-cate li");
     var height = categoryAllLi.length * 45;
     document.documentElement.style.setProperty("--heightShowCate", height+'px');
     if(listCategory.classList.contains("hideCategory")){

@@ -66,15 +66,6 @@ function search() {
             }
         }
     };
-    // if (valueSearch != "") {
-    //     var valueShow = products.filter(function (value) {
-    //         return value.name.toUpperCase().includes(valueSearch.toUpperCase());
-    //     });
-    //     renderValue(valueShow);
-    // }else {
-    //     renderValue([]);
-    //     document.querySelector("#category-search .search ul").style.boxShadow = "0 0 0 #fff";
-    // }
 }
 
 var btnSearch = document.getElementById("searchBtn");

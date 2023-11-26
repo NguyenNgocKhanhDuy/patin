@@ -43,16 +43,12 @@ public class Category implements Serializable {
                 '}';
     }
 
-    public List<String> getNameCategory() {
+    public List<Category> getCategory() {
         List<Category> category = JDBiConnector.me().withHandle(handle -> {
             return handle.createQuery("SELECT name FROM category").mapToBean(Category.class)
                     .stream().collect(Collectors.toList());
         });
-        List<String> cateName = new ArrayList<>();
-        for (Category cate: category) {
-            cateName.add(cate.getName());
-        }
-        return cateName;
+        return category;
     }
 
 }

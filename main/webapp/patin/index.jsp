@@ -20,14 +20,6 @@
                 <li>
                     <a href="./sanPham.html">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
-                        <c:forEach var="i" items="${category}">
-                            <li><a href="#">${i}</a></li>
-                        </c:forEach>
-                        <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
                     </ul>
                 </li>
                 <li><a href=./lienHe.html>LIÊN HỆ</a></li>
@@ -60,25 +52,14 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-                    <!--                        <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                    <!--                        <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                    <!--                        <li><a href="#">Giày patin hãng Courgar</a></li>-->
+
                 </ul>
             </div>
             <div class="search">
                 <input type="text" placeholder="Nhập vào sản phẩm" id="search" name="search">
                 <button id="searchBtn">Tìm Kiếm</button>
                 <ul>
-                    <!--                        <li>-->
-                    <!--                            <a href="#">-->
-                    <!--                                <span class="item">-->
-                    <!--                                    <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">-->
-                    <!--                                    <p class="name">Giày Patin Micro Delta X 2023</p>-->
-                    <!--                                </span>-->
-                    <!--                            </a>-->
-                    <!--                        </li>-->
+
                 </ul>
             </div>
         </div>
@@ -157,7 +138,7 @@
         </div>
     </footer>
 
-<%--    <script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/timKiem.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/home.js"></script>

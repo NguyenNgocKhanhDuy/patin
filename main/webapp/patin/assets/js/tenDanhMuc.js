@@ -1,19 +1,44 @@
 
-var tenDanhMuc = ["1", "2"]
-function renderCategory() {
-    var html = "";
-    for (let i = 0; i < tenDanhMuc.length; i++) {
-        html += ` <li><a href="./danhMuc.html">${tenDanhMuc[i]}</a></li>`
-    }
+function getCategory() {
 
-    var list = document.querySelectorAll(".list-category");
-    for (let i = 0; i < list.length; i++) {
-        list[i].innerHTML = html;
-    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "category-servlet", true)
+    xhttp.send()
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState = 4) {
+           var tenDanhMuc = xhttp.responseText.split(",")
+            tenDanhMuc = tenDanhMuc.filter(function (value) {
+                return value.length > 0
+            });
+            var html = "";
+            for (let i = 0; i < tenDanhMuc.length; i++) {
+                html += ` <li><a href="./danhMuc.html">${tenDanhMuc[i]}</a></li>`
+            }
 
+            var list = document.querySelectorAll(".list-category");
+            for (let i = 0; i < list.length; i++) {
+                list[i].innerHTML = html;
+            }
+        }
+    }
 }
 
-renderCategory();
+getCategory();
+// function renderCategory() {
+//     console.log(txt)
+//     var html = "";
+//     for (let i = 0; i < tenDanhMuc.length; i++) {
+//         html += ` <li><a href="./danhMuc.html">${tenDanhMuc[i]}</a></li>`
+//     }
+//
+//     var list = document.querySelectorAll(".list-category");
+//     for (let i = 0; i < list.length; i++) {
+//         list[i].innerHTML = html;
+//     }
+//
+// }
+
+// renderCategory();
 
 function showDanhMuc() {
     var t = document.querySelectorAll(".list-category li a");

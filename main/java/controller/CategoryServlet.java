@@ -13,9 +13,15 @@ import java.util.List;
 public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/plain; charset=utf-8");
         Category category = new Category();
-        List<String> list = category.getNameCategory();
-        request.setAttribute("category", list);
+        List<Category> listCategory = category.getCategory();
+        String nameCate = "";
+        for (Category c: listCategory) {
+            nameCate += c.getName() +",";
+        }
+        PrintWriter out = response.getWriter();
+        out.write(nameCate.toString());
     }
 
     @Override
