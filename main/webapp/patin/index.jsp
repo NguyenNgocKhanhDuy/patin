@@ -90,6 +90,10 @@
                     <i class="fa-regular fa-circle-right selection" id="next"></i>
                     <i class="fa-regular fa-circle-left selection" id="previous"></i>
                 </div>
+                <a href="./sanPham.html" class="more">
+                    Xem Thêm
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
 
             <h3>Sản phẩm khác</h3>

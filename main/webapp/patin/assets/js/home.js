@@ -18,23 +18,33 @@ var carousel = document.getElementById("carousel");
 
 // hiển thị sản phẩm sale
 function renderProductSale() {
-    var html = "";
-    for(var i = 6; i < 11; i++) {
-        html += `<div class="product-item">
-                    <a href="./ct_sanPham.html">
-                        <img src= ${products[i].images[0]} >
-                        <h4 class="name"> ${products[i].name} </h4>
-                        <span class="price-section"> ${products[i].priceSale}
-                            <h5 class="price"> ${products[i].price} </h5>
-                        </span> 
-                        <ul>
-                            <li><i class="fa-solid fa-heart like"></i></li>
-                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>
-                        </ul>
-                    </a>
-                  </div>`;
-    }
-    document.getElementById("carousel").innerHTML = html;
+    // var html = "";
+    // for(var i = 6; i < 11; i++) {
+    //     html += `<div class="product-item">
+    //                 <a href="./ct_sanPham.html">
+    //                     <img src= ${products[i].images[0]} >
+    //                     <h4 class="name"> ${products[i].name} </h4>
+    //                     <span class="price-section"> ${products[i].priceSale}
+    //                         <h5 class="price"> ${products[i].price} </h5>
+    //                     </span>
+    //                     <ul>
+    //                         <li><i class="fa-solid fa-heart like"></i></li>
+    //                         <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+    //                     </ul>
+    //                 </a>
+    //               </div>`;
+    // }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "showHotProduct-servlet", true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+       if (xhttp.readyState == 4) {
+           document.getElementById("carousel").innerHTML = xhttp.responseText;
+       }
+    };
+
+    slideProduct();
     showDetailSale();
 
 }
@@ -53,61 +63,64 @@ function showDetailSale() {
     }
 }
 
-
-// tự chuyển động sale
-var items = document.getElementsByClassName("product-item");
-var next = document.getElementById("next");
-var previous = document.getElementById("previous");
+function slideProduct() {
+    // tự chuyển động sale
+    var items = document.getElementsByClassName("product-item");
+    var next = document.getElementById("next");
+    var previous = document.getElementById("previous");
 
 // kích thước 1 item
-var itemWidth = items[0].clientWidth + 30;
+//     var itemWidth = items[0].clientWidth + 30;
+    var itemWidth = 300;
 
-var step = itemWidth;
+    var step = itemWidth;
 
-var countMax = (items.length*itemWidth)/step;
+    var countMax = (items.length*itemWidth)/step;
 
-var count = 0;
-var direct = "next";
+    var count = 0;
+    var direct = "next";
 
 // Nhấn next
-next.addEventListener("click", function (){
-    carousel.scrollLeft += step;
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        direct = "previous";
-    }
-});
+    next.addEventListener("click", function (){
+        carousel.scrollLeft += step;
+        count++;
+        if (count == (countMax-2)){
+            count = 1;
+            direct = "previous";
+        }
+    });
 
 // Nhấn previous
-previous.addEventListener("click", function () {
-    carousel.scrollLeft -= step;
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        direct = "next";
-    }
-});
+    previous.addEventListener("click", function () {
+        carousel.scrollLeft -= step;
+        count++;
+        if (count == (countMax-2)){
+            count = 1;
+            direct = "next";
+        }
+    });
 
 
 // Tự lướt
-setInterval(function (){
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        if (direct == "next"){
-            direct = "previous";
-        }else if(direct == "previous"){
-            direct = "next";
+    setInterval(function (){
+        count++;
+        if (count == (countMax-2)){
+            count = 1;
+            if (direct == "next"){
+                direct = "previous";
+            }else if(direct == "previous"){
+                direct = "next";
+            }
         }
-    }
 
-    if (direct == "next"){
-        carousel.scrollLeft += step;
-    }else {
-        carousel.scrollLeft -= step;
-    }
-}, 3000);
+        if (direct == "next"){
+            carousel.scrollLeft += step;
+        }else {
+            carousel.scrollLeft -= step;
+        }
+    }, 3000);
+}
+
 
 
 

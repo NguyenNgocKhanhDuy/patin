@@ -168,4 +168,15 @@ public class Product implements Serializable {
         });
         return products;
     }
+
+    public List<Product> getHotProduct() {
+        List<Product> products = JDBiConnector.me().withHandle(handle -> {
+            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
+                            "from product join image_product on product.id = image_product.id_product " +
+                            "WHERE image_product.id = 1 and product.hot = 1 " +
+                            "LIMIT 5")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
 }
