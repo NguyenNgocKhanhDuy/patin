@@ -20,6 +20,9 @@
                 <li>
                     <a href="./sanPham.html">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
+                        <c:forEach var="i" items="${category}">
+                            <li><a href="./danhMuc.html">${i.getName()}</a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li><a href=./lienHe.html>LIÊN HỆ</a></li>
@@ -52,7 +55,9 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-
+                    <c:forEach var="i" items="${category}">
+                        <li><a href="./danhMuc.html">${i.getName()}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="search">
@@ -78,14 +83,22 @@
                 <h3>Sản phẩm bán chạy</h3>
                 <div class="wrapper">
                     <div class="carousel" id="carousel">
-                        <!--                                <div class="product-item">-->
-                        <!--                                    <a href="#">-->
-                        <!--                                        <img src="${pageContext.request.contextPath}/patin/assets/images/product/calary-C9-den-banchay.jpg" alt="">-->
-                        <!--                                        <h4>Giày Patin Calary C9</h4>-->
-                        <!--                                        <span class="price-section"></span>-->
-                        <!--                                        <h5>1,490,000₫</h5>-->
-                        <!--                                    </a>-->
-                        <!--                                </div>-->
+                        <c:forEach items="${hotProduct}" var="product">
+                            <div class="product-item">
+                                <a href="./ct_sanPham.html">
+                                    <img src= ${product.getImage().getUrl()} >
+                                    <h4 class="name"> ${product.getName()} </h4>
+                                    <span class="price-section"> ${product.getSalePrice()}
+                                        <h5 class="price"> ${product.getOriginPrice()} </h5>
+                                    </span>
+                                    <ul>
+                                        <li><i class="fa-solid fa-heart like"></i></li>
+                                        <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+                                    </ul>
+                                </a>
+                            </div>
+                        </c:forEach>
+
                     </div>
                     <i class="fa-regular fa-circle-right selection" id="next"></i>
                     <i class="fa-regular fa-circle-left selection" id="previous"></i>
@@ -98,7 +111,21 @@
 
             <h3>Sản phẩm khác</h3>
             <div class="product-list" id="product-list">
-
+                <c:forEach items="${products}" var="product">
+                    <div class="product-item">
+                        <a href="./ct_sanPham.html">
+                        <img src= ${product.getImage().getUrl()} >
+                        <h4 class="name"> ${product.getName()} </h4>
+                        <span class="price-section"> ${product.getSalePrice()}
+                            <h5 class="price"> ${product.getOriginPrice()} </h5>
+                        </span>
+                        <ul>
+                            <li><i class="fa-solid fa-heart like"></i></li>
+                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+                        </ul>
+                        </a>
+                    </div>
+                </c:forEach>
             </div>
             <a href="./sanPham.html" class="more">
                 Xem Thêm
@@ -142,7 +169,6 @@
         </div>
     </footer>
 
-    <script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/timKiem.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/home.js"></script>

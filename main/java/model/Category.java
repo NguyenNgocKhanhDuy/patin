@@ -44,7 +44,7 @@ public class Category implements Serializable {
     }
 
     public List<Category> getCategory() {
-        List<Category> category = JDBiConnector.me().withHandle(handle -> {
+        List<Category> category = JDBiConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT name FROM category").mapToBean(Category.class)
                     .stream().collect(Collectors.toList());
         });

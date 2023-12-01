@@ -27,18 +27,16 @@ public class JDBiConnector {
         }
     }
 
-    public static Jdbi me() {
+    public static Jdbi get() {
         if (connector == null) connector = new JDBiConnector();
         return connector.jdbi;
     }
 
     public static void main(String[] args) {
-        List<Product> products = JDBiConnector.me().withHandle(handle -> {
-            return handle.createQuery("select product.name, product.origin_price, product.sale_price, image_product.url " +
-                            "from product join image_product on product.id = image_product.id_product " +
-                            "WHERE image_product.id = 1 and product.hot = 1 " +
-                            "LIMIT 5")
-                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
+                    "FROM product join image_product on product.id = image_product.id_product " +
+                    "WHERE product.id <= 12 and image_product.id = 1").mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         System.out.println(products);
     }
