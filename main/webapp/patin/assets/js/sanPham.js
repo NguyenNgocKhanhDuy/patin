@@ -129,7 +129,7 @@ function renderProductSale() {
     showDetailSale();
 
 }
-renderProductSale();
+// renderProductSale();
 
 // Chi tiết sản phẩm của phần sale
 function showDetailSale() {
@@ -273,6 +273,20 @@ function changeBG(input) {
     }
 }
 
+// function filter() {
+//     var minPrice = textMin.value;
+//     var maxPrice = textMax.value;
+//
+//     console.log(minPrice)
+//     console.log(maxPrice)
+// }
+//
+// inputMin.addEventListener("input", filter);
+// inputMax.addEventListener("input", filter);
+// textMin.addEventListener("input", filter);
+// textMax.addEventListener("input", filter);
+
+
 
 // xử lý chuyển trang
 var productPerPage = 15;
@@ -312,7 +326,7 @@ function renderProduct() {
     document.getElementById("product-list").innerHTML = html;
 }
 
-renderProduct();
+// renderProduct();
 
 
 // Hàm xác định sản phẩm từ mấy tới mấy
@@ -410,7 +424,7 @@ function pageNumber(current) {
     getProductNumberCurrentPage(current);
     renderProduct();
     getProduct();
-    showDetail(getProduct());
+    // showDetail(getProduct());
 
 }
 
@@ -432,7 +446,7 @@ nextPage.addEventListener("click", function (){
     getProductNumberCurrentPage(currentPage);
     renderProduct();
     getProduct();
-    showDetail(getProduct())
+    // showDetail(getProduct())
 });
 
 
@@ -452,7 +466,7 @@ previousPage.addEventListener("click", function (){
     getProductNumberCurrentPage(currentPage);
     renderProduct();
     getProduct();
-    showDetail(getProduct());
+    // showDetail(getProduct());
 });
 
 
@@ -474,4 +488,5 @@ function showDetail(t) {
     }
 }
 
-showDetail(getProduct());
+// showDetail(getProduct());
+

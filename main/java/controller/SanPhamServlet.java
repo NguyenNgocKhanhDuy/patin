@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "HomeServlet", value = "/home-servlet")
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "SanPhamServlet", value = "/sanPham-servlet")
+public class SanPhamServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = new Product();
@@ -24,18 +24,10 @@ public class HomeServlet extends HttpServlet {
         List<Product> hotProduct = product.getHotProduct();
         request.setAttribute("hotProduct", hotProduct);
 
-        List<Product> allProducts = product.getAllProduct();
+        List<Product> products = product.getAllProduct();
+        request.setAttribute("products", products);
 
-        List<Product> someProduct = new ArrayList<>();
-
-        someProduct.clear();
-
-        for (int i = 0; i < 12; i++) {
-            someProduct.add(allProducts.get(i));
-        }
-
-        request.setAttribute("products", someProduct);
-        request.getRequestDispatcher("/patin/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/patin/sanPham.jsp").forward(request, response);
     }
 
     @Override

@@ -33,10 +33,12 @@ public class JDBiConnector {
     }
 
     public static void main(String[] args) {
+        String type = "";
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
                     "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE product.id <= 12 and image_product.id = 1").mapToBean(Product.class).stream().collect(Collectors.toList());
+                    "WHERE image_product.id = 1 " +
+                    "ORDER BY product.sale_price "+ type).mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         System.out.println(products);
     }

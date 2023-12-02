@@ -180,11 +180,29 @@ public class Product implements Serializable {
         return products;
     }
 
-    public List<Product> getProduct(int size) {
+    public List<Product> getAllProduct() {
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
                     "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE product.id <= ? and image_product.id = 1").bind(0, size).mapToBean(Product.class).stream().collect(Collectors.toList());
+                    "WHERE image_product.id = 1").mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
+    public List<Product> filterProduct(int min, int max) {
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
+                    "FROM product join image_product on product.id = image_product.id_product " +
+                    "WHERE product.sale_price >= :min and product.sale_price <= :max and image_product.id = 1").bind("min", min).bind("max", max).mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
+
+    public List<Product> getSortProduct(String type) {
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
+                    "FROM product join image_product on product.id = image_product.id_product " +
+                    "WHERE image_product.id = 1 " +
+                    "ORDER BY product.sale_price "+type).mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return products;
     }

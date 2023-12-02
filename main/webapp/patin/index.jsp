@@ -2,7 +2,7 @@
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/css/base.css">
@@ -12,40 +12,40 @@
 </head>
 <body>
     <header>
-    <div class="container">
-        <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">
-        <nav>
-            <ul class="menu">
-                <li><a href="#">TRANG CHỦ</a></li>
-                <li>
-                    <a href="./sanPham.html">SẢN PHẨM</a>
-                    <ul class="sub_menu list-category">
-                        <c:forEach var="i" items="${category}">
-                            <li><a href="./danhMuc.html">${i.getName()}</a></li>
-                        </c:forEach>
-                    </ul>
-                </li>
-                <li><a href=./lienHe.html>LIÊN HỆ</a></li>
-            </ul>
-        </nav>
-        <div class="user">
-            <ul>
-                <li>
-                    <a href="./dangNhap.html">
-                        ĐĂNG NHẬP
-                    </a>
-                </li>
-                <li>
-                    <a href="./dangKy.html">
-                        ĐĂNG KÝ
-                    </a>
-                </li>
-                <li><a href="./yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="./gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            </ul>
+        <div class="container">
+            <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">
+            <nav>
+                <ul class="menu">
+                    <li><a href="#">TRANG CHỦ</a></li>
+                    <li>
+                        <a href="./sanPham.html">SẢN PHẨM</a>
+                        <ul class="sub_menu list-category">
+                            <c:forEach var="i" items="${category}">
+                                <li><a href="./danhMuc.html">${i.getName()}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                    <li><a href=./lienHe.html>LIÊN HỆ</a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <ul>
+                    <li>
+                        <a href="./dangNhap.html">
+                            ĐĂNG NHẬP
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./dangKy.html">
+                            ĐĂNG KÝ
+                        </a>
+                    </li>
+                    <li><a href="./yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="./gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <div id="category-search">
         <div class="container">
@@ -73,7 +73,7 @@
     <div id="image">
         <div class="container-img">
             <img src="${pageContext.request.contextPath}/patin/assets/images/patin.jpg" alt="">
-            <a href="./sanPham.html" class="shop">Xem sản phẩm</a>
+            <a href="sanPham-servlet" class="shop">Xem sản phẩm</a>
         </div>
     </div>
 
@@ -127,7 +127,7 @@
                     </div>
                 </c:forEach>
             </div>
-            <a href="./sanPham.html" class="more">
+            <a href="sanPham-servlet" class="more">
                 Xem Thêm
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
