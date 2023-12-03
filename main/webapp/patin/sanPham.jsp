@@ -95,26 +95,26 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="filter">
+                <form action="sanPham-servlet" class="filter">
                     <div class="price">
                         <h3>Giá bán (VNĐ)</h3>
                         <div class="price-input">
                             <div class="field">
                                 <span>Min</span>
-                                <input type="number" id="text-min" name="input-min" min="0" max="10000" value="0" step="1000" oninput="rangeText()">
+                                <input type="number" id="text-min" name="input-min" min="0" max="15000000" value="${min}" step="10000" oninput="rangeText()">
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
                                 <span>Max</span>
-                                <input type="number" id="text-max" name="input-max" min="0" max="10000" value="10000" step="1000" oninput="rangeText()">
+                                <input type="number" id="text-max" name="input-max" min="0" max="15000000" value="${max}" step="10000" oninput="rangeText()">
                             </div>
                         </div>
                         <div class="slider">
                             <div class="progress" id="progress"></div>
                         </div>
                         <div class="range-input">
-                            <input type="range" id="min" class="range-min" min="0" max="10000" value="0" oninput="rangeSlider()">
-                            <input type="range" id="max" class="range-max" min="0" max="10000" value="10000" oninput="rangeSlider()">
+                            <input type="range" id="min" class="range-min" min="0" max="15000000" value="${min}" oninput="rangeSlider()">
+                            <input type="range" id="max" class="range-max" min="0" max="15000000" value="${max}" oninput="rangeSlider()">
                         </div>
                     </div>
                     <div class="color">
@@ -146,10 +146,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filterBtn">
+                    <input type="submit" class="filterBtn">
                         Lọc
-                    </div>
-                </div>
+                    </input>
+                </form>
             </div>
             <div class="right">
                 <div class="top">
@@ -204,12 +204,77 @@
                     </div>
                 </div>
                 <div class="pagination">
+                    <h1>Total: ${totalPage}</h1>
+                    <h1>Current ${currentPage}</h1>
                     <ul>
-                        <li id="previousPage" class="arrowPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                        <c:if test="${currentPage == 1}">
+                            <li id="previousPage" class="arrowPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                        </c:if>
+                        <c:if test="${currentPage != 1}">
+                            <li id="previousPage" class="arrowActive arrowPage"><a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}"><i class="fa-solid fa-arrow-left"></i></a></li>
+                        </c:if>
                         <ul id="number-page">
-                            <!--<li class="numb"><a href="#">1</a></li>-->
+                            <c:choose>
+                                <c:when test="${totalPage >= 3}">
+                                    <c:if test="${currentPage == 1}">
+                                        <li class="numb"> <a class="pageNumberActive">
+                                                ${currentPage}
+                                        </a> </li>
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+1}">
+                                                ${currentPage + 1}
+                                        </a> </li>
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+2}">
+                                                ${currentPage + 2}
+                                        </a> </li>
+                                    </c:if>
+                                    <c:if test="${currentPage > 1 && currentPage < totalPage}">
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}">
+                                                ${currentPage - 1}
+                                        </a> </li>
+                                        <li class="numb"> <a class="pageNumberActive">
+                                                ${currentPage}
+                                        </a> </li>
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+1}">
+                                                ${currentPage + 1}
+                                        </a> </li>
+                                    </c:if>
+                                    <c:if test="${currentPage == totalPage}">
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-2}">
+                                                ${currentPage - 2}
+                                        </a> </li>
+                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}">
+                                                ${currentPage - 1}
+                                        </a> </li>
+                                        <li class="numb"> <a class="pageNumberActive">
+                                                ${currentPage}
+                                        </a> </li>
+                                    </c:if>
+
+                                </c:when>
+                                <c:when test="${totalPage < 3}">
+                                    <c:forEach begin="1" end="${totalPage+1}" varStatus="index">
+                                        <c:if test="${index.count == currentPage}">
+                                            <li class="numb"> <a class="pageNumberActive">
+                                                    ${index.count}
+                                            </a> </li>
+                                        </c:if>
+                                        <c:if test="${index.count != currentPage}">
+                                            <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${index.count}">
+                                                    ${index.count}
+                                            </a> </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
+
                         </ul>
-                        <li id="nextPage" class="arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+
+                        <c:if test="${currentPage == totalPage+1}">
+                            <li id="nextPage" class="arrowPage"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                        </c:if>
+                        <c:if test="${currentPage != totalPage+1}">
+                            <li id="nextPage" class="arrowPage arrowActive"><a href="sanPham-servlet?currentPage=${currentPage+1}"><i class="fa-solid fa-arrow-right"></i></a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>

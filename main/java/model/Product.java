@@ -3,6 +3,7 @@ package model;
 import db.JDBiConnector;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.Nested;
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class Product implements Serializable {
     private int id;
     private String name;
     private int originPrice;
+    @ColumnName("price")
     private int salePrice;
     private String size;
     private String color;
@@ -27,7 +29,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, int originPrice, int salePrice, String size, String color, int quantity, int hot, String infomation, ImageProduct image, int idSale, int idAdmin) {
+    public Product(int id, String name, int originPrice, @ColumnName("price") int salePrice, String size, String color, int quantity, int hot, String infomation, ImageProduct image, int idSale, int idAdmin) {
         this.id = id;
         this.name = name;
         this.originPrice = originPrice;
@@ -66,10 +68,11 @@ public class Product implements Serializable {
         this.originPrice = originPrice;
     }
 
+    @ColumnName("price")
     public int getSalePrice() {
         return salePrice;
     }
-
+    @ColumnName("price")
     public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
     }
@@ -182,28 +185,98 @@ public class Product implements Serializable {
 
     public List<Product> getAllProduct() {
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
-                    "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE image_product.id = 1").mapToBean(Product.class).stream().collect(Collectors.toList());
-        });
-        return products;
-    }
-    public List<Product> filterProduct(int min, int max) {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
-                    "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE product.sale_price >= :min and product.sale_price <= :max and image_product.id = 1").bind("min", min).bind("max", max).mapToBean(Product.class).stream().collect(Collectors.toList());
+            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
+                    "WHERE image_product.id = 1 " +
+                    "GROUP BY product.id").mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return products;
     }
 
-    public List<Product> getSortProduct(String type) {
+    public List<Product> getProduct(int currentPage) {
+
+        int productPerPage = 15;
+        int start;
+        int end;
+
+        if (currentPage > 1) {
+            start = ((currentPage - 1) * productPerPage) + 1;
+            end = (currentPage * productPerPage);
+        } else {
+            end = productPerPage;
+            start = 0;
+        }
+
+
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
-                    "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE image_product.id = 1 " +
-                    "ORDER BY product.sale_price "+type).mapToBean(Product.class).stream().collect(Collectors.toList());
+            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
+                    "WHERE product.id >= :start and product.id <= :end " +
+                    "GROUP BY product.id ")
+                    .bind("start", start).bind("end", end).mapToBean(Product.class).stream().collect(Collectors.toList());
         });
+        return products;
+    }
+
+    public List<Product> sortProduct(String type, int currentPage) {
+        int productPerPage = 15;
+        int start;
+
+        if (currentPage > 1) {
+            start = ((currentPage - 1) * productPerPage) + 1;
+        } else {
+            start = 0;
+        }
+
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                    "GROUP BY product.id " +
+                    "ORDER BY MIN(product_detail.price) "+type+" " +
+                    "LIMIT :start, :end")
+                    .bind("start", start).bind("end", productPerPage).mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
+
+    public List<Product> filterProduct(String type, int currentPage, int min, int max) {
+        int productPerPage = 15;
+        int start;
+
+        if (currentPage > 1) {
+            start = ((currentPage - 1) * productPerPage) + 1;
+        } else {
+            start = 0;
+        }
+
+
+        List<Product> products;
+
+        if (!type.equals("")) {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
+                                "ORDER BY MIN(product_detail.price) "+type+" " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage)
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }else {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage)
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }
+
         return products;
     }
 }

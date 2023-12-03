@@ -18,6 +18,21 @@ public class SortServlet extends HttpServlet {
 
         List<Product> list = new ArrayList<>();
 
+        int productPerPage = 15;
+        int currentPage = 0;
+        try {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+        }catch (NumberFormatException e) {
+            currentPage = 1;
+        }
+
+        int totalPage = (int) Math.ceil(product.getAllProduct().size() / productPerPage);
+
+        request.setAttribute("totalPage", totalPage);
+
+        request.setAttribute("currentPage", currentPage);
+
         String sort = request.getParameter("sort");
 
         if (sort == null) sort = "";
@@ -25,10 +40,10 @@ public class SortServlet extends HttpServlet {
         if (sort.equals("auto")) {
             request.getRequestDispatcher("sanPham-servlet").forward(request, response);
         } else if (sort.equals("asc")) {
-            list = product.getSortProduct(sort);
+            list = product.sortProduct(sort, currentPage);
             request.setAttribute("selectASC", "selected");
         } else if (sort.equals("desc")) {
-            list = product.getSortProduct(sort);
+            list = product.sortProduct(sort, currentPage);
             request.setAttribute("selectDESC", "selected");
         }
 

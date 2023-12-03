@@ -6,6 +6,9 @@ var textMax = document.getElementById("text-max");
 
 var priceGap = 0;
 
+progress.style.left = (textMin.value / inputMin.max) * 100 + "%";
+progress.style.right = 100 - (textMax.value / inputMax.max) * 100 + "%";
+
 // Kéo chuột range
 function rangeSlider() {
     var minValue = parseInt(inputMin.value);
@@ -34,7 +37,7 @@ function rangeText() {
     var minValue = parseInt(textMin.value);
     var maxValue = parseInt(textMax.value);
 
-    if((maxValue - minValue >= priceGap) && maxValue <= 10000) {
+    if((maxValue - minValue >= priceGap) && maxValue <= 15000000) {
         if (event.target.id === "text-min"){
             inputMin.value = minValue;
             progress.style.left = (minValue / inputMin.max) * 100 + "%";
@@ -42,6 +45,13 @@ function rangeText() {
             inputMax.value = maxValue;
             progress.style.right = 100 - (maxValue / inputMax.max) * 100 + "%";
         }
+    }else {
+        inputMin.value = 0;
+        progress.style.left = 0+"%";
+        inputMax.value = 15000000;
+        progress.style.right = 0+"%";
+        textMax.value = 15000000;
+        textMin.value = 0;
     }
 }
 
@@ -70,26 +80,25 @@ function changeBG(input) {
 }
 
 
-function filter() {
-    var minPrice = textMin.value;
-    var maxPrice = textMax.value;
-
-    console.log(minPrice)
-    console.log(maxPrice)
-}
-
-inputMin.addEventListener("input", filter);
-inputMax.addEventListener("input", filter);
-textMin.addEventListener("input", filter);
-textMax.addEventListener("input", filter);
+// function filter() {
+//     var minPrice = textMin.value;
+//     var maxPrice = textMax.value;
+//     console.log(minPrice)
+//     console.log(maxPrice)
+// }
+//
+// inputMin.addEventListener("input", filter);
+// inputMax.addEventListener("input", filter);
+// textMin.addEventListener("input", filter);
+// textMax.addEventListener("input", filter);
 
 var select = document.querySelector(".sort select");
 select.addEventListener("change", function (){
     if (this.value == 1) {
-        window.location.href = "sort-servlet?sort=auto"
+        window.location.href = "sanPham-servlet&input-min="+textMin.value+"&input-max="+textMax.value
     }else if(this.value == 2){
-        window.location.href = "sort-servlet?sort=asc"
+        window.location.href = "sanPham-servlet?sort=asc&input-min="+textMin.value+"&input-max="+textMax.value
     }else if(this.value == 3) {
-        window.location.href = "sort-servlet?sort=desc"
+        window.location.href = "sanPham-servlet?sort=desc&input-min="+textMin.value+"&input-max="+textMax.value
     }
 })

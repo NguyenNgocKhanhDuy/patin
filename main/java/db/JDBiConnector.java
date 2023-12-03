@@ -33,12 +33,15 @@ public class JDBiConnector {
     }
 
     public static void main(String[] args) {
-        String type = "";
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
-                    "FROM product join image_product on product.id = image_product.id_product " +
-                    "WHERE image_product.id = 1 " +
-                    "ORDER BY product.sale_price "+ type).mapToBean(Product.class).stream().collect(Collectors.toList());
+            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                            "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                            "GROUP BY product.id " +
+                            "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
+                            "LIMIT :start, :end")
+                    .bind("start", 0).bind("end", 15)
+                    .bind("min", 2000000).bind("max", 5000000)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         System.out.println(products);
     }
