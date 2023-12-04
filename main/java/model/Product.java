@@ -255,7 +255,7 @@ public class Product implements Serializable {
         return products;
     }
 
-    public List<Product> filterProduct(String type, int currentPage, int min, int max) {
+    public List<Product> filterPriceProduct(String type, int currentPage, int min, int max) {
         int productPerPage = 15;
         int start;
 
@@ -264,7 +264,6 @@ public class Product implements Serializable {
         } else {
             start = 0;
         }
-
 
         List<Product> products;
 
@@ -292,6 +291,19 @@ public class Product implements Serializable {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }
+
+        return products;
+    }
+
+    public List<Product> allFilterPriceProduct(int min, int max) {
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max ")
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
 
         return products;
     }
@@ -335,6 +347,18 @@ public class Product implements Serializable {
         return products;
     }
 
+    public List<Product> allFilterColorProduct(String[] color) {
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id ")
+                        .bindList("color", color)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        return products;
+    }
+
     public List<Product> filterPriceColorProduct(String type, int currentPage, String[] color, int min, int max) {
         int productPerPage = 15;
         int start;
@@ -375,6 +399,20 @@ public class Product implements Serializable {
             });
         }
 
+        return products;
+    }
+
+    public List<Product> allFilterPriceColorProduct(String[] color, int min, int max) {
+        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max ")
+                        .bindList("color", color)
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
         return products;
     }
 }

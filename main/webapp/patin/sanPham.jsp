@@ -122,33 +122,32 @@
                         <div class="color-box">
                             <div class="color-item">
                                 <label>Đen</label>
-                                <input type="checkbox" class="check-color" value="2" name="color" id="black" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("2") ? "checked":""} class="check-color" value="2" name="color" id="black" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Trắng</label>
-                                <input type="checkbox" class="check-color" value="1" name="color" id="white" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("1") ? "checked":""} class="check-color" value="1" name="color" id="white" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Đỏ</label>
-                                <input type="checkbox" class="check-color" value="8" name="color" id="red" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("8") ? "checked":""} class="check-color" value="8" name="color" id="red" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Hồng</label>
-                                <input type="checkbox" class="check-color" value="3" name="color" id="pink" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("3") ? "checked":""} class="check-color" value="3" name="color" id="pink" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Xanh dương</label>
-                                <input type="checkbox" class="check-color" value="4" name="color" id="blue" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("4") ? "checked":""} class="check-color" value="4" name="color" id="blue" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Vàng</label>
-                                <input type="checkbox" class="check-color" value="6" name="color" id="yellow" onchange="changeBG(this)">
+                                <input type="checkbox" ${colors.contains("6") ? "checked":""} class="check-color" value="6" name="color" id="yellow" onchange="changeBG(this)">
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="filterBtn">
-                        Lọc
-                    </input>
+                    <input type="hidden" name="sort" id="hiddenSort">
+                    <input type="submit" class="filterBtn" value="Lọc">
                 </form>
             </div>
             <div class="right">
@@ -181,8 +180,8 @@
                         <span>Sắp xếp</span>
                         <select>
                             <option value="1">Mặc định</option>
-                            <option ${selectASC} value="2">Giá tăng dần</option>
-                            <option ${selectDESC} value="3">Giá giảm dần</option>
+                            <option ${selectasc} value="2">Giá tăng dần</option>
+                            <option ${selectdesc} value="3">Giá giảm dần</option>
                         </select>
                     </div>
                     <div class="product-list" id="product-list">
@@ -204,14 +203,12 @@
                     </div>
                 </div>
                 <div class="pagination">
-                    <h1>Total: ${totalPage}</h1>
-                    <h1>Current ${currentPage}</h1>
                     <ul>
                         <c:if test="${currentPage == 1}">
                             <li id="previousPage" class="arrowPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
                         </c:if>
                         <c:if test="${currentPage != 1}">
-                            <li id="previousPage" class="arrowActive arrowPage"><a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}"><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <li id="previousPage" class="arrowActive arrowPage"><a href="${href}&currentPage=${currentPage-1}"><i class="fa-solid fa-arrow-left"></i></a></li>
                         </c:if>
                         <ul id="number-page">
                             <c:choose>
@@ -220,29 +217,29 @@
                                         <li class="numb"> <a class="pageNumberActive">
                                                 ${currentPage}
                                         </a> </li>
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+1}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage+1}">
                                                 ${currentPage + 1}
                                         </a> </li>
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+2}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage+2}">
                                                 ${currentPage + 2}
                                         </a> </li>
                                     </c:if>
                                     <c:if test="${currentPage > 1 && currentPage < totalPage}">
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage-1}">
                                                 ${currentPage - 1}
                                         </a> </li>
                                         <li class="numb"> <a class="pageNumberActive">
                                                 ${currentPage}
                                         </a> </li>
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage+1}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage+1}">
                                                 ${currentPage + 1}
                                         </a> </li>
                                     </c:if>
                                     <c:if test="${currentPage == totalPage}">
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-2}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage-2}">
                                                 ${currentPage - 2}
                                         </a> </li>
-                                        <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${currentPage-1}">
+                                        <li class="numb"> <a href="${href}&currentPage=${currentPage-1}">
                                                 ${currentPage - 1}
                                         </a> </li>
                                         <li class="numb"> <a class="pageNumberActive">
@@ -259,7 +256,7 @@
                                             </a> </li>
                                         </c:if>
                                         <c:if test="${index.count != currentPage}">
-                                            <li class="numb"> <a href="sanPham-servlet?sort=${sort}&currentPage=${index.count}">
+                                            <li class="numb"> <a href="${href}&currentPage=${index.count}">
                                                     ${index.count}
                                             </a> </li>
                                         </c:if>
@@ -273,7 +270,7 @@
                             <li id="nextPage" class="arrowPage"><a><i class="fa-solid fa-arrow-right"></i></a></li>
                         </c:if>
                         <c:if test="${currentPage != totalPage+1}">
-                            <li id="nextPage" class="arrowPage arrowActive"><a href="sanPham-servlet?currentPage=${currentPage+1}"><i class="fa-solid fa-arrow-right"></i></a></li>
+                            <li id="nextPage" class="arrowPage arrowActive"><a href="${href}&currentPage=${currentPage+1}"><i class="fa-solid fa-arrow-right"></i></a></li>
                         </c:if>
                     </ul>
                 </div>
@@ -318,7 +315,6 @@
 
     <script src="${pageContext.request.contextPath}/patin/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/timKiem.js"></script>
-<%--    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham.js"></script>--%>
-    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham3.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham.js"></script>
     </body>
 </html>

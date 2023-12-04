@@ -46,6 +46,7 @@ public class JDBiConnector {
         a.add("2");
         a.add("3");
 
+
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url, product_detail.id_color as color " +
                     "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +

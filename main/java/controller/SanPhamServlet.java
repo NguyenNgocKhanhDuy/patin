@@ -36,6 +36,7 @@ public class SanPhamServlet extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
 
         List<Product> products = new ArrayList<>();
+        List<Product> allProductOfType = new ArrayList<>();
 
         String sort = request.getParameter("sort");
         int min;
@@ -67,49 +68,52 @@ public class SanPhamServlet extends HttpServlet {
 
         if (sort == null) sort = "";
 
+        String href = "sanPham-servlet?";
+
 //        if (!sort.equals("")) {
             if ((min != 0 || max != 15000000) && isFilterColor == false) {
-                products = product.filterProduct(sort, 1, min, max);
+                products = product.filterPriceProduct(sort, 1, min, max);
+                allProductOfType = product.allFilterPriceProduct(min, max);
+                href += "min="+min+"&max="+max;
             } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
                 products = product.filterColorProduct(sort, 1, colors);
+                allProductOfType = product.allFilterColorProduct(colors);
+                String txt = "";
+                for (int i = 0; i < colors.length; i++) {
+                    if (i==0) txt += "color="+colors[i];
+                    txt += "&color="+colors[i];
+                }
+                href += txt;
             } else if ((min != 0 || max != 15000000) && isFilterColor == true){
                 products = product.filterPriceColorProduct(sort, 1,colors, min, max);
+                allProductOfType = product.allFilterPriceColorProduct(colors, min, max);
+                String txt = "";
+                for (int i = 0; i < colors.length; i++) {
+                    txt += "&color="+colors[i];
+                }
+                href += "min="+min+"&max="+max+txt;
             }else{
                 products = product.sortProduct(sort, currentPage);
+                allProductOfType = product.getAllProduct();
             }
-            if (sort.equals("asc")){
-                request.setAttribute("selectASC", "selected");
-            }else if (sort.equals("desc")){
-                request.setAttribute("selectDESC", "selected");
-            }
-//        }
-//        else if (sort.equals("desc")) {
-//            if ((min != 0 || max != 15000000)  && isFilterColor == false) {
-//                products = product.filterProduct(sort, 1, min, max);
-//            } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
-//                products = product.filterColorProduct(sort, 1, colors);
-//            } else if ((min != 0 || max != 15000000) && isFilterColor == true) {
-//                products = product.filterPriceColorProduct(sort, 1,colors, min, max);
-//            } else {
-//                products = product.sortProduct(sort, currentPage);
+        request.setAttribute("select"+sort, "selected");
+//        if (sort.equals("asc")){
+//            }else if (sort.equals("desc")){
+//                request.setAttribute("select"+sort, "selected");
 //            }
-//            request.setAttribute("selectDESC", "selected");
-//        }
-//        else {
-//            if ((min != 0 || max != 15000000)  && isFilterColor == false) {
-//                products = product.filterProduct("", 1, min, max);
-//            } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
-//                products = product.filterColorProduct("", 1, colors);
-//            } else if ((min != 0 || max != 15000000) && isFilterColor == true) {
-//                products = product.filterPriceColorProduct("", 1,colors, min, max);
-//            } else {
-//                products = product.getProduct(currentPage);
-//            }
-//        }
 
-        int totalPage = (int) Math.ceil(products.size() / productPerPage);
+        int totalPage = (int) Math.ceil(allProductOfType.size() / productPerPage);
 
         request.setAttribute("totalPage", totalPage);
+
+        request.setAttribute("href", href);
+
+        ArrayList<String> listColors = new ArrayList<>();
+        for (int i = 0; i < colors.length; i++) {
+            listColors.add(colors[i]);
+        }
+
+        request.setAttribute("colors", listColors);
 
         request.setAttribute("min", min);
         request.setAttribute("max", max);
