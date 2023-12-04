@@ -49,30 +49,63 @@ public class SanPhamServlet extends HttpServlet {
             max = 15000000;
         }
 
+        boolean isFilterColor = false;
+        String[] colors = request.getParameterValues("color");
+        if (colors == null) {
+            colors = new String[6];
+            for (int i = 0; i < colors.length; i++) {
+                colors[i] = "0";
+            }
+        }
+
+        for (int i = 0; i < colors.length; i++) {
+            if (!colors[i].equals("0")) {
+                isFilterColor = true;
+                break;
+            }
+        }
+
         if (sort == null) sort = "";
 
-        if (sort.equals("asc")) {
-            if (min != 0 || max != 15000000) {
-                products = product.filterProduct("asc", 1, min, max);
-            }else {
+//        if (!sort.equals("")) {
+            if ((min != 0 || max != 15000000) && isFilterColor == false) {
+                products = product.filterProduct(sort, 1, min, max);
+            } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
+                products = product.filterColorProduct(sort, 1, colors);
+            } else if ((min != 0 || max != 15000000) && isFilterColor == true){
+                products = product.filterPriceColorProduct(sort, 1,colors, min, max);
+            }else{
                 products = product.sortProduct(sort, currentPage);
             }
-            request.setAttribute("selectASC", "selected");
-        } else if (sort.equals("desc")) {
-            if (min != 0 || max != 15000000) {
-                products = product.filterProduct("desc", 1, min, max);
-            }else {
-                products = product.sortProduct(sort, currentPage);
+            if (sort.equals("asc")){
+                request.setAttribute("selectASC", "selected");
+            }else if (sort.equals("desc")){
+                request.setAttribute("selectDESC", "selected");
             }
-            request.setAttribute("selectDESC", "selected");
-        }
-        else {
-            if (min != 0 || max != 15000000) {
-                products = product.filterProduct("", 1, min, max);
-            }else {
-                products = product.getProduct(currentPage);
-            }
-        }
+//        }
+//        else if (sort.equals("desc")) {
+//            if ((min != 0 || max != 15000000)  && isFilterColor == false) {
+//                products = product.filterProduct(sort, 1, min, max);
+//            } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
+//                products = product.filterColorProduct(sort, 1, colors);
+//            } else if ((min != 0 || max != 15000000) && isFilterColor == true) {
+//                products = product.filterPriceColorProduct(sort, 1,colors, min, max);
+//            } else {
+//                products = product.sortProduct(sort, currentPage);
+//            }
+//            request.setAttribute("selectDESC", "selected");
+//        }
+//        else {
+//            if ((min != 0 || max != 15000000)  && isFilterColor == false) {
+//                products = product.filterProduct("", 1, min, max);
+//            } else if (isFilterColor == true && (min == 0 && max == 15000000)) {
+//                products = product.filterColorProduct("", 1, colors);
+//            } else if ((min != 0 || max != 15000000) && isFilterColor == true) {
+//                products = product.filterPriceColorProduct("", 1,colors, min, max);
+//            } else {
+//                products = product.getProduct(currentPage);
+//            }
+//        }
 
         int totalPage = (int) Math.ceil(products.size() / productPerPage);
 

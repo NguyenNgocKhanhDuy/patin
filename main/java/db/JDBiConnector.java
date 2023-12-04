@@ -6,6 +6,7 @@ import model.Product;
 import org.jdbi.v3.core.Jdbi;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,14 +34,25 @@ public class JDBiConnector {
     }
 
     public static void main(String[] args) {
+        String[] s = {"0", "2", "0"};
+
+        String txt = "";
+        for (int i = 0; i < s.length; i++) {
+            txt += s[i]+", ";
+        }
+
+        ArrayList<String> a = new ArrayList<>();
+        a.add("1");
+        a.add("2");
+        a.add("3");
+
         List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
-                            "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
-                            "GROUP BY product.id " +
-                            "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
-                            "LIMIT :start, :end")
-                    .bind("start", 0).bind("end", 15)
-                    .bind("min", 2000000).bind("max", 5000000)
+            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url, product_detail.id_color as color " +
+                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                    "WHERE product_detail.id_color in (<color>) " +
+                    "GROUP BY product.id " +
+                    "LIMIT :start, :end")
+                    .bind("start", 0).bind("end", 15).bindList("color", s)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         System.out.println(products);

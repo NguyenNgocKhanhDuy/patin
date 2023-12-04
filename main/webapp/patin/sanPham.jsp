@@ -122,27 +122,27 @@
                         <div class="color-box">
                             <div class="color-item">
                                 <label>Đen</label>
-                                <input type="checkbox" class="check-color" name="color" id="black" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="2" name="color" id="black" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Trắng</label>
-                                <input type="checkbox" class="check-color" name="color" id="white" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="1" name="color" id="white" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Đỏ</label>
-                                <input type="checkbox" class="check-color" name="color" id="red" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="8" name="color" id="red" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Hồng</label>
-                                <input type="checkbox" class="check-color" name="color" id="pink" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="3" name="color" id="pink" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Xanh dương</label>
-                                <input type="checkbox" class="check-color" name="color" id="blue" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="4" name="color" id="blue" onchange="changeBG(this)">
                             </div>
                             <div class="color-item">
                                 <label>Vàng</label>
-                                <input type="checkbox" class="check-color" name="color" id="yellow" onchange="changeBG(this)">
+                                <input type="checkbox" class="check-color" value="6" name="color" id="yellow" onchange="changeBG(this)">
                             </div>
                         </div>
                     </div>
@@ -319,6 +319,6 @@
     <script src="${pageContext.request.contextPath}/patin/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/patin/assets/js/timKiem.js"></script>
 <%--    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham.js"></script>--%>
-    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham2.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/sanPham3.js"></script>
     </body>
 </html>

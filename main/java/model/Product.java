@@ -17,7 +17,8 @@ public class Product implements Serializable {
     @ColumnName("price")
     private int salePrice;
     private String size;
-    private String color;
+    @ColumnName("color")
+    private int color;
     private int quantity;
     private int hot;
     private String infomation;
@@ -29,7 +30,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, int originPrice, @ColumnName("price") int salePrice, String size, String color, int quantity, int hot, String infomation, ImageProduct image, int idSale, int idAdmin) {
+    public Product(int id, String name, int originPrice, @ColumnName("price") int salePrice, String size, @ColumnName("color") int color, int quantity, int hot, String infomation, ImageProduct image, int idSale, int idAdmin) {
         this.id = id;
         this.name = name;
         this.originPrice = originPrice;
@@ -85,11 +86,13 @@ public class Product implements Serializable {
         this.size = size;
     }
 
-    public String getColor() {
+    @ColumnName("color")
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    @ColumnName("color")
+    public void setColor(int color) {
         this.color = color;
     }
 
@@ -227,15 +230,28 @@ public class Product implements Serializable {
         } else {
             start = 0;
         }
+        List<Product> products;
 
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
-                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
-                    "GROUP BY product.id " +
-                    "ORDER BY MIN(product_detail.price) "+type+" " +
-                    "LIMIT :start, :end")
-                    .bind("start", start).bind("end", productPerPage).mapToBean(Product.class).stream().collect(Collectors.toList());
-        });
+        if (!type.equals("")){
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "GROUP BY product.id " +
+                                "ORDER BY MIN(product_detail.price) "+type+" " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }else {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "GROUP BY product.id " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }
+
+
         return products;
     }
 
@@ -272,6 +288,88 @@ public class Product implements Serializable {
                                 "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
                                 "LIMIT :start, :end")
                         .bind("start", start).bind("end", productPerPage)
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }
+
+        return products;
+    }
+
+    public List<Product> filterColorProduct(String type, int currentPage, String[] color) {
+        int productPerPage = 15;
+        int start;
+
+        if (currentPage > 1) {
+            start = ((currentPage - 1) * productPerPage) + 1;
+        } else {
+            start = 0;
+        }
+
+
+        List<Product> products;
+
+        if (!type.equals("")) {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id " +
+                                "ORDER BY MIN(product_detail.price) "+type+" " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).bindList("color", color)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }else {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).bindList("color", color)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }
+
+        return products;
+    }
+
+    public List<Product> filterPriceColorProduct(String type, int currentPage, String[] color, int min, int max) {
+        int productPerPage = 15;
+        int start;
+
+        if (currentPage > 1) {
+            start = ((currentPage - 1) * productPerPage) + 1;
+        } else {
+            start = 0;
+        }
+
+
+        List<Product> products;
+
+        if (!type.equals("")) {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
+                                "ORDER BY MIN(product_detail.price) "+type+" " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).bindList("color", color)
+                        .bind("min", min).bind("max", max)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }else {
+            products = JDBiConnector.get().withHandle(handle -> {
+                return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
+                                "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
+                                "WHERE product_detail.id_color in (<color>) " +
+                                "GROUP BY product.id " +
+                                "HAVING MIN(product_detail.price) >= :min and MIN(product_detail.price) <= :max " +
+                                "LIMIT :start, :end")
+                        .bind("start", start).bind("end", productPerPage).bindList("color", color)
                         .bind("min", min).bind("max", max)
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });

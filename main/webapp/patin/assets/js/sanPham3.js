@@ -80,18 +80,6 @@ function changeBG(input) {
 }
 
 
-// function filter() {
-//     var minPrice = textMin.value;
-//     var maxPrice = textMax.value;
-//     console.log(minPrice)
-//     console.log(maxPrice)
-// }
-//
-// inputMin.addEventListener("input", filter);
-// inputMax.addEventListener("input", filter);
-// textMin.addEventListener("input", filter);
-// textMax.addEventListener("input", filter);
-
 var select = document.querySelector(".sort select");
 select.addEventListener("change", function (){
     if (this.value == 1) {
