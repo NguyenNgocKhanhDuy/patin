@@ -1,5 +1,6 @@
 #content {
     margin: 80px 0;
+    position: relative;
 }
 
 #content .login {
@@ -61,4 +62,55 @@
     color: #1c1c1c;
     font-size: 14px;
     float: right;
+}
+
+.error {
+    position: absolute;
+    top: -80px;
+    right: 80px;
+    width: 400px;
+    height: 60px;
+    background: #e2c0bc;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #c0a7a5;
+    border-radius: 4px;
+}
+
+.error .ban {
+    color: #ab2f30;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.error p {
+    font-size: 16px;
+    color: #9b3a3d;
+}
+
+.none {
+    display: none;
+}
+
+.error .del {
+    color: #be9390;
+    font-size: 20px;
+    margin-left: 60px;
+    cursor: pointer;
+}
+
+.fadeOut {
+    animation: fade-out 0.25s ease-in forwards;
+}
+
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }

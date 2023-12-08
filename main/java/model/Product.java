@@ -1,7 +1,6 @@
 package model;
 
-import db.JDBiConnector;
-import org.jdbi.v3.core.Jdbi;
+import db.JDBIConnector;
 import org.jdbi.v3.core.mapper.Nested;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
@@ -166,7 +165,7 @@ public class Product implements Serializable {
 
     public List<Product> searchProduct(String text) {
         String txt = "%"+text.replace(" ", "%")+"%";
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select product.name, image_product.url " +
                                           "from product join image_product on product.id = image_product.id_product "+
                                           "where image_product.id = 1 and product.name like ? ")
@@ -176,7 +175,7 @@ public class Product implements Serializable {
     }
 
     public List<Product> getHotProduct() {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.name, product.origin_price, product.sale_price, image_product.url " +
                             "from product join image_product on product.id = image_product.id_product " +
                             "WHERE image_product.id = 1 and product.hot = 1 " +
@@ -187,7 +186,7 @@ public class Product implements Serializable {
     }
 
     public List<Product> getAllProduct() {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                     "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
                     "WHERE image_product.id = 1 " +
@@ -211,7 +210,7 @@ public class Product implements Serializable {
         }
 
 
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                     "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
                     "WHERE product.id >= :start and product.id <= :end " +
@@ -233,7 +232,7 @@ public class Product implements Serializable {
         List<Product> products;
 
         if (!type.equals("")){
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "GROUP BY product.id " +
@@ -242,7 +241,7 @@ public class Product implements Serializable {
                         .bind("start", start).bind("end", productPerPage).mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }else {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "GROUP BY product.id " +
@@ -268,7 +267,7 @@ public class Product implements Serializable {
         List<Product> products;
 
         if (!type.equals("")) {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "GROUP BY product.id " +
@@ -280,7 +279,7 @@ public class Product implements Serializable {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }else {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "GROUP BY product.id " +
@@ -296,7 +295,7 @@ public class Product implements Serializable {
     }
 
     public List<Product> allFilterPriceProduct(int min, int max) {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "GROUP BY product.id " +
@@ -322,7 +321,7 @@ public class Product implements Serializable {
         List<Product> products;
 
         if (!type.equals("")) {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +
@@ -333,7 +332,7 @@ public class Product implements Serializable {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }else {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +
@@ -348,7 +347,7 @@ public class Product implements Serializable {
     }
 
     public List<Product> allFilterColorProduct(String[] color) {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +
@@ -373,7 +372,7 @@ public class Product implements Serializable {
         List<Product> products;
 
         if (!type.equals("")) {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +
@@ -386,7 +385,7 @@ public class Product implements Serializable {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }else {
-            products = JDBiConnector.get().withHandle(handle -> {
+            products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +
@@ -403,7 +402,7 @@ public class Product implements Serializable {
     }
 
     public List<Product> allFilterPriceColorProduct(String[] color, int min, int max) {
-        List<Product> products = JDBiConnector.get().withHandle(handle -> {
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) as price, image_product.url " +
                                 "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product " +
                                 "WHERE product_detail.id_color in (<color>) " +

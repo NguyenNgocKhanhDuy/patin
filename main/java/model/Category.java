@@ -1,9 +1,8 @@
 package model;
 
-import db.JDBiConnector;
+import db.JDBIConnector;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +43,7 @@ public class Category implements Serializable {
     }
 
     public List<Category> getCategory() {
-        List<Category> category = JDBiConnector.get().withHandle(handle -> {
+        List<Category> category = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT name FROM category").mapToBean(Category.class)
                     .stream().collect(Collectors.toList());
         });

@@ -13,7 +13,8 @@
 <body>
     <header>
         <div class="container">
-            <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">
+<%--            <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">--%>
+            <img src="/patin_shop/patin/assets/images${li.get(0).getUrl()}" alt="" class="logo">
             <nav>
                 <ul class="menu">
                     <li><a href="#">TRANG CHỦ</a></li>
@@ -31,12 +32,12 @@
             <div class="user">
                 <ul>
                     <li>
-                        <a href="./dangNhap.html">
+                        <a href="login.html">
                             ĐĂNG NHẬP
                         </a>
                     </li>
                     <li>
-                        <a href="./dangKy.html">
+                        <a href="register.html">
                             ĐĂNG KÝ
                         </a>
                     </li>
