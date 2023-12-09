@@ -87,6 +87,12 @@
     border-radius: 4px;
 }
 
+.success {
+    background: #d5e9ce;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .error {
     background: #e2c0bc;
     display: flex;
@@ -106,6 +112,9 @@
     margin-right: 20px;
 }
 
+.success .icon {
+    color: #52664a;
+}
 .error .icon {
     color: #ab2f30;
 }
@@ -118,6 +127,9 @@
     font-size: 16px;
 }
 
+.success p {
+    color: #607458;
+}
 .error p {
     color: #9b3a3d;
 }
@@ -135,6 +147,9 @@
     cursor: pointer;
 }
 
+.success .del {
+    color: #a6b99e;
+}
 .error .del {
     color: #be9390;
 }

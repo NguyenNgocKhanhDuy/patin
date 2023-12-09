@@ -1,6 +1,6 @@
 package model;
 
-import db.JDBIConnector;
+import vn.hcmuaf.edu.fit.db.JDBIConnector;
 import org.jdbi.v3.core.mapper.Nested;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 

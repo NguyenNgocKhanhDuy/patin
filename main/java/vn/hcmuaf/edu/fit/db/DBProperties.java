@@ -1,4 +1,4 @@
-package db;
+package vn.hcmuaf.edu.fit.db;
 
 import java.io.IOException;
 import java.util.Properties;

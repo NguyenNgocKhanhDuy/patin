@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.dao;
 
-import db.JDBIConnector;
+import vn.hcmuaf.edu.fit.db.JDBIConnector;
 import vn.hcmuaf.edu.fit.bean.User;
 
 import java.math.BigInteger;
@@ -18,6 +18,13 @@ public class UserDao {
     public static UserDao getInstance() {
         if (instance == null) instance = new UserDao();
         return instance;
+    }
+
+    public List<User> getAllUser(){
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM user").mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        return users;
     }
 
     public User checkLogin(String email, String password) {
@@ -45,6 +52,35 @@ public class UserDao {
                     .mapToBean(User.class).stream().collect(Collectors.toList());
         });
         return users;
+    }
+
+    public void addUser(String email, String password, int verify, String fullName, String address, String phone, int role) {
+        int id = getAllUser().size() + 1;
+        String hashPass = hashPassword(password);
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO user(id, email, password, verify, fullname, address, phone, role) " +
+                    "VALUES (:id, :email, :password, :verify, :fullname, :address, :phone, :role)")
+                    .bind("id", id).bind("email", email).bind("password", hashPass)
+                    .bind("verify", verify).bind("fullname", fullName).bind("phone", phone).bind("address", address)
+                    .bind("role", role).execute();
+        });
+    }
+
+    public boolean isExitsCode(int code) {
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT id " +
+                    "FROM user " +
+                    "WHERE verify = ?").bind(0, code).mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        if (users.size() > 0) return true;
+        return false;
+    }
+
+    public void verify(int code, String email) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user SET verify = :code WHERE email = :email")
+                    .bind("code", code).bind("email", email).execute();
+        });
     }
 
     public String hashPassword(String password){

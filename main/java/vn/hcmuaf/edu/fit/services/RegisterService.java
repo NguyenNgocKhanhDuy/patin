@@ -53,4 +53,20 @@ public class RegisterService {
         }
         return "";
     }
+
+    public String register(String email, String password, String confirmPass, String fullname, String address, String phone) {
+        if (UserService.getInstance().isUserExists(email)){
+            return "Đã tồn tại tài khoản sử dụng email";
+        } else if (!password.equals(confirmPass)) {
+            return "Mật khẩu không đúng";
+        }else {
+            UserService.getInstance().register(email, password, fullname, address, phone);
+            return "Đăng ký thành công";
+        }
+    }
+
+    public long getCurrentTime() {
+        Long current = System.currentTimeMillis();
+        return current;
+    }
 }

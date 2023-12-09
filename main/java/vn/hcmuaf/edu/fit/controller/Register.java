@@ -1,5 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
+import vn.hcmuaf.edu.fit.services.MailService;
 import vn.hcmuaf.edu.fit.services.RegisterService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
@@ -20,23 +21,37 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullname");
+        String pass = request.getParameter("pass");
+        String confirmPass = request.getParameter("confirmPass");
         String phone = request.getParameter("phone");
-        String errorInformation = "";
+        String address = request.getParameter("address");
+        String information = "";
 
-        errorInformation = RegisterService.getInstance().checkFormLogin(fullName, email, phone);
+        information = RegisterService.getInstance().checkFormLogin(fullName, email, phone);
 
-        if (!errorInformation.equals("")) {
+        if (!information.equals("")) {
             request.setAttribute("type", "alert");
-            request.setAttribute("errorInformation", errorInformation);
         } else {
-            if (UserService.getInstance().isUserExists(email)){
-                request.setAttribute("type", "error");
-                errorInformation = "Đã tồn tại tài khoản sử dụng email";
-                request.setAttribute("errorInformation", errorInformation);
+            String status = RegisterService.getInstance().register(email, pass, confirmPass, fullName, address, phone);
+            if (status.equals("Đăng ký thành công")){
+                request.setAttribute("type", "success");
+                request.setAttribute("isSuccess", "true");
+                request.setAttribute("timeStart", RegisterService.getInstance().getCurrentTime());
             }else {
-                response.sendRedirect("/patin_shop/patin/login.jsp");
+                request.setAttribute("type", "error");
             }
+            information = status;
         }
-        request.getRequestDispatcher("/patin/register.jsp").forward(request, response);
+        request.setAttribute("information", information);
+        request.setAttribute("email", email);
+        request.setAttribute("pass", pass);
+        request.setAttribute("confirmPass", confirmPass);
+        request.setAttribute("fullname", fullName);
+        request.setAttribute("address", address);
+        request.setAttribute("phone", phone);
+
+        request.getSession().setAttribute("email", email);
+        request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+
     }
 }

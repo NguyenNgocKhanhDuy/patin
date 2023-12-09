@@ -1,6 +1,6 @@
 package model;
 
-import db.JDBIConnector;
+import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.io.Serializable;
 import java.util.List;

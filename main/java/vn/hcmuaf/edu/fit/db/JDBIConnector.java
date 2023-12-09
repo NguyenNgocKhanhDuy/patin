@@ -1,12 +1,10 @@
-package db;
+package vn.hcmuaf.edu.fit.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import model.Product;
 import org.jdbi.v3.core.Jdbi;
 import vn.hcmuaf.edu.fit.bean.User;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,11 +33,9 @@ public class JDBIConnector {
 
     public static void main(String[] args) {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT email, password " +
-                                          "FROM user " +
-                                          "WHERE verify = 1 and email = ?")
-                    .bind(0, "duynguyenngockhanh@gmail.com")
-                    .mapToBean(User.class).stream().collect(Collectors.toList());
+            return handle.createQuery("SELECT id " +
+                    "FROM user " +
+                    "WHERE verify = ?").bind(0, 0).mapToBean(User.class).stream().collect(Collectors.toList());
         });
         System.out.println(users);
     }

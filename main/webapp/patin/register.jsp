@@ -63,53 +63,61 @@
                 <div class="top">
                     <div class="left">
                         <div class="holder">
-                            <label>Họ tên
-                                <span class="red">
-                                    (*)
-                                </span>
-                            </label>
-                            <input id="name" type="text" name="fullname">
-                        </div>
-                        <div class="holder">
                             <label>Email
                                 <span class="red">
                                     (*)
                                 </span>
                             </label>
-                            <input type="email" name="email">
+                            <input type="email" name="email" value="${email != null ? email : ""}">
                         </div>
                         <div class="holder">
                             <label>Mật khẩu</label>
-                            <input type="password">
+                            <input type="password" name="pass" value="${pass != null ? pass : ""}">
+                        </div>
+                        <div class="holder">
+                            <label>Nhập lại mật khẩu</label>
+                            <input type="password" name="confirmPass" value="${confirmPass != null ? confirmPass : ""}">
                         </div>
                     </div>
                     <div class="right">
+                        <div class="holder">
+                            <label>Họ tên
+                                <span class="red">
+                                    (*)
+                                </span>
+                            </label>
+                            <input id="name" type="text" name="fullname" value="${fullname != null ? fullname : ""}">
+                        </div>
                         <div class="holder">
                             <label>Số điện thoại
                                 <span class="red">
                                     (*)
                                 </span>
                             </label>
-                            <input type="tel" name="phone">
+                            <input type="tel" name="phone" value="${phone != null ? phone : ""}">
                         </div>
                         <div class="holder">
                             <label>Địa chỉ</label>
-                            <input type="text">
+                            <input type="text" name="address" value="${address != null ? address : ""}">
                         </div>
                     </div>
                 </div>
+                <input id="statusSuccess" type="hidden" value="${isSuccess != null ? isSuccess : "false"}">
                 <button type="submit">Đăng Ký</button>
             </form>
         </div>
     </div>
     <div class="popup ${type != null ? type : "none"}">
+        <c:if test="${type.equals(\"success\")}">
+            <i class="fa-solid fa-check icon"></i>
+        </c:if>
         <c:if test="${type.equals(\"error\")}">
             <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
         </c:if>
         <c:if test="${type.equals(\"alert\")}">
             <i class="fa-solid fa-triangle-exclamation icon"></i>
         </c:if>
-        <p>${errorInformation}</p>
+        <p>${information}</p>
         <i class="fa-solid fa-xmark del"></i>
     </div>
 </div>
@@ -150,6 +158,6 @@
 </footer>
 
 <%--<script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>--%>
-<script src="${pageContext.request.contextPath}/patin/assets/js/register.js"></script>
+<script src="${pageContext.request.contextPath}/patin/assets/js/register1.js"></script>
 </body>
 </html>
