@@ -83,6 +83,47 @@ public class UserDao {
         });
     }
 
+    public int getVerifyByEmail(String email) {
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT verify FROM user WHERE email = ?")
+                    .bind(0, email).mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        return users.get(0).getVerify();
+    }
+
+    public void keyForgetPass(int code, String email) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user SET keyPass = ? WHERE email = ?")
+                    .bind(0, code).bind(1, email).execute();
+        });
+    }
+
+    public int getKey(String email) {
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT keyPass FROM user WHERE email = ?").bind(0, email).mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        return users.get(0).getKeyPass();
+    }
+
+    public boolean isExitsCodePass(int code) {
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT id " +
+                    "FROM user " +
+                    "WHERE keyPass = ?").bind(0, code).mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        if (users.size() > 0) return true;
+        return false;
+    }
+
+    public void updatePass(String email, String password) {
+        String hashPass = hashPassword(password);
+
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user SET password = ? WHERE email = ?")
+                    .bind(0, hashPass).bind(1, email).execute();
+        });
+    }
+
     public String hashPassword(String password){
         try {
             MessageDigest sha256 = null;

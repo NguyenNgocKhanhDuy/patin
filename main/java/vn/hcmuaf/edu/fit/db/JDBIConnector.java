@@ -35,7 +35,7 @@ public class JDBIConnector {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT id " +
                     "FROM user " +
-                    "WHERE verify = ?").bind(0, 0).mapToBean(User.class).stream().collect(Collectors.toList());
+                    "WHERE keyPass = ?").bind(0, 0).mapToBean(User.class).stream().collect(Collectors.toList());
         });
         System.out.println(users);
     }

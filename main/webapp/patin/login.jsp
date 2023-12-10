@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -64,16 +65,40 @@
                         <input type="password" name="password" placeholder="Mật khẩu...">
                     </div>
                     <button type="submit">Đăng Nhập</button>
-                    <a href="register.html">Tạo tài khoản</a>
+                    <div class="more">
+                        <a href="/patin/register.jsp">Tạo tài khoản</a>
+                        <a id="forgetPass">Quên mật khẩu</a>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="${error != null ? "error" : "none"}">
-            <i class="fa-solid fa-ban fa-flip-horizontal ban"></i>
-            <p>Email hoặc mật khẩu không đúng.</p>
+        <div class="popup ${type != null ? type : "none"}">
+            <c:if test="${type.equals(\"success\")}">
+                <i class="fa-solid fa-check icon"></i>
+            </c:if>
+            <c:if test="${type.equals(\"error\")}">
+                <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
+            </c:if>
+            <c:if test="${type.equals(\"alert\")}">
+                <i class="fa-solid fa-triangle-exclamation icon"></i>
+            </c:if>
+            <p>${information}</p>
             <i class="fa-solid fa-xmark del"></i>
         </div>
     </div>
+
+    <div class="modal">
+        <div class="modal-container">
+            <i class="fa-solid fa-xmark del"></i>
+            <h3>Quên mật khẩu</h3>
+            <form action="/patin_shop/forgerPass">
+                <label>Nhập email của bạn dể chúng tôi có thể hỗ trợ bạn về mật khẩu</label>
+                <input type="email" name="emailPass" placeholder="Email...">
+                <input type="submit" value="Gửi">
+            </form>
+        </div>
+    </div>
+
     
     <footer>
         <div class="container">
@@ -110,7 +135,7 @@
         </div>
     </footer>
     
-<%--    <script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>--%>
-    <script src="${pageContext.request.contextPath}/patin/assets/js/login.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/category.js"></script>
+    <script src="${pageContext.request.contextPath}/patin/assets/js/login1.js"></script>
 </body>
 </html>

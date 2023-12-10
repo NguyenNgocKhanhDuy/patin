@@ -7,16 +7,15 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
-import java.util.ArrayList;
 
 
-@WebServlet(name = "VerifyEmail", value = "/doVerifyEmail")
-public class VerifyEmail extends HttpServlet {
+@WebServlet(name = "VerifyForgetPass", value = "/verifyForgetPass")
+public class VerifyForgetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long timeEnd = System.currentTimeMillis();
         long timeStart = (long) request.getSession().getAttribute("timeStart");
-        String email = (String) request.getSession().getAttribute("email");
+        String email = (String) request.getSession().getAttribute("emailPass");
         String[] codes = request.getParameterValues("code");
         String s = "";
         for (int i = 0; i < codes.length; i++) {
@@ -25,19 +24,18 @@ public class VerifyEmail extends HttpServlet {
         int code = Integer.parseInt(s);
 
         if (MailService.getInstance().isValidCode(timeStart, timeEnd)){
-            if (UserService.getInstance().verifyMail(code, email)) {
+            if (UserService.getInstance().checkKey(code, email)) {
                 request.getSession().removeAttribute("timeStart");
-                request.getSession().removeAttribute("email");
-                response.sendRedirect("/patin_shop/patin/login.jsp");
+                request.getRequestDispatcher("/patin/newPass.jsp").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Mã xác minh không đúng");
-                request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+                request.getRequestDispatcher("/patin/verifyForgetPass.jsp").forward(request, response);
             }
         }else {
             request.setAttribute("type", "error");
             request.setAttribute("information", "Mã xác minh không đúng");
-            request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+            request.getRequestDispatcher("/patin/verifyForgetPass.jsp").forward(request, response);
         }
     }
 

@@ -23,12 +23,3 @@ if (popup.style.opacity != "0") {
 }
 
 del.addEventListener("click", hideError);
-
-var statusSuccess = document.querySelector("form #statusSuccess");
-if (statusSuccess.value == 'true') {
-    setTimeout(fowardToLogin, 1000);
-}
-
-function fowardToLogin() {
-    window.location.href = "/patin_shop/patin/login.jsp";
-}

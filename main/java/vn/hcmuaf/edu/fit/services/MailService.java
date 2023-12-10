@@ -35,11 +35,11 @@ public class MailService {
                 });
 
         try {
-            Message message = new MimeMessage(session);
+            MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(MailProperties.getUsername()));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message.setSubject("Thư xác thực Email");
-            message.setText("Mã xác thực: "+mes);
+            message.setSubject("Thư xác thực Email", "utf-8");
+            message.setText("Mã xác thực: "+mes, "utf-8");
             Transport.send(message);
             return true;
         } catch (MessagingException e) {

@@ -34,9 +34,9 @@ public class Register extends HttpServlet {
         } else {
             String status = RegisterService.getInstance().register(email, pass, confirmPass, fullName, address, phone);
             if (status.equals("Đăng ký thành công")){
-                request.setAttribute("type", "success");
-                request.setAttribute("isSuccess", "true");
-                request.setAttribute("timeStart", RegisterService.getInstance().getCurrentTime());
+                request.getSession().setAttribute("timeStart", RegisterService.getInstance().getCurrentTime());
+                request.getSession().setAttribute("email", email);
+                request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
             }
@@ -50,8 +50,7 @@ public class Register extends HttpServlet {
         request.setAttribute("address", address);
         request.setAttribute("phone", phone);
 
-        request.getSession().setAttribute("email", email);
-        request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+        request.getRequestDispatcher("/patin/register.jsp").forward(request, response);
 
     }
 }

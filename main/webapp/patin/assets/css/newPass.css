@@ -1,12 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-size: 12px;
+    color: #000;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
 .container {
     height: 100vh;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    /*background-image: linear-gradient(142deg, #9861c2, #5cc0de);*/
-    /*background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);*/
-    /*background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);*/
-    /*background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);*/
     background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);
 }
 
@@ -31,7 +41,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    text-align: left;
     margin: 20px 0;
+}
+
+.code-container .holder {
+    margin: 10px 0;
+}
+
+.code-container label {
+    margin-left: 12px;
 }
 
 .code {
@@ -39,11 +59,13 @@
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     border: 1px solid #eee;
-    font-size: 30px;
-    width: 75px;
-    height: 80px;
+    font-size: 20px;
+    /*width: 200px;*/
+    height: 30px;
+    display: block;
+    padding: 6px;
     margin: 10px;
-    text-align: center;
+    /*text-align: center;*/
     font-weight: 300;
     outline: none;
 }
@@ -71,10 +93,10 @@
     cursor: pointer;
     border: 1px solid transparent;
     margin: 0 0 20px 0;
-    width: 300px;
+    width: 200px;
     padding: 16px;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 20px;
     border-radius: 10px;
     background: #9861c2;
     color: #fff;
@@ -85,13 +107,13 @@
 }
 
 .resend a {
-    color: #9861c2;
+    color: #d558c8;
     font-weight: 600;
 }
 
 .popup {
     position: absolute;
-    top: -80px;
+    top: 80px;
     right: 80px;
     width: 400px;
     height: 60px;
@@ -113,12 +135,7 @@
     justify-content: center;
 }
 
-.alert {
-    background: #eee9ce;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .popup .icon {
     font-size: 20px;
@@ -132,9 +149,7 @@
     color: #ab2f30;
 }
 
-.alert .icon {
-    color: #87722e;
-}
+
 
 .popup p {
     font-size: 16px;
@@ -146,9 +161,7 @@
 .error p {
     color: #9b3a3d;
 }
-.alert p {
-    color: #7f7454;
-}
+
 
 .none {
     display: none;
@@ -166,9 +179,7 @@
 .error .del {
     color: #be9390;
 }
-.alert .del {
-    color: #d0cb9e;
-}
+
 
 
 .fadeOut {

@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.controller;
 
 
 import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.services.RegisterService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -22,14 +23,22 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = UserService.getInstance().checkLogin(email, password);
-        if (user == null) {
-            request.setAttribute("email", email);
-            request.setAttribute("error", "error");
-            request.getRequestDispatcher("/patin/login.jsp").forward(request, response);
+        String infomation = RegisterService.getInstance().checkEmail(email);
+        if (!"valid".equals(infomation)){
+            request.setAttribute("type", "alert");
+            request.setAttribute("infomation", infomation);
+            request.getRequestDispatcher("/patin/login.jsp");
         }else {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("auth", user);
-            response.sendRedirect("/patin_shop/patin/index.jsp");
+            if (user == null) {
+                request.setAttribute("email", email);
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Email hoặc mật khẩu không chính xác");
+                request.getRequestDispatcher("/patin/login.jsp").forward(request, response);
+            }else {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("auth", user);
+                response.sendRedirect("/patin_shop/patin/index.jsp");
+            }
         }
     }
 }

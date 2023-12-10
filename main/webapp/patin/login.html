@@ -60,7 +60,10 @@
                     <input type="password">
                 </div>
                 <button type="submit">Đăng Nhập</button>
-                <a href="register.html">Tạo tài khoản</a>
+                <div class="more">
+                    <a id="forgetPass">Quên mật khẩu</a>
+                    <a href="register.html">Tạo tài khoản</a>
+                </div>
             </form>
         </div>
     </div>
@@ -68,6 +71,17 @@
         <i class="fa-solid fa-ban fa-flip-horizontal ban"></i>
         <p>Email hoặc mật khẩu không đúng.</p>
         <i class="fa-solid fa-xmark del"></i>
+    </div>
+</div>
+<div class="modal">
+    <div class="modal-container">
+        <i class="fa-solid fa-xmark del"></i>
+        <h3>Quên mật khẩu</h3>
+        <form action="">
+            <label>Nhập email của bạn</label>
+            <input type="email" name="emailPass" placeholder="Email...">
+            <input type="submit" value="Gửi">
+        </form>
     </div>
 </div>
 
@@ -109,7 +123,7 @@
 
 
 
-<script src="./assets/js/tenDanhMuc.js"></script>
-<script src="./assets/js/login.js"></script>
+<script src="assets/js/category.js"></script>
+<script src="./assets/js/login1.js"></script>
 </body>
 </html>

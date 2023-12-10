@@ -11,13 +11,13 @@
 <%@ page isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
-    <title>Verify Email</title>
+    <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/css/verifyEmail1.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/patin/assets/fontawesome/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <form action="/patin_shop/doVerifyEmail" class="wrapper">
+        <form action="/patin_shop/verifyForgetPass" class="wrapper">
             <h3>Xác thực email</h3>
             <p>Chúng tôi vừa gửi đến email ${sessionScope.email} một mã xác thực
                 <br>Hãy kiểm tra email và điền vào bên dưới để xác thực email của bạn</p>

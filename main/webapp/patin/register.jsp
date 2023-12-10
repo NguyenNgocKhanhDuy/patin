@@ -26,11 +26,7 @@
                 <li>
                     <a href="./sanPham.html">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
-                        <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
+
                     </ul>
                 </li>
                 <li><a href=./lienHe.html>LIÊN HỆ</a></li>
@@ -157,7 +153,7 @@
     </div>
 </footer>
 
-<%--<script src="${pageContext.request.contextPath}/patin/assets/js/tenDanhMuc.js"></script>--%>
+<script src="${pageContext.request.contextPath}/patin/assets/js/category.js"></script>
 <script src="${pageContext.request.contextPath}/patin/assets/js/register1.js"></script>
 </body>
 </html>
