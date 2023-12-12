@@ -17,12 +17,12 @@ public class ForgerPass extends HttpServlet {
         if (!UserService.getInstance().isUserExists(email)) {
             request.setAttribute("type", "error");
             request.setAttribute("information", "Không tồn tại tài khoản");
-            request.getRequestDispatcher("/patin/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }else {
             if (UserService.getInstance().sendforgetPass(email)){
                 request.getSession().setAttribute("timeStart", System.currentTimeMillis());
                 request.getSession().setAttribute("emailPass", email);
-                request.getRequestDispatcher("/patin/verifyForgetPass.jsp").forward(request, response);
+                request.getRequestDispatcher("/verifyForgetPass.jsp").forward(request, response);
             }
         }
     }

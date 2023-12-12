@@ -32,12 +32,12 @@ public class VerifyEmail extends HttpServlet {
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Mã xác minh không đúng");
-                request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+                request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
             }
         }else {
             request.setAttribute("type", "error");
             request.setAttribute("information", "Mã xác minh không đúng");
-            request.getRequestDispatcher("/patin/verifyEmail.jsp").forward(request, response);
+            request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
         }
     }
 

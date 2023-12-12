@@ -1,8 +1,8 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import com.google.gson.Gson;
-import vn.hcmuaf.edu.fit.bean.Category;
-import vn.hcmuaf.edu.fit.dao.CategoryDao;
+import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,15 +11,15 @@ import java.io.*;
 import java.util.List;
 
 
-@WebServlet(name = "ShowCategory", value = "/showCategory")
-public class ShowCategory extends HttpServlet {
+@WebServlet(name = "Search", value = "/search")
+public class Search extends HttpServlet {
     private Gson gson = new Gson();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> listCategory = CategoryDao.getInstance().getCategory();
+        String find = (String) request.getParameter("search");
+        List<Product> listSearch = ProductService.getInstance().search(find);
         response.setContentType("application/json");
-        response.getWriter().print(gson.toJson(listCategory));
+        response.getWriter().print(gson.toJson(listSearch));
     }
 
     @Override

@@ -26,16 +26,16 @@ public class VerifyForgetPass extends HttpServlet {
         if (MailService.getInstance().isValidCode(timeStart, timeEnd)){
             if (UserService.getInstance().checkKey(code, email)) {
                 request.getSession().removeAttribute("timeStart");
-                request.getRequestDispatcher("/patin/newPass.jsp").forward(request, response);
+                request.getRequestDispatcher("/newPass.jsp").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Mã xác minh không đúng");
-                request.getRequestDispatcher("/patin/verifyForgetPass.jsp").forward(request, response);
+                request.getRequestDispatcher("/verifyForgetPass.jsp").forward(request, response);
             }
         }else {
             request.setAttribute("type", "error");
             request.setAttribute("information", "Mã xác minh không đúng");
-            request.getRequestDispatcher("/patin/verifyForgetPass.jsp").forward(request, response);
+            request.getRequestDispatcher("/verifyForgetPass.jsp").forward(request, response);
         }
     }
 

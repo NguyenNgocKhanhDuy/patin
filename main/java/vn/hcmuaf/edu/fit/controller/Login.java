@@ -27,17 +27,17 @@ public class Login extends HttpServlet {
         if (!"valid".equals(infomation)){
             request.setAttribute("type", "alert");
             request.setAttribute("infomation", infomation);
-            request.getRequestDispatcher("/patin/login.jsp");
+            request.getRequestDispatcher("/login.jsp");
         }else {
             if (user == null) {
                 request.setAttribute("email", email);
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Email hoặc mật khẩu không chính xác");
-                request.getRequestDispatcher("/patin/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
             }else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", user);
-                response.sendRedirect("/patin_shop/patin/index.jsp");
+                response.sendRedirect("/patin_shop/index.jsp");
             }
         }
     }

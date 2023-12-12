@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.dao;
 
-import model.Category;
+import vn.hcmuaf.edu.fit.bean.Category;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.util.List;
