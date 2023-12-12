@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Verify Email</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/verifyEmail1.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/verifyEmail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
 </head>
 <body>
@@ -48,6 +48,6 @@
             <i class="fa-solid fa-xmark del"></i>
         </div>
     </div>
-<script src="${pageContext.request.contextPath}/assets/js/verifyEmail1.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/verifyEmail.js"></script>
 </body>
 </html>

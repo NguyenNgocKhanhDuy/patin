@@ -29,7 +29,7 @@ public class UserDao {
 
     public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT email, password " +
+            return handle.createQuery("SELECT email, password, fullname " +
                             "FROM user " +
                             "WHERE verify = 1 and email = ?")
                     .bind(0, email)

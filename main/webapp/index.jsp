@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home1.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
     <title>Trang Chủ</title>
 </head>
@@ -33,16 +33,26 @@
             </nav>
             <div class="user">
                 <ul>
-                    <li>
-                        <a href="login.html">
-                            ĐĂNG NHẬP
-                        </a>
-                    </li>
-                    <li>
-                        <a href="register.html">
-                            ĐĂNG KÝ
-                        </a>
-                    </li>
+                    <c:if test="${sessionScope.auth != null}">
+                        <li>
+                            <a href="">
+                                    ${sessionScope.auth.getFullName()}
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.auth == null}">
+                        <li>
+                            <a href="login.jsp">
+                                ĐĂNG NHẬP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="register.jsp">
+                                ĐĂNG KÝ
+                            </a>
+                        </li>
+                    </c:if>
+
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
                     <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
@@ -238,7 +248,7 @@
 
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/category1.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/home.js"></script>
 </body>
 </html>

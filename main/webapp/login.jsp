@@ -136,6 +136,6 @@
     </footer>
     
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/login1.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/login.js"></script>
 </body>
 </html>
