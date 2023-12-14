@@ -90,7 +90,7 @@ header ul.sub_menu {
     background-color: #222;
     opacity: 0;
     visibility: hidden;
-    z-index: 1;
+    z-index: 3;
     transition: all 0.25s ease-in;
 }
 
@@ -235,7 +235,6 @@ header .user ul li:hover a {
     color: #1c1c1c;
     line-height: 39px;
     text-decoration: none;
-    z-index: 3;
 }
 
 #category-search .search {

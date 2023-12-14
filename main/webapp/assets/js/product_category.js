@@ -56,55 +56,75 @@ setInterval(function (){
 }, 3000);
 
 
-var inputMin = document.getElementById("min");
-var inputMax = document.getElementById("max");
-var progress = document.getElementById("progress");
 var textMin = document.getElementById("text-min");
 var textMax = document.getElementById("text-max");
 
-var priceGap = 0;
+function changeCurrency() {
+    textMin.value = parseFloat(textMin.value).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+    textMax.value = parseFloat(textMax.value).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
 
-progress.style.left = (textMin.value / inputMin.max) * 100 + "%";
-progress.style.right = 100 - (textMax.value / inputMax.max) * 100 + "%";
+}
 
-// Kéo chuột range
-function rangeSlider() {
-    var minValue = parseInt(inputMin.value);
+changeCurrency();
 
-    var maxValue = parseInt(inputMax.value);
 
-    if(maxValue - minValue < priceGap) {
-        if (event.target.id === "min"){
-            inputMin.value = maxValue - priceGap;
-        }else {
-            inputMax.value = minValue + priceGap;
-        }
-    }else {
-        // Thiết lập thanh màu
-        progress.style.left = (minValue / inputMin.max) * 100 + "%";
-        progress.style.right = 100 - (maxValue / inputMax.max) * 100 + "%";
+textMin.addEventListener("blur", function () {
+    var value = this.value.replace(/,/g, '')
+    if (this.value < 0 || this.value > changeToNumber(textMax.value)){
+        value = 0;
     }
-    // gán giá trị vào ô input
-    textMin.value = inputMin.value;
-    textMax.value = inputMax.value;
+    this.value = parseFloat(value).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+});
+
+
+function changeToNumber(currency) {
+    return parseInt(currency.substring(0, currency.length - 2).replaceAll(".", ""))
 }
 
 
-// Nhập ô input
-function rangeText() {
-    var minValue = parseInt(textMin.value);
-    var maxValue = parseInt(textMax.value);
+textMin.addEventListener("focus", function () {
+    textMin.value = changeToNumber(textMin.value);
+});
 
-    if((maxValue - minValue >= priceGap) && maxValue <= 15000000) {
-        if (event.target.id === "text-min"){
-            inputMin.value = minValue;
-            progress.style.left = (minValue / inputMin.max) * 100 + "%";
-        }else {
-            inputMax.value = maxValue;
-            progress.style.right = 100 - (maxValue / inputMax.max) * 100 + "%";
-        }
+var oldMin = 0;
+textMin.addEventListener("keydown", function (){
+    oldMin = this.value;
+})
+
+
+
+textMax.addEventListener("blur", function () {
+    var value = this.value.replace(/,/g, '')
+    if (changeToNumber(textMin.value) < this.value || this.value > 10000000){
+        value = 10000000;
     }
-}
+    this.value = parseFloat(value).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+});
+
+textMax.addEventListener("focus", function (){
+    textMax.value = changeToNumber(textMax.value);
+});
+
+var oldMax = 10000000;
+textMax.addEventListener("keydown", function (){
+    oldMax = this.value;
+
+})
+
+
+
 
 // COLOR
 var colorItems = document.getElementsByClassName("color-item");
@@ -155,3 +175,18 @@ select.addEventListener("change", function (){
     }
     document.querySelector(".filterBtn").click();
 })
+
+var popup = document.querySelector(".popup");
+
+var del = document.querySelector(".popup .del");
+
+
+function hideError() {
+    popup.classList.add("fadeOut")
+}
+
+if (popup.style.opacity != "0") {
+    setTimeout(hideError, 3000);
+}
+
+del.addEventListener("click", hideError);

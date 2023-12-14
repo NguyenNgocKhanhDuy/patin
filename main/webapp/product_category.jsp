@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -13,9 +14,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sanPham.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list_product.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
     <title>Sản Phẩm</title>
+    <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
     <header>
@@ -27,9 +29,7 @@
                     <li>
                         <a href="#">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
-                            <c:forEach var="i" items="${category}">
-                                <li><a href="danhMuc.html">${i.getName()}</a></li>
-                            </c:forEach>
+
                         </ul>
                     </li>
                     <li><a href=lienHe.html>LIÊN HỆ</a></li>
@@ -37,16 +37,25 @@
             </nav>
             <div class="user">
                 <ul>
-                    <li>
-                        <a href="login.html">
-                            ĐĂNG NHẬP
-                        </a>
-                    </li>
-                    <li>
-                        <a href="register.html">
-                            ĐĂNG KÝ
-                        </a>
-                    </li>
+                    <c:if test="${sessionScope.auth != null}">
+                        <li>
+                            <a href="">
+                                    ${sessionScope.auth.getFullName()}
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.auth == null}">
+                        <li>
+                            <a href="login.jsp">
+                                ĐĂNG NHẬP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="register.jsp">
+                                ĐĂNG KÝ
+                            </a>
+                        </li>
+                    </c:if>
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
                     <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
@@ -62,9 +71,7 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-                    <c:forEach var="i" items="${category}">
-                        <li><a href="danhMuc.html">${i.getName()}</a></li>
-                    </c:forEach>
+
                 </ul>
             </div>
             <div class="search">
@@ -87,34 +94,20 @@
     <div id="content">
         <div class="container">
             <div class="left">
-                <div class="category">
-                    <h3>Danh Mục</h3>
-                    <ul class="list-category">
-                        <c:forEach var="i" items="${category}">
-                            <li><a href="danhMuc.html">${i.getName()}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                <form action="sanPham-servlet" class="filter">
+                <form action="listProduct" class="filter">
                     <div class="price">
-                        <h3>Giá bán (VNĐ)</h3>
+                        <h3>Giá bán</h3>
                         <div class="price-input">
                             <div class="field">
-                                <span>Min</span>
-                                <input type="number" id="text-min" name="input-min" min="0" max="15000000" value="${min}" step="10000" oninput="rangeText()">
+                                <span>Giá thấp nhất</span>
+                                <input type="currency" id="text-min" min="0" max="10000000" name="min" value="${min != null ? min : 0}" step="10000">
+
                             </div>
-                            <div class="separator">-</div>
+                            <div class="separator"></div>
                             <div class="field">
-                                <span>Max</span>
-                                <input type="number" id="text-max" name="input-max" min="0" max="15000000" value="${max}" step="10000" oninput="rangeText()">
+                                <span>Giá cao nhất</span>
+                                <input type="currency"  id="text-max" min="0" max="10000000" name="max" value="${max != null ? max : 10000000}" step="10000">
                             </div>
-                        </div>
-                        <div class="slider">
-                            <div class="progress" id="progress"></div>
-                        </div>
-                        <div class="range-input">
-                            <input type="range" id="min" class="range-min" min="0" max="15000000" value="${min}" oninput="rangeSlider()">
-                            <input type="range" id="max" class="range-max" min="0" max="15000000" value="${max}" oninput="rangeSlider()">
                         </div>
                     </div>
                     <div class="color">
@@ -151,30 +144,6 @@
                 </form>
             </div>
             <div class="right">
-                <div class="top">
-                    <h3>Sản phẩm bán chạy</h3>
-                    <div class="wrapper">
-                        <div class="carousel" id="carousel">
-                            <c:forEach items="${hotProduct}" var="product">
-                                <div class="product-item">
-                                    <a href="ct_sanPham.html">
-                                        <img src= ${product.getImage().getUrl()} >
-                                        <h4 class="name"> ${product.getName()} </h4>
-                                        <span class="price-section"> ${product.getSalePrice()}
-                                        <h5 class="price"> ${product.getOriginPrice()} </h5>
-                                    </span>
-                                        <ul>
-                                            <li><i class="fa-solid fa-heart like"></i></li>
-                                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>
-                                        </ul>
-                                    </a>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        <i class="fa-regular fa-circle-right selection" id="next"></i>
-                        <i class="fa-regular fa-circle-left selection" id="previous"></i>
-                    </div>
-                </div>
                 <div class="bottom">
                     <div class="sort">
                         <span>Sắp xếp</span>
@@ -188,16 +157,48 @@
                         <c:forEach items="${products}" var="product">
                             <div class="product-item">
                                 <a href="ct_sanPham.html">
-                                    <img src= ${product.getImage().getUrl()} >
+                                    <img src= ${product.getImg()} >
                                     <h4 class="name"> ${product.getName()} </h4>
-                                    <span class="price-section"> ${product.getSalePrice()}
-                                        <h5 class="price"> ${product.getOriginPrice()} </h5>
+                                    <span class="price-section">
+                                        <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
+                                            <c:if test="${product.getSalePercent() == 0}">
+                                                <h5 class="price">
+                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                                </h5>
+                                            </c:if>
+                                            <c:if test="${product.getSalePercent() != 0}">
+                                                <h5 class="origin">
+                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>
+                                                </h5>
+                                                <h5 class="price">
+                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                                 </h5>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${product.getMinPrice() != product.getMaxPrice()}">
+                                        <h5 class="price">
+                                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                        </h5>
+                                            -
+                                            <h5 class="price">
+                                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
+                                        </h5>
+                                        </c:if>
                                     </span>
+
                                     <ul>
                                         <li><i class="fa-solid fa-heart like"></i></li>
                                         <li><i class="fa-solid fa-cart-shopping cart"></i></li>
                                     </ul>
                                 </a>
+                                <c:if test="${product.getSalePercent() != 0}">
+                                    <div class="sale">
+                                        <p>
+                                            <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
+                                        </p>
+                                        <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
+                                    </div>
+                                </c:if>
                             </div>
                         </c:forEach>
                     </div>
@@ -205,10 +206,17 @@
                 <div class="pagination">
                     <ul>
                         <c:if test="${currentPage == 1}">
-                            <li id="previousPage" class="arrowPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <li id="previousPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-angles-left"></i></a></li>
                         </c:if>
                         <c:if test="${currentPage != 1}">
-                            <li id="previousPage" class="arrowActive arrowPage"><a href="${href}&currentPage=${currentPage-1}"><i class="fa-solid fa-arrow-left"></i></a></li>
+                            <li id="previousPage"><a class="arrowActive" href="${href}&currentPage=1"><i class="fa-solid fa-angles-left"></i></a></li>
+                        </c:if>
+
+                        <c:if test="${currentPage == 1}">
+                            <li id="previousPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-chevron-left"></i></a></li>
+                        </c:if>
+                        <c:if test="${currentPage != 1}">
+                            <li id="previousPage"><a class="arrowActive" href="${href}&currentPage=${currentPage-1}"><i class="fa-solid fa-chevron-left"></i></a></li>
                         </c:if>
                         <ul id="number-page">
                             <c:choose>
@@ -249,7 +257,7 @@
 
                                 </c:when>
                                 <c:when test="${totalPage < 3}">
-                                    <c:forEach begin="1" end="${totalPage+1}" varStatus="index">
+                                    <c:forEach begin="1" end="${totalPage}" varStatus="index">
                                         <c:if test="${index.count == currentPage}">
                                             <li class="numb"> <a class="pageNumberActive">
                                                     ${index.count}
@@ -266,16 +274,34 @@
 
                         </ul>
 
-                        <c:if test="${currentPage == totalPage+1}">
-                            <li id="nextPage" class="arrowPage"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <c:if test="${currentPage == totalPage}">
+                            <li id="nextPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-chevron-right"></i></a></li>
                         </c:if>
-                        <c:if test="${currentPage != totalPage+1}">
-                            <li id="nextPage" class="arrowPage arrowActive"><a href="${href}&currentPage=${currentPage+1}"><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <c:if test="${currentPage != totalPage}">
+                            <li id="nextPage"><a class="arrowActive" href="${href}&currentPage=${currentPage+1}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                        </c:if>
+
+                        <c:if test="${currentPage == totalPage}">
+                            <li id="nextPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-angles-right"></i></a></li>
+                        </c:if>
+                        <c:if test="${currentPage != totalPage}">
+                            <li id="nextPage"><a class="arrowActive" href="${href}&currentPage=${totalPage}"><i class="fa-solid fa-angles-right"></i></a></li>
                         </c:if>
                     </ul>
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="popup ${type != null ? type : "none"}">
+        <c:if test="${type.equals(\"error\")}">
+            <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
+        </c:if>
+        <c:if test="${type.equals(\"alert\")}">
+            <i class="fa-solid fa-triangle-exclamation icon"></i>
+        </c:if>
+        <p>${information}</p>
+        <i class="fa-solid fa-xmark del"></i>
     </div>
 
     <footer>
@@ -314,7 +340,8 @@
     </footer>
 
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/sanPham.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/list_product.js"></script>
     </body>
 </html>

@@ -49,7 +49,7 @@ public class SortServlet extends HttpServlet {
 
 
         request.setAttribute("products", list);
-        request.getRequestDispatcher("/patin/sanPham.jsp").forward(request, response);
+        request.getRequestDispatcher("/patin/list_product.jsp").forward(request, response);
     }
 
     @Override

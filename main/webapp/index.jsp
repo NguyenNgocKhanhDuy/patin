@@ -11,20 +11,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
     <title>Trang Chủ</title>
+    <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
-    <fmt:setLocale value="vi_VN"/>
     <header>
         <div class="container">
-            <img src="${pageContext.request.contextPath}/patin/assets/images/logo.PNG" alt="" class="logo">
+            <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
             <nav>
                 <ul class="menu">
                     <li><a href="#">TRANG CHỦ</a></li>
                     <li>
-                        <a href="sanPham.html">SẢN PHẨM</a>
+                        <a href="list_product.html">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
                             <c:forEach var="i" items="${category}">
-                                <li><a href="danhMuc.html">${i.getName()}</a></li>
+                                <li><a href="product_category.html">${i.getName()}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -69,7 +69,7 @@
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
                     <c:forEach var="i" items="${category}">
-                        <li><a href="danhMuc.html">${i.getName()}</a></li>
+                        <li><a href="product_category.html">${i.getName()}</a></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -138,17 +138,16 @@
                                         <p>
                                             <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
                                         </p>
-                                        <img src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
+                                        <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
                                     </div>
                                 </c:if>
                             </div>
                         </c:forEach>
-
                     </div>
                     <i class="fa-regular fa-circle-right selection" id="next"></i>
                     <i class="fa-regular fa-circle-left selection" id="previous"></i>
                 </div>
-                <a href="sanPham.html" class="more">
+                <a href="list_product.html" class="more">
                     Xem Thêm
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -198,7 +197,7 @@
                                 <p>
                                     <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
                                 </p>
-                                <img src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
+                                <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
                             </div>
                         </c:if>
                     </div>

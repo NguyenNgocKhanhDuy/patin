@@ -19,7 +19,7 @@ public class CategoryDao {
 
     public List<Category> getCategory() {
         List<Category> selectNameFromCategory = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT name FROM category").mapToBean(Category.class).stream().collect(Collectors.toList());
+            return handle.createQuery("SELECT * FROM category").mapToBean(Category.class).stream().collect(Collectors.toList());
         });
         return selectNameFromCategory;
     }

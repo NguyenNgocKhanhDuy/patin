@@ -20,7 +20,7 @@ function addInCateHtml(c) {
     var html = '';
     for (let i = 0; i < c.length; i++) {
         html += `<li>
-                    <a href="./danhMuc.html">
+                    <a href="listProductCategory?id=${c[i].id}">
                         ${c[i].name}
                     </a>
                  </li>`

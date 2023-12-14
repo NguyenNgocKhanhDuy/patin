@@ -125,7 +125,7 @@
     transform: translate(-50%, -50%);
 }
 
-#content  .product-item .sale img {
+#content  .product-item .sale img.tag {
     width: 80px;
     height: 80px;
 }

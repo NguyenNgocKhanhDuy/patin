@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/sanPham.css">
+    <link rel="stylesheet" href="assets/css/list_product.css">
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <title>Sản Phẩm</title>
 </head>
@@ -116,8 +116,8 @@
                                 <div class="progress" id="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input type="range" id="min" class="range-min" min="0" max="10000" value="0" oninput="rangeSlider()">
-                                <input type="range" id="max" class="range-max" min="0" max="10000" value="10000" oninput="rangeSlider()">
+                                <input type="range" pattern="^\d+(\.|\,)\d{2}$" id="min" class="range-min" min="0" max="10000" value="0" oninput="rangeSlider()">
+                                <input type="range" pattern="^\d+(\.|\,)\d{2}$" id="max" class="range-max" min="0" max="10000" value="10000" oninput="rangeSlider()">
                             </div>
                         </div>
                         <div class="color">
@@ -249,6 +249,6 @@
         <script src="assets/js/category.js"></script>
         <script src="assets/js/showDanhMuc.js"></script>
         <script src="assets/js/search.js"></script>
-        <script src="assets/js/sanPham.js"></script>
+        <script src="assets/js/list_product.js"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@
                 <ul class="menu">
                     <li><a href="./index.html">TRANG CHỦ</a></li>
                     <li>
-                        <a href="sanPham.html">SẢN PHẨM</a>
+                        <a href="list_product.html">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
 
                         </ul>
