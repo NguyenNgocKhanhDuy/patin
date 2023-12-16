@@ -89,7 +89,7 @@ public class ProductDao {
         return products;
     }
 
-    public List<Product> getProductSortPerPageByCategory(int start, int category, String type) {
+    public List<Product> getProductSortPerPageByCategory(int start, String type, int category) {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id = product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
@@ -196,7 +196,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "HAVING minPrice >= :min AND maxPrice <= :max ")
                     .bind("min", min).bind("max", max).bind("category", category)
@@ -223,7 +223,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "ORDER BY minPrice " + type+" "+
                             "LIMIT :start, 15")
@@ -250,7 +250,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "LIMIT :start, 15")
                     .bindList("colors", colors).bind("start", start).bind("category", category)
@@ -273,7 +273,7 @@ public class ProductDao {
         Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT COUNT(DISTINCT product.id) " +
                             "FROM product JOIN product_detail on product.id = product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE product_detail.id_color in (<color>) AND category_detail.id = :category ")
+                            "WHERE product_detail.id_color in (<color>) AND category_detail.id_category = :category ")
                     .bindList("color", colors).bind("category", category)
                     .mapTo(Integer.class).one();
         });
@@ -300,7 +300,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "HAVING minPrice >= :min AND maxPrice <= :max " +
                             "ORDER BY minPrice " + type+" "+
@@ -331,7 +331,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "HAVING minPrice >= :min AND maxPrice <= :max " +
                             "LIMIT :start, 15")
@@ -360,7 +360,7 @@ public class ProductDao {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product JOIN category_detail on category_detail.id_product = product.id " +
-                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id = :category " +
+                            "WHERE image_product.id = 1 AND product_detail.id_color in (<colors>) AND category_detail.id_category = :category " +
                             "GROUP BY product.id " +
                             "HAVING minPrice >= :min AND maxPrice <= :max")
                     .bindList("colors", colors)
@@ -368,5 +368,56 @@ public class ProductDao {
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return products.size();
+    }
+
+    public Product getProduct(int id) {
+        Product product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.*, image_product.url as img, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice " +
+                    "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail on product.id = product_detail.id_product " +
+                    "WHERE image_product.id = 1 AND  product.id = ?")
+                    .bind(0, id).mapToBean(Product.class).one();
+        });
+        return product;
+    }
+
+    public int getTotalQuantity(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT SUM(product_detail.quantity) " +
+                            "FROM product_detail " +
+                            "WHERE product_detail.id_product = ? " +
+                            "GROUP BY product_detail.id_product")
+                    .bind(0, id).mapTo(Integer.class).one();
+        });
+        return i;
+    }
+
+    public int getPrice(int id, int size, int color) {
+        List<Integer> i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product_detail.price * (1-product.sale_percent) " +
+                            "FROM product_detail JOIN product on product_detail.id_product = product.id " +
+                            "WHERE id_product = :id AND id_size = :size AND id_color = :color")
+                    .bind("id", id).bind("size", size).bind("color", color)
+                    .mapTo(Integer.class).list();
+        });
+        if (i.size() != 1) {
+            i.clear();
+            i.add(0);
+        }
+        return i.get(0);
+    }
+
+    public int getQuantity(int id, int size, int color) {
+        List<Integer> i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT quantity " +
+                            "FROM product_detail " +
+                            "WHERE id_product = :id AND id_size = :size AND id_color = :color")
+                    .bind("id", id).bind("size", size).bind("color", color)
+                    .mapTo(Integer.class).list();
+        });
+        if (i.size() != 1) {
+            i.clear();
+            i.add(0);
+        }
+        return i.get(0);
     }
 }

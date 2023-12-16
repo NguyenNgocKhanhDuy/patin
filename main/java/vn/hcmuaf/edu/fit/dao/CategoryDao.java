@@ -17,10 +17,17 @@ public class CategoryDao {
         return instance;
     }
 
-    public List<Category> getCategory() {
+    public List<Category> getAllCategory() {
         List<Category> selectNameFromCategory = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT * FROM category").mapToBean(Category.class).stream().collect(Collectors.toList());
         });
         return selectNameFromCategory;
+    }
+
+    public Category getCategory(int id) {
+        Category category = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT name FROM category WHERE id = ?").bind(0, id).mapToBean(Category.class).one();
+        });
+        return category;
     }
 }

@@ -163,7 +163,7 @@
                         <div class="carousel" id="carousel">
                             <c:forEach items="${hotProducts}" var="product">
                                 <div class="product-item">
-                                    <a href="ct_sanPham.html">
+                                    <a href="productDetail?productID=${product.getId()}">
                                         <img src= ${product.getImg()} >
                                         <h4 class="name"> ${product.getName()} </h4>
                                         <span class="price-section">
@@ -224,7 +224,7 @@
                     <div class="product-list" id="product-list">
                         <c:forEach items="${products}" var="product">
                             <div class="product-item">
-                                <a href="ct_sanPham.html">
+                                <a href="productDetail?productID=${product.getId()}">
                                     <img src= ${product.getImg()} >
                                     <h4 class="name"> ${product.getName()} </h4>
                                     <span class="price-section">

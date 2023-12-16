@@ -349,6 +349,7 @@ header .user ul li:hover a {
     transform: translate(-50%, -50%);
     text-shadow: 0 0 5px #000;
     z-index: 1;
+    white-space: nowrap;
 }
 
 

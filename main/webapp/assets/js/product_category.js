@@ -1,63 +1,8 @@
 
-
-// tự chuyển động sale
-var items = document.getElementsByClassName("product-item");
-var next = document.getElementById("next");
-var previous = document.getElementById("previous");
-
-// kích thước 1 item
-var itemWidth = items[0].clientWidth + 30;
-
-var step = itemWidth;
-
-var countMax = (items.length*itemWidth)/step;
-
-var count = 0;
-var direct = "next";
-
-// Nhấn next
-next.addEventListener("click", function (){
-    carousel.scrollLeft += step;
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        direct = "previous";
-    }
-});
-
-// Nhấn previous
-previous.addEventListener("click", function () {
-    carousel.scrollLeft -= step;
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        direct = "next";
-    }
-});
-
-
-// Tự lướt
-setInterval(function (){
-    count++;
-    if (count == (countMax-2)){
-        count = 1;
-        if (direct == "next"){
-            direct = "previous";
-        }else if(direct == "previous"){
-            direct = "next";
-        }
-    }
-
-    if (direct == "next"){
-        carousel.scrollLeft += step;
-    }else {
-        carousel.scrollLeft -= step;
-    }
-}, 3000);
-
-
 var textMin = document.getElementById("text-min");
 var textMax = document.getElementById("text-max");
+var minValue = 10000;
+var maxvalue = 10000000;
 
 function changeCurrency() {
     textMin.value = parseFloat(textMin.value).toLocaleString('vi-VN', {
@@ -76,8 +21,8 @@ changeCurrency();
 
 textMin.addEventListener("blur", function () {
     var value = this.value.replace(/,/g, '')
-    if (this.value < 0 || this.value > changeToNumber(textMax.value)){
-        value = 0;
+    if (this.value < minValue || this.value > changeToNumber(textMax.value)){
+        value = minValue;
     }
     this.value = parseFloat(value).toLocaleString('vi-VN', {
         style: 'currency',
@@ -95,7 +40,7 @@ textMin.addEventListener("focus", function () {
     textMin.value = changeToNumber(textMin.value);
 });
 
-var oldMin = 0;
+var oldMin = minValue;
 textMin.addEventListener("keydown", function (){
     oldMin = this.value;
 })
@@ -104,8 +49,8 @@ textMin.addEventListener("keydown", function (){
 
 textMax.addEventListener("blur", function () {
     var value = this.value.replace(/,/g, '')
-    if (changeToNumber(textMin.value) < this.value || this.value > 10000000){
-        value = 10000000;
+    if (changeToNumber(textMin.value) > this.value || this.value > maxvalue){
+        value = maxvalue;
     }
     this.value = parseFloat(value).toLocaleString('vi-VN', {
         style: 'currency',
@@ -117,7 +62,7 @@ textMax.addEventListener("focus", function (){
     textMax.value = changeToNumber(textMax.value);
 });
 
-var oldMax = 10000000;
+var oldMax = maxvalue;
 textMax.addEventListener("keydown", function (){
     oldMax = this.value;
 

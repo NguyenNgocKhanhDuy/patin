@@ -1,4 +1,4 @@
-package model;
+package vn.hcmuaf.edu.fit.bean;
 
 import java.io.Serializable;
 

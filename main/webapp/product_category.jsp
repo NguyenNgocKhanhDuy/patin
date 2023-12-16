@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list_product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product_category.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
     <title>Sản Phẩm</title>
     <fmt:setLocale value="vi_VN"/>
@@ -87,14 +87,15 @@
     <div id="image">
         <div class="container-img">
             <img src="${pageContext.request.contextPath}/assets/images/patin.jpg" alt="">
-            <p class="title">Sản phẩm</p>
+            <p class="title">${categoryName}</p>
         </div>
     </div>
 
     <div id="content">
         <div class="container">
             <div class="left">
-                <form action="listProduct" class="filter">
+                <form action="listProductCategory" class="filter">
+                    <input type="hidden" name="categoryID" value="${categoryID}">
                     <div class="price">
                         <h3>Giá bán</h3>
                         <div class="price-input">
@@ -156,7 +157,7 @@
                     <div class="product-list" id="product-list">
                         <c:forEach items="${products}" var="product">
                             <div class="product-item">
-                                <a href="ct_sanPham.html">
+                                <a href="product_detail.html">
                                     <img src= ${product.getImg()} >
                                     <h4 class="name"> ${product.getName()} </h4>
                                     <span class="price-section">
@@ -342,6 +343,6 @@
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/list_product.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/product_category.js"></script>
     </body>
 </html>

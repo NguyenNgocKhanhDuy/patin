@@ -7,6 +7,7 @@ public class Product implements Serializable {
     private String name;
     private int minPrice;
     private int maxPrice;
+    private int quantity;
     private double salePercent;
     private String img;
     private int hot;
@@ -15,11 +16,12 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, int minPrice, int maxPrice, double salePercent, String img, int hot, String information) {
+    public Product(int id, String name, int minPrice, int maxPrice, int quantity, double salePercent, String img, int hot, String information) {
         this.id = id;
         this.name = name;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
+        this.quantity = quantity;
         this.salePercent = salePercent;
         this.img = img;
         this.hot = hot;
@@ -56,6 +58,14 @@ public class Product implements Serializable {
 
     public void setMaxPrice(int maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getSalePercent() {
@@ -97,6 +107,7 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", minPrice=" + minPrice +
                 ", maxPrice=" + maxPrice +
+                ", quantity=" + quantity +
                 ", salePercent=" + salePercent +
                 ", img='" + img + '\'' +
                 ", hot=" + hot +

@@ -138,7 +138,6 @@
 }
 
 .selectActive {
-    border: 2px solid #ccc;
     box-shadow: 0 0 4px #000;
 }
 
@@ -164,7 +163,7 @@
 
 #content .product .right .container-checkSize {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-row-gap: 20px;
 }
 
@@ -185,6 +184,17 @@
     height: 100%;
     opacity: 0;
     cursor: pointer;
+}
+
+#content .product .right .quantityStore {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #999999;
+    display: block;
+}
+
+#content .product .right .quantityStore #quantityDetail {
+    display: inline-block;
 }
 
 #content .product .right .deselect {
@@ -245,7 +255,7 @@
     -webkit-appearance: none;
 }
 
-#content .product .right .buy .addTocart span {
+#content .product .right .buy .addTocart .btnAdd {
     padding: 16px 28px 14px;
     margin-right: 6px;
     margin-bottom: 5px;
@@ -258,9 +268,11 @@
     letter-spacing: 2px;
     text-decoration: none;
     transition: all 0.25s ease-in-out;
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
 
-#content .product .right .buy .addTocart span:hover {
+#content .product .right .buy .addTocart .btnAdd:hover {
     opacity: 0.8;
     box-shadow: 0 0 4px 3px #ccc;
 }
@@ -276,6 +288,17 @@
 
 .heartActive {
     color: red !important;
+}
+
+.disabled {
+    cursor: not-allowed !important;
+}
+.disabledBg {
+    background: #ccc !important;
+    pointer-events: none;
+}
+.disabledNoBg {
+    pointer-events: none;
 }
 
 #content .product .right .moreInfo {
@@ -491,6 +514,27 @@
     position: relative;
 }
 
+#content  .product-item .sale {
+    position: absolute;
+    top: -19px;
+    right: -2px;
+}
+
+#content  .product-item .sale p {
+    position: absolute;
+    top: 48%;
+    left: 60%;
+    font-weight: 600;
+    font-size: 18px;
+    color: #feefb2;
+    transform: translate(-50%, -50%);
+}
+
+#content  .product-item .sale img.tag {
+    width: 80px;
+    height: 80px;
+}
+
 #content .product-item a {
     text-decoration: none;
     color: #1c1c1c;
@@ -521,21 +565,29 @@
     margin-bottom: 16px;
 }
 
-#content .product-item .price-section {
-    font-size: 18px;
-    color: #1c1c1c;
-    font-weight: 700;
+#content  .product-item .price-section {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-#content .product-item .price-section .price {
+#content  .product-item .price-section .price {
+    display: inline-block;
+    font-weight: 700;
+    margin: 0 10px;
+    color: #1c1c1c;
+    font-size: 18px;
+}
+
+#content  .product-item .price-section .origin {
     display: inline-block;
     font-weight: 400;
-    text-decoration: line-through;
-    margin-left: 10px;
+    margin: 0 10px;
     color: #b2b2b2;
+    text-decoration: line-through;
+    font-size: 18px;
 }
 
 #content .product-item ul {
@@ -694,4 +746,101 @@
     font-weight: 700;
     text-transform: uppercase;
     line-height: 40px;
+}
+
+.popup {
+    position: absolute;
+    top: 10%;
+    right: 80px;
+    width: 400px;
+    height: 60px;
+    padding: 10px;
+    border: 2px solid #c0a7a5;
+    border-radius: 4px;
+}
+
+.success {
+    background: #d5e9ce;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error {
+    background: #e2c0bc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert {
+    background: #eee9ce;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup .icon {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.success .icon {
+    color: #52664a;
+}
+.error .icon {
+    color: #ab2f30;
+}
+
+.alert .icon {
+    color: #87722e;
+}
+
+.popup p {
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.success p {
+    color: #607458;
+}
+.error p {
+    color: #9b3a3d;
+}
+.alert p {
+    color: #7f7454;
+}
+
+.none {
+    display: none;
+}
+
+.popup .del {
+    font-size: 20px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.success .del {
+    color: #a6b99e;
+}
+.error .del {
+    color: #be9390;
+}
+.alert .del {
+    color: #d0cb9e;
+}
+
+
+.fadeOut {
+    animation: fade-out 0.25s ease-in forwards;
+}
+
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }

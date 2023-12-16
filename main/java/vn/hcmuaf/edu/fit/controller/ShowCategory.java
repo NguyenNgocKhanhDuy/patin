@@ -17,7 +17,7 @@ public class ShowCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> listCategory = CategoryDao.getInstance().getCategory();
+        List<Category> listCategory = CategoryDao.getInstance().getAllCategory();
         response.setContentType("application/json");
         response.getWriter().print(gson.toJson(listCategory));
     }

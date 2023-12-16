@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.ServletException;
@@ -22,10 +23,12 @@ public class ListProductCategory extends HttpServlet {
         int category;
 
         try {
-            category = Integer.parseInt(request.getParameter("id"));
+            category = Integer.parseInt(request.getParameter("categoryID"));
         }catch (NumberFormatException e) {
             category = 1;
         }
+        request.setAttribute("categoryID", category);
+        request.setAttribute("categoryName", CategoryDao.getInstance().getCategory(category).getName());
 
         int currentPage = 0;
         int min;
@@ -98,7 +101,7 @@ public class ListProductCategory extends HttpServlet {
 
         List<Product> products;
         int totalPage;
-        String href = "listProduct?";
+        String href = "listProductCategory?categoryID="+category;
 
         if ((min != minValue || max != maxValue) && !isColorFilter) {
             if (min < minValue || max > maxValue) {
@@ -107,12 +110,12 @@ public class ListProductCategory extends HttpServlet {
                 min = minValue;
                 max = maxValue;
             }
-            products = ProductService.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPrice(min, max) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterPriceByCategory(currentPage, sort, min, max, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceByCategory(min, max, category) / productPerPage));
             href += "min="+min+"&max="+max;
         } else if (!(min != minValue || max != maxValue) && isColorFilter) {
-            products = ProductService.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColor(colors) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterColorByCategory(currentPage, sort, colors, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColorByCategory(colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -122,8 +125,8 @@ public class ListProductCategory extends HttpServlet {
 
         } else if ((min != minValue || max != maxValue) && isColorFilter) {
 
-            products = ProductService.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColor(min, max, colors) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterPriceColorByCategory(currentPage, sort, min, max, colors, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColorByCategory(min, max, colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -132,8 +135,8 @@ public class ListProductCategory extends HttpServlet {
             href += "min="+min+"&max="+max+txt;
 
         }else {
-            products = ProductService.getInstance().getProductPerPage(currentPage, sort);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countAll() / productPerPage));
+            products = ProductService.getInstance().getProductPerPageByCategory(currentPage, sort, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countAllByCategory(category) / productPerPage));
         }
 
         href += "&sort="+sort;
@@ -151,7 +154,7 @@ public class ListProductCategory extends HttpServlet {
 
         request.setAttribute("products", products);
 
-        request.getRequestDispatcher("/list_product.jsp").forward(request, response);
+        request.getRequestDispatcher("/product_category.jsp").forward(request, response);
     }
 
     @Override

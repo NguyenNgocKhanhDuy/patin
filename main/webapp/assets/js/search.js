@@ -3,28 +3,6 @@ var searchInput = document.querySelector("#category-search .search input");
 var body = document.querySelector("body")
 var btnSearch = document.getElementById("searchBtn");
 
-function renderValue(arrayValue) {
-    var html = "";
-    var maxLength = 0;
-    if (arrayValue.length > 3) {
-        maxLength = 3;
-    }else {
-        maxLength = arrayValue.length;
-    }
-    for (let i = 0; i < maxLength; i++) {
-        html += `<li>
-                    <a href="./ct_sanPham.html">
-                        <span class="item">
-                            <img src="${arrayValue[i].images[0]}" alt="">
-                            <p class="name">${arrayValue[i].name}</p>
-                        </span>
-                    </a>
-                 </li>`;
-    }
-    showBox.innerHTML = html;
-    showBox.style.boxShadow = "0px 4px 6px 2px #ccc";
-}
-
 
 function search() {
     var xhttp = new XMLHttpRequest();
@@ -57,6 +35,7 @@ function addInSearchHtml(c) {
                  </li>`
     }
     showBox.innerHTML = html;
+    showBox.style.boxShadow = "0px 4px 6px 2px #ccc";
 }
 
 btnSearch.addEventListener("click", search);

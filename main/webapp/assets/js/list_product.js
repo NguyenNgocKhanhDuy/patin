@@ -61,6 +61,8 @@ setInterval(function (){
 // var progress = document.getElementById("progress");
 var textMin = document.getElementById("text-min");
 var textMax = document.getElementById("text-max");
+var minValue = 0;
+var maxValue = 0;
 
 // var priceGap = 0;
 
@@ -128,9 +130,9 @@ changeCurrency();
 
 textMin.addEventListener("blur", function () {
     var value = this.value.replace(/,/g, '')
-    // if (this.value < 0 || minValueTemp > maxValueTemp){
-    //     value = 0;
-    // }
+    if (this.value < minValue || this.value > changeToNumber(textMax.value)){
+        value = minValue;
+    }
     this.value = parseFloat(value).toLocaleString('vi-VN', {
         style: 'currency',
         currency: 'VND'
@@ -147,7 +149,7 @@ textMin.addEventListener("focus", function () {
     textMin.value = changeToNumber(textMin.value);
 });
 
-var oldMin = 0;
+var oldMin = minValue;
 textMin.addEventListener("keydown", function (){
     oldMin = this.value;
 })
@@ -156,9 +158,9 @@ textMin.addEventListener("keydown", function (){
 
 textMax.addEventListener("blur", function () {
     var value = this.value.replace(/,/g, '')
-    // if (maxValueTemp < minValueTemp || maxValueTemp > 10000000){
-    //     value = 10000000;
-    // }
+    if (this.value < changeToNumber(textMin.value) || this.value > maxValue){
+        value = maxValue;
+    }
     this.value = parseFloat(value).toLocaleString('vi-VN', {
         style: 'currency',
         currency: 'VND'
@@ -169,7 +171,7 @@ textMax.addEventListener("focus", function (){
     textMax.value = changeToNumber(textMax.value);
 });
 
-var oldMax = 10000000;
+var oldMax = maxValue;
 textMax.addEventListener("keydown", function (){
     oldMax = this.value;
 
