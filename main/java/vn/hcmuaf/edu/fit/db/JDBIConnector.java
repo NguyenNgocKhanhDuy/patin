@@ -35,18 +35,14 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        List<Integer> i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT quantity " +
-                            "FROM product_detail " +
-                            "WHERE id_product = :id AND id_size = :size AND id_color = :color")
-                    .bind("id", 1).bind("size", 5).bind("color", 3)
-                    .mapTo(Integer.class).list();
+        Product product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id, product.name, image_product.url as img, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, size.name as size, color.name as color " +
+                            "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id AND product_detail.id_size = :size AND product_detail.id_color = :color")
+                    .bind("id", 1).bind("size", 1).bind("color", 3)
+                    .mapToBean(Product.class).one();
         });
-        if (i.size() != 1) {
-            i.clear();
-            i.add(0);
-        }
-        System.out.println(i.get(0));
+        System.out.println(product);
     }
 
 

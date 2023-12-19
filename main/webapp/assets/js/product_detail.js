@@ -183,13 +183,29 @@ minus.addEventListener("click", function () {
     var value = parseInt(inputQuantity.value);
     if (value > 1) {
         value--;
+        // boxQuantity.classList.remove("disabled");
+        // plus.classList.remove("disabledNoBg");
+        // inputQuantity.classList.remove("disabledNoBg");
+    }else {
+        // boxQuantity.classList.add("disabled");
+        // minus.classList.add("disabledNoBg");
+        // inputQuantity.classList.add("disabledNoBg");
     }
     inputQuantity.value = value;
 });
 
 plus.addEventListener("click", function () {
     var value = parseInt(inputQuantity.value);
-    value++;
+    if (value < parseInt(quantityDetail.textContent)) {
+        value++;
+        // boxQuantity.classList.remove("disabled");
+        // minus.classList.remove("disabledNoBg");
+        // inputQuantity.classList.remove("disabledNoBg");
+    }else {
+        // boxQuantity.classList.add("disabled");
+        // plus.classList.add("disabledNoBg");
+        // inputQuantity.classList.add("disabledNoBg");
+    }
     inputQuantity.value = value;
 });
 
@@ -222,6 +238,42 @@ function changeCurrency(price) {
 
 }
 
+var info = document.getElementById("info");
+var review = document.getElementById("review");
+var infoText = document.querySelector(".info-text");
+var reviewText = document.querySelector(".review");
+var infoActive = document.querySelector("#info a");
+var reviewActive = document.querySelector("#review a");
+info.addEventListener("click", function (){
+    infoText.style.display = "block";
+    reviewText.style.display = "none";
+    infoActive.classList.add("activeNav");
+    reviewActive.classList.remove("activeNav");
+})
+
+review.addEventListener("click", function (){
+    reviewText.style.display = "flex";
+    infoText.style.display = "none";
+    infoActive.classList.remove("activeNav");
+    reviewActive.classList.add("activeNav");
+})
+
+// rating star
+var stars = document.querySelectorAll(".rating-star i");
+for (let i = 0; i < stars.length; i++) {
+    stars[i].addEventListener("click", function () {
+        for (let j = 0; j < stars.length; j++) {
+            if(i >= j) {
+                stars[j].classList.add("starActive");
+            }else {
+                stars[j].classList.remove("starActive");
+            }
+        }
+    });
+}
+
+
+
 var popup = document.querySelector(".popup");
 
 var del = document.querySelector(".popup .del");
@@ -236,3 +288,4 @@ if (popup.style.opacity != "0") {
 }
 
 del.addEventListener("click", hideError);
+

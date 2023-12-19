@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/gioHang.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <title>Giỏ hàng</title>
 </head>
@@ -40,7 +40,10 @@
                     </a>
                 </li>
                 <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <span class="amount">1</span>
+                </li>
             </ul>
         </div>
     </div>
@@ -82,6 +85,8 @@
         <div class="container">
             <div class="title">
                 <h3>Sản phẩm</h3>
+                <h3>Kích cỡ</h3>
+                <h3>Màu sắc</h3>
                 <h3>Giá</h3>
                 <h3>Số lượng</h3>
                 <h3>Tổng cộng</h3>
@@ -94,6 +99,8 @@
                             <img src="https://xpatin.com/wp-content/uploads/2023/05/cau-tao-anh-2-380x380.jpg" alt="">
                             <p class="name">Giày Patin Micro Delta X 2023</p>
                         </div>
+                        <p class="size">34</p>
+                        <p class="color">Hồng</p>
                         <p class="price">14,990,000₫</p>
                         <!--                    <p class="quantity">1</p>-->
                         <div class="quantity">
@@ -103,7 +110,7 @@
                         </div>
                         <p class="total">14,990,000₫</p>
                         <!--                    <p class="detail">Chi tiết</p>-->
-                        <i class="fa-solid fa-clipboard detail"></i>
+
                         <i class="fa-solid fa-xmark del"></i>
                     </div>
 
@@ -192,6 +199,6 @@
     <script src="assets/js/category.js"></script>
     <script src="assets/js/showDanhMuc.js"></script>
     <script src="assets/js/search.js"></script>
-    <script src="assets/js/gioHang.js"></script>
+    <script src="assets/js/cart_test.js"></script>
 </body>
 </html>

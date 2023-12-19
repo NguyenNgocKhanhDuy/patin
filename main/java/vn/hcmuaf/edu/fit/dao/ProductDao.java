@@ -41,7 +41,7 @@ public class ProductDao {
 
     public List<Product> search(String find) {
         List<Product> products = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.name, image_product.url as img " +
+            return handle.createQuery("SELECT product.id, product.name, image_product.url as img " +
                     "FROM product JOIN image_product on product.id = image_product.id_product " +
                     "WHERE image_product.id = 1 and product.name like ? " +
                     "LIMIT 3")
@@ -419,5 +419,17 @@ public class ProductDao {
             i.add(0);
         }
         return i.get(0);
+    }
+
+    public Product getProductDetail(int id, int size, int color) {
+        Product product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id, product.name, product_detail.quantity, image_product.url as img, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, size.name as size, color.name as color " +
+                            "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id AND product_detail.id_size = :size AND product_detail.id_color = :color")
+                    .bind("id", id).bind("size", size).bind("color", color)
+                    .mapToBean(Product.class).one();
+        });
+        return product;
+
     }
 }

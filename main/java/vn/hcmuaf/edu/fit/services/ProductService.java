@@ -178,4 +178,8 @@ public class ProductService {
         }
         return randomProduct;
     }
+
+    public Product getProductDetail(int id, int size, int color) {
+        return ProductDao.getInstance().getProductDetail(id, size, color);
+    }
 }

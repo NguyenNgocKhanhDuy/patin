@@ -128,6 +128,17 @@ header .user ul li:hover a {
     transition: 0.25s ease-in-out;
 }
 
+header .user ul li .amount {
+    position: absolute;
+    top: -12px;
+    right: -4px;
+    background: #7fad39;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    padding: 3px 7px;
+}
+
 /* Category - Search */
 #category-search {
     margin-top: 25px;

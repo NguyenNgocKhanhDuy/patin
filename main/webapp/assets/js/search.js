@@ -26,7 +26,7 @@ function addInSearchHtml(c) {
     var html = "";
     for (let i = 0; i < c.length; i++) {
         html += `<li>  
-                     <a href="">  
+                     <a href="productDetail?productID=${c[i].id}">  
                          <span class="item"> 
                              <img src="${c[i].img}" alt=""/>
                              <p class="name">${c[i].name}</p>

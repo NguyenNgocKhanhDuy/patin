@@ -34,6 +34,9 @@ public class ProductDetail extends HttpServlet {
         Product product = ProductService.getInstance().getProduct(productID);
         request.setAttribute("product", product);
 
+        String info = product.getInformation().replace("%", "<br>");
+        product.setInformation(info);
+
         List<ImageProduct> listImg = ImageProductDao.getInstance().getAllImage(productID);
         request.setAttribute("listImg", listImg);
 

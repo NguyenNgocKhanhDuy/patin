@@ -22,9 +22,9 @@
             <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
             <nav>
                 <ul class="menu">
-                    <li><a href="./index.html">TRANG CHỦ</a></li>
+                    <li><a href="/index.jsp">TRANG CHỦ</a></li>
                     <li>
-                        <a href="list_product.html">SẢN PHẨM</a>
+                        <a href="/list_product.jsp">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
 
                         </ul>
@@ -35,17 +35,17 @@
             <div class="user">
                 <ul>
                     <li>
-                        <a href="login.html">
+                        <a href="#">
                             ĐĂNG NHẬP
                         </a>
                     </li>
                     <li>
-                        <a href="register.html">
+                        <a href="/register.jsp">
                             ĐĂNG KÝ
                         </a>
                     </li>
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
         </div>

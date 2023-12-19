@@ -57,7 +57,7 @@
                         </li>
                     </c:if>
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -111,12 +111,18 @@
                     </div>
                     <div class="price-section">
                         <p id="priceDetail">
-                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
-                            -
-                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
+                            <c:if test="${product.getMinPrice() != product.getMaxPrice()}">
+                                <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                -
+                                <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
+                            </c:if>
+
+                            <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
+                                <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                            </c:if>
                         </p>
                     </div>
-                    <form action="cart">
+                    <form action="cartController">
                         <input type="hidden" id="idProduct" name="productID" value="${productID}">
                         <div class="colors">
                             <span>Màu sắc</span>
@@ -196,7 +202,7 @@
                         <div class="buy">
                             <div class="quantity">
                                 <i id="minus" class="fa-solid fa-minus"></i>
-                                <input type="number" value="1">
+                                <input type="number" value="1"name="quantity">
                                 <i id="plus" class="fa-solid fa-plus"></i>
                             </div>
                             <div class="addTocart">
@@ -240,7 +246,10 @@
                     </ul>
                 </div>
                 <div class="info-text">
-                    ${product.getInformation()}
+                    <h3 class="title">Thông tin sản phẩm</h3>
+                    <p class="product-info">
+                        ${product.getInformation()}
+                    </p>
                 </div>
                 <div class="review">
                     <div class="left">

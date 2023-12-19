@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
             }else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", user);
-                response.sendRedirect("/patin_shop/index.jsp");
+                response.sendRedirect("/patin_shop/home");
             }
         }
     }

@@ -25,7 +25,7 @@
             <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
             <nav>
                 <ul class="menu">
-                    <li><a href="index.jsp">TRANG CHỦ</a></li>
+                    <li><a href="home">TRANG CHỦ</a></li>
                     <li>
                         <a href="#">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
@@ -57,7 +57,7 @@
                         </li>
                     </c:if>
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
         </div>

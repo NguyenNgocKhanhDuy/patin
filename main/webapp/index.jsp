@@ -21,11 +21,9 @@
                 <ul class="menu">
                     <li><a href="#">TRANG CHỦ</a></li>
                     <li>
-                        <a href="list_product.html">SẢN PHẨM</a>
+                        <a href="listProduct">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
-                            <c:forEach var="i" items="${category}">
-                                <li><a href="product_category.html">${i.getName()}</a></li>
-                            </c:forEach>
+
                         </ul>
                     </li>
                     <li><a href=lienHe.html>LIÊN HỆ</a></li>
@@ -42,19 +40,19 @@
                     </c:if>
                     <c:if test="${sessionScope.auth == null}">
                         <li>
-                            <a href="login.jsp">
+                            <a href=/login.jsp">
                                 ĐĂNG NHẬP
                             </a>
                         </li>
                         <li>
-                            <a href="register.jsp">
+                            <a href="/register.jsp">
                                 ĐĂNG KÝ
                             </a>
                         </li>
                     </c:if>
 
                     <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="gioHang.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -68,9 +66,7 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-                    <c:forEach var="i" items="${category}">
-                        <li><a href="product_category.html">${i.getName()}</a></li>
-                    </c:forEach>
+
                 </ul>
             </div>
             <div class="search">
@@ -98,7 +94,7 @@
                     <div class="carousel" id="carousel">
                         <c:forEach items="${hotProducts}" var="product">
                             <div class="product-item">
-                                <a href="product_detail.html">
+                                <a href="productDetail?productID=${product.getId()}">
                                     <img src= ${product.getImg()} >
                                     <h4 class="name"> ${product.getName()} </h4>
                                     <span class="price-section">
@@ -147,7 +143,7 @@
                     <i class="fa-regular fa-circle-right selection" id="next"></i>
                     <i class="fa-regular fa-circle-left selection" id="previous"></i>
                 </div>
-                <a href="list_product.html" class="more">
+                <a href="listProduct" class="more">
                     Xem Thêm
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -157,7 +153,7 @@
             <div class="product-list" id="product-list">
                 <c:forEach items="${products}" var="product">
                     <div class="product-item">
-                        <a href="product_detail.html">
+                        <a href="productDetail?productID=${product.getId()}">
                             <img src= ${product.getImg()} >
                             <h4 class="name"> ${product.getName()} </h4>
                             <span class="price-section">
