@@ -1,7 +1,7 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import com.google.gson.Gson;
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
@@ -17,7 +17,7 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String find = (String) request.getParameter("search");
-        List<Product> listSearch = ProductService.getInstance().search(find);
+        List<Product2> listSearch = ProductService.getInstance().search(find);
         response.setContentType("application/json");
         response.getWriter().print(gson.toJson(listSearch));
     }

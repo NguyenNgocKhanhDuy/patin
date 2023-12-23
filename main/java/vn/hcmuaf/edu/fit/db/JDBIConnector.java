@@ -1,14 +1,12 @@
 package vn.hcmuaf.edu.fit.db;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.core.result.ResultIterable;
 import vn.hcmuaf.edu.fit.bean.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JDBIConnector {
@@ -35,16 +33,13 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        Product product = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.id, product.name, image_product.url as img, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, size.name as size, color.name as color " +
-                            "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
-                            "WHERE product_detail.id_product = :id AND product_detail.id_size = :size AND product_detail.id_color = :color")
-                    .bind("id", 1).bind("size", 1).bind("color", 3)
-                    .mapToBean(Product.class).one();
+        List<Product> products = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id, product.name, product.sale_percent, MIN(product_detail.price)*(1 - product.sale_percent) as price, image_product.url  " +
+                    "FROM product_detail JOIN product on product_detail.product_id = product.id JOIN image_product on product.id = image_product.product_id " +
+                    "WHERE image_product.id = 1 and product.hot = 1 " +
+                    "GROUP BY product.id " +
+                    "LIMIT 5 ").mapToBean(Product.class).stream().collect(Collectors.toList());
         });
-        System.out.println(product);
+        System.out.println(products);
     }
-
-
-
 }

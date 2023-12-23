@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
@@ -14,15 +14,15 @@ import java.util.List;
 public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listHotProduct = ProductService.getInstance().getHotProduct();
+        List<Product2> listHotProduct = ProductService.getInstance().getHotProduct();
         request.setAttribute("hotProducts", listHotProduct);
-        List<Product> listProduct = ProductService.getInstance().getProductHome();
+        List<Product2> listProduct = ProductService.getInstance().getProductHome();
         request.setAttribute("products", listProduct);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

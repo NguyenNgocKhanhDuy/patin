@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.cart;
 
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class Cart {
 
 
     public boolean add(int id, int size, int color, int quantity) {
-        Product product = ProductService.getInstance().getProductDetail(id, size, color);
+        Product2 product = ProductService.getInstance().getProductDetail(id, size, color);
         CartKey cartKey = new CartKey(id, size, color);
         if (product == null) return false;
         if (data.containsKey(cartKey)){
@@ -31,14 +31,14 @@ public class Cart {
     }
 
     public boolean increase(int id, int size, int color) {
-        Product product = ProductService.getInstance().getProductDetail(id, size, color);
+        Product2 product = ProductService.getInstance().getProductDetail(id, size, color);
         if (product == null) return false;
         CartKey cartKey = new CartKey(id, size, color);
         return data.get(cartKey).increaseOne();
     }
 
     public boolean decrease(int id, int size, int color) {
-        Product product = ProductService.getInstance().getProductDetail(id, size, color);
+        Product2 product = ProductService.getInstance().getProductDetail(id, size, color);
         if (product == null) return false;
         CartKey cartKey = new CartKey(id, size, color);
         return data.get(cartKey).decreaseOne();

@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listHotProduct = ProductService.getInstance().getHotProduct();
+        List<Product2> listHotProduct = ProductService.getInstance().getHotProduct();
         request.setAttribute("hotProducts", listHotProduct);
 
         int currentPage = 0;
@@ -88,7 +88,7 @@ public class ListProduct extends HttpServlet {
         List<String> listColors = new ArrayList<>(Arrays.asList(colors));
         if (!listColors.contains("0")) isColorFilter = true;
 
-        List<Product> products;
+        List<Product2> products;
         int totalPage;
         String href = "listProduct?";
 

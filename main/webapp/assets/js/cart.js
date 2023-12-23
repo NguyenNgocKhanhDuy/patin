@@ -60,15 +60,24 @@ quantity()
 
     function addCartHtml(cart) {
         var html = '';
+        var totalPrice = document.querySelector(".pay_total .totalValue");
 
         var keys = [];
         for (const cartKey in cart) {
             keys.push(JSON.parse(cartKey))
         }
-        console.log(cart)
+        var sum = 0;
+
+        var htmlLink = `<a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>`
+
+        if (keys.length > 0) {
+            htmlLink += `<span class="amount">${keys.length}</span>`
+        }
+        document.querySelector(".user .cartLink").innerHTML = htmlLink
 
         for (let i = 0; i < Object.keys(cart).length; i++) {
             var product = cart[JSON.stringify(keys[i])].product;
+            sum += (product.minPrice * cart[JSON.stringify(keys[i])].quantity)
             html +=  `
             <a href="productDetail?productID=${keys[i].id}" class="product-item">
                 <input type="hidden" class="id" value="${keys[i].id}"/>
@@ -114,6 +123,7 @@ quantity()
                 <i class="fa-solid fa-xmark del"></i>
             </a>  `
         }
+        totalPrice.textContent = changeCurrency(sum);
         document.querySelector(".product-list").innerHTML = html;
         quantity();
         preventLink()

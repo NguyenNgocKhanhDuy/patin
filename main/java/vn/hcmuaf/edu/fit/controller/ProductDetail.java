@@ -2,11 +2,10 @@ package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.Color;
 import vn.hcmuaf.edu.fit.bean.ImageProduct;
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.bean.Size;
 import vn.hcmuaf.edu.fit.dao.ColorDao;
 import vn.hcmuaf.edu.fit.dao.ImageProductDao;
-import vn.hcmuaf.edu.fit.dao.ProductDao;
 import vn.hcmuaf.edu.fit.dao.SizeDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
@@ -31,7 +30,7 @@ public class ProductDetail extends HttpServlet {
 
         request.setAttribute("productID", productID);
 
-        Product product = ProductService.getInstance().getProduct(productID);
+        Product2 product = ProductService.getInstance().getProduct(productID);
         request.setAttribute("product", product);
 
         String info = product.getInformation().replace("%", "<br>");
@@ -46,7 +45,7 @@ public class ProductDetail extends HttpServlet {
         List<Size> sizes = SizeDao.getInstance().getProductSize(productID);
         request.setAttribute("sizes", sizes);
 
-        List<Product> orderProduct = ProductService.getInstance().getRandomProduct(4);
+        List<Product2> orderProduct = ProductService.getInstance().getRandomProduct(4);
         request.setAttribute("orderProducts", orderProduct);
 
         request.setAttribute("totalQuantity", ProductService.getInstance().getTotalQuantity(productID));

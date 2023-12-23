@@ -13,10 +13,15 @@ function search() {
         if (this.readyState == 4 && this.status == 200) {
             if (searchInput.value.length == 0) {
                 showBox.innerHTML = "";
+                showBox.style.boxShadow = "0 0 0 0 #fff";
             }else {
                 var c= {}
                 c = xhttp.response
-                addInSearchHtml(c)
+                if (c.length > 0) {
+                    addInSearchHtml(c)
+                }else {
+                    showBox.style.boxShadow = "0 0 0 0 #fff";
+                }
             }
         }
     };
@@ -43,6 +48,7 @@ searchInput.addEventListener("input", search);
 searchInput.addEventListener("click", search);
 body.addEventListener("click", function (){
     showBox.innerHTML = ""
+    showBox.style.boxShadow = "0 0 0 0 #fff";
 })
 
 searchInput.addEventListener("click", function () {

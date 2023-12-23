@@ -8,9 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cart.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/contact.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
-    <title>Giỏ hàng</title>
+    <title>Liên hệ</title>
     <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
@@ -94,101 +94,38 @@
 
     <div id="content">
         <div class="container">
-            <div class="title">
-                <h3>Sản phẩm</h3>
-                <h3>Kích cỡ</h3>
-                <h3>Màu sắc</h3>
-                <h3>Giá</h3>
-                <h3>Số lượng</h3>
-                <h3>Tổng cộng</h3>
-
-            </div>
-            <div class="product-list">
-                <c:set var="totalPrice" value="${totalPrice != null ? totalPrice : 0}"/>
-                <c:if test="${sessionScope.cart.getData().size() > 0 && sessionScope.cart != null}">
-                    <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
-                        <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
-                        <c:set var="totalPrice" value="${totalPrice + (product.getMinPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
-                        <a href="productDetail?productID=${keys.get(index.index).getId()}" class="product-item">
-                            <input type="hidden" class="id" value="${keys.get(index.index).getId()}"/>
-                            <input type="hidden" class="size" value="${keys.get(index.index).getSize()}"/>
-                            <input type="hidden" class="color" value="${keys.get(index.index).getColor()}"/>
-                            <div class="img-name">
-                                <img src="${product.getImg()}" alt="">
-                                <p class="name">${product.getName()}</p>
-                            </div>
-                            <p class="size">${product.getSize()}</p>
-                            <p class="color">${product.getColor()}</p>
-                            <p class="price">
-                                <fmt:formatNumber type="currency" value="${product.getMinPrice()}"/>
-                            </p>
-                            <div class="boxQuantity">
-                                <div class="quantity">
-                                    <i class="fa-solid fa-minus minus"></i>
-                                    <input type="number" value="${data.get(keys.get(index.index)).getQuantity()}">
-                                    <i class="fa-solid fa-plus plus"></i>
-                                </div>
-                            </div>
-                            <p class="total">
-                                <fmt:formatNumber type="currency" value="${product.getMinPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
-                            </p>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </a>
-                    </c:forEach>
-
-                </c:if>
-
-            </div>
-            <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
-<%--                <c:set var="totalPrice" value="${totalPrice != null ? totalPrice : 0}"/>--%>
-<%--                <c:forEach begin="0" end="${data.size()-1}" varStatus="index">--%>
-<%--                    <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>--%>
-<%--                    <c:set var="totalPrice" value="${totalPrice + (product.getMinPrice() * data.get(keys.get(index.index)).getQuantity())}"/>--%>
-<%--                </c:forEach>--%>
-                <div class="pay_total">
-                    <h3>Giỏ hàng</h3>
-                    <div class="price-total">
-                        <p>Tổng tiền</p>
-                        <p class="totalValue">
-                            <fmt:formatNumber type="currency" value="${totalPrice}"/>
-                        </p>
-                    </div>
-                    <a href="payment" class="checkout">Thanh toán</a>
+            <div class="contact-info">
+                <div class="info-section">
+                    <i class="fa-solid fa-phone"></i>
+                    <h3 class="title">Số điện thoại</h3>
+                    <p>+65 11.188.888</p>
                 </div>
-            </c:if>
-        </div>
-    </div>
-
-    <div class="modal">
-        <div class="modal-container">
-            <i class="fa-solid fa-xmark del"></i>
-            <h2>Chi tiết</h2>
-            <div class="modal-detail">
-                <div class="detail-info">
-                    <div class="detail-section">
-                        <h3 class="title">Màu sắc: </h3>
-                        <span class="selected color">Xanh dương</span>
-                    </div>
-                    <div class="detail-section">
-                        <h3 class="title">Kích thước: </h3>
-                        <span class="selected size">34</span>
-                    </div>
-                    <div class="detail-section">
-                        <h3 class="title">Số lượng: </h3>
-                        <span class="selected quantity">1</span>
-                    </div>
-                    <div class="detail-section">
-                        <h3 class="title">Tổng giá: </h3>
-                        <span class="selected price">14,000,000đ</span>
-                    </div>
+                <div class="info-section">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3 class="title">Địa chỉ</h3>
+                    <p>Trường Đại học Nông Lâm</p>
                 </div>
-                <div class="detail-note">
-                    <h3>Ghi chú</h3>
-                    <textarea class="note-content"></textarea>
+                <div class="info-section">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3 class="title">Email</h3>
+                    <p>patin@gmail.com</p>
                 </div>
             </div>
-            <div class="complete">
-                <span>Hoàn thành</span>
+
+            <div class="location">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145947051154!2d106.78918677336857!3d10.871276389283322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1699256851992!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="message">
+                <h3>Gửi tin nhắn</h3>
+                <form action="sendMailContact">
+                    <div class="messageInput">
+                        <input type="text" placeholder="Họ tên" name="fullname" value="${sessionScope.auth.getFullName() != null ? sessionScope.auth.getFullName() : ""}">
+                        <input type="email" placeholder="Email" name="email" value="${sessionScope.auth.getEmail() != null ? sessionScope.auth.getEmail() : ""}">
+                    </div>
+                    <textarea placeholder="Nội dung" name="message"></textarea>
+                    <input type="submit" value="Gửi">
+                </form>
             </div>
         </div>
     </div>

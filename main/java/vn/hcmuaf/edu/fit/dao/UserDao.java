@@ -29,7 +29,7 @@ public class UserDao {
 
     public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT email, password, fullname " +
+            return handle.createQuery("SELECT * " +
                             "FROM user " +
                             "WHERE verify = 1 and email = ?")
                     .bind(0, email)
@@ -113,6 +113,14 @@ public class UserDao {
         });
         if (users.size() > 0) return true;
         return false;
+    }
+
+    public void updateUser(User user) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone WHERE id = :id")
+                    .bind("id", user.getId()).bind("fullname", user.getFullName()).bind("address", user.getAddress()).bind("phone", user.getPhone())
+                    .execute();
+        });
     }
 
     public void updatePass(String email, String password) {

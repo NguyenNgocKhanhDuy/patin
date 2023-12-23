@@ -27,11 +27,14 @@ public class ShowCart extends HttpServlet {
         request.setAttribute("data", cart.getData());
         request.setAttribute("keys", keys);
 
+        request.setAttribute("type", request.getAttribute("type"));
+        request.setAttribute("information", request.getAttribute("information"));
+
         request.getRequestDispatcher("/cart.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

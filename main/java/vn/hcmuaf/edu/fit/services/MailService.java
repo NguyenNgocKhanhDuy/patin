@@ -25,7 +25,7 @@ public class MailService {
         return instance;
     }
 
-    public boolean sendMailVerifyCode(String to, String mes) {
+    public boolean sendMail(String to, String mes) {
         Session session = Session.getInstance(Mail.getProp(),
                 new Authenticator() {
                     @Override
@@ -46,6 +46,7 @@ public class MailService {
             return false;
         }
     }
+
 
     public boolean isValidCode(long timeStart, long timeEnd) {
         long time = timeEnd - timeStart;

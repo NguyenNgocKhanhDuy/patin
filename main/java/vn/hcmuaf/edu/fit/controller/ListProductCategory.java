@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
@@ -99,7 +99,7 @@ public class ListProductCategory extends HttpServlet {
         List<String> listColors = new ArrayList<>(Arrays.asList(colors));
         if (!listColors.contains("0")) isColorFilter = true;
 
-        List<Product> products;
+        List<Product2> products;
         int totalPage;
         String href = "listProductCategory?categoryID="+category;
 

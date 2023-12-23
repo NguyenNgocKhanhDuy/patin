@@ -32,7 +32,7 @@
 
                         </ul>
                     </li>
-                    <li><a href=lienHe.html>LIÊN HỆ</a></li>
+                    <li><a href=contact.html>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
@@ -47,6 +47,7 @@
                     <c:if test="${sessionScope.auth == null}">
                         <li>
                             <a href="login.jsp">
+                                <c:set var="location" value="productDetail?productID=${productID}" scope="session"/>
                                 ĐĂNG NHẬP
                             </a>
                         </li>
@@ -56,7 +57,7 @@
                             </a>
                         </li>
                     </c:if>
-                    <li><a href="yeuThich.html"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
                     <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
@@ -208,9 +209,11 @@
                             <div class="addTocart">
                                 <input class="btnAdd" type="submit" value="Thêm vào giỏ hàng">
                             </div>
-                            <span id="addToLike">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
+                            <a href="addWishList?productID=${productID}">
+                                <span id="addToLike">
+                                    <i class="fa-regular fa-heart"></i>
+                                </span>
+                            </a>
                         </div>
                     </form>
                     <div class="moreInfo">
