@@ -3,13 +3,25 @@ var subMenu = document.querySelector(".account ul li:first-child .sub_menu");
 var contentSections = document.querySelectorAll(".right > div");
 var manageList = document.querySelectorAll(".account .menu li");
 
+var isShow = false;
+
+function showManage() {
+    manageList[0].addEventListener("click", function () {
+        if (isShow == false){
+            subMenu.classList.replace("hideSubMenu", "showSubMenu");
+            isShow = true;
+        }else {
+            subMenu.classList.replace("hideSubMenu", "showSubMenu");
+            isShow = false;
+        }
+    });
+}
+showManage();
+
 function showContent() {
-    var index = 0;
+
     for (let i = 0; i < manageList.length; i++) {
         manageList[i].addEventListener("click", function () {
-            if (i == 0) {
-                subMenu.classList.replace("hideSubMenu", "showSubMenu");
-            }
            if (i > 0) {
                for (let j = 0; j < manageList.length; j++) {
                    manageList[j].classList.remove("activeAccountNav");
@@ -21,6 +33,9 @@ function showContent() {
                contentSections[i-1].style.display = "block";
                if (i > 4) {
                    subMenu.classList.replace("showSubMenu", "hideSubMenu");
+                   manageList[0].classList.remove("activeAccountNav")
+               }else {
+                   manageList[0].classList.add("activeAccountNav")
                }
            }
         });
@@ -143,46 +158,111 @@ function showDetailBrand() {
 showDetailBrand();
 
 
-var orderDetails = document.querySelectorAll(".order-item .detail");
+var colorDetails = document.querySelectorAll(".color-item .detail");
 
-function showDetailOrder() {
-    for (let i = 0; i < orderDetails.length; i++) {
-        orderDetails[i].addEventListener("click", function () {
+function showDetailColor() {
+    for (let i = 0; i < colorDetails.length; i++) {
+        colorDetails[i].addEventListener("click", function () {
 
-            var modalEditOrder = document.querySelector(".modal-EditOrder");
+            var modalEditColor = document.querySelector(".modal-Editcolor");
 
-            var modalDelEditOrder = document.querySelector(".modal-containerEditOrder .del");
+            var modalDelEditColor = document.querySelector(".modal-containerEditColor .del");
 
-            var modalAddEditOrder = document.querySelector(".modal-containerEditOrder .add");
-            modalEditOrder.style.display = "flex";
+            var modalAddEditColor = document.querySelector(".modal-containerEditColor .add");
+            modalEditColor.style.display = "flex";
 
-            modalEditOrder.addEventListener("click", function () {
-                modalEditOrder.style.display = "none";
+            modalEditColor.addEventListener("click", function () {
+                modalEditColor.style.display = "none";
             });
 
-            modalDelEditOrder.addEventListener("click", function () {
-                modalEditOrder.style.display = "none";
+            modalDelEditColor.addEventListener("click", function () {
+                modalEditColor.style.display = "none";
             });
-            modalAddEditOrder.addEventListener("click", function () {
-                modalEditOrder.style.display = "none";
+            modalAddEditColor.addEventListener("click", function () {
+                modalEditColor.style.display = "none";
             });
         });
     }
 }
 
-showDetailOrder();
+showDetailColor();
+
+
+var sizeDetails = document.querySelectorAll(".size-item .detail");
+
+function showDetailSize() {
+    for (let i = 0; i < sizeDetails.length; i++) {
+        sizeDetails[i].addEventListener("click", function () {
+
+            var modalEditSize = document.querySelector(".modal-Editsize");
+
+            var modalDelEditSize = document.querySelector(".modal-containerEditSize .del");
+
+            var modalAddEditSize = document.querySelector(".modal-containerEditSize .add");
+            modalEditSize.style.display = "flex";
+
+            modalEditSize.addEventListener("click", function () {
+                modalEditSize.style.display = "none";
+            });
+
+            modalDelEditSize.addEventListener("click", function () {
+                modalEditSize.style.display = "none";
+            });
+            modalAddEditSize.addEventListener("click", function () {
+                modalEditSize.style.display = "none";
+            });
+        });
+    }
+}
+
+showDetailSize();
+
+
+// var orderDetails = document.querySelectorAll(".order-item .detail");
+//
+// function showDetailOrder() {
+//     for (let i = 0; i < orderDetails.length; i++) {
+//         orderDetails[i].addEventListener("click", function () {
+//
+//             var modalEditOrder = document.querySelector(".modal-EditOrder");
+//
+//             var modalDelEditOrder = document.querySelector(".modal-containerEditOrder .del");
+//
+//             var modalAddEditOrder = document.querySelector(".modal-containerEditOrder .add");
+//             modalEditOrder.style.display = "flex";
+//
+//             modalEditOrder.addEventListener("click", function () {
+//                 modalEditOrder.style.display = "none";
+//             });
+//
+//             modalDelEditOrder.addEventListener("click", function () {
+//                 modalEditOrder.style.display = "none";
+//             });
+//             modalAddEditOrder.addEventListener("click", function () {
+//                 modalEditOrder.style.display = "none";
+//             });
+//         });
+//     }
+// }
+//
+// showDetailOrder();
 
 
 
 
 var modalProduct = document.querySelector(".modal-product");
 var modalBrand = document.querySelector(".modal-brand");
-var modalContainer = document.querySelector(".modal-container");
+var modalColor = document.querySelector(".modal-color");
+var modalSize = document.querySelector(".modal-size");
 
 var modalDelProduct = document.querySelector(".modal-containerProduct .del");
 var modalDelBrand = document.querySelector(".modal-containerBrand .del");
+var modalDelColor = document.querySelector(".modal-containerColor .del");
+var modalDelSize = document.querySelector(".modal-containerSize .del");
 var modalAddProduct = document.querySelector(".modal-containerProduct .add");
 var modalAddBrand = document.querySelector(".modal-containerBrand .add");
+var modalAddColor = document.querySelector(".modal-containerColor .add");
+var modalAddSize = document.querySelector(".modal-containerSize .add");
 
 var addProduct = document.querySelector(".product .add");
 
@@ -195,12 +275,29 @@ addBrand.addEventListener("click", function () {
     modalBrand.style.display = "flex";
 });
 
+var addColor = document.querySelector(".color .add");
+addColor.addEventListener("click", function () {
+    modalColor.style.display = "flex";
+});
+var addSize = document.querySelector(".size .add");
+addSize.addEventListener("click", function () {
+    modalSize.style.display = "flex";
+});
+
 modalProduct.addEventListener("click", function () {
     modalProduct.style.display = "none";
 });
 
 modalBrand.addEventListener("click", function () {
     modalBrand.style.display = "none";
+});
+
+modalColor.addEventListener("click", function () {
+    modalColor.style.display = "none";
+});
+
+modalSize.addEventListener("click", function () {
+    modalSize.style.display = "none";
 });
 
 modalDelProduct.addEventListener("click", function () {
@@ -210,6 +307,12 @@ modalDelProduct.addEventListener("click", function () {
 modalDelBrand.addEventListener("click", function () {
     modalBrand.style.display = "none";
 });
+modalDelColor.addEventListener("click", function () {
+    modalColor.style.display = "none";
+});
+modalDelSize.addEventListener("click", function () {
+    modalSize.style.display = "none";
+});
 
 modalAddProduct.addEventListener("click", function () {
     modalProduct.style.display = "none";
@@ -218,7 +321,38 @@ modalAddProduct.addEventListener("click", function () {
 modalAddBrand.addEventListener("click", function () {
     modalBrand.style.display = "none";
 });
+modalAddColor.addEventListener("click", function () {
+    modalColor.style.display = "none";
+});
+modalAddSize.addEventListener("click", function () {
+    modalSize.style.display = "none";
+});
 
-modalContainer.addEventListener("click", function () {
+var modalContainerUser = document.querySelector(".modalConUser");
+
+modalContainerUser.addEventListener("click", function () {
+    event.stopPropagation();
+});
+
+var modalContainerProduct = document.querySelector(".modalConProduct");
+
+modalContainerProduct.addEventListener("click", function () {
+    event.stopPropagation();
+});
+
+var modalContainerBrand = document.querySelector(".modalConBrand");
+
+modalContainerBrand.addEventListener("click", function () {
+    event.stopPropagation();
+});
+
+var modalContainerColor = document.querySelector(".modalConColor");
+
+modalContainerColor.addEventListener("click", function () {
+    event.stopPropagation();
+});
+var modalContainerSize = document.querySelector(".modalConSize");
+
+modalContainerSize.addEventListener("click", function () {
     event.stopPropagation();
 });

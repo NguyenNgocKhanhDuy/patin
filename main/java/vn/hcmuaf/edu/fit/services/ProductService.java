@@ -34,6 +34,10 @@ public class ProductService {
         return result;
     }
 
+    public List<Product2> getAllProduct() {
+        return ProductDao2.getInstance().getAllProduct();
+    }
+
     public List<Product2> search(String find) {
         String txt = "%"+find.replace(" ", "%")+"%";
         return ProductDao2.getInstance().search(txt);

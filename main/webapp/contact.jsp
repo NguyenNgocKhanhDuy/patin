@@ -182,6 +182,6 @@
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/cart.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
 </body>
 </html>

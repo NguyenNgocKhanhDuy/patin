@@ -152,7 +152,7 @@ function initDoB() {
 initDoB();
 
 function namNhuan(yearIn) {
-    if(yearIn % 400 === 0 || (yearIn % 4 === 0 && yearIn % 4 !== 0)){
+    if((yearIn % 400 === 0 && yearIn % 100 === 0 ) || (yearIn % 4 === 0 && yearIn % 100 !== 0)){
         return true;
     }
     return false;
@@ -219,3 +219,24 @@ function showOrderNavs() {
     }
 }
 showOrderNavs();
+
+var popup = document.querySelector(".popup");
+
+var del = document.querySelector(".popup .del");
+
+
+function hideError() {
+    popup.classList.add("fadeOut")
+    setTimeout(hide, 500);
+}
+
+if (popup.style.opacity != "0") {
+    setTimeout(hideError, 3000);
+}
+
+function hide() {
+    popup.classList.remove("error", "alert", "success")
+    popup.classList.add("none")
+}
+
+del.addEventListener("click", hideError);

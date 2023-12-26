@@ -1,50 +1,96 @@
+<%@ page import="java.text.NumberFormat" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html; charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
-    <title>Admin</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
+    <title>Giỏ hàng</title>
+    <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
     <header>
-    <div class="container">
-        <img src="assets/images/logo.PNG" alt="" class="logo">
-        <nav>
-            <ul class="menu">
-                <li><a href="index.jsp">TRANG CHỦ</a></li>
-                <li>
-                    <a href="list_product.html">SẢN PHẨM</a>
-                    <ul class="sub_menu list-category">
-                        <!--                                    <li><a href="#">Giày patin dành cho trẻ em</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin dành cho người lớn</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Centosy</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Flying Eagle</a></li>-->
-                        <!--                                    <li><a href="#">Giày patin hãng Courgar</a></li>-->
-                    </ul>
-                </li>
-                <li><a href="contact.html">LIÊN HỆ</a></li>
-            </ul>
-        </nav>
-        <div class="user">
-            <ul>
-                <li>
-                    <a href="login.html">
-                        ĐĂNG NHẬP
-                    </a>
-                </li>
-                <li>
-                    <a href="register.html">
-                        ĐĂNG KÝ
-                    </a>
-                </li>
-                <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            </ul>
+        <div class="container">
+            <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
+            <nav>
+                <ul class="menu">
+                    <li><a href="home">TRANG CHỦ</a></li>
+                    <li>
+                        <a href="listProduct">SẢN PHẨM</a>
+                        <ul class="sub_menu list-category">
+
+                        </ul>
+                    </li>
+                    <li><a href=lienHe.jsp>LIÊN HỆ</a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <ul>
+                    <c:if test="${sessionScope.auth != null}">
+                        <li>
+                            <a href="">
+                                    ${sessionScope.auth.getFullName()}
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.auth == null}">
+                        <li>
+                            <a href="login.jsp">
+                                ĐĂNG NHẬP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="register.jsp">
+                                ĐĂNG KÝ
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                    <li class="cartLink">
+                        <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                            <span class="amount">${sessionScope.cart.getData().size()}</span>
+                        </c:if>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="category-search">
+        <div class="container">
+
+            <div class="category-title" id="categoryAll">
+                <div class="category">
+                    <span>Danh Mục</span>
+                </div>
+                <ul id="list-cate" class="list list-category hideCategory">
+                    <c:forEach var="i" items="${category}">
+                        <li><a href="product_category.html">${i.getName()}</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Nhập vào sản phẩm" id="search" name="search">
+                <button id="searchBtn">Tìm Kiếm</button>
+                <ul>
+
+                </ul>
+            </div>
         </div>
     </div>
-</header>
+
+    <div id="image">
+        <div class="container-img">
+            <img src="${pageContext.request.contextPath}/assets/images/patin.jpg" alt="">
+        </div>
+    </div>
 
     <div id="content">
         <div class="container">
@@ -58,8 +104,7 @@
                                 <li id="manageUser" class="activeAccountNav">Quản lý người dùng</li>
                                 <li id="manageProduct">Quản lý sản phẩm</li>
                                 <li id="manageBrand">Quản lý danh mục</li>
-                                <li id="manageColor">Quản lý màu sắc</li>
-                                <li id="manageSize">Quản lý kích thước</li>
+                                <li id="manageOrder">Quản lý đơn hàng</li>
                             </ul>
                         </li>
                         <li id="manageReport">
@@ -80,7 +125,7 @@
                         <i class="fa-solid fa-users"></i>
                         <div class="text">
                             <h3>Tổng số tài khoản</h3>
-                            <p class="totalUser">0</p>
+                            <p class="totalUser">${allUser.size()}</p>
                         </div>
                     </div>
                     <div class="search">
@@ -105,6 +150,7 @@
                             <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
+
                     </div>
                     <div class="pagination">
                         <ul>
@@ -122,7 +168,7 @@
                         <i class="fa-solid fa-shop"></i>
                         <div class="text">
                             <h3>Tổng số sản phẩm</h3>
-                            <p class="totalProduct">0</p>
+                            <p class="totalProduct">${allProduct.size()}</p>
                         </div>
                     </div>
                     <div class="search">
@@ -162,13 +208,14 @@
                     </div>
                 </div>
 
+
                 <div class="brand section">
                     <div class="title">
                         <div class="total">
                             <i class="fa-solid fa-shop"></i>
                             <div class="text">
                                 <h3>Tổng số danh mục</h3>
-                                <p class="totalBrand">0</p>
+                                <p class="totalBrand">${allCategory.size()}</p>
                             </div>
                         </div>
                         <div class="search">
@@ -190,24 +237,6 @@
                             <i class="fa-solid fa-clipboard detail"></i>
                             <i class="fa-solid fa-xmark del"></i>
                         </div>
-                        <div class="brand-item">
-                            <p class="index">2</p>
-                            <p class="name">Giày patin dành cho người lớn</p>
-                            <i class="fa-solid fa-clipboard detail"></i>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </div>
-                        <div class="brand-item">
-                            <p class="index">3</p>
-                            <p class="name">Giày patin hãng Micro</p>
-                            <i class="fa-solid fa-clipboard detail"></i>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </div>
-                        <div class="brand-item">
-                            <p class="index">4</p>
-                            <p class="name">Giày patin hãng Flying Eagle</p>
-                            <i class="fa-solid fa-clipboard detail"></i>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </div>
                     </div>
                 </div>
 
@@ -217,7 +246,7 @@
                             <i class="fa-solid fa-shop"></i>
                             <div class="text">
                                 <h3>Tổng số màu sắc</h3>
-                                <p class="totalColor">0</p>
+                                <p class="totalColor">${allColor.size()}</p>
                             </div>
                         </div>
                         <div class="search">
@@ -248,7 +277,7 @@
                             <i class="fa-solid fa-shop"></i>
                             <div class="text">
                                 <h3>Tổng số kích thước</h3>
-                                <p class="totalSize">0</p>
+                                <p class="totalSize">${allSize.size()}</p>
                             </div>
                         </div>
                         <div class="search">
@@ -273,49 +302,49 @@
                     </div>
                 </div>
 
-<!--                <div class="order section">-->
-<!--                    <div class="total">-->
-<!--                        <i class="fa-solid fa-shop"></i>-->
-<!--                        <div class="text">-->
-<!--                            <h3>Tổng số đơn hàng</h3>-->
-<!--                            <p class="totalOrder">0</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="search">-->
-<!--                        <input type="text" placeholder="Nhập tìm kiếm">-->
-<!--                        <button class="search-btn">Tìm kiếm</button>-->
-<!--                    </div>-->
-<!--                    <div class="order-list">-->
-<!--                        <div class="title">-->
-<!--                            <h4>STT</h4>-->
-<!--                            <h4>Mã đơn hàng</h4>-->
-<!--                            <h4>Tên sản phẩm</h4>-->
-<!--                            <h4>Số điện thoại</h4>-->
-<!--                            <h4>Ngày đặt</h4>-->
-<!--                            <h4>Tình trạng</h4>-->
-<!--                        </div>-->
-<!--                        <div class="order-item">-->
-<!--                            <p class="index">1</p>-->
-<!--                            <p class="id">DH01</p>-->
-<!--                            <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>-->
-<!--                            <p class="phone">0839151003</p>-->
-<!--                            <p class="date">11/11/2023</p>-->
-<!--                            <p class="state">Đã giao</p>-->
-<!--                            <i class="fa-solid fa-clipboard detail"></i>-->
-<!--                            <i class="fa-solid fa-xmark del"></i>-->
-<!--                        </div>-->
+<%--                <div class="order section">--%>
+<%--                    <div class="total">--%>
+<%--                        <i class="fa-solid fa-shop"></i>--%>
+<%--                        <div class="text">--%>
+<%--                            <h3>Tổng số đơn hàng</h3>--%>
+<%--                            <p class="totalOrder">${allBills.size()}</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="search">--%>
+<%--                        <input type="text" placeholder="Nhập tìm kiếm">--%>
+<%--                        <button class="search-btn">Tìm kiếm</button>--%>
+<%--                    </div>--%>
+<%--                    <div class="order-list">--%>
+<%--                        <div class="title">--%>
+<%--                            <h4>STT</h4>--%>
+<%--                            <h4>Mã đơn hàng</h4>--%>
+<%--                            <h4>Tên sản phẩm</h4>--%>
+<%--                            <h4>Số điện thoại</h4>--%>
+<%--                            <h4>Ngày đặt</h4>--%>
+<%--                            <h4>Tình trạng</h4>--%>
+<%--                        </div>--%>
+<%--                        <div class="order-item">--%>
+<%--                            <p class="index">1</p>--%>
+<%--                            <p class="id">DH01</p>--%>
+<%--                            <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>--%>
+<%--                            <p class="phone">0839151003</p>--%>
+<%--                            <p class="date">11/11/2023</p>--%>
+<%--                            <p class="state">Đã giao</p>--%>
+<%--                            <i class="fa-solid fa-clipboard detail"></i>--%>
+<%--                            <i class="fa-solid fa-xmark del"></i>--%>
+<%--                        </div>--%>
 
-<!--                    </div>-->
-<!--                    <div class="pagination">-->
-<!--                        <ul>-->
-<!--                            <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>-->
-<!--                            <ul class="number-page">-->
-<!--                                &lt;!&ndash;<li class="numb"><a href="#">1</a></li>&ndash;&gt;-->
-<!--                            </ul>-->
-<!--                            <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
+<%--                    </div>--%>
+<%--                    <div class="pagination">--%>
+<%--                        <ul>--%>
+<%--                            <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>--%>
+<%--                            <ul class="number-page">--%>
+<%--                                <!--<li class="numb"><a href="#">1</a></li>-->--%>
+<%--                            </ul>--%>
+<%--                            <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
                 <div class="report section">
                     <div class="tk_sale">
@@ -547,7 +576,7 @@
                         <div class="hold-2">
                             <div class="hold">
                                 <label>Màu sắc</label>
-<!--                                <input type="text">-->
+                                <!--                                <input type="text">-->
                                 <select name="color">
                                     <option>Trắng</option>
                                 </select>
@@ -602,7 +631,7 @@
                         <div class="hold-2">
                             <div class="hold">
                                 <label>Màu sắc</label>
-<!--                                <input type="text">-->
+                                <!--                                <input type="text">-->
                                 <select name="color">
                                     <option>Trắng</option>
                                 </select>
@@ -671,7 +700,7 @@
     </div>
 
     <div class="modal modal-brand">
-        <div class="modal-container modalConBrand modal-containerBrand">
+        <div class="modal-container modal-containerBrand">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm danh mục</h3>
             <form action="">
@@ -682,7 +711,7 @@
     </div>
 
     <div class="modal modal-Editbrand">
-        <div class="modal-container modalConBrand modal-containerEditBrand">
+        <div class="modal-container modal-containerEditBrand">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa danh mục</h3>
             <form action="">
@@ -693,7 +722,7 @@
     </div>
 
     <div class="modal modal-color">
-        <div class="modal-container modalConColor modal-containerColor">
+        <div class="modal-container modal-containerColor">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm màu</h3>
             <form action="">
@@ -704,7 +733,7 @@
     </div>
 
     <div class="modal modal-Editcolor">
-        <div class="modal-container modalConColor modal-containerEditColor">
+        <div class="modal-container modal-containerEditColor">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa tên màu sắc</h3>
             <form action="">
@@ -715,7 +744,7 @@
     </div>
 
     <div class="modal modal-size">
-        <div class="modal-container modalConSize modal-containerSize">
+        <div class="modal-container modal-containerSize">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm kích thước</h3>
             <form action="">
@@ -726,7 +755,7 @@
     </div>
 
     <div class="modal modal-Editsize">
-        <div class="modal-container modalConSize modal-containerEditSize">
+        <div class="modal-container modal-containerEditSize">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa kích thước</h3>
             <form action="">
@@ -736,10 +765,25 @@
         </div>
     </div>
 
+
+    <div class="popup ${type != null ? type : "none"}">
+        <c:if test="${type.equals(\"success\")}">
+            <i class="fa-solid fa-check icon"></i>
+        </c:if>
+        <c:if test="${type.equals(\"error\")}">
+            <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
+        </c:if>
+        <c:if test="${type.equals(\"alert\")}">
+            <i class="fa-solid fa-triangle-exclamation icon"></i>
+        </c:if>
+        <p>${information}</p>
+        <i class="fa-solid fa-xmark del"></i>
+    </div>
+
     <footer>
         <div class="container">
             <div class="info">
-                <img src="assets/images/logo.PNG" alt="">
+                <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="">
                 <p>
                     Địa chỉ: Trường Đại học Nông Lâm Thành Phố Hồ Chí Minh
                 </p>
@@ -771,7 +815,9 @@
         </div>
     </footer>
 
-<!--    <script src="assets/js/category.js"></script>-->
-    <script src="assets/js/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
 </body>
 </html>

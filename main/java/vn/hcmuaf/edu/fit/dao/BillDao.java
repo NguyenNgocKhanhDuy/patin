@@ -4,6 +4,8 @@ import vn.hcmuaf.edu.fit.bean.Bill;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BillDao {
     private static BillDao instance;
@@ -37,6 +39,14 @@ public class BillDao {
             return handle.createQuery("SELECT * FROM bill WHERE user_id = :user ORDER BY date DESC LIMIT 1").bind("user", idUser).mapToBean(Bill.class).one();
         });
         return bill;
+    }
+
+    public List<Bill> getAllBill(){
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM bill").mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+
     }
 
 }

@@ -115,10 +115,13 @@ public class UserDao {
         return false;
     }
 
+
+
     public void updateUser(User user) {
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone WHERE id = :id")
+            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob WHERE id = :id")
                     .bind("id", user.getId()).bind("fullname", user.getFullName()).bind("address", user.getAddress()).bind("phone", user.getPhone())
+                    .bind("sex", user.getSex()).bind("dob", user.getDob())
                     .execute();
         });
     }
@@ -142,6 +145,13 @@ public class UserDao {
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
+    }
+
+    public boolean checkPass(int user, String pass) {
+        String p = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT password FROM user WHERE id = :user").bind("user", user).mapTo(String.class).one();
+        });
+        return hashPassword(pass).equals(p);
     }
 
 }

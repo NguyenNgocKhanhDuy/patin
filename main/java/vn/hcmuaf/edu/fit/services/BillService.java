@@ -9,6 +9,7 @@ import vn.hcmuaf.edu.fit.dao.BillDetailDao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BillService {
     private static BillService instance;
@@ -51,6 +52,10 @@ public class BillService {
 
     public Bill getNewBill(int user) {
         return BillDao.getInstance().getNewBill(user);
+    }
+
+    public List<Bill> getAllBill() {
+        return BillDao.getInstance().getAllBill();
     }
 
     public LocalDateTime getCurrentDate() {

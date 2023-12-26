@@ -3,9 +3,18 @@ package vn.hcmuaf.edu.fit.services;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.dao.UserDao;
 
+import javax.swing.text.DateFormatter;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.sql.Date.*;
 
 public class UserService {
     private static UserService instance;
@@ -22,6 +31,10 @@ public class UserService {
         return UserDao.getInstance().checkLogin(email, password);
     }
 
+    public List<User> getAllUser() {
+        return UserDao.getInstance().getAllUser();
+    }
+
     public boolean isUserExists(String email){
         if (UserDao.getInstance().getUserByEmail(email).size() > 0)
             return true;
@@ -34,7 +47,7 @@ public class UserService {
             int code = Integer.parseInt(randomCodeVerify());
             if (!UserDao.getInstance().isExitsCode(code)) {
                 insertVerifyCode(code, email);
-                return MailService.getInstance().sendMail("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
             }
         }
     }
@@ -44,7 +57,7 @@ public class UserService {
             int code = Integer.parseInt(randomCodeVerify());
             if (!UserDao.getInstance().isExitsCode(code)) {
                 insertVerifyCode(code, email);
-                return MailService.getInstance().sendMail("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
             }
         }
     }
@@ -66,7 +79,7 @@ public class UserService {
             int code = Integer.parseInt(randomCodeVerify());
             if (!UserDao.getInstance().isExitsCodePass(code)) {
                 UserDao.getInstance().keyForgetPass(code, email);
-                return MailService.getInstance().sendMail("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
             }
         }
     }
@@ -153,4 +166,45 @@ public class UserService {
         UserDao.getInstance().updateUser(user);
     }
 
+    public boolean checkPass(int user, String pass) {
+        return UserDao.getInstance().checkPass(user, pass);
+    }
+
+    public String checkDOB(int day, int month, int year) {
+        if (year >= 2005){
+            int dayMax = 0;
+            switch (month){
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    dayMax = 31;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    dayMax = 30;
+                    break;
+                case 2:
+                    dayMax = isLeapYear(year) ? 29 : 28;
+                    break;
+            }
+            if (!(day > 0 && day <= dayMax)) {
+                return "Ngày không hợp lệ";
+            }
+        }else {
+            return "Bạn chưa đủ 18 tuổi";
+        }
+        return "";
+    }
+
+    public boolean isLeapYear(int year) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 100 == 0 && year % 400 == 0))
+            return true;
+        return false;
+    }
 }

@@ -1,6 +1,8 @@
 package vn.hcmuaf.edu.fit.bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class User implements Serializable {
     private int id;
@@ -10,13 +12,15 @@ public class User implements Serializable {
     private String fullName;
     private String address;
     private String phone;
+    private String sex;
+    private LocalDateTime dob;
     private int keyPass;
     private int role;
 
     public User() {
     }
 
-    public User(int id, String email, String password, int verify, String fullName, String address, String phone, int keyPass, int role) {
+    public User(int id, String email, String password, int verify, String fullName, String address, String phone, String sex, LocalDateTime dob, int keyPass, int role) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -24,6 +28,8 @@ public class User implements Serializable {
         this.fullName = fullName;
         this.address = address;
         this.phone = phone;
+        this.sex = sex;
+        this.dob = dob;
         this.keyPass = keyPass;
         this.role = role;
     }
@@ -84,6 +90,22 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public LocalDateTime getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDateTime dob) {
+        this.dob = dob;
+    }
+
     public int getKeyPass() {
         return keyPass;
     }
@@ -110,6 +132,8 @@ public class User implements Serializable {
                 ", fullName='" + fullName + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", dob='" + dob + '\'' +
                 ", keyPass=" + keyPass +
                 ", role=" + role +
                 '}';

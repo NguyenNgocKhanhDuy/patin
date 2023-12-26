@@ -25,7 +25,7 @@ public class MailService {
         return instance;
     }
 
-    public boolean sendMail(String to, String mes) {
+    public boolean sendMailVerify(String to, String mes) {
         Session session = Session.getInstance(Mail.getProp(),
                 new Authenticator() {
                     @Override
@@ -40,6 +40,28 @@ public class MailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject("Thư xác thực Email", "utf-8");
             message.setText("Mã xác thực: "+mes, "utf-8");
+            Transport.send(message);
+            return true;
+        } catch (MessagingException e) {
+            return false;
+        }
+    }
+
+    public boolean sendMail(String to, String mes) {
+        Session session = Session.getInstance(Mail.getProp(),
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(MailProperties.getUsername(), MailProperties.getPassword());
+                    }
+                });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(MailProperties.getUsername()));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject("Tin nhắn từ khách hàng patin", "utf-8");
+            message.setText(mes, "utf-8");
             Transport.send(message);
             return true;
         } catch (MessagingException e) {

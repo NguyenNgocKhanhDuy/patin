@@ -54,7 +54,7 @@
         height: 0;
     }
     100% {
-        height: 210px;
+        height: 270px;
     }
 }
 @keyframes hide {
@@ -146,7 +146,7 @@
 
 #content .right .user-list .title {
     display: grid;
-    grid-template-columns: 5% 5% repeat(3, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(3, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -161,7 +161,7 @@
 
 #content .right .user-list .user-item {
     display: grid;
-    grid-template-columns: 5% 5% repeat(3, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(3, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -289,7 +289,7 @@
 
 #content .right .product-list .title {
     display: grid;
-    grid-template-columns: 5% 5% repeat(5, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -304,7 +304,7 @@
 
 #content .right .product-list .product-item {
     display: grid;
-    grid-template-columns: 5% 5% repeat(5, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -335,24 +335,70 @@
     cursor: pointer;
 }
 
-/* BRAND */
-#content .right .brand {
+/* BRAND | COLOR | SIZE */
+#content .right .brand,
+#content .right .color,
+#content .right .size{
     display: none;
 }
 
 
-#content .right .brand .title{
+/*#content .right .brand .title,*/
+/*#content .right .color .title,*/
+/*#content .right .size .title{*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*    padding-bottom: 30px;*/
+/*    border-bottom: 1px solid #ccc;*/
+/*}*/
+
+
+/*#content .right .brand .title h3,*/
+/*#content .right .color .title h3,*/
+/*#content .right .size .title h3{*/
+/*    font-size: 30px;*/
+/*}*/
+
+
+#content .right .brand .total,
+#content .right .color .total,
+#content .right .size .total{
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    background-color: #283e57;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #ccc;
+    justify-content: center;
 }
 
-
-#content .right .brand .title h3 {
-    font-size: 30px;
+#content .right .brand .total i,
+#content .right .color .total i,
+#content .right .size .total i{
+    font-size: 20px;
+    background-color: #7fad39;
+    padding: 20px 18px;
+    border-radius: 50%;
+    margin-right: 20px;
 }
+
+#content .right .brand .total .text  h3,
+#content .right .color .total .text  h3,
+#content .right .size .total .text  h3{
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+#content .right .brand .total .text  p,
+#content .right .color .total .text  p,
+#content .right .size .total .text  p{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
 
 #content .right .add {
     width: fit-content;
@@ -374,15 +420,20 @@
     box-shadow: 0 0 4px 3px #ccc;
 }
 
-#content .right .brand .brand-list {
+#content .right .brand .brand-list,
+#content .right .color .color-list,
+#content .right .size .size-list{
     background-color: #283e57;
     color: #fff;
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-row-gap: 20px;
+    margin-top: 40px;
 }
 
-#content .right .brand .brand-list .brand-title {
+#content .right .brand .brand-list .brand-title,
+#content .right .color .color-list .color-title,
+#content .right .size .size-list .size-title{
     display: grid;
     grid-template-columns: 5% 1fr 5% 5%;
     grid-column-gap: 20px;
@@ -391,13 +442,17 @@
     border-bottom: 1px solid #b2b2b2;
 }
 
-#content .right .brand-list .brand-title h4 {
+#content .right .brand-list .brand-title h4,
+#content .right .color-list .color-title h4,
+#content .right .size-list .size-title h4{
     font-size: 18px;
     line-height: 40px;
     padding: 12px 0;
 }
 
-#content .right .brand-list .brand-item {
+#content .right .brand-list .brand-item,
+#content .right .color-list .color-item,
+#content .right .size-list .size-item{
     display: grid;
     grid-template-columns: 5% 1fr 5% 5%;
     align-items: center;
@@ -406,21 +461,28 @@
     padding-bottom: 20px;
 }
 
-#content .right .brand-list .brand-item p {
+#content .right .brand-list .brand-item p,
+#content .right .color-list .color-item p,
+#content .right .size-list .size-item p{
     font-size: 18px;
 }
 
-#content .right .brand-list .brand-item .detail {
+#content .right .brand-list .brand-item .detail,
+#content .right .color-list .color-item .detail,
+#content .right .size-list .size-item .detail{
     font-size: 24px;
     color: #fff;
     cursor: pointer;
 }
 
-#content .right .brand .brand-item .del {
+#content .right .brand .brand-item .del,
+#content .right .color .color-item .del,
+#content .right .size .size-item .del{
     font-size: 24px;
     color: #b2b2b2;
     cursor: pointer;
 }
+
 
 /* ORDER */
 #content .right .order {
@@ -606,8 +668,6 @@
 
 
 
-
-
 /* PERSON */
 #content .right .person {
     display: none;
@@ -701,7 +761,7 @@
 
 .modal-container {
     width: 80%;
-    height: 500px;
+    /*height: 500px;*/
     background-color: #fff;
     padding: 20px;
     position: relative;
@@ -815,25 +875,87 @@
     box-shadow: 0 0 4px 3px #ccc;
 }
 
-.modal-containerBrand, .modal-containerEditBrand {
+.modal-containerBrand, .modal-containerEditBrand,
+.modal-containerColor, .modal-containerEditColor,
+.modal-containerSize, .modal-containerEditSize{
     height: 300px;
 }
 
 .modalConUser {
-    height: 400px;
+    /*height: 400px;*/
+}
+
+.modalConUser .gender {
+    font-size: 18px;
+}
+
+.modalConUser .gender .selectGender {
+    display: flex;
+    gap: 10px;
+    margin: 12px 0;
+    height: 40px;
+    align-items: center;
+}
+
+.modalConUser .dob {
+    font-size: 18px;
+}
+
+.modalConUser .dob .dob-input {
+    display: flex;
+    gap: 10px;
+    margin: 12px 0;
+    height: 40px;
+    align-items: center;
+}
+
+.modalConUser .dob select {
+    height: 100%;
+    margin-right:20px;
+    width: 40px;
+    padding: 0 10px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+}
+
+.modalConUser .dob select:last-child {
+    width: 70px;
 }
 
 .modalConUser input[type = "file"] {
     margin-top: 30px;
 }
 
+.modalConProduct select {
+    height: 100%;
+    margin: 0 auto;
+    width: 50%;
+    padding: 6px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+}
+
 .modal-brand form,
-.modal-Editbrand form{
+.modal-Editbrand form,
+.modal-color form,
+.modal-Editcolor form,
+.modal-size form,
+.modal-Editsize form{
     text-align: center;
 }
 
 .modal-brand input,
-.modal-Editbrand input{
+.modal-Editbrand input,
+.modal-color input,
+.modal-Editcolor input,
+.modal-size input,
+.modal-Editsize input{
     height: 40px;
     width: 60%;
     padding: 0 16px;

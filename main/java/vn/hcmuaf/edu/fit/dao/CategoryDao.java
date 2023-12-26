@@ -18,10 +18,10 @@ public class CategoryDao {
     }
 
     public List<Category> getAllCategory() {
-        List<Category> selectNameFromCategory = JDBIConnector.get().withHandle(handle -> {
+        List<Category> selectFromCategory = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT * FROM category").mapToBean(Category.class).stream().collect(Collectors.toList());
         });
-        return selectNameFromCategory;
+        return selectFromCategory;
     }
 
     public Category getCategory(int id) {
