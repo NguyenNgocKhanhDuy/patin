@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -53,10 +54,13 @@ public class UserInformation extends HttpServlet {
                     user.setFullName(fullName);
                     user.setPhone(phone);
                     user.setSex(sex);
-                    String dob =day+"/"+month+"/"+year+" 00:00";
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(dob, formatter);
-                    user.setDob(dateTime);
+                    String dob =year+"-"+month+"-"+day;
+                    Date date = Date.valueOf(dob);
+                    user.setDob(date);
+//                    String dob =day+"/"+month+"/"+year+" 00:00";
+//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//                    LocalDateTime dateTime = LocalDateTime.parse(dob, formatter);
+//                    user.setDob(dateTime);
                     UserService.getInstance().updateUser(user);
                     request.setAttribute("type", "sucess");
                     request.setAttribute("information", "Cập nhật thông tin thành công");

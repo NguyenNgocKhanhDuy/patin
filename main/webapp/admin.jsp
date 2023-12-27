@@ -1,7 +1,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html; charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -104,7 +104,8 @@
                                 <li id="manageUser" class="activeAccountNav">Quản lý người dùng</li>
                                 <li id="manageProduct">Quản lý sản phẩm</li>
                                 <li id="manageBrand">Quản lý danh mục</li>
-                                <li id="manageOrder">Quản lý đơn hàng</li>
+                                <li id="manageColor">Quản lý màu sắc</li>
+                                <li id="manageSize">Quản lý kích thước</li>
                             </ul>
                         </li>
                         <li id="manageReport">
@@ -142,23 +143,103 @@
                             <h4>Email</h4>
                             <h4>SĐT</h4>
                         </div>
-                        <div class="user-item">
-                            <p class="index">1</p>
-                            <p class="name">Nguyyen Ngoc Khanh DUy</p>
-                            <p class="email">duynguyennghockhanh@fmail.com</p>
-                            <p class="phone">0839151003</p>
-                            <i class="fa-solid fa-clipboard detail"></i>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </div>
-
+                        <c:forEach var="user" items="${users}">
+                            <div class="user-item">
+                                <p class="index">${user.getId()}</p>
+                                <p class="name">${user.getFullName()}</p>
+                                <p class="email">${user.getEmail()}</p>
+                                <p class="phone">${user.getPhone()}</p>
+                                <i class="fa-solid fa-clipboard detail"></i>
+                                <i class="fa-solid fa-xmark del"></i>
+                            </div>
+                        </c:forEach>
                     </div>
                     <div class="pagination">
+                        <h1>TotalPage: ${totalPage}</h1>
+                        <h1>Current: ${currentPage}</h1>
                         <ul>
-                            <li  class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
-                            <ul class="number-page">
-                                <!--<li class="numb"><a href="#">1</a></li>-->
+                            <c:if test="${currentPage == 1}">
+                                <li id="previousPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-angles-left"></i></a></li>
+                            </c:if>
+                            <c:if test="${currentPage != 1}">
+                                <li id="previousPage"><a class="arrowActive" href="${href}&currentPage=1"><i class="fa-solid fa-angles-left"></i></a></li>
+                            </c:if>
+
+                            <c:if test="${currentPage == 1}">
+                                <li id="previousPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-chevron-left"></i></a></li>
+                            </c:if>
+                            <c:if test="${currentPage != 1}">
+                                <li id="previousPage"><a class="arrowActive" href="${href}&currentPage=${currentPage-1}"><i class="fa-solid fa-chevron-left"></i></a></li>
+                            </c:if>
+                            <ul id="number-page">
+                                <c:choose>
+                                    <c:when test="${totalPage >= 3}">
+                                        <c:if test="${currentPage == 1}">
+                                            <li class="numb"> <a class="pageNumberActive">
+                                                    ${currentPage}
+                                            </a> </li>
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage+1}">
+                                                    ${currentPage + 1}
+                                            </a> </li>
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage+2}">
+                                                    ${currentPage + 2}
+                                            </a> </li>
+                                        </c:if>
+                                        <c:if test="${currentPage > 1 && currentPage < totalPage}">
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage-1}">
+                                                    ${currentPage - 1}
+                                            </a> </li>
+                                            <li class="numb"> <a class="pageNumberActive">
+                                                    ${currentPage}
+                                            </a> </li>
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage+1}">
+                                                    ${currentPage + 1}
+                                            </a> </li>
+                                        </c:if>
+                                        <c:if test="${currentPage == totalPage}">
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage-2}">
+                                                    ${currentPage - 2}
+                                            </a> </li>
+                                            <li class="numb"> <a href="${href}&currentPage=${currentPage-1}">
+                                                    ${currentPage - 1}
+                                            </a> </li>
+                                            <li class="numb"> <a class="pageNumberActive">
+                                                    ${currentPage}
+                                            </a> </li>
+                                        </c:if>
+
+                                    </c:when>
+                                    <c:when test="${totalPage < 3}">
+                                        <c:forEach begin="1" end="${totalPage}" varStatus="index">
+                                            <c:if test="${index.count == currentPage}">
+                                                <li class="numb"> <a class="pageNumberActive">
+                                                        ${index.count}
+                                                </a> </li>
+                                            </c:if>
+                                            <c:if test="${index.count != currentPage}">
+                                                <li class="numb"> <a href="${href}&currentPage=${index.count}">
+                                                        ${index.count}
+                                                </a> </li>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:when>
+                                </c:choose>
+
                             </ul>
-                            <li class=" nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
+
+                            <c:if test="${currentPage == totalPage}">
+                                <li id="nextPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-chevron-right"></i></a></li>
+                            </c:if>
+                            <c:if test="${currentPage != totalPage}">
+                                <li id="nextPage"><a class="arrowActive" href="${href}&currentPage=${currentPage+1}"><i class="fa-solid fa-chevron-right"></i></a></li>
+                            </c:if>
+
+                            <c:if test="${currentPage == totalPage}">
+                                <li id="nextPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-angles-right"></i></a></li>
+                            </c:if>
+                            <c:if test="${currentPage != totalPage}">
+                                <li id="nextPage"><a class="arrowActive" href="${href}&currentPage=${totalPage}"><i class="fa-solid fa-angles-right"></i></a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -212,7 +293,7 @@
                 <div class="brand section">
                     <div class="title">
                         <div class="total">
-                            <i class="fa-solid fa-shop"></i>
+                            <i class="fa-solid fa-layer-group"></i>
                             <div class="text">
                                 <h3>Tổng số danh mục</h3>
                                 <p class="totalBrand">${allCategory.size()}</p>
@@ -243,7 +324,7 @@
                 <div class="color section">
                     <div class="title">
                         <div class="total">
-                            <i class="fa-solid fa-shop"></i>
+                            <i class="fa-solid fa-palette"></i>
                             <div class="text">
                                 <h3>Tổng số màu sắc</h3>
                                 <p class="totalColor">${allColor.size()}</p>
@@ -274,7 +355,7 @@
                 <div class="size section">
                     <div class="title">
                         <div class="total">
-                            <i class="fa-solid fa-shop"></i>
+                            <i class="fa-solid fa-rectangle-list"></i>
                             <div class="text">
                                 <h3>Tổng số kích thước</h3>
                                 <p class="totalSize">${allSize.size()}</p>
@@ -547,7 +628,7 @@
 
                     </div>
                 </div>
-                <button class="add">Sửa</button>
+                <button class="add">Cập nhật</button>
             </form>
         </div>
     </div>

@@ -28,7 +28,7 @@ public class VerifyEmail extends HttpServlet {
             if (UserService.getInstance().verifyMail(code, email)) {
                 request.getSession().removeAttribute("timeStart");
                 request.getSession().removeAttribute("email");
-                response.sendRedirect("/patin_shop/patin/login.jsp");
+                response.sendRedirect("/patin_shop/login.jsp");
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Mã xác minh không đúng");

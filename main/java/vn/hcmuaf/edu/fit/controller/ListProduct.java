@@ -124,7 +124,7 @@ public class ListProduct extends HttpServlet {
             href += "min="+min+"&max="+max+txt;
 
         }else {
-            products = ProductService.getInstance().getProductPerPage(currentPage, sort);
+            products = ProductService.getInstance().getProductPerPage(currentPage, sort, 15);
             totalPage = (int) Math.ceil((ProductService.getInstance().countAll() / productPerPage));
         }
 

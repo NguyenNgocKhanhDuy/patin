@@ -207,4 +207,18 @@ public class UserService {
             return true;
         return false;
     }
+
+    public List<User> getUserPerPage(int currentPage, int productPerPage) {
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        return UserDao.getInstance().getUserPerPage(start);
+    }
+
+    public User getUserByID(int id) {
+        return UserDao.getInstance().getUserByID(id);
+    }
 }

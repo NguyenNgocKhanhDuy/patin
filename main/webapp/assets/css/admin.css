@@ -208,16 +208,20 @@
     cursor: pointer;
 }
 
-.arrowPage {
+.arrowPageLi {
     pointer-events: none;
+}
+.arrowPagea {
+    color: #ccc !important;
 }
 
 .arrowActive {
     pointer-events: auto;
+    color: #1c1c1c !important;
 }
 
 .pageNumberActive {
-    color: #fff;
+    color: #fff !important;
     background-color: #7fad39;
 }
 
@@ -232,13 +236,14 @@
     font-weight: 700;
     text-decoration: none;
     line-height: 30px;
+    color: #1c1c1c;
     display: inline-block;
     width: 30px;
     height: 30px;
     border: 1px solid #b2b2b2;
 }
 
-#content .right .pagination ul .number-page {
+#content .right .pagination ul #number-page {
     display: inline-block;
 }
 

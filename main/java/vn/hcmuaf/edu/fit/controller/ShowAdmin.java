@@ -23,6 +23,26 @@ public class ShowAdmin extends HttpServlet {
         List<User> allUser = UserService.getInstance().getAllUser();
         request.setAttribute("allUser", allUser);
 
+
+        int currentPage;
+        try {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }catch (NumberFormatException e) {
+            currentPage = 1;
+        }
+
+        String href = "showAdmin?";
+        request.setAttribute("href", href);
+
+        double productPerPage = 5.0;
+
+        int totalPage = (int) Math.ceil(allUser.size() / productPerPage);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("currentPage", currentPage);
+
+        List<User> users = UserService.getInstance().getUserPerPage(currentPage, (int) productPerPage);
+        request.setAttribute("users", users);
+
         List<Product2> allProduct = ProductService.getInstance().getAllProduct();
         request.setAttribute("allProduct", allProduct);
 

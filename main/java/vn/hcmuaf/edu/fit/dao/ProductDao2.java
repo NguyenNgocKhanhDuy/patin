@@ -50,14 +50,15 @@ public class ProductDao2 {
         return products;
     }
 
-    public List<Product2> getProductPerPage(int start) {
+    public List<Product2> getProductPerPage(int start, int quantityPerPage) {
         List<Product2> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id, product.name, MIN(product_detail.price) * (1-product.sale_percent) as minPrice, MAX(product_detail.price) * (1-product.sale_percent) as maxPrice, product.sale_percent, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
                             "WHERE image_product.id = 1 " +
                             "GROUP BY product.id " +
-                            "LIMIT ?, 15")
-                    .bind(0, start).mapToBean(Product2.class).stream().collect(Collectors.toList());
+                            "LIMIT ?, ?")
+                    .bind(0, start).bind(1, quantityPerPage)
+                    .mapToBean(Product2.class).stream().collect(Collectors.toList());
         });
         return products;
     }

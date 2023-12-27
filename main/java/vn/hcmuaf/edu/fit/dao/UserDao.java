@@ -154,4 +154,19 @@ public class UserDao {
         return hashPassword(pass).equals(p);
     }
 
+    public List<User> getUserPerPage(int start) {
+        List<User> users = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM user LIMIT :start, 5").bind("start", start).mapToBean(User.class).stream().collect(Collectors.toList());
+        });
+        return users;
+    }
+
+    public User getUserByID(int id) {
+        User user = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM user WHERE id = ?").bind(0, id).mapToBean(User.class).one();
+        });
+        return user;
+    }
+
+
 }

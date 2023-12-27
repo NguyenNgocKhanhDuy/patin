@@ -43,10 +43,10 @@ public class ProductService {
         return ProductDao2.getInstance().search(txt);
     }
 
-    public List<Product2> getProductPerPage(int currentPage, String sort) {
+    public List<Product2> getProductPerPage(int currentPage, String sort, int quantityPerPage) {
         int start = getStartIndex(currentPage);
         if ("".equals(sort)) {
-            return ProductDao2.getInstance().getProductPerPage(start);
+            return ProductDao2.getInstance().getProductPerPage(start, quantityPerPage);
         }else {
             return ProductDao2.getInstance().getProductSortPerPage(start, sort);
         }
