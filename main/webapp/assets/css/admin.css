@@ -890,6 +890,11 @@
     /*height: 400px;*/
 }
 
+.modalConUser .box{
+    display: flex;
+    justify-content: space-between;
+}
+
 .modalConUser .gender {
     font-size: 18px;
 }
@@ -900,6 +905,35 @@
     margin: 12px 0;
     height: 40px;
     align-items: center;
+}
+
+.modalConUser .role,
+.modalConUser .verify{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.modalConUser .role select{
+    margin: 18px 0;
+    height: 40px;
+    margin-right:20px;
+    width: 100px;
+    padding: 0 10px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+}
+
+.modalConUser .verify select{
+    margin: 18px 0;
+    height: 40px;
+    margin-right:20px;
+    width: 120px;
+    padding: 0 10px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
 }
 
 .modalConUser .dob {

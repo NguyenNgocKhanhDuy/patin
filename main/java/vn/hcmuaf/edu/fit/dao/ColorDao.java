@@ -25,4 +25,31 @@ public class ColorDao {
         });
         return colors;
     }
+
+    public Color getColorById(int id) {
+        Color color = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM color WHERE id = ?").bind(0, id).mapToBean(Color.class).one();
+        });
+        return color;
+    }
+
+    public List<Color> getAllColor() {
+        List<Color> colors = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM color").mapToBean(Color.class).stream().collect(Collectors.toList());
+        });
+        return colors;
+    }
+
+    public void insertColor(Color color){
+        int id = getAllColor().size() + 1;
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO color(id, name) VALUES (:id, name)").bind("name", color.getName()).bind("id", id).execute();
+        });
+    }
+
+    public void updateColor(Color color){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE color SET name = :name WHERE id = :id").bind("name", color.getName()).bind("id", color.getId()).execute();
+        });
+    }
 }

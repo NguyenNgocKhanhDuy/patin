@@ -1,5 +1,6 @@
 package vn.hcmuaf.edu.fit.dao;
 
+
 import vn.hcmuaf.edu.fit.bean.Size;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
@@ -24,5 +25,34 @@ public class SizeDao {
                     "WHERE product_detail.id_product = ?").bind(0, productId).mapToBean(Size.class).stream().collect(Collectors.toList());
         });
         return sizes;
+    }
+
+    public Size getSizeById(int id) {
+        Size size = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * " +
+                    "FROM size " +
+                    "WHERE id = ?").bind(0, id).mapToBean(Size.class).one();
+        });
+        return size;
+    }
+
+    public List<Size> getAllsize() {
+        List<Size> sizes = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM size").mapToBean(Size.class).stream().collect(Collectors.toList());
+        });
+        return sizes;
+    }
+
+    public void insertSize(Size size){
+        int id = getAllsize().size() + 1;
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO size(id, name) VALUES (:id, name)").bind("name", size.getName()).bind("id", id).execute();
+        });
+    }
+
+    public void updateSize(Size size){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE size SET name = :name WHERE id = :id").bind("name", size.getName()).bind("id", size.getId()).execute();
+        });
     }
 }

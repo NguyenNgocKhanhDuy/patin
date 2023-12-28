@@ -418,6 +418,10 @@
                             <input type="email">
                         </div>
                         <div class="hold">
+                            <label>Mật khẩu</label>
+                            <input type="password">
+                        </div>
+                        <div class="hold">
                             <label>Địa chỉ</label>
                             <input type="tel">
                         </div>
@@ -428,14 +432,32 @@
                             <label>Số điện thoại</label>
                             <input type="tel">
                         </div>
-                        <div class="gender">
-                            <label>Giới tính:</label>
-                            <div class="selectGender">
-                                <input type="radio" name="gender" checked = "true">
-                                <label>Nam</label>
-                                <input type="radio" name="gender">
-                                <label>Nữ</label>
+                        <div class="box">
+
+                            <div class="gender">
+                                <label>Giới tính:</label>
+                                <div class="selectGender">
+                                    <input type="radio" name="gender" checked = "true">
+                                    <label>Nam</label>
+                                    <input type="radio" name="gender">
+                                    <label>Nữ</label>
+                                </div>
                             </div>
+                                <div class="role">
+                                    <label>Vai trò:</label>
+                                    <select name="role">
+                                        <option selected>Khách hàng</option>
+                                        <option>Mod</option>
+                                        <option>Admin</option>
+                                    </select>
+                                </div>
+                                <div class="verify">
+                                    <label>Xác thực Email:</label>
+                                    <select name="verify">
+                                        <option selected>Chưa xác nhận</option>
+                                        <option>Đã xác nhận</option>
+                                    </select>
+                                </div>
                         </div>
                         <div class="dob">
                             <label>Ngày sinh:</label>

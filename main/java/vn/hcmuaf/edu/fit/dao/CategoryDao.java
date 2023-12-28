@@ -30,4 +30,17 @@ public class CategoryDao {
         });
         return category;
     }
+
+    public void insertCategory(Category category){
+        int id = getAllCategory().size() + 1;
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO category(id, name) VALUES (:id, name)").bind("name", category.getName()).bind("id", id).execute();
+        });
+    }
+
+    public void updateCategory(Category category){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE category SET name = :name WHERE id = :id").bind("name", category.getName()).bind("id", category.getId()).execute();
+        });
+    }
 }

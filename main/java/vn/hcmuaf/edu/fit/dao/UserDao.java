@@ -66,6 +66,19 @@ public class UserDao {
         });
     }
 
+    public void addUser(User user) {
+        int id = getAllUser().size() + 1;
+        String hashPass = hashPassword(user.getPassword());
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO user(id, email, password, verify, fullname,phone, address, sex, dob, role) " +
+                    "VALUES (:id, :email, :password, :verify, :fullname, :phone, :address, :sex, :dob, :role)")
+                    .bind("id", id).bind("email", user.getEmail()).bind("password", hashPass)
+                    .bind("verify", user.getVerify()).bind("fullname", user.getFullName()).bind("phone", user.getPhone()).bind("address", user.getAddress())
+                    .bind("sex", user.getSex()).bind("dob", user.getDob())
+                    .bind("role", user.getRole()).execute();
+        });
+    }
+
     public boolean isExitsCode(int code) {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT id " +
@@ -119,9 +132,9 @@ public class UserDao {
 
     public void updateUser(User user) {
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob WHERE id = :id")
+            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob, role = :role, verify = :verify WHERE id = :id")
                     .bind("id", user.getId()).bind("fullname", user.getFullName()).bind("address", user.getAddress()).bind("phone", user.getPhone())
-                    .bind("sex", user.getSex()).bind("dob", user.getDob())
+                    .bind("sex", user.getSex()).bind("dob", user.getDob()).bind("role", user.getRole()).bind("verify", user.getVerify())
                     .execute();
         });
     }

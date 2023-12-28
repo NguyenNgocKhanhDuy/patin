@@ -1,7 +1,11 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import com.google.gson.Gson;
-import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.bean.*;
+import vn.hcmuaf.edu.fit.dao.CategoryDao;
+import vn.hcmuaf.edu.fit.dao.ColorDao;
+import vn.hcmuaf.edu.fit.dao.SizeDao;
+import vn.hcmuaf.edu.fit.services.ProductService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -15,16 +19,47 @@ public class ShowModalAdmin extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userID;
-        try {
-            userID = Integer.parseInt(request.getParameter("userID"));
-            response.setContentType("application/json");
-            User user = UserService.getInstance().getUserByID(userID);
-            response.getWriter().println(gson.toJson(user));
+        String select = request.getParameter("select");
+        int id;
+        if (select == null){
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Lỗi");
+            request.getRequestDispatcher("showAdmin").forward(request, response);
+        }else {
+            try {
+                id = Integer.parseInt(request.getParameter("id"));
+                response.setContentType("application/json");
 
-        }catch (NumberFormatException e) {
-            userID = 0;
+                if (select.equals("user")){
+                    User user = UserService.getInstance().getUserByID(id);
+                    response.getWriter().println(gson.toJson(user));
+
+                } else if (select.equals("product")) {
+
+
+                } else if (select.equals("brand")) {
+                    Category category = CategoryDao.getInstance().getCategory(id);
+                    response.getWriter().println(gson.toJson(category));
+                } else if (select.equals("color")) {
+                    Color color = ColorDao.getInstance().getColorById(id);
+                    response.getWriter().println(gson.toJson(color));
+                } else if (select.equals("size")) {
+                    Size size = SizeDao.getInstance().getSizeById(id);
+                    response.getWriter().println(gson.toJson(size));
+                }
+
+
+            }catch (NumberFormatException e) {
+                id = 0;
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Lỗi");
+                request.getRequestDispatcher("showAdmin").forward(request, response);
+            }
+
         }
+
+
+        
     }
 
     @Override

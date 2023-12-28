@@ -515,49 +515,67 @@
         <div class="modal-container modalConUser modal-containerUser">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm người dùng</h3>
-            <form>
+            <form action="addUserAdmin">
                 <div class="wrapper">
                     <div class="main">
                         <div class="hold">
                             <label>Tên</label>
-                            <input type="text">
+                            <input type="text" name="fullname">
                         </div>
 
                         <div class="hold">
                             <label>Email</label>
-                            <input type="email">
+                            <input type="email" name="email">
                         </div>
                         <div class="hold">
                             <label>Địa chỉ</label>
-                            <input type="tel">
+                            <input type="text" name="address">
+                        </div>
+                        <div class="hold">
+                            <label>Mật khẩu</label>
+                            <input type="password" name="password">
                         </div>
 
                     </div>
                     <div class="more">
                         <div class="hold">
                             <label>Số điện thoại</label>
-                            <input type="tel">
+                            <input type="tel" name="phone">
                         </div>
-                        <div class="gender">
-                            <label>Giới tính:</label>
-                            <div class="selectGender">
-                                <input type="radio" name="gender" checked = "true">
-                                <label>Nam</label>
-                                <input type="radio" name="gender">
-                                <label>Nữ</label>
+                        <div class="box">
+                            <div class="gender">
+                                <label>Giới tính:</label>
+                                <div class="selectGender">
+                                    <input type="radio" name="gender" checked = "true" value="Nam">
+                                    <label>Nam</label>
+                                    <input type="radio" name="gender" value="Nữ">
+                                    <label>Nữ</label>
+                                </div>
+                            </div>
+                            <div class="role">
+                                <label>Vai trò:</label>
+                                <select name="role">
+                                    <option value="0" selected>Khách hàng</option>
+                                    <option value="1">Mod</option>
+                                    <option value="2">Admin</option>
+                                </select>
+                            </div>
+                            <div class="verify">
+                                <label>Xác thực Email:</label>
+                                <select name="verify">
+                                    <option value="0" selected>Chưa xác nhận</option>
+                                    <option value="1">Đã xác nhận</option>
+                                </select>
                             </div>
                         </div>
                         <div class="dob">
                             <label>Ngày sinh:</label>
                             <div class="dob-input">
                                 <select class="day" name="day">
-                                    <option>31</option>
                                 </select>
                                 <select class="month" name="month">
-                                    <option>12</option>
                                 </select>
                                 <select class="year" name="year">
-                                    <option>1900</option>
                                 </select>
                             </div>
                         </div>
@@ -567,7 +585,7 @@
 
                     </div>
                 </div>
-                <button class="add">Thêm</button>
+                <button type="submit" class="add">Thêm</button>
             </form>
         </div>
     </div>
@@ -576,28 +594,28 @@
         <div class="modal-container modalConUser modal-containerEditUser">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Chi tiết</h3>
-            <form>
+            <form action="updateUserAdmin">
                 <div class="wrapper">
                     <div class="main">
                         <div class="hold">
                             <label>Tên</label>
-                            <input type="text">
+                            <input type="text" name="fullname">
                         </div>
 
                         <div class="hold">
                             <label>Email</label>
-                            <input type="email">
+                            <input type="email" name="email">
                         </div>
                         <div class="hold">
                             <label>Địa chỉ</label>
-                            <input type="tel">
+                            <input type="text" name="phone">
                         </div>
 
                     </div>
                     <div class="more">
                         <div class="hold">
                             <label>Số điện thoại</label>
-                            <input type="tel">
+                            <input type="tel" name="phone">
                         </div>
                         <div class="gender">
                             <label>Giới tính:</label>
@@ -628,7 +646,7 @@
 
                     </div>
                 </div>
-                <button class="add">Cập nhật</button>
+                <button type="submit" class="add">Cập nhật</button>
             </form>
         </div>
     </div>
@@ -784,9 +802,9 @@
         <div class="modal-container modal-containerBrand">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm danh mục</h3>
-            <form action="">
-                <input type="text" placeholder="Nhập tên danh mục">
-                <button class="add">Thêm</button>
+            <form action="addCategoryAdmin">
+                <input type="text" placeholder="Nhập tên danh mục" name="name">
+                <button type="submit" class="add">Thêm</button>
             </form>
         </div>
     </div>
@@ -795,7 +813,7 @@
         <div class="modal-container modal-containerEditBrand">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa danh mục</h3>
-            <form action="">
+            <form action="updateCategoryAdmin">
                 <input type="text" placeholder="Nhập tên danh mục">
                 <button class="add">Sửa</button>
             </form>
@@ -806,9 +824,9 @@
         <div class="modal-container modal-containerColor">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm màu</h3>
-            <form action="">
-                <input type="text" placeholder="Nhập tên màu sắc">
-                <button class="add">Thêm</button>
+            <form action="addColorAdmin">
+                <input type="text" placeholder="Nhập tên màu sắc" name="name">
+                <button type="submit" class="add">Thêm</button>
             </form>
         </div>
     </div>
@@ -817,7 +835,7 @@
         <div class="modal-container modal-containerEditColor">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa tên màu sắc</h3>
-            <form action="">
+            <form action="updateColorAdmin">
                 <input type="text" placeholder="Nhập tên màu sắc">
                 <button class="add">Sửa</button>
             </form>
@@ -828,9 +846,9 @@
         <div class="modal-container modal-containerSize">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Thêm kích thước</h3>
-            <form action="">
-                <input type="text" placeholder="Nhập số kích thước">
-                <button class="add">Thêm</button>
+            <form action="addSizeAdmin">
+                <input type="text" placeholder="Nhập số kích thước" name="name">
+                <button type="submit" class="add">Thêm</button>
             </form>
         </div>
     </div>
@@ -839,7 +857,7 @@
         <div class="modal-container modal-containerEditSize">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Sửa kích thước</h3>
-            <form action="">
+            <form action="updateSizeAdmin">
                 <input type="text" placeholder="Nhập số kích thước">
                 <button class="add">Sửa</button>
             </form>
@@ -900,5 +918,6 @@
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 </body>
 </html>

@@ -41,6 +41,10 @@ public class UserService {
         return false;
     }
 
+    public void addUser(User user) {
+        UserDao.getInstance().addUser(user);
+    }
+
     public boolean register(String email, String password, String fullname, String address, String phone) {
         UserDao.getInstance().addUser(email, password, 0, fullname, address, phone, 0);
         while (true){
@@ -220,5 +224,9 @@ public class UserService {
 
     public User getUserByID(int id) {
         return UserDao.getInstance().getUserByID(id);
+    }
+
+    public String hashPass(String pass) {
+        return UserDao.getInstance().hashPassword(pass);
     }
 }
