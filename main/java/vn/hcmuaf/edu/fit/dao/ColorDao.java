@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.dao;
 
 import vn.hcmuaf.edu.fit.bean.Color;
+
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -50,6 +51,25 @@ public class ColorDao {
     public void updateColor(Color color){
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE color SET name = :name WHERE id = :id").bind("name", color.getName()).bind("id", color.getId()).execute();
+        });
+    }
+
+    public List<Color> getColorPerPage(int currentPage, int productPerPage) {
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        List<Color> color = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM color LIMIT :start, 5").bind("start", start).mapToBean(Color.class).stream().collect(Collectors.toList());
+        });
+        return color;
+    }
+
+    public void deleteColor(int id) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM color WHERE id = ?").bind(0, id).execute();
         });
     }
 }

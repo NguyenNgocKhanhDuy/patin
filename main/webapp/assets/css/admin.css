@@ -15,7 +15,6 @@
     list-style: none;
     margin: 12px 0;
     padding: 12px 0;
-    color: #1c1c1c;
     font-size: 16px;
     font-weight: 600;
     overflow: hidden;
@@ -23,7 +22,13 @@
     user-select: none;
 }
 
-#content .left ul li:hover {
+#content .left ul li a {
+    text-decoration: none;
+    padding: 20px 0;
+    color: #1c1c1c;
+}
+
+#content .left ul li a:hover {
     color: #7fad39;
 }
 
@@ -250,7 +255,7 @@
 /* PRODUCT */
 
 #content .right .product {
-    display: none;
+    /*display: none;*/
 }
 
 #content .right .product .total {
@@ -294,7 +299,7 @@
 
 #content .right .product-list .title {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% 20% repeat(1, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -309,7 +314,7 @@
 
 #content .right .product-list .product-item {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% 20% repeat(1, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -344,7 +349,7 @@
 #content .right .brand,
 #content .right .color,
 #content .right .size{
-    display: none;
+    /*display: none;*/
 }
 
 
@@ -576,7 +581,7 @@
 
 /* REPORT */
 #content .right .report {
-    display: none;
+    /*display: none;*/
 }
 
 #content .right .tk_sale {
@@ -631,7 +636,7 @@
 
 #content .right .bill-list .title {
     display: grid;
-    grid-template-columns: 5% repeat(5, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -646,7 +651,7 @@
 
 #content .right .bill-list .bill-item {
     display: grid;
-    grid-template-columns: 5% repeat(5, 1fr) 5% 5%;
+    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;

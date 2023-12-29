@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPage(int currentPage, String sort, int quantityPerPage) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, quantityPerPage);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPage(start, quantityPerPage);
         }else {
@@ -53,7 +53,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageByCategory(int currentPage, String sort, int category) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageByCategory(start, category);
         }else {
@@ -70,7 +70,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterPrice(int currentPage, String sort, int min, int max) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterPrice(start, min, max);
         }else {
@@ -79,7 +79,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterPriceByCategory(int currentPage, String sort, int min, int max, int category) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterPriceByCategory(start, min, max, category);
         }else {
@@ -96,7 +96,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterColor(int currentPage, String sort, String[] colors) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterColor(start, colors);
         }else {
@@ -105,7 +105,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterColorByCategory(int currentPage, String sort, String[] colors, int category) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterColorByCategory(start, colors, category);
         }else {
@@ -122,7 +122,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterPriceColor(int currentPage, String sort, int min, int max, String[] colors) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterPriceColor(start, min, max, colors);
         }else {
@@ -131,7 +131,7 @@ public class ProductService {
     }
 
     public List<Product2> getProductPerPageFilterPriceColorByCategory(int currentPage, String sort, int min, int max, String[] colors, int category) {
-        int start = getStartIndex(currentPage);
+        int start = getStartIndex(currentPage, 15);
         if ("".equals(sort)) {
             return ProductDao2.getInstance().getProductPerPageFilterPriceColorByCategory(start, min, max, colors, category);
         }else {
@@ -147,8 +147,7 @@ public class ProductService {
         return ProductDao2.getInstance().countFilterPriceColorByCategory(min, max, colors, category);
     }
 
-    public int getStartIndex(int currentPage) {
-        int productPerPage = 15;
+    public int getStartIndex(int currentPage, int productPerPage) {
         if (currentPage > 1) {
             return  ((currentPage - 1) * productPerPage);
         } else {

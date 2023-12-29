@@ -1,5 +1,7 @@
 package vn.hcmuaf.edu.fit.bean;
 
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ public class User implements Serializable {
     private int verify;
     private String fullName;
     private String address;
+
     private String phone;
     private String sex;
     private Date dob;
@@ -83,6 +86,7 @@ public class User implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     public String getPhone() {
         return phone;

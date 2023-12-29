@@ -63,4 +63,14 @@ public class BillService {
         return localDate;
     }
 
+    public List<Bill> getBillPerPage(int currentPage, int productPerPage){
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        return BillDao.getInstance().getBillPerPage(start);
+    }
+
 }

@@ -1,10 +1,9 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Bill;
-import vn.hcmuaf.edu.fit.bean.Category;
-import vn.hcmuaf.edu.fit.bean.Product2;
-import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.dao.CategoryDao;
+import vn.hcmuaf.edu.fit.dao.ColorDao;
+import vn.hcmuaf.edu.fit.dao.SizeDao;
 import vn.hcmuaf.edu.fit.services.BillService;
 import vn.hcmuaf.edu.fit.services.ProductService;
 import vn.hcmuaf.edu.fit.services.UserService;
@@ -16,13 +15,12 @@ import java.io.*;
 import java.util.List;
 
 
-@WebServlet(name = "ShowAdmin", value = "/showAdmin")
-public class ShowAdmin extends HttpServlet {
+@WebServlet(name = "ShowUserAdmin", value = "/showUserAdmin")
+public class ShowUserAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> allUser = UserService.getInstance().getAllUser();
         request.setAttribute("allUser", allUser);
-
 
         int currentPage;
         try {
@@ -31,7 +29,7 @@ public class ShowAdmin extends HttpServlet {
             currentPage = 1;
         }
 
-        String href = "showAdmin?";
+        String href = "showUserAdmin?";
         request.setAttribute("href", href);
 
         double productPerPage = 5.0;
@@ -39,18 +37,13 @@ public class ShowAdmin extends HttpServlet {
         int totalPage = (int) Math.ceil(allUser.size() / productPerPage);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("currentPage", currentPage);
+        request.setAttribute("productPerPage", (int) productPerPage);
 
         List<User> users = UserService.getInstance().getUserPerPage(currentPage, (int) productPerPage);
         request.setAttribute("users", users);
 
-        List<Product2> allProduct = ProductService.getInstance().getAllProduct();
-        request.setAttribute("allProduct", allProduct);
-
-        List<Category> categories = CategoryDao.getInstance().getAllCategory();
-        request.setAttribute("allCategory", categories);
-
-        List<Bill> bills = BillService.getInstance().getAllBill();
-        request.setAttribute("allBills", bills);
+        request.setAttribute("type", request.getAttribute("type"));
+        request.setAttribute("information", request.getAttribute("information"));
 
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }

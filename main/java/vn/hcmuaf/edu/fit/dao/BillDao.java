@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.dao;
 
 import vn.hcmuaf.edu.fit.bean.Bill;
+import vn.hcmuaf.edu.fit.bean.Color;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.time.LocalDateTime;
@@ -47,6 +48,13 @@ public class BillDao {
         });
         return bills;
 
+    }
+
+    public List<Bill> getBillPerPage(int start) {
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.phone as user_phone FROM bill JOIN user ON bill.user_id = user.id LIMIT :start, 5").bind("start", start).mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
     }
 
 }

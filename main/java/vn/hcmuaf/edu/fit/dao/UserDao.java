@@ -181,5 +181,10 @@ public class UserDao {
         return user;
     }
 
+    public void deleteUser(int id) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM user WHERE id = ?").bind(0, id).execute();
+        });
+    }
 
 }

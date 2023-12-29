@@ -22,7 +22,7 @@ public class AddColorAdmin extends HttpServlet {
         if (name == null){
             request.setAttribute("type", "error");
             request.setAttribute("information", "Lỗi null");
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            request.getRequestDispatcher("showColorAdmin").forward(request, response);
         }else {
 
             Color color = new Color(0, name);
@@ -30,12 +30,12 @@ public class AddColorAdmin extends HttpServlet {
 
             request.setAttribute("type", "success");
             request.setAttribute("information", "Thêm thành công");
-            request.getRequestDispatcher("showAdmin").forward(request, response);
+            request.getRequestDispatcher("showColorAdmin").forward(request, response);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

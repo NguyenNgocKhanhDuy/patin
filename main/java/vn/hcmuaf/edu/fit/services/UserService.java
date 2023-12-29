@@ -229,4 +229,8 @@ public class UserService {
     public String hashPass(String pass) {
         return UserDao.getInstance().hashPassword(pass);
     }
+
+    public void deleteUser(int id) {
+        UserDao.getInstance().deleteUser(id);
+    }
 }

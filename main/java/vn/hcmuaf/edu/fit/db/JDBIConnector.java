@@ -7,6 +7,7 @@ import vn.hcmuaf.edu.fit.bean.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -36,15 +37,11 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-
-        Date d = Date.valueOf("2023-12-27");
-
-
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob WHERE id = :id")
-                    .bind("id", 11).bind("fullname", "rtt").bind("address", "ijjiqef").bind("phone", "09938123")
-                    .bind("sex", "anm").bind("dob", d)
-                    .execute();
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.phone as user_phone FROM bill join user on bill.user_id = user.id " +
+                    "LIMIT :start, 5").bind("start", 0).mapToBean(Bill.class).stream().collect(Collectors.toList());
         });
+
+
     }
 }

@@ -29,7 +29,7 @@ public class AddUserAdmin extends HttpServlet {
         if (fullname == null || address == null || phone == null || sex == null || email == null || password == null){
             request.setAttribute("type", "error");
             request.setAttribute("information", "Lỗi null");
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            request.getRequestDispatcher("showUserAdmin").forward(request, response);
         }else {
             try {
                 role = Integer.parseInt(request.getParameter("role"));
@@ -47,17 +47,17 @@ public class AddUserAdmin extends HttpServlet {
 
                 request.setAttribute("type", "success");
                 request.setAttribute("information", "Thêm thành công");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                request.getRequestDispatcher("showUserAdmin").forward(request, response);
             }catch (NumberFormatException e ){
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi parse");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                request.getRequestDispatcher("showUserAdmin").forward(request, response);
             }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

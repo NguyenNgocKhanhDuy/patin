@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.dao;
 
 
 import vn.hcmuaf.edu.fit.bean.Size;
+import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -53,6 +54,25 @@ public class SizeDao {
     public void updateSize(Size size){
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE size SET name = :name WHERE id = :id").bind("name", size.getName()).bind("id", size.getId()).execute();
+        });
+    }
+
+    public List<Size> getSizePerPage(int currentPage, int productPerPage) {
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        List<Size> size = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM size LIMIT :start, 5").bind("start", start).mapToBean(Size.class).stream().collect(Collectors.toList());
+        });
+        return size;
+    }
+
+    public void deleteSize(int id) {
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM size WHERE id = ?").bind(0, id).execute();
         });
     }
 }
