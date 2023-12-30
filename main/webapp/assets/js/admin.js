@@ -127,7 +127,7 @@ var userDetails = document.querySelectorAll(".user-item .detail");
 function showDetailUser() {
     for (let i = 0; i < userDetails.length; i++) {
         userDetails[i].addEventListener("click", function () {
-            modalDetail(document.querySelectorAll(".user-item .index")[i].textContent, "user")
+            modalDetail(document.querySelectorAll(".user-item .id")[i].textContent, "user")
             modal.style.display = "flex";
 
             // var modalEditUser = document.querySelector(".modal-Edituser");
@@ -214,7 +214,7 @@ var brandDetails = document.querySelectorAll(".brand-item .detail");
 function showDetailBrand() {
     for (let i = 0; i < brandDetails.length; i++) {
         brandDetails[i].addEventListener("click", function () {
-            modalDetail(document.querySelectorAll(".brand-item .index")[i].textContent, "brand");
+            modalDetail(document.querySelectorAll(".brand-item .id")[i].value, "brand");
 
             modal.style.display = "flex";
 
@@ -247,7 +247,7 @@ var colorDetails = document.querySelectorAll(".color-item .detail");
 function showDetailColor() {
     for (let i = 0; i < colorDetails.length; i++) {
         colorDetails[i].addEventListener("click", function () {
-            modalDetail(document.querySelectorAll(".color-item .index")[i].textContent, "color");
+            modalDetail(document.querySelectorAll(".color-item .id")[i].value, "color");
 
             modal.style.display = "flex";
 
@@ -280,7 +280,7 @@ var sizeDetails = document.querySelectorAll(".size-item .detail");
 function showDetailSize() {
     for (let i = 0; i < sizeDetails.length; i++) {
         sizeDetails[i].addEventListener("click", function () {
-            modalDetail(document.querySelectorAll(".size-item .index")[i].textContent, "size");
+            modalDetail(document.querySelectorAll(".size-item .id")[i].value, "size");
 
             modal.style.display = "flex";
 

@@ -193,4 +193,8 @@ public class ProductService {
     public void addWishList(int userID, int productID) {
         ProductDao2.getInstance().addWishList(userID, productID);
     }
+
+    public List<Product2> getAllProductDetail(int id){
+        return ProductDao2.getInstance().getAllProductDetail(id);
+    }
 }

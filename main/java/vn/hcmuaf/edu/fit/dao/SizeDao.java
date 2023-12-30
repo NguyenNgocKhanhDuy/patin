@@ -75,4 +75,11 @@ public class SizeDao {
             return handle.createUpdate("DELETE FROM size WHERE id = ?").bind(0, id).execute();
         });
     }
+
+    public int getIdByName(String name){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT id FROM size WHERE name like ?").bind(0, "%" + name.trim().replace(" ", "%") + "%").mapTo(Integer.class).one();
+        });
+        return i;
+    }
 }

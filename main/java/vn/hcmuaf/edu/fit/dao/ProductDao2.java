@@ -433,6 +433,18 @@ public class ProductDao2 {
         return product;
 
     }
+    public List<Product2> getAllProductDetail(int id) {
+        List<Product2> product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.*, product_detail.quantity, product_detail.price as minPrice, size.name as size, color.name as color " +
+                            "FROM  product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id " +
+                            "ORDER BY minPrice asc")
+                    .bind("id", id)
+                    .mapToBean(Product2.class).stream().collect(Collectors.toList());
+        });
+        return product;
+
+    }
 
     public List<Product2> getWishList(int userID, int productID) {
         List<Product2> products = JDBIConnector.get().withHandle(handle -> {

@@ -35,8 +35,19 @@ public class ShowModalAdmin extends HttpServlet {
                     response.getWriter().println(gson.toJson(user));
 
                 } else if (select.equals("product")) {
-
-
+                    String size = request.getParameter("size");
+                    String color = request.getParameter("color");
+                    if (size == null || color == null){
+                        request.setAttribute("type", "error");
+                        request.setAttribute("information", "Lỗi");
+                        request.getRequestDispatcher("showAdmin").forward(request, response);
+                    }else {
+                        int idSize = SizeDao.getInstance().getIdByName(size);
+                        int idColor = ColorDao.getInstance().getIdByName(color);
+                        Product2 product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
+//                        response.getWriter().println(gson.toJson(id+", "+idSize+", "+idColor));
+                        response.getWriter().println(gson.toJson(product));
+                    }
                 } else if (select.equals("brand")) {
                     Category category = CategoryDao.getInstance().getCategory(id);
                     response.getWriter().println(gson.toJson(category));

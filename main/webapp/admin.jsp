@@ -211,6 +211,7 @@
                             </div>
                             <c:forEach var="user" items="${users}" varStatus="index">
                                 <div class="user-item">
+                                    <input type="hidden" class="id" value="${user.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">${user.getFullName()}</p>
                                     <p class="email">${user.getEmail()}</p>
@@ -252,7 +253,9 @@
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <img src="${product.getImg()}" alt="">
                                     <p class="name">${product.getName()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
+                                    <a href="showProductDetailAdmin?id=${product.getId()}">
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                    </a>
                                     <i class="fa-solid fa-xmark del"></i>
                                 </div>
                             </c:forEach>
@@ -286,6 +289,7 @@
                             </div>
                             <c:forEach items="${categories}" var="category" varStatus="index">
                                 <div class="brand-item">
+                                    <input type="hidden" class="id" value="${category.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">${category.getName()}</p>
                                     <i class="fa-solid fa-clipboard detail"></i>
@@ -323,6 +327,7 @@
                             </div>
                             <c:forEach var="color" items="${colors}" varStatus="index">
                                 <div class="color-item">
+                                    <input type="hidden" class="id" value="${color.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">Màu ${color.getName()}</p>
                                     <i class="fa-solid fa-clipboard detail"></i>
@@ -360,6 +365,7 @@
                             </div>
                             <c:forEach items="${sizes}" var="size" varStatus="index">
                                 <div class="size-item">
+                                    <input type="hidden" class="id" value="${size.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">Size ${size.getName()}</p>
                                     <i class="fa-solid fa-clipboard detail"></i>
@@ -423,16 +429,87 @@
                                 </c:forEach>
 
                             </div>
-                            <div class="pagination">
-                                <ul>
-                                    <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>
-                                    <ul class="number-page">
-                                        <!--<li class="numb"><a href="#">1</a></li>-->
-                                    </ul>
-                                    <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
+                    </div>
+                </c:if>
+
+                <c:if test="${productDetail != null}">
+                    <div class="product_detail section">
+                        <div class="general">
+                            <p class="name">Tên sản phẩm: ${productDetail.get(0).getName()}</p>
+                            <p class="price">
+                            <span class="rangePrice">
+                                Giá:
+                                <fmt:formatNumber value="${productDetail.get(0).getMinPrice()}" type="currency"/>
+                                     -
+                                <fmt:formatNumber value="${productDetail.get(productDetail.size()-1).getMinPrice()}" type="currency"/>
+                            </span>
+                                <span class="salePercent">
+                                Giảm giá:
+                                    <fmt:formatNumber value="${productDetail.get(0).getSalePercent()}" type="percent"/>
+                            </span>
+                            </p>
+                            <c:if test="${productDetail.get(0).getHot() == 1}">
+                                <p class="hot">Hot</p>
+                            </c:if>
+                            <p class="more">
+                            <span>Thông tin:<br>-
+                            ${productDetail.get(0).getInformation()}
+                            </span>
+                                <span>
+                                <i class="fa-solid fa-clipboard detail"></i>
+                            </span>
+                            </p>
+                        </div>
+                        <div class="img">
+                            <c:forEach items="${images}" var="img">
+                                <img src="${img.getUrl()}" alt="">
+                            </c:forEach>
+                        </div>
+                        <c:if test="${images.size() < 5}">
+                            <div class="addBox">
+                                    <div class="add">
+                                        Thêm ảnh
+                                    </div>
+                                    <div class="add">
+                                        Thêm sản phẩm
+                                    </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${images.size() == 5}">
+                            <div class="add rightBtn">
+                                Thêm sản phẩm
+                            </div>
+                        </c:if>
+                        <div class="product-list">
+                            <div class="title">
+                                <h4>STT</h4>
+                                <h4>Màu sắc</h4>
+                                <h4>Size</h4>
+                                <h4>Giá gốc</h4>
+                                <h4>Giá giảm giá</h4>
+                                <h4>Số lượng</h4>
+                            </div>
+                            <c:forEach var="product" varStatus="index" items="${productDetail}">
+                                <div class="product-item">
+                                    <input type="hidden" class="id" value="${product.getId()}">
+                                    <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                    <p class="color">${product.getColor()}</p>
+                                    <p class="size">${product.getSize()}</p>
+                                    <p class="price">
+                                        <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                    </p>
+                                    <p class="priceSale">
+                                        <fmt:formatNumber value="${product.getMinPrice() * (1 - product.getSalePercent())}" type="currency"/>
+                                    </p>
+                                    <p class="quantỉty">${product.getQuantity()}</p>
+                                    <i class="fa-solid fa-clipboard detail"></i>
+                                    <i class="fa-solid fa-xmark del"></i>
+                                </div>
+                            </c:forEach>
+
+                        </div>
+
                     </div>
                 </c:if>
 
@@ -524,50 +601,6 @@
                         </c:if>
                     </ul>
                 </div>
-
-<%--                <div class="order section">--%>
-<%--                    <div class="total">--%>
-<%--                        <i class="fa-solid fa-shop"></i>--%>
-<%--                        <div class="text">--%>
-<%--                            <h3>Tổng số đơn hàng</h3>--%>
-<%--                            <p class="totalOrder">${allBills.size()}</p>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="search">--%>
-<%--                        <input type="text" placeholder="Nhập tìm kiếm">--%>
-<%--                        <button class="search-btn">Tìm kiếm</button>--%>
-<%--                    </div>--%>
-<%--                    <div class="order-list">--%>
-<%--                        <div class="title">--%>
-<%--                            <h4>STT</h4>--%>
-<%--                            <h4>Mã đơn hàng</h4>--%>
-<%--                            <h4>Tên sản phẩm</h4>--%>
-<%--                            <h4>Số điện thoại</h4>--%>
-<%--                            <h4>Ngày đặt</h4>--%>
-<%--                            <h4>Tình trạng</h4>--%>
-<%--                        </div>--%>
-<%--                        <div class="order-item">--%>
-<%--                            <p class="index">1</p>--%>
-<%--                            <p class="id">DH01</p>--%>
-<%--                            <p class="name">Giày Patin Tốc Độ – Speed Flying Eagle PHANTOM</p>--%>
-<%--                            <p class="phone">0839151003</p>--%>
-<%--                            <p class="date">11/11/2023</p>--%>
-<%--                            <p class="state">Đã giao</p>--%>
-<%--                            <i class="fa-solid fa-clipboard detail"></i>--%>
-<%--                            <i class="fa-solid fa-xmark del"></i>--%>
-<%--                        </div>--%>
-
-<%--                    </div>--%>
-<%--                    <div class="pagination">--%>
-<%--                        <ul>--%>
-<%--                            <li class="arrowPage previousPage"><a><i class="fa-solid fa-arrow-left"></i></a></li>--%>
-<%--                            <ul class="number-page">--%>
-<%--                                <!--<li class="numb"><a href="#">1</a></li>-->--%>
-<%--                            </ul>--%>
-<%--                            <li class="nextPage arrowPage arrowActive"><a><i class="fa-solid fa-arrow-right"></i></a></li>--%>
-<%--                        </ul>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
 
 
 
@@ -964,6 +997,146 @@
         </div>
     </c:if>
 
+    <c:if test="${productDetail != null}">
+        <div class="modal modal-general modal-edit modal-Editproduct">
+            <div class="modal-container modalConProduct modal-containerEditProduct">
+                <i class="fa-solid fa-xmark del"></i>
+                <h3>Chi tiết sản phẩm</h3>
+                <form>
+                    <div class="wrapper">
+                        <div class="main">
+                            <div class="hold">
+                                <label>Tên sản phẩm</label>
+                                <input type="text" value="${productDetail.get(0).getName()}">
+                            </div>
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Giảm giá</label>
+                                    <input type="text" value="${productDetail.get(0).getSalePercent()}">
+                                </div>
+                                <div class="hold">
+                                    <label>Hot</label>
+                                    <c:if test="${productDetail.get(0).getHot() == 1}">
+                                        <input type="checkbox" name="hot" checked>
+                                    </c:if>
+                                    <c:if test="${productDetail.get(0).getHot() == 0}">
+                                        <input type="checkbox" name="hot">
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more">
+                            <div class="hold">
+                                <label>Thông tin khác</label>
+                                <textarea>${text}</textarea>
+                            </div>
+                            <div class="chooseImg">
+                                <input type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="add">Cập nhật</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-img">
+            <div class="modal-img-container">
+                <div class="delImg">
+                    Xoá ảnh
+                </div>
+                <i id="closeModalImg" class="fa-solid fa-x"></i>
+                <i id="previousImg" class="fa-solid fa-left-long"></i>
+                <i id="nextImg" class="fa-solid fa-right-long"></i>
+                <img id="imageInModal" src="" alt="">
+            </div>
+        </div>
+        <div class="modal modalAddDetail">
+            <div class="modal-container modalConProduct">
+                <i class="fa-solid fa-xmark del"></i>
+                <h3>Thêm sản phẩm</h3>
+                <form>
+                    <div class="wrapper">
+                        <div class="main">
+                            <div class="hold">
+                                <label>Tên sản phẩm</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Giá gốc</label>
+                                    <input type="text">
+                                </div>
+                                <div class="hold">
+                                    <label>Số lượng</label>
+                                    <input type="number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more">
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Màu sắc</label>
+                                    <select name="color">
+                                        <option>Trắng</option>
+                                    </select>
+                                </div>
+                                <div class="hold">
+                                    <label>Size</label>
+                                    <select name="size">
+                                        <option>27</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add">Thêm</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal modalEditDetail">
+            <div class="modal-container modalConProduct">
+                <i class="fa-solid fa-xmark del"></i>
+                <h3>Chi tiết sản phẩm</h3>
+                <form>
+                    <div class="wrapper">
+                        <div class="main">
+                            <div class="hold">
+                                <label>Tên sản phẩm</label>
+                                <input type="text">
+                            </div>
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Giá gốc</label>
+                                    <input type="text">
+                                </div>
+                                <div class="hold">
+                                    <label>Số lượng</label>
+                                    <input type="number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more">
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Màu sắc</label>
+                                    <select name="color">
+                                        <option>Trắng</option>
+                                    </select>
+                                </div>
+                                <div class="hold">
+                                    <label>Size</label>
+                                    <select name="size">
+                                        <option>27</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add">Cập nhật</button>
+                </form>
+            </div>
+        </div>
+    </c:if>
 
 
     <div class="popup ${type != null ? type : "none"}">
@@ -1018,7 +1191,12 @@
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+    <c:if test="${productDetail == null}">
+        <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
+    </c:if>
+    <c:if test="${productDetail != null}">
+        <script src="${pageContext.request.contextPath}/assets/js/adminModalImg.js"></script>
+    </c:if>
     <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 </body>
 </html>

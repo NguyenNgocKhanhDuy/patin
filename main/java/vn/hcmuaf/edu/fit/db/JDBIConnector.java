@@ -37,11 +37,14 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT bill.*, user.phone as user_phone FROM bill join user on bill.user_id = user.id " +
-                    "LIMIT :start, 5").bind("start", 0).mapToBean(Bill.class).stream().collect(Collectors.toList());
+        List<Product2> product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.*, product_detail.quantity, product_detail.price as minPrice, size.name as size, color.name as color " +
+                            "FROM  product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id " +
+                            "ORDER BY minPrice asc")
+                    .bind("id", 1)
+                    .mapToBean(Product2.class).stream().collect(Collectors.toList());
         });
-
-
+        System.out.println(product.get(0).getInformation().replace("%", "<br>"));
     }
 }
