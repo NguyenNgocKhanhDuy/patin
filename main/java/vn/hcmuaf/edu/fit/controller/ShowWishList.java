@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
@@ -19,7 +19,7 @@ public class ShowWishList extends HttpServlet {
         try {
             id = Integer.parseInt(request.getParameter("id"));
             User user = (User) request.getSession().getAttribute("auth");
-            List<Product2> productList = ProductService.getInstance().getWishList(user.getId(), id);
+            List<Product> productList = ProductService.getInstance().getWishList(user.getId(), id);
             request.setAttribute("list", productList);
             request.getRequestDispatcher("wishlist.jsp").forward(request, response);
         }catch (NumberFormatException e){

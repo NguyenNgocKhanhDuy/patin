@@ -6,6 +6,7 @@ import vn.hcmuaf.edu.fit.bean.User;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,29 +55,35 @@ public class UserDao {
         return users;
     }
 
-    public void addUser(String email, String password, int verify, String fullName, String address, String phone, int role) {
-        int id = getAllUser().size() + 1;
+    public boolean addUser(String email, String password, int verify, String fullName, String address, String phone, String sex, LocalDateTime dob, String avatar, int role) {
         String hashPass = hashPassword(password);
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO user(id, email, password, verify, fullname, address, phone, role) " +
-                    "VALUES (:id, :email, :password, :verify, :fullname, :address, :phone, :role)")
-                    .bind("id", id).bind("email", email).bind("password", hashPass)
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO user(email, password, verify, fullname, address, phone, sex, dob, avatar, role) " +
+                            "VALUES (:email, :password, :verify, :fullname, :address, :phone, :sex, :dob, :avatar, :role)")
+                    .bind("email", email).bind("password", hashPass)
                     .bind("verify", verify).bind("fullname", fullName).bind("phone", phone).bind("address", address)
+                    .bind("sex", sex).bind("dob", dob).bind("avatar", avatar)
                     .bind("role", role).execute();
         });
+        if (i == 1){
+            return true;
+        }
+        return false;
     }
 
-    public void addUser(User user) {
-        int id = getAllUser().size() + 1;
+    public boolean addUser(User user) {
         String hashPass = hashPassword(user.getPassword());
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO user(id, email, password, verify, fullname,phone, address, sex, dob, role) " +
-                    "VALUES (:id, :email, :password, :verify, :fullname, :phone, :address, :sex, :dob, :role)")
-                    .bind("id", id).bind("email", user.getEmail()).bind("password", hashPass)
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO user(email, password, verify, fullname,phone, address, sex, dob, role) " +
+                            "VALUES (:id, :email, :password, :verify, :fullname, :phone, :address, :sex, :dob, :role)")
+                    .bind("email", user.getEmail()).bind("password", hashPass)
                     .bind("verify", user.getVerify()).bind("fullname", user.getFullName()).bind("phone", user.getPhone()).bind("address", user.getAddress())
                     .bind("sex", user.getSex()).bind("dob", user.getDob())
                     .bind("role", user.getRole()).execute();
         });
+        if (i == 1)
+            return true;
+        return false;
     }
 
     public boolean isExitsCode(int code) {
@@ -89,11 +96,13 @@ public class UserDao {
         return false;
     }
 
-    public void verify(int code, String email) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean verify(int code, String email) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE user SET verify = :code WHERE email = :email")
                     .bind("code", code).bind("email", email).execute();
         });
+        if(i == 1) return true;
+        return false;
     }
 
     public int getVerifyByEmail(String email) {
@@ -104,11 +113,13 @@ public class UserDao {
         return users.get(0).getVerify();
     }
 
-    public void keyForgetPass(int code, String email) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean keyForgetPass(int code, String email) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE user SET keyPass = ? WHERE email = ?")
                     .bind(0, code).bind(1, email).execute();
         });
+        if(i == 1) return true;
+        return false;
     }
 
     public int getKey(String email) {
@@ -130,22 +141,26 @@ public class UserDao {
 
 
 
-    public void updateUser(User user) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean updateUser(User user) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob, role = :role, verify = :verify WHERE id = :id")
                     .bind("id", user.getId()).bind("fullname", user.getFullName()).bind("address", user.getAddress()).bind("phone", user.getPhone())
                     .bind("sex", user.getSex()).bind("dob", user.getDob()).bind("role", user.getRole()).bind("verify", user.getVerify())
                     .execute();
         });
+        if(i == 1) return true;
+        return false;
     }
 
-    public void updatePass(String email, String password) {
+    public boolean updatePass(String email, String password) {
         String hashPass = hashPassword(password);
 
-        JDBIConnector.get().withHandle(handle -> {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE user SET password = ? WHERE email = ?")
                     .bind(0, hashPass).bind(1, email).execute();
         });
+        if(i == 1) return true;
+        return false;
     }
 
     public String hashPassword(String password){
@@ -181,10 +196,12 @@ public class UserDao {
         return user;
     }
 
-    public void deleteUser(int id) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean deleteUser(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM user WHERE id = ?").bind(0, id).execute();
         });
+        if(i == 1) return true;
+        return false;
     }
 
 }

@@ -20,7 +20,11 @@ public class ResendCode extends HttpServlet {
             request.getSession().setAttribute("timeStart", timeStart);
             request.setAttribute("type", "success");
             request.setAttribute("information", "Gửi lại mã thành công");
-            request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
+            request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
+        }else {
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Có lỗi xảy ra");
+            request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
         }
     }
 

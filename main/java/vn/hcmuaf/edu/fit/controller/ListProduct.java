@@ -1,7 +1,9 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.services.ProductService;
+import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -16,7 +18,8 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product2> listHotProduct = ProductService.getInstance().getHotProduct();
+//        List<Product> listHotProduct = ProductService.getInstance().getHotProduct();
+        List<ProductMain> listHotProduct = ProductService2.getInstance().getHotProduct();
         request.setAttribute("hotProducts", listHotProduct);
 
         int currentPage = 0;
@@ -44,10 +47,12 @@ public class ListProduct extends HttpServlet {
             if (maxText == null) maxText = String.valueOf(maxValue);
 
             if (!minText.equals(minValue+"")) {
-                minText = minText.substring(0, minText.length() - 2).replace(".", "");
+                minText = minText.replace(".", "");
+//                minText = minText.substring(0, minText.length() - 2).replace(".", "");
             }
             if (!maxText.equals(maxValue+"")) {
-                maxText = maxText.substring(0, maxText.length() - 2).replace(".", "");
+                maxText = maxText.replace(".", "");
+//                maxText = maxText.substring(0, maxText.length() - 2).replace(".", "");
             }
 
             try {
@@ -88,7 +93,7 @@ public class ListProduct extends HttpServlet {
         List<String> listColors = new ArrayList<>(Arrays.asList(colors));
         if (!listColors.contains("0")) isColorFilter = true;
 
-        List<Product2> products;
+        List<ProductMain> products;
         int totalPage;
         String href = "listProduct?";
 
@@ -99,11 +104,13 @@ public class ListProduct extends HttpServlet {
                 min = minValue;
                 max = maxValue;
             }
-            products = ProductService.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
+//            products = ProductService.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
+            products = ProductService2.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
             totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPrice(min, max) / productPerPage));
             href += "min="+min+"&max="+max;
         } else if (!(min != minValue || max != maxValue) && isColorFilter) {
-            products = ProductService.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
+//            products = ProductService.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
+            products = ProductService2.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
             totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColor(colors) / productPerPage));
 
             String txt = "";
@@ -113,8 +120,8 @@ public class ListProduct extends HttpServlet {
             href += txt;
 
         } else if ((min != minValue || max != maxValue) && isColorFilter) {
-
-            products = ProductService.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
+//            products = ProductService.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
+            products = ProductService2.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
             totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColor(min, max, colors) / productPerPage));
 
             String txt = "";
@@ -124,7 +131,8 @@ public class ListProduct extends HttpServlet {
             href += "min="+min+"&max="+max+txt;
 
         }else {
-            products = ProductService.getInstance().getProductPerPage(currentPage, sort, 15);
+//            products = ProductService.getInstance().getProductPerPage(currentPage, sort, 15);
+            products = ProductService2.getInstance().getProductPerPage(currentPage, sort, 15);
             totalPage = (int) Math.ceil((ProductService.getInstance().countAll() / productPerPage));
         }
 

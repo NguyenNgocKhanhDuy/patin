@@ -1,8 +1,7 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.ImageProduct;
-import vn.hcmuaf.edu.fit.bean.Product2;
-import vn.hcmuaf.edu.fit.bean.ProductDetail;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.dao.ImageProductDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
@@ -20,7 +19,7 @@ public class ShowProductDetailAdmin extends HttpServlet {
         int id;
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            List<Product2> productDetail = ProductService.getInstance().getAllProductDetail(id);
+            List<Product> productDetail = ProductService.getInstance().getAllProductDetail(id);
 
             String text = productDetail.get(0).getInformation();
             request.setAttribute("text", "- "+text.replace("%", "\n- ").trim());

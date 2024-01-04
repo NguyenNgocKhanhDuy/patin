@@ -32,7 +32,7 @@
 }
 
 #content .left .price {
-    margin-top: 70px;
+    margin-top: 270px;
     font-size: 16px;
     margin-bottom: 35px;
 }
@@ -431,6 +431,10 @@
     background-color: #7fad39;
 }
 
+#content .right .pagination {
+    position: relative;
+}
+
 #content .right .pagination ul li:hover a{
     color: #fff;
     background-color: #7fad39;
@@ -453,91 +457,22 @@
     display: inline-block;
 }
 
-.popup {
+#content .right .pagination .selectPage {
     position: absolute;
-    top: 10%;
-    right: 80px;
-    width: 400px;
-    height: 60px;
-    padding: 10px;
-    border: 2px solid #c0a7a5;
-    border-radius: 4px;
-}
-
-.success {
-    background: #d5e9ce;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.error {
-    background: #e2c0bc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.alert {
-    background: #eee9ce;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.popup .icon {
-    font-size: 20px;
-    margin-right: 20px;
-}
-
-
-.error .icon {
-    color: #ab2f30;
-}
-
-.alert .icon {
-    color: #87722e;
-}
-
-.popup p {
+    top: -6px;
+    right: 16px;
     font-size: 16px;
-    white-space: nowrap;
 }
 
-.error p {
-    color: #9b3a3d;
-}
-.alert p {
-    color: #7f7454;
-}
-
-.none {
-    display: none;
-}
-
-.popup .del {
-    font-size: 20px;
-    margin-left: 50px;
+#content .right .pagination .selectPage select {
+    height: 40px;
+    padding: 0 10px;
     cursor: pointer;
-}
-
-.error .del {
-    color: #be9390;
-}
-.alert .del {
-    color: #d0cb9e;
-}
-
-
-.fadeOut {
-    animation: fade-out 0.25s ease-in forwards;
+    font-size: 20px;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    appearance: none;
 }
 
 
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}

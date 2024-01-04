@@ -22,20 +22,20 @@
         <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
         <nav>
             <ul class="menu">
-                <li><a href="/index.jsp">TRANG CHỦ</a></li>
+                <li><a href="home">TRANG CHỦ</a></li>
                 <li>
-                    <a href="/list_product.jsp">SẢN PHẨM</a>
+                    <a href="listProduct">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
 
                     </ul>
                 </li>
-                <li><a href=contact.html>LIÊN HỆ</a></li>
+                <li><a href=contact.jsp>LIÊN HỆ</a></li>
             </ul>
         </nav>
         <div class="user">
             <ul>
                 <li>
-                    <a href="./login.jsp">
+                    <a href="login.jsp">
                         ĐĂNG NHẬP
                     </a>
                 </li>
@@ -44,8 +44,8 @@
                         ĐĂNG KÝ
                     </a>
                 </li>
-                <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
+                <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
             </ul>
         </div>
     </div>
@@ -55,7 +55,7 @@
     <div class="container">
         <div class="login">
             <h3>Đăng Ký</h3>
-            <form action="/patin_shop/doRegister" class="wrapper" method="post">
+            <form action="doRegister" class="wrapper" method="post">
                 <div class="top">
                     <div class="left">
                         <div class="holder">
@@ -154,6 +154,6 @@
 </footer>
 
 <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/register.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 </body>
 </html>

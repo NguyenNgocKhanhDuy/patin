@@ -15,29 +15,35 @@ import java.io.*;
 import java.util.List;
 
 
-@WebServlet(name = "ProductDetail", value = "/productDetail")
-public class ProductDetail extends HttpServlet {
+@WebServlet(name = "ShowRatingProduct", value = "/showRatingProduct")
+public class ShowRatingProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int productID;
+        int currentPage;
 
         try {
-            productID = Integer.parseInt(request.getParameter("productID"));
 
+            productID = Integer.parseInt(request.getParameter("productID"));
             request.setAttribute("productID", productID);
 
-//        Product product = ProductService.getInstance().getProduct(productID);
+            try {
+                currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            }catch (NumberFormatException e){
+                currentPage = 1;
+            }
+            request.setAttribute("currentPage", currentPage);
+            int totalPage = (int) Math.ceil((RatingDao.getInstance().getAllRatingOfProduct(productID).size() / (3+0.0)));
+            request.setAttribute("totalPage", totalPage);
+
+            String href = "showRatingProduct?productID="+productID;
+            request.setAttribute("href", href);
+
+
             List<ProductMain> products = ProductService2.getInstance().getProductDetail(productID);
-
-            String info = products.get(0).getProductDetail().getProduct().getInformation().replace("%", "<br>- ");
-            products.get(0).getProductDetail().getProduct().setInformation(info);
-
             request.setAttribute("products", products);
 
-//        String info = product.getInformation().replace("%", "<br>");
-//        product.setInformation(info);
-
-            List<Rating> ratings = RatingDao.getInstance().getAllRatingOfProduct(productID);
+            List<Rating> ratings = RatingDao.getInstance().getAllRatingOfProductPerPage(productID, currentPage);
             request.setAttribute("ratings", ratings);
             double totalRate = 0;
             for (int i = 0; i < ratings.size(); i++) {
@@ -46,7 +52,6 @@ public class ProductDetail extends HttpServlet {
             totalRate = totalRate / ratings.size();
 
             request.setAttribute("totalRate", (double) Math.round(totalRate * 10) / 10);
-
 
 
             List<ImageProduct> listImg = ImageProductDao.getInstance().getAllImage(productID);
@@ -58,6 +63,7 @@ public class ProductDetail extends HttpServlet {
             List<Size> sizes = SizeDao.getInstance().getProductSize(productID);
             request.setAttribute("sizes", sizes);
 
+//            List<Product> orderProduct = ProductService.getInstance().getRandomProduct(4);
             List<ProductMain> orderProduct = ProductService2.getInstance().getRandomProduct(4);
             request.setAttribute("orderProducts", orderProduct);
 
@@ -66,14 +72,16 @@ public class ProductDetail extends HttpServlet {
                 totalQuantity += products.get(0).getProductDetail().getQuantity();
             }
 
-//        request.setAttribute("totalQuantity", ProductService.getInstance().getTotalQuantity(productID));
             request.setAttribute("totalQuantity", totalQuantity);
+
+            List<ImageRating> listImgRating = RatingDao.getInstance().getImageRatingOfProductPerPage(productID, currentPage);
+            request.setAttribute("listImgRating", listImgRating);
+            request.setAttribute("hasImg", 0);
 
             request.setAttribute("type", request.getAttribute("type"));
             request.setAttribute("information", request.getAttribute("information"));
 
             request.getRequestDispatcher("product_detail.jsp").forward(request, response);
-
 
         }catch (NumberFormatException e) {
             request.setAttribute("type", "error");
@@ -85,6 +93,7 @@ public class ProductDetail extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

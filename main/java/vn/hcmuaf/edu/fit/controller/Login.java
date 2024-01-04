@@ -23,13 +23,13 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = UserService.getInstance().checkLogin(email, password);
-        String infomation = RegisterService.getInstance().checkEmail(email);
+        String infomation = UserService.getInstance().checkEmail(email);
         String location = request.getParameter("location");
         if (location == null) location = "/patin_shop/home";
         if (!"valid".equals(infomation)){
             request.setAttribute("type", "alert");
             request.setAttribute("infomation", infomation);
-            request.getRequestDispatcher("/login.jsp");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }else {
             if (user == null) {
                 request.setAttribute("email", email);

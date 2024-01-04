@@ -1,9 +1,7 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.Bill;
-import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.services.BillService;
-import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,8 @@
 package vn.hcmuaf.edu.fit.services;
 
 import vn.hcmuaf.edu.fit.bean.Bill;
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.BillDetail;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.cart.Cart;
 import vn.hcmuaf.edu.fit.cart.CartKey;
 import vn.hcmuaf.edu.fit.dao.BillDao;
@@ -42,7 +43,7 @@ public class BillService {
         BillDao.getInstance().insertBill(id, name, date, state, paymnet, note, user);
 
         for (int i = 0; i < keys.size(); i++) {
-            Product2 product = cart.getData().get(keys.get(i)).getProduct();
+            Product product = cart.getData().get(keys.get(i)).getProduct();
             int quantity = cart.getData().get(keys.get(i)).getQuantity();
             BillDetailDao.getInstance().insertBillDetail(id, product.getId(), keys.get(i).getSize(), keys.get(i).getColor(), quantity, quantity * product.getMinPrice());
         }
@@ -71,6 +72,14 @@ public class BillService {
             start = 0;
         }
         return BillDao.getInstance().getBillPerPage(start);
+    }
+
+    public Bill getBill(int id){
+        return BillDao.getInstance().getBill(id);
+    }
+
+    public List<BillDetail> getBillDetail(int id){
+        return BillDetailDao.getInstance().getBillDetail(id);
     }
 
 }

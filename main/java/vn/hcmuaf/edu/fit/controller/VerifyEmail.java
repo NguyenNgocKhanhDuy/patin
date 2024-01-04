@@ -28,16 +28,18 @@ public class VerifyEmail extends HttpServlet {
             if (UserService.getInstance().verifyMail(code, email)) {
                 request.getSession().removeAttribute("timeStart");
                 request.getSession().removeAttribute("email");
-                response.sendRedirect("/patin_shop/login.jsp");
+                request.setAttribute("type", "success");
+                request.setAttribute("information", "Đăng ký thành công");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Mã xác minh không đúng");
-                request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
+                request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
             }
         }else {
             request.setAttribute("type", "error");
             request.setAttribute("information", "Mã xác minh không đúng");
-            request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
+            request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
         }
     }
 

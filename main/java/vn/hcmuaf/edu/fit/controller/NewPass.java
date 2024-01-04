@@ -19,13 +19,13 @@ public class NewPass extends HttpServlet {
             request.getSession().removeAttribute("emailPass");
             request.setAttribute("type", "success");
             request.setAttribute("information", "Thay đổi mật khẩu thành công");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }else {
             request.setAttribute("type", "error");
             request.setAttribute("pass", pass);
             request.setAttribute("confirmPass", confirmPass);
             request.setAttribute("information", "Mật khẩu nhập không đúng");
-            request.getRequestDispatcher("/newPass.jsp").forward(request, response);
+            request.getRequestDispatcher("newPass.jsp").forward(request, response);
         }
     }
 

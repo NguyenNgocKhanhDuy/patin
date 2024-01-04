@@ -1,25 +1,25 @@
 package vn.hcmuaf.edu.fit.cart;
 
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
 
 public class CartProduct {
-    private Product2 product;
+    private Product product;
     private int quantity;
 
 
     public CartProduct() {
     }
 
-    public CartProduct(Product2 product, int quantity) {
+    public CartProduct(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
-    public Product2 getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product2 product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

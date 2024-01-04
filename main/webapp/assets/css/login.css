@@ -70,105 +70,6 @@
     cursor: pointer;
 }
 
-
-/*.popup {*/
-/*    position: absolute;*/
-/*    top: -80px;*/
-/*    right: 80px;*/
-/*    width: 400px;*/
-/*    height: 60px;*/
-/*    padding: 10px;*/
-/*    border: 2px solid #c0a7a5;*/
-/*    border-radius: 4px;*/
-/*}*/
-
-/*.success {*/
-/*    background: #d5e9ce;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-/*.error {*/
-/*    background: #e2c0bc;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-
-/*.alert {*/
-/*    background: #eee9ce;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-
-/*.popup .icon {*/
-/*    font-size: 20px;*/
-/*    margin-right: 20px;*/
-/*}*/
-
-/*.success .icon {*/
-/*    color: #52664a;*/
-/*}*/
-/*.error .icon {*/
-/*    color: #ab2f30;*/
-/*}*/
-
-/*.alert .icon {*/
-/*    color: #87722e;*/
-/*}*/
-
-/*.popup p {*/
-/*    font-size: 16px;*/
-/*    white-space: nowrap;*/
-/*}*/
-
-/*.success p {*/
-/*    color: #607458;*/
-/*}*/
-/*.error p {*/
-/*    color: #9b3a3d;*/
-/*}*/
-/*.alert p {*/
-/*    color: #7f7454;*/
-/*}*/
-
-/*.none {*/
-/*    display: none;*/
-/*}*/
-
-/*.popup .del {*/
-/*    font-size: 20px;*/
-/*    margin-left: 50px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.success .del {*/
-/*    color: #a6b99e;*/
-/*}*/
-/*.error .del {*/
-/*    color: #be9390;*/
-/*}*/
-/*.alert .del {*/
-/*    color: #d0cb9e;*/
-/*}*/
-
-
-/*.fadeOut {*/
-/*    animation: fade-out 0.25s ease-in forwards;*/
-/*}*/
-
-
-/*@keyframes fade-out {*/
-/*    0% {*/
-/*        opacity: 1;*/
-/*    }*/
-/*    100%{*/
-/*        opacity: 0;*/
-/*    }*/
-/*}*/
-
-
 .modal {
     position: fixed;
     top: 0;
@@ -183,8 +84,7 @@
 }
 
 .modal-container {
-    width: 450px;
-    height: 300px;
+    width: 500px;
     padding: 20px;
     background: #fff;
     position: relative;
@@ -228,20 +128,22 @@
 }
 
 .modal-container form input[type=submit] {
-    background: #00e181;
+    background-color: #7fad39;
+    font-size: 16px;
     color: #fff;
     width: 100px;
-    height: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 16px;
+    border: none;
     border-radius: 4px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 20px;
+    margin: 20px auto;
     cursor: pointer;
-    border: 1px solid #ccc;
-    transition: all 0.25s ease-in;
+    transition: all 0.25s ease-in-out;
 }
 
 .modal-container form input[type=submit]:hover {
     opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc ;
 }

@@ -1,9 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Category;
 import vn.hcmuaf.edu.fit.bean.Product;
-import vn.hcmuaf.edu.fit.bean.Product2;
-import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.ServletException;
@@ -20,7 +17,7 @@ public class ShowProductAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Product2> allProduct = ProductService.getInstance().getAllProduct();
+        List<Product> allProduct = ProductService.getInstance().getAllProduct();
         request.setAttribute("allProduct", allProduct);
 
 
@@ -41,7 +38,7 @@ public class ShowProductAdmin extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("productPerPage", (int) productPerPage);
 
-        List<Product2> products = ProductService.getInstance().getProductPerPage(currentPage, "", (int) productPerPage);
+        List<Product> products = ProductService.getInstance().getProductPerPage(currentPage, "", (int) productPerPage);
         request.setAttribute("products", products);
 
         request.setAttribute("type", request.getAttribute("type"));

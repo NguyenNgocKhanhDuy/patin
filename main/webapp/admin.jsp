@@ -405,7 +405,7 @@
                                 <div class="title">
                                     <h4>STT</h4>
                                     <h4>Mã đơn hàng</h4>
-                                    <h4>Số điện thoại</h4>
+                                    <h4>Email</h4>
                                     <h4>Ngày đặt</h4>
                                     <h4>Tình trạng</h4>
                                 </div>
@@ -413,7 +413,7 @@
                                     <div class="bill-item">
                                         <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                         <p class="id">${bill.getName()}</p>
-                                        <p class="phone">${bill.getUser().getPhone()}</p>
+                                        <p class="email">${bill.getUser().getEmail()}</p>
                                         <p class="date">
                                             ${bill.getDate().getDayOfMonth()}
                                                 /
@@ -423,7 +423,9 @@
                                         </p>
 
                                         <p class="state">${bill.getStatus()}</p>
-                                        <i class="fa-solid fa-clipboard detail"></i>
+                                        <a href="showBillDetailAdmin?id=${bill.getId()}">
+                                            <i class="fa-solid fa-clipboard detail"></i>
+                                        </a>
                                         <i class="fa-solid fa-xmark del"></i>
                                     </div>
                                 </c:forEach>
@@ -510,6 +512,68 @@
 
                         </div>
 
+                    </div>
+                </c:if>
+
+                <c:if test="${billDetail != null}">
+                    <div class="bill_detail section">
+                        <div class="general">
+                            <p class="name">Người mua hàng: ${bill.getUser().getFullName()} </p>
+                            <p class="phone">Số điện thoại: ${bill.getUser().getPhone()} </p>
+                            <p class="email">Email: ${bill.getUser().getEmail()} </p>
+                            <p class="address">Địa chỉ: ${bill.getUser().getAddress()} </p>
+                            <p class="price">Giá: </p>
+                            <p class="bill_info">
+                            <span class="name">
+                                Đơn hàng: ${bill.getName()}
+                            </span>
+                                <span class="status">
+                                Tình trạng: ${bill.getStatus()}
+                            </span>
+                                <span class="payment">
+                                Phương thức thanh toán: ${bill.getPayment()}
+                            </span>
+                            </p>
+                            <p class="date">Ngày đặt hàng:
+                                    ${bill.getDate().getDayOfMonth()}
+                                /
+                                    ${bill.getDate().getMonthValue()}
+                                /
+                                    ${bill.getDate().getYear()}
+                            </p>
+                            <p class="more">
+                            <span>Ghi chú: ${bill.getNote()}
+                            </span>
+                                <span>
+                                <i class="fa-solid fa-clipboard detail"></i>
+                            </span>
+                            </p>
+                        </div>
+
+                        <div class="bill-list">
+                            <div class="title">
+                                <h4>STT</h4>
+                                <h4>Tên sản phẩm</h4>
+                                <h4>Màu sắc</h4>
+                                <h4>Size</h4>
+                                <h4>Giá</h4>
+                                <h4>Số lượng</h4>
+                            </div>
+                            <c:forEach var="bill" items="${billDetail}" varStatus="index">
+                                <div class="bill-item">
+                                    <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                    <p class="name">${bill.getProduct().getName()}</p>
+                                    <p class="color">${bill.getColor().getName()}</p>
+                                    <p class="size">${bill.getSize().getName()}</p>
+                                    <p class="price">
+                                        <fmt:formatNumber value="${bill.getPrice()}" type="currency"/>
+                                    </p>
+                                    <p class="quantỉty">${bill.getQuantity()}</p>
+                                    <i class="fa-solid fa-clipboard detail"></i>
+                                    <i class="fa-solid fa-xmark del"></i>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </c:if>
 
@@ -886,44 +950,6 @@
         </div>
     </c:if>
 
-
-
-<%--    <div class="modal modal-EditOrder">--%>
-<%--        <div class="modal-container modal-containerEditOrder">--%>
-<%--            <i class="fa-solid fa-xmark del"></i>--%>
-<%--            <h3>Sửa đơn hàng</h3>--%>
-<%--            <form>--%>
-<%--                <div class="wrapper">--%>
-<%--                    <div class="main">--%>
-<%--                        <div class="hold">--%>
-<%--                            <label>Mã đơn hàng</label>--%>
-<%--                            <input type="text">--%>
-<%--                        </div>--%>
-<%--                        <div class="hold">--%>
-<%--                            <label>Tên sản phẩm</label>--%>
-<%--                            <input type="text">--%>
-<%--                        </div>--%>
-<%--                        <div class="hold">--%>
-<%--                            <label>Tình trạng</label>--%>
-<%--                            <input type="text">--%>
-<%--                        </div>--%>
-
-<%--                    </div>--%>
-<%--                    <div class="more">--%>
-<%--                        <div class="hold">--%>
-<%--                            <label>Ngày đặt</label>--%>
-<%--                            <input type="date">--%>
-<%--                        </div>--%>
-<%--                        <div class="hold">--%>
-<%--                            <label>Thông tin khác</label>--%>
-<%--                            <textarea></textarea>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <button class="add">Sửa</button>--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 
     <c:if test="${categories != null}">
         <div class="modal modal-brand">

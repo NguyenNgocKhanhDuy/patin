@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/patin_shop/verifyForgetPass" class="wrapper">
+        <form action="verifyForgetPass" class="wrapper">
             <h3>Xác thực email</h3>
             <p>Chúng tôi vừa gửi đến email ${sessionScope.email} một mã xác thực
                 <br>Hãy kiểm tra email và điền vào bên dưới để xác thực email của bạn</p>
@@ -33,7 +33,7 @@
             <button class="btn">Xác thực</button>
             <div class="resend">
                 <p>Nếu bạn không nhận được mã.
-                    <a href="/patin_shop/doResend">Gửi lại</a>
+                    <a href="doResend">Gửi lại</a>
                 </p>
             </div>
         </form>
@@ -44,10 +44,14 @@
             <c:if test="${type.equals(\"error\")}">
                 <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
             </c:if>
+            <c:if test="${type.equals(\"alert\")}">
+                <i class="fa-solid fa-triangle-exclamation icon"></i>
+            </c:if>
             <p>${information}</p>
             <i class="fa-solid fa-xmark del"></i>
         </div>
     </div>
-<script src="${pageContext.request.contextPath}/assets/js/verifyEmail.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/verifyEmail.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 </body>
 </html>

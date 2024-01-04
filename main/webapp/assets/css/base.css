@@ -13,6 +13,7 @@ html, body {
     font-size: 12px;
     color: #000;
     font-family: Tahoma, Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
 @font-face {
@@ -350,9 +351,9 @@ header .user ul li .amount {
     object-fit: cover;
 }
 
-#image .container-img p {
+#image .container-img .breadcrumb{
     position: absolute;
-    font-size: 50px;
+    font-size: 40px;
     color: #fff;
     font-weight: 600;
     top: 50%;
@@ -363,7 +364,63 @@ header .user ul li .amount {
     white-space: nowrap;
 }
 
+#image .container-img .breadcrumb a {
+    position: relative;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
 
+#image .container-img .breadcrumb .main {
+    font-size: 40px;
+}
+#image .container-img .breadcrumb .sub {
+    font-size: 36px;
+}
+
+#image .container-img .breadcrumb a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 4px;
+    bottom: -4px;
+    left: 50%;
+    box-shadow: 0 0 5px #000;
+    transform: translateX(-50%);
+    background-color: #fff;
+    transition: width 0.5s ease-in;
+}
+
+#image .container-img .breadcrumb a:hover::after {
+    width: 100%;
+}
+
+
+/* GO TOP */
+.goTop {
+    position: fixed;
+    right: 3%;
+    bottom: 10%;
+    display: none;
+    z-index: 2;
+}
+
+.goTop i{
+    font-size: 20px;
+    background: #7fad39;
+    color: #fff;
+    border-radius: 50%;
+    padding: 14px 16.5px;
+    transition: all 0.25s ease-in;
+}
+
+.goTop i:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 4px 3px #ccc;
+}
+.showGoTop {
+    display: block;
+}
 
 
 /* Footer */

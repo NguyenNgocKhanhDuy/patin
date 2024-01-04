@@ -1,4 +1,4 @@
-<%@ page import="java.text.NumberFormat" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
@@ -26,7 +26,7 @@
 
                         </ul>
                     </li>
-                    <li><a href=contact.html>LIÊN HỆ</a></li>
+                    <li><a href=contact.jsp>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
@@ -41,6 +41,7 @@
                     <c:if test="${sessionScope.auth == null}">
                         <li>
                             <a href=/login.jsp">
+                                <c:set var="location" value="home" scope="session"/>
                                 ĐĂNG NHẬP
                             </a>
                         </li>
@@ -51,7 +52,7 @@
                         </li>
                     </c:if>
 
-                    <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
                     <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
@@ -60,7 +61,6 @@
 
     <div id="category-search">
         <div class="container">
-
             <div class="category-title" id="categoryAll">
                 <div class="category">
                     <span>Danh Mục</span>
@@ -82,9 +82,12 @@
     <div id="image">
         <div class="container-img">
             <img src="${pageContext.request.contextPath}/assets/images/patin.jpg" alt="">
-            <a href="sanPham-servlet" class="shop">Xem sản phẩm</a>
+            <p class="breadcrumb">
+                <a href="#">Trang chủ</a>
+            </p>
         </div>
     </div>
+
 
     <div id="content">
         <div class="container">
@@ -92,24 +95,71 @@
                 <h3>Sản phẩm bán chạy</h3>
                 <div class="wrapper">
                     <div class="carousel" id="carousel">
+<%--                        <c:forEach items="${hotProducts}" var="product">--%>
+<%--                            <div class="product-item">--%>
+<%--                                <a href="productDetail?productID=${product.getId()}">--%>
+<%--                                    <img src= ${product.getImg()} >--%>
+<%--                                    <h4 class="name"> ${product.getName()} </h4>--%>
+<%--                                    <span class="price-section">--%>
+<%--                                        <c:if test="${product.getMinPrice() == product.getMaxPrice()}">--%>
+<%--                                            <c:if test="${product.getSalePercent() == 0}">--%>
+<%--                                                <h5 class="price">--%>
+<%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
+<%--                                                </h5>--%>
+<%--                                            </c:if>--%>
+<%--                                            <c:if test="${product.getSalePercent() != 0}">--%>
+<%--                                                 <h5 class="price">--%>
+<%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
+<%--                                                 </h5>--%>
+<%--                                                <h5 class="origin">--%>
+<%--                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>--%>
+<%--                                                </h5>--%>
+<%--                                            </c:if>--%>
+<%--                                        </c:if>--%>
+<%--                                        <c:if test="${product.getMinPrice() != product.getMaxPrice()}">--%>
+<%--                                        <h5 class="price">--%>
+<%--                                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
+<%--                                        </h5>--%>
+<%--                                            ---%>
+<%--                                            <h5 class="price">--%>
+<%--                                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>--%>
+<%--                                        </h5>--%>
+<%--                                        </c:if>--%>
+<%--                                    </span>--%>
+
+<%--                                    <ul>--%>
+<%--                                        <li><i class="fa-solid fa-heart like"></i></li>--%>
+<%--                                        <li><i class="fa-solid fa-cart-shopping cart"></i></li>--%>
+<%--                                    </ul>--%>
+<%--                                </a>--%>
+<%--                                <c:if test="${product.getSalePercent() != 0}">--%>
+<%--                                    <div class="sale">--%>
+<%--                                        <p>--%>
+<%--                                            <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>--%>
+<%--                                        </p>--%>
+<%--                                        <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">--%>
+<%--                                    </div>--%>
+<%--                                </c:if>--%>
+<%--                            </div>--%>
+<%--                        </c:forEach>--%>
                         <c:forEach items="${hotProducts}" var="product">
                             <div class="product-item">
-                                <a href="productDetail?productID=${product.getId()}">
+                                <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
                                     <img src= ${product.getImg()} >
-                                    <h4 class="name"> ${product.getName()} </h4>
+                                    <h4 class="name"> ${product.getProductDetail().getProduct().getName()} </h4>
                                     <span class="price-section">
                                         <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
-                                            <c:if test="${product.getSalePercent() == 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() == 0}">
                                                 <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                                 </h5>
                                             </c:if>
-                                            <c:if test="${product.getSalePercent() != 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
                                                  <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                                  </h5>
                                                 <h5 class="origin">
-                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>
+                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
                                                 </h5>
                                             </c:if>
                                         </c:if>
@@ -129,10 +179,10 @@
                                         <li><i class="fa-solid fa-cart-shopping cart"></i></li>
                                     </ul>
                                 </a>
-                                <c:if test="${product.getSalePercent() != 0}">
+                                <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
                                     <div class="sale">
                                         <p>
-                                            <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
+                                            <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
                                         </p>
                                         <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
                                     </div>
@@ -143,32 +193,32 @@
                     <i class="fa-regular fa-circle-right selection" id="next"></i>
                     <i class="fa-regular fa-circle-left selection" id="previous"></i>
                 </div>
-                <a href="listProduct" class="more">
-                    Xem Thêm
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+<%--                <a href="listProduct" class="more">--%>
+<%--                    Xem Thêm--%>
+<%--                    <i class="fa-solid fa-arrow-right"></i>--%>
+<%--                </a>--%>
             </div>
 
             <h3>Sản phẩm khác</h3>
             <div class="product-list" id="product-list">
                 <c:forEach items="${products}" var="product">
-                    <div class="product-item">
-                        <a href="productDetail?productID=${product.getId()}">
-                            <img src= ${product.getImg()} >
-                            <h4 class="name"> ${product.getName()} </h4>
-                            <span class="price-section">
+        <div class="product-item">
+            <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
+                <img src= ${product.getImg()} >
+                <h4 class="name"> ${product.getProductDetail().getProduct().getName()} </h4>
+                <span class="price-section">
                                         <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
-                                            <c:if test="${product.getSalePercent() == 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() == 0}">
                                                 <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                                 </h5>
                                             </c:if>
-                                            <c:if test="${product.getSalePercent() != 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
                                                  <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                                  </h5>
                                                 <h5 class="origin">
-                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>
+                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
                                                 </h5>
                                             </c:if>
                                         </c:if>
@@ -183,27 +233,64 @@
                                         </c:if>
                                     </span>
 
-                            <ul>
-                                <li><i class="fa-solid fa-heart like"></i></li>
-                                <li><i class="fa-solid fa-cart-shopping cart"></i></li>
-                            </ul>
-                        </a>
-                        <c:if test="${product.getSalePercent() != 0}">
-                            <div class="sale">
-                                <p>
-                                    <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
-                                </p>
-                                <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
-                            </div>
-                        </c:if>
-                    </div>
-                </c:forEach>
-            </div>
-            <a href="sanPham-servlet" class="more">
-                Xem Thêm
-                <i class="fa-solid fa-arrow-right"></i>
+                <ul>
+                    <li><i class="fa-solid fa-heart like"></i></li>
+                    <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+                </ul>
             </a>
+            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
+                <div class="sale">
+                    <p>
+                        <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
+                    </p>
+                    <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
+                </div>
+            </c:if>
         </div>
+    </c:forEach>
+            </div>
+
+        </div>
+        <div class="intro">
+
+            <div class="box">
+                <div class="text">
+                    <h4>Lợi ích trượt patin</h4>
+                    <p>Patin – Roller Sports là môn thể thao mang lại nhiều lợi ích sức khỏe thể chất và tinh thần dành cho tất cả mọi người ở mọi lứa tuổi. Giúp cho bạn có 1 thể lực bền bỉ hơn & 1 tinh thần luôn minh mẫn, sảng khoái cùng những mối quan hệ bạn bè mới.</p>
+                    <a href="listProduct" class="shop">Xem sản phẩm</a>
+                </div>
+                <img src="https://patin.cdn.vccloud.vn/wp-content/uploads/2022/12/hinh-anh-giay-flying-eagle-drift-carbon1-min-e1669867679773-1024x688.jpg" alt="">
+            </div>
+            <ul>
+                <li>
+                    <span>1.</span>
+                    <p><span>Cơ bắp.</span><br>
+                        Độ bền & sức mạnh sẽ được cải thiện tốt hơn.</p>
+                </li>
+                <li>
+                    <span>2.</span>
+                    <p><span>Phản xạ & thăng bằng.</span><br>
+                        Ngày càng nhanh nhẹn & gia tăng khả năng giữ thăng bằng.</p>
+                </li>
+                <li>
+                    <span>3.</span>
+                    <p>
+                        <span>Dáng thon - cường tráng.</span><br>
+                        Tùy mục đích bài tập, mỗi giờ trượt có thể đốt 1060 calories.
+                    </p>
+                </li>
+                <li>
+                    <span>4.</span>
+                    <p><span>Hệ tuần hoàn.</span><br>
+                        Cải thiện và phát triển tốt hơn hệ tuần hoàn máu, hệ hô hấp.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="goTop">
+        <a href="#">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
     </div>
 
     <footer>
@@ -245,5 +332,6 @@
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/home.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/goTop.js"></script>
 </body>
 </html>

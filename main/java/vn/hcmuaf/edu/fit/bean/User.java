@@ -15,17 +15,17 @@ public class User implements Serializable {
     private int verify;
     private String fullName;
     private String address;
-
     private String phone;
     private String sex;
     private Date dob;
+    private String avatar;
     private int keyPass;
     private int role;
 
     public User() {
     }
 
-    public User(int id, String email, String password, int verify, String fullName, String address, String phone, String sex, Date dob, int keyPass, int role) {
+    public User(int id, String email, String password, int verify, String fullName, String address, String phone, String sex, Date dob, String avatar, int keyPass, int role) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -35,6 +35,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.sex = sex;
         this.dob = dob;
+        this.avatar = avatar;
         this.keyPass = keyPass;
         this.role = role;
     }
@@ -112,6 +113,14 @@ public class User implements Serializable {
         this.dob = dob;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public int getKeyPass() {
         return keyPass;
     }
@@ -139,7 +148,8 @@ public class User implements Serializable {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", sex='" + sex + '\'' +
-                ", dob='" + dob + '\'' +
+                ", dob=" + dob +
+                ", avatar='" + avatar + '\'' +
                 ", keyPass=" + keyPass +
                 ", role=" + role +
                 '}';

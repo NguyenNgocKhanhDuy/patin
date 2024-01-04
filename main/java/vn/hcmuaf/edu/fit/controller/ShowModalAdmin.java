@@ -44,7 +44,7 @@ public class ShowModalAdmin extends HttpServlet {
                     }else {
                         int idSize = SizeDao.getInstance().getIdByName(size);
                         int idColor = ColorDao.getInstance().getIdByName(color);
-                        Product2 product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
+                        Product product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
 //                        response.getWriter().println(gson.toJson(id+", "+idSize+", "+idColor));
                         response.getWriter().println(gson.toJson(product));
                     }

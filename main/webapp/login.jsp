@@ -22,14 +22,14 @@
             <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
             <nav>
                 <ul class="menu">
-                    <li><a href="/home">TRANG CHỦ</a></li>
+                    <li><a href="home">TRANG CHỦ</a></li>
                     <li>
-                        <a href="/listProduct">SẢN PHẨM</a>
+                        <a href="listProduct">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
 
                         </ul>
                     </li>
-                    <li><a href=lienHe.jsp>LIÊN HỆ</a></li>
+                    <li><a href=contact.jsp>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
@@ -40,11 +40,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/register.jsp">
+                        <a href="register.jsp">
                             ĐĂNG KÝ
                         </a>
                     </li>
-                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
                     <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
         <div class="container">
             <div class="login">
                 <h3>Đăng Nhập</h3>
-                <form action="/patin_shop/doLogin" method="post">
+                <form action="doLogin" method="post">
                     <input type="hidden" name="location" value="${sessionScope.location != null ? sessionScope.location : "/patin_shop/home"}">
                     <div class="holder">
                         <label>Email</label>
@@ -67,32 +67,32 @@
                     </div>
                     <button type="submit">Đăng Nhập</button>
                     <div class="more">
-                        <a href="/register.jsp">Tạo tài khoản</a>
+                        <a href="register.jsp">Tạo tài khoản</a>
                         <a id="forgetPass">Quên mật khẩu</a>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="popup ${type != null ? type : "none"}">
-            <c:if test="${type.equals(\"success\")}">
-                <i class="fa-solid fa-check icon"></i>
-            </c:if>
-            <c:if test="${type.equals(\"error\")}">
-                <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
-            </c:if>
-            <c:if test="${type.equals(\"alert\")}">
-                <i class="fa-solid fa-triangle-exclamation icon"></i>
-            </c:if>
-            <p>${information}</p>
-            <i class="fa-solid fa-xmark del"></i>
-        </div>
+    </div>
+    <div class="popup ${type != null ? type : "none"}">
+        <c:if test="${type.equals(\"success\")}">
+            <i class="fa-solid fa-check icon"></i>
+        </c:if>
+        <c:if test="${type.equals(\"error\")}">
+            <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
+        </c:if>
+        <c:if test="${type.equals(\"alert\")}">
+            <i class="fa-solid fa-triangle-exclamation icon"></i>
+        </c:if>
+        <p>${information}</p>
+        <i class="fa-solid fa-xmark del"></i>
     </div>
 
     <div class="modal">
         <div class="modal-container">
             <i class="fa-solid fa-xmark del"></i>
             <h3>Quên mật khẩu</h3>
-            <form action="/patin_shop/forgerPass">
+            <form action="forgerPass">
                 <label>Nhập email của bạn dể chúng tôi có thể hỗ trợ bạn về mật khẩu</label>
                 <input type="email" name="emailPass" placeholder="Email...">
                 <input type="submit" value="Gửi">
@@ -137,6 +137,7 @@
     </footer>
     
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/login.js"></script>
 </body>
 </html>

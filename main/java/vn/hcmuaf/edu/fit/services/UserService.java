@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -41,19 +42,21 @@ public class UserService {
         return false;
     }
 
-    public void addUser(User user) {
-        UserDao.getInstance().addUser(user);
+    public boolean addUser(User user) {
+       return UserDao.getInstance().addUser(user);
     }
 
     public boolean register(String email, String password, String fullname, String address, String phone) {
-        UserDao.getInstance().addUser(email, password, 0, fullname, address, phone, 0);
-        while (true){
-            int code = Integer.parseInt(randomCodeVerify());
-            if (!UserDao.getInstance().isExitsCode(code)) {
-                insertVerifyCode(code, email);
-                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+        if (UserDao.getInstance().addUser(email, password, 0, fullname, address, phone,"Nam", LocalDateTime.now(), "http://localhost:8080/patin_shop/assets/images/logo.PNG", 0)){
+            while (true){
+                int code = Integer.parseInt(randomCodeVerify());
+                if (!UserDao.getInstance().isExitsCode(code)) {
+                    insertVerifyCode(code, email);
+                    return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                }
             }
         }
+        return false;
     }
 
     public boolean reSend(String email) {
@@ -66,14 +69,13 @@ public class UserService {
         }
     }
 
-    public void insertVerifyCode(int code, String email) {
-        UserDao.getInstance().verify(code, email);
+    public boolean insertVerifyCode(int code, String email) {
+        return UserDao.getInstance().verify(code, email);
     }
 
     public boolean verifyMail(int code, String email) {
         if (UserDao.getInstance().getVerifyByEmail(email) == code){
-            UserDao.getInstance().verify(1, email);
-            return true;
+            return UserDao.getInstance().verify(1, email);
         }
         return false;
     }
@@ -81,8 +83,7 @@ public class UserService {
     public boolean sendforgetPass(String email) {
         while (true){
             int code = Integer.parseInt(randomCodeVerify());
-            if (!UserDao.getInstance().isExitsCodePass(code)) {
-                UserDao.getInstance().keyForgetPass(code, email);
+            if (!UserDao.getInstance().isExitsCodePass(code) && UserDao.getInstance().keyForgetPass(code, email)) {
                 return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
             }
         }
@@ -94,8 +95,7 @@ public class UserService {
 
     public boolean changePass(String email, String pass, String confirmPass) {
         if (pass.equals(confirmPass)) {
-            UserDao.getInstance().updatePass(email, pass);
-            return true;
+            return UserDao.getInstance().updatePass(email, pass);
         }
         return false;
     }
@@ -166,8 +166,8 @@ public class UserService {
         return "";
     }
 
-    public void updateUser(User user) {
-        UserDao.getInstance().updateUser(user);
+    public boolean updateUser(User user) {
+        return UserDao.getInstance().updateUser(user);
     }
 
     public boolean checkPass(int user, String pass) {
@@ -226,11 +226,7 @@ public class UserService {
         return UserDao.getInstance().getUserByID(id);
     }
 
-    public String hashPass(String pass) {
-        return UserDao.getInstance().hashPassword(pass);
-    }
-
-    public void deleteUser(int id) {
-        UserDao.getInstance().deleteUser(id);
+    public boolean deleteUser(int id) {
+        return UserDao.getInstance().deleteUser(id);
     }
 }

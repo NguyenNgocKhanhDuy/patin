@@ -42,7 +42,7 @@ public class AddUserAdmin extends HttpServlet {
                 String dob = year+"-"+month+"-"+day;
                 Date date = Date.valueOf(dob);
 
-                User user = new User(0, email, password, verify, fullname, address, phone, sex, date, 0, role);
+                User user = new User(0, email, password, verify, fullname, address, phone, sex, date,"", 0, role);
                 UserService.getInstance().addUser(user);
 
                 request.setAttribute("type", "success");

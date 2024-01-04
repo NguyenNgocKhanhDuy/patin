@@ -238,28 +238,8 @@ function changeCurrency(price) {
 
 }
 
-var info = document.getElementById("info");
-var review = document.getElementById("review");
-var infoText = document.querySelector(".info-text");
-var reviewText = document.querySelector(".review");
-var infoActive = document.querySelector("#info a");
-var reviewActive = document.querySelector("#review a");
-info.addEventListener("click", function (){
-    infoText.style.display = "block";
-    reviewText.style.display = "none";
-    infoActive.classList.add("activeNav");
-    reviewActive.classList.remove("activeNav");
-})
-
-review.addEventListener("click", function (){
-    reviewText.style.display = "flex";
-    infoText.style.display = "none";
-    infoActive.classList.remove("activeNav");
-    reviewActive.classList.add("activeNav");
-})
-
 // rating star
-var stars = document.querySelectorAll(".rating-star i");
+var stars = document.querySelectorAll(".rate i");
 for (let i = 0; i < stars.length; i++) {
     stars[i].addEventListener("click", function () {
         for (let j = 0; j < stars.length; j++) {
@@ -273,26 +253,8 @@ for (let i = 0; i < stars.length; i++) {
 }
 
 
-
-var popup = document.querySelector(".popup");
-
-var del = document.querySelector(".popup .del");
-
-
-function hideError() {
-    popup.classList.add("fadeOut")
-    setTimeout(hide, 500);
-}
-
-if (popup.style.opacity != "0") {
-    setTimeout(hideError, 3000);
-}
-
-function hide() {
-    popup.classList.remove("error", "alert", "success")
-    popup.classList.add("none")
-}
-
-
-del.addEventListener("click", hideError);
-
+var selectPage = document.querySelector(".pagination .selectPage select");
+var option = document.querySelectorAll(".pagination .selectPage select option")
+selectPage.addEventListener("change", function () {
+    location.href = document.querySelector("#href").value+"&currentPage="+selectPage.value
+});

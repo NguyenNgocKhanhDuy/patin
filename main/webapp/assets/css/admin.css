@@ -636,7 +636,7 @@
 
 #content .right .bill-list .title {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% 1.5fr 3fr repeat(2, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -651,7 +651,7 @@
 
 #content .right .bill-list .bill-item {
     display: grid;
-    grid-template-columns: 5% repeat(4, 1fr) 5% 5%;
+    grid-template-columns: 5% 1.5fr 3fr repeat(2, 1fr) 5% 5%;
     grid-column-gap: 20px;
     text-align: center;
     align-items: center;
@@ -861,7 +861,88 @@
     cursor: pointer;
 }
 
+/* BILL DETAIL */
+#content .right .bill_detail .general{
+    background: #283e57;
+    padding: 16px;
+}
 
+#content .right .bill_detail .general p {
+    color: #fff;
+    font-size: 18px;
+    margin: 20px 0;
+    width: 90%;
+}
+
+#content .right .bill_detail .general p.bill_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+#content .right .bill_detail .general p:last-child {
+    text-align: justify;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#content .right .bill_detail .general p:last-child span:first-child {
+    width: 90%;
+}
+
+#content .right .bill_detail .general p:last-child span:last-child {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#content .right .bill_detail .bill-list {
+    margin-top: 40px;
+    background-color: #283e57;
+    color: #fff;
+    display: grid;
+    grid-template-rows: 70px repeat(5, 1fr);
+    grid-row-gap: 20px;
+}
+
+#content .right .bill_detail .bill-list .title {
+    display: grid;
+    grid-template-columns: 5% 2fr repeat(4, 1fr) 5% 5%;
+    grid-column-gap: 20px;
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid #b2b2b2;
+}
+
+#content .right .bill_detail .bill-list .title h4 {
+    font-size: 18px;
+    line-height: 40px;
+    padding: 12px 0;
+}
+
+#content .right .bill_detail .bill-list .bill-item {
+    display: grid;
+    grid-template-columns: 5% 2fr repeat(4, 1fr) 5% 5%;
+    grid-column-gap: 20px;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+#content .right .bill_detail .bill-list .bill-item p {
+    font-size: 16px;
+}
+
+#content .right .bill_detail .bill-list .bill-item .detail {
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#content .right .bill_detail .bill-list .bill-item .del {
+    font-size: 24px;
+    color: #b2b2b2;
+    cursor: pointer;
+}
 
 
 
@@ -913,6 +994,10 @@
     display: flex;
     flex-direction: column;
     margin: 12px 0;
+}
+
+.modal-container .billDetail_quantity {
+    width: 100px;
 }
 
 .modal-container .hold-2 {

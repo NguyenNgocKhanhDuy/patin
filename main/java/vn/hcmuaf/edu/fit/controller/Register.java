@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
             if (status.equals("Đăng ký thành công")){
                 request.getSession().setAttribute("timeStart", RegisterService.getInstance().getCurrentTime());
                 request.getSession().setAttribute("email", email);
-                request.getRequestDispatcher("/verifyEmail.jsp").forward(request, response);
+                request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
             }
@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
         request.setAttribute("address", address);
         request.setAttribute("phone", phone);
 
-        request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
 
     }
 }
