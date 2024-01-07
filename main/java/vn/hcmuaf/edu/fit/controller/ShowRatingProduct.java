@@ -7,11 +7,13 @@ import vn.hcmuaf.edu.fit.dao.RatingDao;
 import vn.hcmuaf.edu.fit.dao.SizeDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
 import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.services.RatingService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,23 +38,37 @@ public class ShowRatingProduct extends HttpServlet {
             int totalPage = (int) Math.ceil((RatingDao.getInstance().getAllRatingOfProduct(productID).size() / (3+0.0)));
             request.setAttribute("totalPage", totalPage);
 
-            String href = "showRatingProduct?productID="+productID;
-            request.setAttribute("href", href);
-
-
             List<ProductMain> products = ProductService2.getInstance().getProductDetail(productID);
             request.setAttribute("products", products);
 
-            List<Rating> ratings = RatingDao.getInstance().getAllRatingOfProductPerPage(productID, currentPage);
-            request.setAttribute("ratings", ratings);
-            double totalRate = 0;
-            for (int i = 0; i < ratings.size(); i++) {
-                totalRate += ratings.get(i).getScore()+0.0;
+
+            String sort = request.getParameter("sort");
+
+            List<Rating> ratings = new ArrayList<>();
+            if (sort == null){
+                sort = "date";
             }
-            totalRate = totalRate / ratings.size();
+
+            request.setAttribute("sort", sort);
+            ratings = RatingService.getInstance().getAllRatingPerPage(productID, currentPage, sort);
+            request.setAttribute("ratingPerPage", ratings);
+
+            String href = "showRatingProduct?productID="+productID;
+            href += "&sort="+sort;
+            request.setAttribute("href", href);
+
+            List<Rating> all = RatingDao.getInstance().getAllRatingOfProduct(productID);
+            request.setAttribute("ratings", all);
+            double totalRate = 0;
+            for (int i = 0; i < all.size(); i++) {
+                totalRate += all.get(i).getScore()+0.0;
+            }
+            totalRate = totalRate / all.size();
 
             request.setAttribute("totalRate", (double) Math.round(totalRate * 10) / 10);
 
+            List<RatingLike> likes = RatingDao.getInstance().getLike(productID);
+            request.setAttribute("likes", likes);
 
             List<ImageProduct> listImg = ImageProductDao.getInstance().getAllImage(productID);
             request.setAttribute("listImg", listImg);
@@ -74,7 +90,7 @@ public class ShowRatingProduct extends HttpServlet {
 
             request.setAttribute("totalQuantity", totalQuantity);
 
-            List<ImageRating> listImgRating = RatingDao.getInstance().getImageRatingOfProductPerPage(productID, currentPage);
+            List<ImageRating> listImgRating = RatingDao.getInstance().getImageRatingOfProduct(productID);
             request.setAttribute("listImgRating", listImgRating);
             request.setAttribute("hasImg", 0);
 
@@ -94,6 +110,6 @@ public class ShowRatingProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

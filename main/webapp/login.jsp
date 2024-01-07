@@ -56,7 +56,6 @@
             <div class="login">
                 <h3>Đăng Nhập</h3>
                 <form action="doLogin" method="post">
-                    <input type="hidden" name="location" value="${sessionScope.location != null ? sessionScope.location : "/patin_shop/home"}">
                     <div class="holder">
                         <label>Email</label>
                         <input type="email" name="email" placeholder="Email..." value="${email != null ? email : ""}">

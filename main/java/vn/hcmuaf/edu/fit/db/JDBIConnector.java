@@ -39,8 +39,7 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-//        System.out.println(ProductService2.getInstance().getRandomProduct(4));
-        System.out.println(ProductService2.getInstance().getHotProduct());
+        System.out.println(RatingDao.getInstance().getAllRatingOfProductPerPageSortDate(1, 1));
 
     }
 }

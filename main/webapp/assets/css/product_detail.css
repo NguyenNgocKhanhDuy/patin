@@ -400,12 +400,25 @@
     right: 0;
 }
 
+#content .review .left select.sort {
+    float: right;
+    margin-right: 30px;
+    font-size: 16px;
+    color: #65676B;
+    font-weight: 600;
+    border: none;
+    padding: 12px 4px 14px;
+    outline: none;
+}
+
 #content .review .left .rate-list{
-    margin-right: 24px;
+    padding-right: 24px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 87%;
+    height: 82%;
+    width: 95%;
+    overflow: auto;
 }
 
 .boxBorder {
@@ -428,6 +441,10 @@
     margin: 6px 0;
 }
 
+#content .review .left .rate-list .rate-item .user .side .date {
+    color: #aaa;
+}
+
 #content .review .left .rate-list .rate-item .image {
     margin-left: 100px;
     margin-top: 24px;
@@ -437,12 +454,29 @@
 
 #content .review .left .rate-list .rate-item .image img{
     width: 100px;
+    object-fit: cover;
 }
 
 #content .review .left .rate-list .rate-item .nameContent {
     margin-left: 100px;
     margin-top: 24px;
     text-align: justify;
+}
+
+#content .review .left .rate-list .rate-item span.like {
+    display: block;
+    margin-left: 100px;
+    margin-top: 20px;
+    color: #999999;
+    font-weight: 600;
+}
+
+#content .review .left .rate-list .rate-item span.like i {
+    color: #ccc;
+}
+
+.isLike {
+    color: #7fad39 !important;
 }
 
 #content .left .pagination {
@@ -750,12 +784,23 @@
     display: none;
 }
 
+.modal-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
  .modal-img i {
     font-size: 24px;
     color: #fff;
     position: absolute;
     cursor: pointer;
     padding: 10px;
+}
+
+.modal-img img {
+    width: 800px;
+    object-fit: scale-down;
 }
 
  .modal-img #closeModalImg {

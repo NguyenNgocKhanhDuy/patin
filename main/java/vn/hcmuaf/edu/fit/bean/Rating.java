@@ -10,6 +10,7 @@ public class Rating implements Serializable {
     private int score;
     private String content;
     private LocalDateTime date;
+    private int like;
     @Nested("user")
     private User user;
     @Nested("product")
@@ -18,11 +19,12 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(int id, int score, String content, LocalDateTime date, User user, Product2 product) {
+    public Rating(int id, int score, String content, LocalDateTime date, int like, User user, Product2 product) {
         this.id = id;
         this.score = score;
         this.content = content;
         this.date = date;
+        this.like = like;
         this.user = user;
         this.product = product;
     }
@@ -59,6 +61,14 @@ public class Rating implements Serializable {
         this.date = date;
     }
 
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
     @Nested("user")
     public User getUser() {
         return user;
@@ -86,6 +96,7 @@ public class Rating implements Serializable {
                 ", score=" + score +
                 ", content='" + content + '\'' +
                 ", date=" + date +
+                ", like=" + like +
                 ", user=" + user +
                 ", product=" + product +
                 '}';

@@ -63,7 +63,7 @@ public class ProductDetail extends HttpServlet {
 
             int totalQuantity = 0;
             for (int i = 0; i < products.size(); i++) {
-                totalQuantity += products.get(0).getProductDetail().getQuantity();
+                totalQuantity += products.get(i).getProductDetail().getQuantity();
             }
 
 //        request.setAttribute("totalQuantity", ProductService.getInstance().getTotalQuantity(productID));
@@ -86,5 +86,6 @@ public class ProductDetail extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
+        doGet(request, response);
     }
 }

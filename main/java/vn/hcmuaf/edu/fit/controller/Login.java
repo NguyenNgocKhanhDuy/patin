@@ -24,8 +24,7 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         User user = UserService.getInstance().checkLogin(email, password);
         String infomation = UserService.getInstance().checkEmail(email);
-        String location = request.getParameter("location");
-        if (location == null) location = "/patin_shop/home";
+
         if (!"valid".equals(infomation)){
             request.setAttribute("type", "alert");
             request.setAttribute("infomation", infomation);
@@ -39,7 +38,11 @@ public class Login extends HttpServlet {
             }else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", user);
-                response.sendRedirect("/patin_shop/home");
+
+                String location = (String) session.getAttribute("location");
+                if (location == null) location = "home";
+
+                request.getRequestDispatcher(location).forward(request, response);
             }
         }
     }

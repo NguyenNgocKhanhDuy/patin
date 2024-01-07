@@ -254,7 +254,19 @@ for (let i = 0; i < stars.length; i++) {
 
 
 var selectPage = document.querySelector(".pagination .selectPage select");
-var option = document.querySelectorAll(".pagination .selectPage select option")
+
 selectPage.addEventListener("change", function () {
-    location.href = document.querySelector("#href").value+"&currentPage="+selectPage.value
+    var sortValue = document.querySelector("#sortRating").value
+    location.href = document.querySelector("#href").value+"&currentPage="+selectPage.value;
+});
+
+var selectSort = document.querySelector(".review select.sort");
+selectSort.addEventListener("change", function () {
+    var href = document.querySelector("#href").value;
+    if(href.includes("sort")) {
+        var index = href.search("sort")
+        var type = href.substring(index + 5, index + 5 + 4);
+        href = href.replace(type, selectSort.value);
+    }
+    location.href = href
 });
