@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.cart;
 
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.cart.Cart;

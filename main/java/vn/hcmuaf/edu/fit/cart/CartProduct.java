@@ -1,25 +1,25 @@
 package vn.hcmuaf.edu.fit.cart;
 
-import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.ProductMain;
 
 public class CartProduct {
-    private Product product;
+    private ProductMain product;
     private int quantity;
 
 
     public CartProduct() {
     }
 
-    public CartProduct(Product product, int quantity) {
+    public CartProduct(ProductMain product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
-    public Product getProduct() {
+    public ProductMain getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductMain product) {
         this.product = product;
     }
 
@@ -42,7 +42,7 @@ public class CartProduct {
     public boolean increase(int num) {
         int temp = quantity;
         temp += num;
-        if (product.getQuantity() < temp) return false;
+        if (product.getProductDetail().getQuantity() < temp) return false;
         quantity = temp;
         return true;
     }
@@ -58,7 +58,7 @@ public class CartProduct {
     public boolean increaseOne() {
         int temp = quantity;
         temp++;
-        if (temp > product.getQuantity()) return false;
+        if (temp > product.getProductDetail().getQuantity()) return false;
         quantity = temp;
         return true;
     }

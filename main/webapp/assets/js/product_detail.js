@@ -242,6 +242,7 @@ function changeCurrency(price) {
 var stars = document.querySelectorAll(".rate i");
 for (let i = 0; i < stars.length; i++) {
     stars[i].addEventListener("click", function () {
+        document.querySelector("#ratePoint").value = (i+1);
         for (let j = 0; j < stars.length; j++) {
             if(i >= j) {
                 stars[j].classList.add("starActive");

@@ -43,9 +43,9 @@ public class BillService {
         BillDao.getInstance().insertBill(id, name, date, state, paymnet, note, user);
 
         for (int i = 0; i < keys.size(); i++) {
-            Product product = cart.getData().get(keys.get(i)).getProduct();
-            int quantity = cart.getData().get(keys.get(i)).getQuantity();
-            BillDetailDao.getInstance().insertBillDetail(id, product.getId(), keys.get(i).getSize(), keys.get(i).getColor(), quantity, quantity * product.getMinPrice());
+//            Product product = cart.getData().get(keys.get(i)).getProduct();
+//            int quantity = cart.getData().get(keys.get(i)).getQuantity();
+//            BillDetailDao.getInstance().insertBillDetail(id, product.getId(), keys.get(i).getSize(), keys.get(i).getColor(), quantity, quantity * product.getMinPrice());
         }
 
     }

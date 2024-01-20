@@ -19,12 +19,13 @@ public class BillDetailDao2 implements Serializable {
         return instance;
     }
 
-    public void insertBillDetail(int idBill, int idProduct, int idSize, int idColor, int quantity, int price){
-        JDBIConnector.get().withHandle(handle -> {
+    public int addBillDetail(BillDetail2 billDetail){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("INSERT INTO bill_detail(bill_id, product_id, size_id, color_id, quantity, price) VALUES (:bill, :product, :size, :color, :quantity, :price)")
-                    .bind("bill", idBill).bind("product", idProduct).bind("size", idSize).bind("color", idColor).bind("quantity", quantity).bind("price", price)
+                    .bind("bill", billDetail.getBill().getId()).bind("product", billDetail.getProduct().getId()).bind("size", billDetail.getSize().getId()).bind("color", billDetail.getColor().getId()).bind("quantity", billDetail.getQuantity()).bind("price", billDetail.getPrice())
                     .execute();
         });
+        return i;
     }
 
     public List<BillDetail2> getBillDetail(int id){

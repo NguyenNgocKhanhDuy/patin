@@ -19,19 +19,14 @@ public class BillDao2 {
         return instance;
     }
 
-    public int billSize(){
+
+    public int addBill(Bill2 bill) {
         Integer i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT COUNT(*) FROM bill").mapTo(Integer.class).one();
+            return handle.createUpdate("INSERT INTO bill(name, date, status, payment, note, user_id) VALUES (:name, :date, :state, :payment, :note, :user)")
+                    .bind("name", bill.getName()).bind("date", bill.getDate()).bind("status", bill.getStatus()).bind("payment", bill.getPayment())
+                    .bind("note", bill.getNote()).bind("user", bill.getUser().getId()).execute();
         });
         return i;
-    }
-
-    public void insertBill(int id, String name, LocalDateTime date, String state, String payment, String note, int user) {
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO bill(id, name, date, state, payment, note, user_id) VALUES (:id, :name, :date, :state, :payment, :note, :user)")
-                    .bind("id", id).bind("name", name).bind("date", date).bind("state", state).bind("payment", payment)
-                    .bind("note", note).bind("user", user).execute();
-        });
     }
 
 

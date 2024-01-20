@@ -132,7 +132,7 @@
     filter: drop-shadow(0 0 8px #7fad39);
 }
 
-#content .product-item i.del {
+#content .product-item .del {
     position: absolute;
     top: 50%;
     right: 5px;

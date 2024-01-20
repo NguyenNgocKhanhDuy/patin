@@ -24,6 +24,9 @@ public class ShowRatingProduct extends HttpServlet {
         int productID;
         int currentPage;
 
+        String contentRating = request.getParameter("content");
+        request.setAttribute("content", contentRating);
+
         try {
 
             productID = Integer.parseInt(request.getParameter("productID"));
@@ -35,7 +38,7 @@ public class ShowRatingProduct extends HttpServlet {
                 currentPage = 1;
             }
             request.setAttribute("currentPage", currentPage);
-            int totalPage = (int) Math.ceil((RatingDao.getInstance().getAllRatingOfProduct(productID).size() / (3+0.0)));
+            int totalPage = (int) Math.ceil((RatingDao.getInstance().getSizeAllRating(productID) / (3+0.0)));
             request.setAttribute("totalPage", totalPage);
 
             List<ProductMain> products = ProductService2.getInstance().getProductDetail(productID);
@@ -104,7 +107,6 @@ public class ShowRatingProduct extends HttpServlet {
             request.setAttribute("infomation", "Lỗi");
             request.getRequestDispatcher("listProduct").forward(request, response);
         }
-
 
     }
 

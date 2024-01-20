@@ -53,9 +53,9 @@
                         </li>
                     </c:if>
 
-                    <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
                     <li class="cartLink">
-                        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
                         <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
                             <span class="amount">${sessionScope.cart.getData().size()}</span>
                         </c:if>
@@ -99,7 +99,7 @@
             <h3 class="big-title">Thông tin</h3>
             <form action="addBill" class="wrapper">
                 <div class="infomation">
-                    <div action="">
+                    <div>
                         <div class="holder">
                             <label>Họ tên</label>
                             <input type="text" name="fullName" value="${user.getFullName()}">
@@ -190,13 +190,13 @@
                         <div class="payment-item">
                             <input type="radio" class="show" name="payment" id="momo" value="MoMo">
                             <p class="hasImg">Quét mã MoMo</p>
-                            <img src="assets/images/momo.png" alt="">
+                            <img src="assets/images/MoMo.png" alt="">
                             <input type="radio" class="hide" id="momoHide">
                         </div>
                         <div class="payment-item">
                             <input type="radio" class="show" name="payment" id="zalopay" value="ZaloPay">
                             <p class="hasImg">Quét mã ZaloPay</p>
-                            <img src="assets/images/zalopay.png" alt="">
+                            <img src="assets/images/ZaloPay.png" alt="">
                             <input type="radio" class="hide" id="zalopayHide">
                         </div>
                         <div class="payment-item">

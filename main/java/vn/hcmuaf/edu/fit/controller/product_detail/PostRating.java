@@ -1,11 +1,17 @@
 package vn.hcmuaf.edu.fit.controller.product_detail;
 
+import vn.hcmuaf.edu.fit.bean.ImageRating;
+import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Rating;
+import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.dao.RatingDao;
+import vn.hcmuaf.edu.fit.services.RatingService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.time.LocalDateTime;
 
 
 @WebServlet(name = "PostRating", value = "/postRating")
@@ -22,16 +28,80 @@ public class PostRating extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("file");
-        String fileName = filePart.getSubmittedFileName();
-        ServletContext servletContext = getServletContext();
-        File root = new File(servletContext.getRealPath("/") + "data/");
-        if (!root.exists()) root.mkdirs();
-        System.out.println(root.getAbsolutePath());
-        for (Part part : request.getParts()) {
-            part.write(root.getAbsolutePath() + "/" + fileName);
-            RatingDao.getInstance().insert("data/" + fileName);
+
+        User user = (User) request.getSession().getAttribute("auth");
+        if (user == null) {
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Đăng nhập để tiếp tục");
+            request.getRequestDispatcher("showRatingProduct").forward(request, response);
+        } else {
+            int point;
+            String content = request.getParameter("content");
+            content = content.trim();
+
+            try {
+                int productID = Integer.parseInt(request.getParameter("productID"));
+                point = Integer.parseInt(request.getParameter("rate"));
+
+                LocalDateTime date = LocalDateTime.now();
+                Product2 product = new Product2();
+                product.setId(productID);
+
+                Rating rating = new Rating(0, point, content, date, 0, user, product);
+
+                if (content.length() == 0){
+                    if (!RatingService.getInstance().addRatingNoContent(rating)) {
+                        request.setAttribute("content", content);
+                        request.setAttribute("type", "error");
+                        request.setAttribute("information", "Có lỗi xảy ra");
+                        request.getRequestDispatcher("showRatingProduct").forward(request, response);
+                    }
+                }else {
+                    if (!RatingService.getInstance().addRatingHasContent(rating)) {
+                        request.setAttribute("content", content);
+                        request.setAttribute("type", "error");
+                        request.setAttribute("information", "Có lỗi xảy ra");
+                        request.getRequestDispatcher("showRatingProduct").forward(request, response);
+                    }
+                }
+
+
+
+                Part filePart = request.getPart("file");
+
+                if (filePart.getSize() != 0) {
+                    String fileName = filePart.getSubmittedFileName();
+                    ServletContext servletContext = getServletContext();
+                    File root = new File(servletContext.getRealPath("/") + "data/rating");
+                    if (!root.exists()) root.mkdirs();
+
+                    System.out.println(root.getAbsolutePath());
+
+                    ImageRating imageRating = new ImageRating();
+                    imageRating.setRating(RatingService.getInstance().getNewRating());
+                    imageRating.setUrl("data/rating/" + fileName);
+
+                    RatingService.getInstance().addRatingImg(imageRating);
+
+                    for (Part part : request.getParts()) {
+                        part.write(root.getAbsolutePath() + "/" + fileName);
+                    }
+
+                }
+                request.setAttribute("type", "success");
+                request.setAttribute("information", "Đánh giá thành công");
+                request.getRequestDispatcher("showRatingProduct").forward(request, response);
+
+
+            } catch (NumberFormatException e) {
+                request.setAttribute("content", content);
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Nhập đánh giá của bạn");
+                request.getRequestDispatcher("showRatingProduct").forward(request, response);
+            }
+
+
         }
-        response.getWriter().println("Upload success");
+
     }
 }

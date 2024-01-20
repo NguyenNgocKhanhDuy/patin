@@ -42,6 +42,8 @@ public class Login extends HttpServlet {
                 String location = (String) session.getAttribute("location");
                 if (location == null) location = "home";
 
+                request.setAttribute("type", "success");
+                request.setAttribute("information", "Đăng nhập thành công");
                 request.getRequestDispatcher(location).forward(request, response);
             }
         }

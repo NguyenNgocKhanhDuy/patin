@@ -108,19 +108,19 @@
                 <c:if test="${sessionScope.cart.getData().size() > 0 && sessionScope.cart != null}">
                     <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
                         <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
-                        <c:set var="totalPrice" value="${totalPrice + (product.getMinPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
+                        <c:set var="totalPrice" value="${totalPrice + (product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
                         <a href="productDetail?productID=${keys.get(index.index).getId()}" class="product-item">
                             <input type="hidden" class="id" value="${keys.get(index.index).getId()}"/>
                             <input type="hidden" class="size" value="${keys.get(index.index).getSize()}"/>
                             <input type="hidden" class="color" value="${keys.get(index.index).getColor()}"/>
                             <div class="img-name">
                                 <img src="${product.getImg()}" alt="">
-                                <p class="name">${product.getName()}</p>
+                                <p class="name">${product.getProductDetail().getProduct().getName()}</p>
                             </div>
-                            <p class="size">${product.getSize()}</p>
-                            <p class="color">${product.getColor()}</p>
+                            <p class="size">${product.getProductDetail().getSize()}</p>
+                            <p class="color">${product.getProductDetail().getColor()}</p>
                             <p class="price">
-                                <fmt:formatNumber type="currency" value="${product.getMinPrice()}"/>
+                                <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice()}"/>
                             </p>
                             <div class="boxQuantity">
                                 <div class="quantity">
@@ -130,9 +130,11 @@
                                 </div>
                             </div>
                             <p class="total">
-                                <fmt:formatNumber type="currency" value="${product.getMinPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
+                                <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
                             </p>
-                            <i class="fa-solid fa-xmark del"></i>
+<%--                            <a href="cartDelete?id=${keys.get(index.index).getId()}&color=${keys.get(index.index).getColor()}&size=${keys.get(index.index).getSize()}" class="del">--%>
+                                <i class="fa-solid fa-xmark del"></i>
+<%--                            </a>--%>
                         </a>
                     </c:forEach>
 

@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.services;
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.dao.ProductDao;
 import vn.hcmuaf.edu.fit.dao.ProductDao2;
@@ -196,7 +197,7 @@ public class ProductService2 {
         ProductDao2.getInstance().addWishList(userID, productID);
     }
 
-    public List<ProductMain> getAllProductDetail(int id){
-        return ProductDao2.getInstance().getAllProductDetail(id);
+    public ProductMain getAllProductDetailOnlyOne(int id, int size, int color){
+        return ProductDao2.getInstance().getAllProductDetailOnlyOne(id, size, color);
     }
 }

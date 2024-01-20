@@ -52,8 +52,13 @@
                         </li>
                     </c:if>
 
-                    <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                    <li class="cartLink">
+                        <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                            <span class="amount">${sessionScope.cart.getData().size()}</span>
+                        </c:if>
+                    </li>
                 </ul>
             </div>
         </div>

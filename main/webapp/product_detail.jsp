@@ -25,6 +25,7 @@
         <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
         <nav>
             <ul class="menu">
+
                 <li><a href="index.jsp">TRANG CHỦ</a></li>
                 <li>
                     <a href="#">SẢN PHẨM</a>
@@ -44,10 +45,10 @@
                         </a>
                     </li>
                 </c:if>
+                <input type="hidden" id="href" value="${href}">
                 <c:if test="${sessionScope.auth == null}">
                     <li>
                         <a href="login.jsp">
-                            <input type="hidden" id="href" value="${href}">
                             <c:set var="location" value="${href}" scope="session"/>
                             ĐĂNG NHẬP
                         </a>
@@ -58,8 +59,13 @@
                         </a>
                     </li>
                 </c:if>
-                <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                <li class="cartLink">
+                    <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                        <span class="amount">${sessionScope.cart.getData().size()}</span>
+                    </c:if>
+                </li>
             </ul>
         </div>
     </div>
@@ -304,13 +310,22 @@
                             <div class="rate-list">
                                     <c:forEach var="rating" items="${ratingPerPage}" varStatus="index">
                                         <c:set var="hasImg" value="0"/>
+
+                                        <c:forEach items="${listImgRating}" var="image">
+                                            <c:if test="${image.getRating().getId() == rating.getId()}">
+                                                <c:set var="hasImg" value="1"/>
+                                            </c:if>
+                                        </c:forEach>
+                                        
+<%--                                        <c:if test="${hasImg == 1 || (rating.getContent() != null && !rating.getContent().equals(\"\"))}">--%>
+<%--                                        </c:if>--%>
                                         <c:if test="${index.index != 0 && index.index != 2}">
                                             <div class="rate-item boxBorder">
                                                 <div class="user">
                                                     <img src="${rating.getUser().getAvatar()}" alt="">
                                                     <div class="side">
                                                         <h4 class="name">${rating.getUser().getFullName()}</h4>
-                                                        <div class="rating-star">
+                                                        <div class="rating-star rating-star-cmt">
                                                             <c:if test="${rating.getScore() < 5}">
                                                                 <c:forEach begin="1" end="${rating.getScore()}">
                                                                     <i class="fa-solid fa-star starActive"></i>
@@ -332,12 +347,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <c:forEach items="${listImgRating}" var="image">
-                                                    <c:if test="${image.getRating().getId() == rating.getId()}">
-                                                        <c:set var="hasImg" value="1"/>
-                                                    </c:if>
-                                                </c:forEach>
 
                                                 <c:if test="${hasImg == 1}">
                                                     <div class="image">
@@ -380,7 +389,7 @@
                                                     <img src="${rating.getUser().getAvatar()}" alt="">
                                                     <div class="side">
                                                         <h4 class="name">${rating.getUser().getFullName()}</h4>
-                                                        <div class="rating-star">
+                                                        <div class="rating-star rating-star-cmt">
                                                             <c:if test="${rating.getScore() < 5}">
                                                                 <c:forEach begin="1" end="${rating.getScore()}">
                                                                     <i class="fa-solid fa-star starActive"></i>
@@ -403,11 +412,11 @@
                                                     </div>
                                                 </div>
 
-                                                <c:forEach items="${listImgRating}" var="image">
-                                                    <c:if test="${image.getRating().getId() == rating.getId()}">
-                                                        <c:set var="hasImg" value="1"/>
-                                                    </c:if>
-                                                </c:forEach>
+                                                    <%--                                                <c:forEach items="${listImgRating}" var="image">--%>
+                                                    <%--                                                    <c:if test="${image.getRating().getId() == rating.getId()}">--%>
+                                                    <%--                                                        <c:set var="hasImg" value="1"/>--%>
+                                                    <%--                                                    </c:if>--%>
+                                                    <%--                                                </c:forEach>--%>
 
                                                 <c:if test="${hasImg == 1}">
                                                     <div class="image">
@@ -571,8 +580,12 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                             </div>
+                            <input type="hidden" id="ratePoint" name="rate" value="">
+                            <input type="hidden" name="productID" value="${productID}">
                             <p>Nhận xét của bạn</p>
-                            <textarea></textarea>
+                            <textarea name="content">
+                                ${content}
+                            </textarea>
                             <div class="file">
                                 <input type="file" name="file">
                             </div>
@@ -658,6 +671,9 @@
 </div>
 
 <div class="popup ${type != null ? type : "none"}">
+    <c:if test="${type.equals(\"success\")}">
+        <i class="fa-solid fa-check icon"></i>
+    </c:if>
     <c:if test="${type.equals(\"error\")}">
         <i class="fa-solid fa-ban fa-flip-horizontal icon"></i>
     </c:if>

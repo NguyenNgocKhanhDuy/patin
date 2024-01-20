@@ -36,7 +36,9 @@ function quantity() {
     for (let i = 0; i < deleteList.length; i++) {
         deleteList[i].addEventListener("click", function () {
             event.preventDefault();
-            sendQuantity(productItemsID[i].value, productItemsSize[i].value, productItemsColor[i].value, "delete");
+            var url = `cartDelete?id=${productItemsID[i].value}&size=${productItemsSize[i].value}&color=${productItemsColor[i].value}`
+            location.href = url;
+            // sendQuantity(productItemsID[i].value, productItemsSize[i].value, productItemsColor[i].value, "delete");
         })
     }
 

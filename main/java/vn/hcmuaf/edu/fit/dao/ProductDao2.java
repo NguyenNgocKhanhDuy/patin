@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.dao;
 
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
@@ -438,22 +439,19 @@ public class ProductDao2 {
         return product;
 
     }
-    public List<ProductMain> getAllProductDetail(int id) {
-        List<ProductMain> product = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, " +
-                            "product.hot as product_detail_product_hot, product.sale_percent as product_detail_product_salePercent, " +
-                            "product.information as product_detail_product_information, " +
-                            "product_detail.quantity as product_detail_quantity, product_detail.price as minPrice, " +
-                            "size.name as product_detail_size_name, color.name as product_detail_color_name " +
-                            "FROM  product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
-                            "WHERE product_detail.id_product = :id " +
-                            "ORDER BY minPrice asc")
-                    .bind("id", id)
-                    .mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+    public ProductMain getAllProductDetailOnlyOne(int id, int size, int color) {
+        ProductMain product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product_detail.quantity as product_detail_quantity, image_product.url as img, product_detail.price * (1-product.sale_percent) as product_detail_price, product.sale_percent as product_detail_product_salePercent, product.information as product_detail_product_information, " +
+                            "size.id as product_detail_size_id, size.name product_detail_size_name, color.id as product_detail_color_id, color.name as product_detail_color_name " +
+                            "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id AND product_detail.id_size = :size AND product_detail.id_color = :color AND image_product.id = 1 ")
+                    .bind("id", id).bind("size", size).bind("color", color)
+                    .mapToBean(ProductMain.class).one();
         });
         return product;
-
     }
+
+
 
     public List<ProductMain> getWishList(int userID, int productID) {
         List<ProductMain> products = JDBIConnector.get().withHandle(handle -> {

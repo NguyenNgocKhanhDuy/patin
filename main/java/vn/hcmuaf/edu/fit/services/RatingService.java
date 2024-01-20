@@ -1,5 +1,6 @@
 package vn.hcmuaf.edu.fit.services;
 
+import vn.hcmuaf.edu.fit.bean.ImageRating;
 import vn.hcmuaf.edu.fit.bean.Rating;
 import vn.hcmuaf.edu.fit.dao.RatingDao;
 
@@ -24,5 +25,34 @@ public class RatingService {
         }else {
             return RatingDao.getInstance().getAllRatingOfProductPerPage(id, currentPage);
         }
+    }
+
+    public boolean addRatingHasContent(Rating rating){
+        if (RatingDao.getInstance().addRatingHasContent(rating) != 1){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean addRatingNoContent(Rating rating){
+        if (RatingDao.getInstance().addRatingNoContent(rating) != 1){
+            return false;
+        }
+        return true;
+    }
+    public boolean addRatingImg(ImageRating imgRating){
+        if (RatingDao.getInstance().addRatingImg(imgRating) == 0){
+            return false;
+        }
+        return true;
+    }
+
+    public Rating getNewRating() {
+        return RatingDao.getInstance().getNewRating();
+    }
+    public boolean updateContentRating(int id){
+        if (RatingDao.getInstance().updateContentRating(id) != 1)
+            return false;
+        return true;
     }
 }
