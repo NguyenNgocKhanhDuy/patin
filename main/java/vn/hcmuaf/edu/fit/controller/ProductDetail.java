@@ -27,12 +27,16 @@ public class ProductDetail extends HttpServlet {
             request.setAttribute("productID", productID);
 
 //        Product product = ProductService.getInstance().getProduct(productID);
-            List<ProductMain> products = ProductService2.getInstance().getProductDetail(productID);
+            List<ProductMain> products = ProductService2.getInstance().getAllProductDetail(productID);
 
             String info = products.get(0).getProductDetail().getProduct().getInformation().replace("%", "<br>- ");
             products.get(0).getProductDetail().getProduct().setInformation(info);
 
             request.setAttribute("products", products);
+
+            String href = "productDetail?productID="+productID;
+            request.setAttribute("href", href);
+
 
 //        String info = product.getInformation().replace("%", "<br>");
 //        product.setInformation(info);

@@ -8,7 +8,7 @@ public class BillDetail2 implements Serializable {
     @Nested("bill")
     private Bill2 bill;
     @Nested("product")
-    private Product product;
+    private ProductMain product;
     @Nested("size")
     private Size size;
     @Nested("color")
@@ -19,7 +19,7 @@ public class BillDetail2 implements Serializable {
     public BillDetail2() {
     }
 
-    public BillDetail2(Bill2 bill, Product product, Size size, Color color, int quantity, int price) {
+    public BillDetail2(Bill2 bill, ProductMain product, Size size, Color color, int quantity, int price) {
         this.bill = bill;
         this.product = product;
         this.size = size;
@@ -39,12 +39,12 @@ public class BillDetail2 implements Serializable {
     }
 
     @Nested("product")
-    public Product getProduct() {
+    public ProductMain getProduct() {
         return product;
     }
 
     @Nested("product")
-    public void setProduct(Product product) {
+    public void setProduct(ProductMain product) {
         this.product = product;
     }
 

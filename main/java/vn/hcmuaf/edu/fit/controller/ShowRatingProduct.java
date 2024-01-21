@@ -41,7 +41,7 @@ public class ShowRatingProduct extends HttpServlet {
             int totalPage = (int) Math.ceil((RatingDao.getInstance().getSizeAllRating(productID) / (3+0.0)));
             request.setAttribute("totalPage", totalPage);
 
-            List<ProductMain> products = ProductService2.getInstance().getProductDetail(productID);
+            List<ProductMain> products = ProductService2.getInstance().getAllProductDetail(productID);
             request.setAttribute("products", products);
 
 

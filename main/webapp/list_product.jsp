@@ -42,6 +42,15 @@
                         <a href="">
                                 ${sessionScope.auth.getFullName()}
                         </a>
+                        <ul class="sub_menu user_sub">
+                            <li>
+                                <a href="">Tài khoản</a>
+                            </li>
+
+                            <li>
+                                <a href="">Đăng xuất</a>
+                            </li>
+                        </ul>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.auth == null}">

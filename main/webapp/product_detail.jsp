@@ -26,18 +26,19 @@
         <nav>
             <ul class="menu">
 
-                <li><a href="index.jsp">TRANG CHỦ</a></li>
+                <li><a href="home">TRANG CHỦ</a></li>
                 <li>
-                    <a href="#">SẢN PHẨM</a>
+                    <a href="listProduct">SẢN PHẨM</a>
                     <ul class="sub_menu list-category">
 
                     </ul>
                 </li>
-                <li><a href=contact.html>LIÊN HỆ</a></li>
+                <li><a href=contact.jsp>LIÊN HỆ</a></li>
             </ul>
         </nav>
         <div class="user">
             <ul>
+                <input type="hidden" id="href" value="${href}">
                 <c:if test="${sessionScope.auth != null}">
                     <li>
                         <a href="">
@@ -45,9 +46,10 @@
                         </a>
                     </li>
                 </c:if>
-                <input type="hidden" id="href" value="${href}">
+
                 <c:if test="${sessionScope.auth == null}">
                     <li>
+
                         <a href="login.jsp">
                             <c:set var="location" value="${href}" scope="session"/>
                             ĐĂNG NHẬP
@@ -406,7 +408,7 @@
                                                             </c:if>
                                                         </div>
                                                         <div class="date">
-                                                            <fmt:parseDate value="${rating.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                                            <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
                                                             <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
                                                         </div>
                                                     </div>

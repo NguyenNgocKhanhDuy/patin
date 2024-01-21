@@ -143,19 +143,19 @@
                                             </c:if>
                                             <li class="seperate">
                                                 <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
-                                                <c:set var="totalPrice" value="${totalPrice + (product.getMinPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
+                                                <c:set var="totalPrice" value="${totalPrice + (product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
                                                 <p class="infoItem">
                                                     ${index.index + 1}.
-                                                    ${product.getName()}
+                                                    ${product.getProductDetail().getProduct().getName()}
                                                     <br>- Màu sắc:
-                                                    <span class="color">${product.getColor()}</span>
+                                                    <span class="color">${product.getProductDetail().getColor().getName()}</span>
                                                     <br>- Size:
-                                                    <span class="size">${product.getSize()}</span>
+                                                    <span class="size">${product.getProductDetail().getSize().getName()}</span>
                                                     <br>- Số lượng:
                                                     <span class="quantity">${data.get(keys.get(index.index)).getQuantity()}</span>
                                                 </p>
                                                 <p class="price right">
-                                                    <fmt:formatNumber type="currency" value="${product.getMinPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
+                                                    <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
                                                 </p>
                                             </li>
                                         </c:forEach>

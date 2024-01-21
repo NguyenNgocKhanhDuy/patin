@@ -49,9 +49,13 @@ public class BillService2 {
     public String generateName(Bill2 bill, List<BillDetail2> listBillDetail) {
         String s = "";
         for (BillDetail2 b: listBillDetail) {
-            s += "P"+b.getProduct().getId();
+            s += "P"+b.getProduct().getProductDetail().getProduct().getId();
         }
-        return "DH"+bill.getId()+"P"+s+"U"+bill.getUser().getId();
+        return "DH"+bill.getId()+s+"U"+bill.getUser().getId();
+    }
+
+    public boolean updateName(String name, int id){
+        return BillDao2.getInstance().updateName(name, id) != 1 ? false : true;
     }
 
     public boolean addBillDetail(List<BillDetail2> listBillDetail) {
@@ -64,8 +68,8 @@ public class BillService2 {
     }
 
 
-    public Bill getNewBill(int user) {
-        return BillDao.getInstance().getNewBill(user);
+    public Bill2 getNewBill(int user) {
+        return BillDao2.getInstance().getNewBill(user);
     }
 
     public List<Bill> getAllBill() {
@@ -93,6 +97,10 @@ public class BillService2 {
 
     public List<BillDetail> getBillDetail(int id){
         return BillDetailDao.getInstance().getBillDetail(id);
+    }
+
+    public List<BillDetail2> getAllBillDetail(int id){
+        return BillDetailDao2.getInstance().getAllBillDetail(id);
     }
 
 }

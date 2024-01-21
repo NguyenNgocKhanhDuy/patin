@@ -185,8 +185,8 @@ public class ProductService2 {
         return randomProduct;
     }
 
-    public List<ProductMain> getProductDetail(int id) {
-        return ProductDao2.getInstance().getProductDetail(id);
+    public List<ProductMain> getAllProductDetail(int id) {
+        return ProductDao2.getInstance().getAllProductDetail(id);
     }
 
     public List<ProductMain> getWishList(int userID, int productID) {
@@ -197,7 +197,12 @@ public class ProductService2 {
         ProductDao2.getInstance().addWishList(userID, productID);
     }
 
-    public ProductMain getAllProductDetailOnlyOne(int id, int size, int color){
-        return ProductDao2.getInstance().getAllProductDetailOnlyOne(id, size, color);
+    public ProductMain getProductDetail(int id, int size, int color){
+        return ProductDao2.getInstance().getProductDetail(id, size, color);
+    }
+
+    public boolean reduceQuantity(int id, int size, int color, int amount) {
+        int newQuanity = getQuantity(id, size, color) - amount;
+        return ProductDao2.getInstance().reduceQuantity(id, size, color, newQuanity) != 1 ? false : true;
     }
 }

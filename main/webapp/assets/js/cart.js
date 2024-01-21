@@ -79,7 +79,7 @@ quantity()
 
         for (let i = 0; i < Object.keys(cart).length; i++) {
             var product = cart[JSON.stringify(keys[i])].product;
-            sum += (product.minPrice * cart[JSON.stringify(keys[i])].quantity)
+            sum += (product.productDetail.price * cart[JSON.stringify(keys[i])].quantity)
             html +=  `
             <a href="productDetail?productID=${keys[i].id}" class="product-item">
                 <input type="hidden" class="id" value="${keys[i].id}"/>
@@ -87,12 +87,12 @@ quantity()
                 <input type="hidden" class="color" value="${keys[i].color}"/>
                 <div class="img-name">
                     <img src="${product.img}" alt="">
-                        <p class="name">${product.name}</p>
+                        <p class="name">${product.productDetail.product.name}</p>
                 </div>
-                <p class="size">${product.size}</p>
-                <p class="color">${product.color}</p>
+                <p class="size">${product.productDetail.size.name}</p>
+                <p class="color">${product.productDetail.color.name}</p>
                 <p class="price">
-                   ${changeCurrency(product.minPrice)}
+                   ${changeCurrency(product.productDetail.price)}
                 </p>
                 <div class="boxQuantity">`
                    if(cart[JSON.stringify(keys[i])].quantity >= product.quantity){
@@ -120,7 +120,7 @@ quantity()
                     }
               html += ` </div>
                 <p class="total">
-                    ${changeCurrency(product.minPrice * cart[JSON.stringify(keys[i])].quantity)}
+                    ${changeCurrency(product.productDetail.price * cart[JSON.stringify(keys[i])].quantity)}
                 </p>
                 <i class="fa-solid fa-xmark del"></i>
             </a>  `

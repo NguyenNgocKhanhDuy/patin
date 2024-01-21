@@ -96,20 +96,30 @@
         <div class="container">
             <div class="pay">
                 <c:set var="totalPrice" value="${totalPrice != null ? totalPrice : 0}"/>
-                <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
-                        <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
-                        <c:set var="totalPrice" value="${totalPrice + (product.getMinPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
+<%--                <c:forEach begin="0" end="${data.size()-1}" varStatus="index">--%>
+<%--                        <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>--%>
+<%--                        <c:set var="totalPrice" value="${totalPrice + (product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity())}"/>--%>
+<%--                </c:forEach>--%>
+
+                <c:forEach var="b" items="${bills}">
+<%--                        <c:set var="product" value="${bill.getProduct().getProductDetail()}"/>--%>
+                        <c:set var="totalPrice" value="${totalPrice + (b.getPrice() * b.getQuantity())}"/>
                 </c:forEach>
 
-                <c:if test="${!payment.equals(\"cash\")}">
+                <c:if test="${!bill.getPayment().equals(\"cash\")}">
+<%--                <c:if test="${!payment.equals(\"cash\")}">--%>
                     <div class="pay-show">
                         <h3 class="titleMethod">Quét mã để thanh toán</h3>
-                        <c:if test="${payment.equals(\"Bank\")}">
-                            <img class="app large" src="assets/images/${payment}.png" alt="">
+                        <c:if test="${bill.getPayment().equals(\"Bank\")}">
+<%--                        <c:if test="${payment.equals(\"Bank\")}">--%>
+<%--                            <img class="app large" src="assets/images/${payment}.png" alt="">--%>
+                            <img class="app large" src="assets/images/${bill.getPayment()}.png" alt="">
                         </c:if>
 
-                        <c:if test="${!payment.equals(\"Bank\")}">
-                            <img class="app" src="assets/images/${payment}.png" alt="">
+                        <c:if test="${!bill.getPayment().equals(\"Bank\")}">
+<%--                        <c:if test="${!payment.equals(\"Bank\")}">--%>
+<%--                            <img class="app" src="assets/images/${payment}.png" alt="">--%>
+                            <img class="app" src="assets/images/${bill.getPayment()}.png" alt="">
                         </c:if>
                         <div class="payment-info">
                             <p>Người nhận:
@@ -131,7 +141,8 @@
                         <div class="sub">
                             <img src="assets/images/scan.png" alt="">
                             <p>Sử dụng app
-                                <span class="appName">${payment}</span>
+<%--                                <span class="appName">${payment}</span>--%>
+                                <span class="appName">${bill.getPayment()}</span>
                                 để quét mã
                             </p>
                         </div>
@@ -149,27 +160,49 @@
                         <ul>
                             <li class="item">
                                 <ul>
-                                    <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
-                                        <c:if test="${data.size() > 1 && index.index > 0}">
+                                    <c:forEach var="b" items="${bills}" varStatus="index">
+                                        <c:if test="${bills.size() > 1 && index.index > 0}">
                                             <li class="seperate line"></li>
                                         </c:if>
                                         <li class="seperate">
-                                            <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
+                                            <c:set var="product" value="${b.getProduct()}"/>
                                             <p class="infoItem">
                                                     ${index.index + 1}.
-                                                    ${product.getName()}
+                                                    ${product.getProductDetail().getProduct().getName()}
                                                 <br>- Màu sắc:
-                                                <span class="color">${product.getColor()}</span>
+                                                <span class="color">${b.getColor().getName()}</span>
                                                 <br>- Size:
-                                                <span class="size">${product.getSize()}</span>
+                                                <span class="size">${b.getSize().getName()}</span>
                                                 <br>- Số lượng:
-                                                <span class="quantity">${data.get(keys.get(index.index)).getQuantity()}</span>
+                                                <span class="quantity">${b.getQuantity()}</span>
                                             </p>
                                             <p class="price right">
-                                                <fmt:formatNumber type="currency" value="${product.getMinPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
+                                                <fmt:formatNumber type="currency" value="${b.getPrice() * b.getQuantity()}"/>
                                             </p>
                                         </li>
                                     </c:forEach>
+
+<%--                                    <c:forEach begin="0" end="${data.size()-1}" varStatus="index">--%>
+<%--                                        <c:if test="${data.size() > 1 && index.index > 0}">--%>
+<%--                                            <li class="seperate line"></li>--%>
+<%--                                        </c:if>--%>
+<%--                                        <li class="seperate">--%>
+<%--                                            <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>--%>
+<%--                                            <p class="infoItem">--%>
+<%--                                                    ${index.index + 1}.--%>
+<%--                                                    ${product.getProductDetail().getProduct().getName()}--%>
+<%--                                                <br>- Màu sắc:--%>
+<%--                                                <span class="color">${product.getProductDetail().getColor().getName()}</span>--%>
+<%--                                                <br>- Size:--%>
+<%--                                                <span class="size">${product.getProductDetail().getSize().getName()}</span>--%>
+<%--                                                <br>- Số lượng:--%>
+<%--                                                <span class="quantity">${data.get(keys.get(index.index)).getQuantity()}</span>--%>
+<%--                                            </p>--%>
+<%--                                            <p class="price right">--%>
+<%--                                                <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>--%>
+<%--                                            </p>--%>
+<%--                                        </li>--%>
+<%--                                    </c:forEach>--%>
                                 </ul>
                             </li>
                         </ul>
@@ -202,7 +235,11 @@
                             <span class="orderId">${bill.getName()}</span>
                         </li>
                         <li>Ngày:
-                            <span class="date">${date}</span>
+                            <span class="date">
+                                <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
+<%--                                ${date}--%>
+                            </span>
                         </li>
                         <li>Số điện thoại:
                             <span class="phone">${user.getPhone()}</span>
@@ -212,12 +249,15 @@
                                 <fmt:formatNumber type="currency" value="${totalPrice}"/>
                             </span>
                         </li>
-                        <c:if test="${!payment.equals(\"cash\")}">
+                        <c:if test="${!bill.getPayment().equals(\"cash\")}">
+<%--                        <c:if test="${!payment.equals(\"cash\")}">--%>
                             <li>Phương thức thanh toán:
-                                <span class="paymentMethod">Quét mã ${payment}</span>
+<%--                                <span class="paymentMethod">Quét mã ${payment}</span>--%>
+                                <span class="paymentMethod">Quét mã ${bill.getPayment()}</span>
                             </li>
                         </c:if>
-                        <c:if test="${payment.equals(\"cash\")}">
+                        <c:if test="${bill.getPayment().equals(\"cash\")}">
+<%--                        <c:if test="${payment.equals(\"cash\")}">--%>
                             <li>Phương thức thanh toán:
                                 <span class="paymentMethod">Trả tiền khi nhận hàng</span>
                             </li>

@@ -117,8 +117,8 @@
                                 <img src="${product.getImg()}" alt="">
                                 <p class="name">${product.getProductDetail().getProduct().getName()}</p>
                             </div>
-                            <p class="size">${product.getProductDetail().getSize()}</p>
-                            <p class="color">${product.getProductDetail().getColor()}</p>
+                            <p class="size">${product.getProductDetail().getSize().getName()}</p>
+                            <p class="color">${product.getProductDetail().getColor().getName()}</p>
                             <p class="price">
                                 <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice()}"/>
                             </p>
@@ -132,9 +132,7 @@
                             <p class="total">
                                 <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
                             </p>
-<%--                            <a href="cartDelete?id=${keys.get(index.index).getId()}&color=${keys.get(index.index).getColor()}&size=${keys.get(index.index).getSize()}" class="del">--%>
-                                <i class="fa-solid fa-xmark del"></i>
-<%--                            </a>--%>
+                            <i class="fa-solid fa-xmark del"></i>
                         </a>
                     </c:forEach>
 

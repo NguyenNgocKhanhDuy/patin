@@ -22,7 +22,7 @@ public class BillDao2 {
 
     public int addBill(Bill2 bill) {
         Integer i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO bill(name, date, status, payment, note, user_id) VALUES (:name, :date, :state, :payment, :note, :user)")
+            return handle.createUpdate("INSERT INTO bill(name, date, status, payment, note, user_id) VALUES (:name, :date, :status, :payment, :note, :user)")
                     .bind("name", bill.getName()).bind("date", bill.getDate()).bind("status", bill.getStatus()).bind("payment", bill.getPayment())
                     .bind("note", bill.getNote()).bind("user", bill.getUser().getId()).execute();
         });
@@ -58,6 +58,13 @@ public class BillDao2 {
                     "FROM bill JOIN user ON bill.user_id = user.id where bill.id = :id").bind("id", id).mapToBean(Bill2.class).one();
         });
         return bill;
+    }
+
+    public int updateName(String name, int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE bill SET name = ? WHERE id = ?").bind(0, name).bind(1, id).execute();
+        });
+        return i;
     }
 
 }

@@ -70,7 +70,7 @@ header i {
     font-size: 18px;
 }
 
-header nav ul.menu li:hover > a{
+header ul.menu li:hover > a{
     color: #7fad39;
     transition: 0.25s ease-in-out;
 }
@@ -95,6 +95,11 @@ header ul.sub_menu {
     transition: all 0.25s ease-in;
 }
 
+.user_sub {
+    left: 0 !important;
+    width: 150px !important;
+}
+
 header ul.sub_menu::after {
     content: "";
     display: block;
@@ -110,7 +115,7 @@ header ul.sub_menu li {
     margin: 8px 0;
 }
 
-header nav ul.sub_menu li a {
+header ul.sub_menu li a {
     color: #fff;
     font-size: 14px;
     font-weight: 400;
@@ -119,12 +124,12 @@ header nav ul.sub_menu li a {
     letter-spacing: 1px;
 }
 
-header nav ul.sub_menu li:hover a{
+header ul.sub_menu li:hover a{
     color: #7fad39;
     transition: 0.25s ease-in-out;
 }
 
-header .user ul li:hover a {
+header .user ul li:hover > a {
     color: #7fad39;
     transition: 0.25s ease-in-out;
 }

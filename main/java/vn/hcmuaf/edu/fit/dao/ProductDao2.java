@@ -427,7 +427,7 @@ public class ProductDao2 {
         return i.get(0);
     }
 
-    public List<ProductMain> getProductDetail(int id) {
+    public List<ProductMain> getAllProductDetail(int id) {
         List<ProductMain> product = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product_detail.quantity as product_detail_quantity, image_product.url as img, product_detail.price * (1-product.sale_percent) as product_detail_price, product.sale_percent as product_detail_product_salePercent, product.information as product_detail_product_information, " +
                             "size.id as product_detail_size_id, size.name product_detail_size_name, color.id as product_detail_color_id, color.name as product_detail_color_name " +
@@ -439,7 +439,7 @@ public class ProductDao2 {
         return product;
 
     }
-    public ProductMain getAllProductDetailOnlyOne(int id, int size, int color) {
+    public ProductMain getProductDetail(int id, int size, int color) {
         ProductMain product = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product_detail.quantity as product_detail_quantity, image_product.url as img, product_detail.price * (1-product.sale_percent) as product_detail_price, product.sale_percent as product_detail_product_salePercent, product.information as product_detail_product_information, " +
                             "size.id as product_detail_size_id, size.name product_detail_size_name, color.id as product_detail_color_id, color.name as product_detail_color_name " +
@@ -470,4 +470,15 @@ public class ProductDao2 {
                     .bind("user", userID).bind("product", productID).execute();
         });
     }
+
+    public int reduceQuantity(int id, int size, int color, int newQuantity){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE product_detail SET quantity = :quantity " +
+                            "WHERE id_product = :product AND id_size = :size AND id_color = :color")
+                    .bind("product", id).bind("size", size).bind("color", color)
+                    .bind("quantity", newQuantity).execute();
+        });
+        return i;
+    }
+
 }

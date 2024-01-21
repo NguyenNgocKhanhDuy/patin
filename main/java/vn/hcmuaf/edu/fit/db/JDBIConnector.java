@@ -40,6 +40,6 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        System.out.println(ProductDao2.getInstance().getAllProductDetailOnlyOne(1, 1, 3));
+        System.out.println(BillDetailDao2.getInstance().getAllBillDetail(1).get(0).getSize());
     }
 }
