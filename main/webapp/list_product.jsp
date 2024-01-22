@@ -44,11 +44,11 @@
                         </a>
                         <ul class="sub_menu user_sub">
                             <li>
-                                <a href="">Tài khoản</a>
+                                <a href="account.jsp">Tài khoản</a>
                             </li>
 
                             <li>
-                                <a href="">Đăng xuất</a>
+                                <a href="logout">Đăng xuất</a>
                             </li>
                         </ul>
                     </li>

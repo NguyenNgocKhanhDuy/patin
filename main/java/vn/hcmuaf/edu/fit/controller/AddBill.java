@@ -54,6 +54,15 @@ public class AddBill extends HttpServlet {
                 UserService.getInstance().updateUser(user);
 //                BillService.getInstance().insertBill(payment, note, user.getId(), cart);
 
+                if (payment.equals("cash")){
+                    payment = "Trả tiền khi nhận";
+                } else if (payment.equals("MoMo")) {
+                    payment = "Quét mã MoMo";
+                } else if (payment.equals("ZaloPay")) {
+                    payment = "Quét mã ZaloPay";
+                } else if (payment.equals("Bank")) {
+                    payment = "Chuyển khoản ngân hàng";
+                }
                 Bill2 bill = new Bill2(0, "", BillService2.getInstance().getCurrentDate(), "Đang xử lý", payment, note, user);
 
                 List<BillDetail2> listBill = new ArrayList<>();

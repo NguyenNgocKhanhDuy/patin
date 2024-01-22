@@ -97,133 +97,281 @@
             <div class="left">
                 <div class="account">
                     <ul class="menu">
-                        <li class="activeAccountNav">
-                            <i class="fa-regular fa-user"></i>
-                            <span>Tài khoản của tôi</span>
-<%--                            <ul class="sub_menu showSubMenu">--%>
-<%--                                <li id="information" class="activeAccountNav">Thông tin</li>--%>
-<%--                                <li id="address">Địa chỉ</li>--%>
-<%--                            </ul>--%>
-                        </li>
-                        <li>
-                            <i class="fa-regular fa-clipboard"></i>
-                            <span>Đơn hàng</span>
-                        </li>
-                        <li>
-                            <i class="fa-regular fa-bell"></i>
-                            <span>Đổi mật khẩu</span>
-                        </li>
+                        <c:if test="${bills == null && pass == null}">
+                            <li class="activeAccountNav">
+                                <i class="fa-regular fa-user"></i>
+                                <a class="activeAccountNav" href="account.jsp">Tài khoản của tôi</a>
+                            </li>
+                            <li>
+                                <i class="fa-regular fa-clipboard"></i>
+                                <a href="orderAccount">Đơn hàng</a>
+                            </li>
+                            <li>
+                                <i class="fa-regular fa-bell"></i>
+                                <a href="showChangePassAccount">Đổi mật khẩu</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${bills != null}">
+                            <li>
+                                <i class="fa-regular fa-user"></i>
+                                <a href="account.jsp">Tài khoản của tôi</a>
+                            </li>
+                            <li class="activeAccountNav">
+                                <i class="fa-regular fa-clipboard"></i>
+                                <a class="activeAccountNav" href="orderAccount">Đơn hàng</a>
+                            </li>
+                            <li>
+                                <i class="fa-regular fa-bell"></i>
+                                <a href="showChangePassAccount">Đổi mật khẩu</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${pass != null}">
+                            <li>
+                                <i class="fa-regular fa-user"></i>
+                                <a href="account.jsp">Tài khoản của tôi</a>
+                            </li>
+                            <li>
+                                <i class="fa-regular fa-clipboard"></i>
+                                <a href="orderAccount">Đơn hàng</a>
+                            </li>
+                            <li class="activeAccountNav">
+                                <i class="fa-regular fa-bell"></i>
+                                <a class="activeAccountNav" href="showChangePassAccount">Đổi mật khẩu</a>
+                            </li>
+                        </c:if>
+
                     </ul>
                 </div>
             </div>
 
             <div class="right">
-                <div class="infomation">
-                    <h3>Thông tin</h3>
-                    <div class="wrapper">
-                        <form action="userInformation" class="info">
-                            <div class="part name">
-                                <label>Tên:</label>
-                                <input type="text" name="fullname" value="${sessionScope.auth.getFullName()}">
-                            </div>
-                            <div class="part email">
-                                <label>Email: </label>
-                                <input type="email" value="${sessionScope.auth.getEmail()}">
-                            </div>
-                            <div class="part phone">
-                                <label>Số điện thoại: </label>
-                                <input type="tel" name="phone" value="${sessionScope.auth.getPhone()}">
-                            </div>
-                            <div class="part">
-                                <label>Địa chỉ: </label>
-                                <input type="tel" name="text" value="${sessionScope.auth.getAddress()}">
-                            </div>
-                            <div class="part gender">
-                                <label>Giới tính:</label>
-                                <div class="selectGender">
-                                    <input type="radio" name="gender" checked = "true">
-                                    <label>Nam</label>
-                                    <input type="radio" name="gender">
-                                    <label>Nữ</label>
+                <c:if test="${pass == null && bills == null && billDetail == null}">
+                    <div class="infomation">
+                        <h3>Thông tin</h3>
+                        <div class="wrapper">
+                            <form action="userInformation" class="info">
+                                <div class="part name">
+                                    <label>Tên:</label>
+                                    <input type="text" name="fullname" value="${sessionScope.auth.getFullName()}">
+                                </div>
+                                <div class="part email">
+                                    <label>Email: </label>
+                                    <input type="email" value="${sessionScope.auth.getEmail()}">
+                                </div>
+                                <div class="part phone">
+                                    <label>Số điện thoại: </label>
+                                    <input type="tel" name="phone" value="${sessionScope.auth.getPhone()}">
+                                </div>
+                                <div class="part">
+                                    <label>Địa chỉ: </label>
+                                    <input type="tel" name="text" value="${sessionScope.auth.getAddress()}">
+                                </div>
+                                <div class="part gender">
+                                    <label>Giới tính:</label>
+                                    <div class="selectGender">
+                                        <input type="radio" name="gender" checked = "true">
+                                        <label>Nam</label>
+                                        <input type="radio" name="gender">
+                                        <label>Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="part dob">
+                                    <label>Ngày sinh:</label>
+                                    <div class="dob-input">
+                                        <select class="day" name="day">
+                                            <option>31</option>
+                                        </select>
+                                        <select class="month" name="month">
+                                            <option>12</option>
+                                        </select>
+                                        <select class="year" name="year">
+                                            <option>1900</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="submit" class="save" value="Lưu Thông Tin">
+                            </form>
+                            <div class="avatar">
+                                <img src="assets/images/logo.PNG" alt="">
+                                <div class="selectImg">
+                                    <input type="file" accept="image/*">
+                                    <input type="submit" value="Lựa chọn ảnh">
                                 </div>
                             </div>
-                            <div class="part dob">
-                                <label>Ngày sinh:</label>
-                                <div class="dob-input">
-                                    <select class="day" name="day">
-                                        <option>31</option>
-                                    </select>
-                                    <select class="month" name="month">
-                                        <option>12</option>
-                                    </select>
-                                    <select class="year" name="year">
-                                        <option>1900</option>
-                                    </select>
+                        </div>
+                    </div>
+                </c:if>
+
+
+
+                <c:if test="${bills != null}">
+                    <div class="order">
+                        <div class="nav">
+                            <ul>
+                                <c:if test="${billStatus == 0}">
+                                    <li class="activeOrderNav">
+                                        <a href="orderAccount?billStatus=0">Tất cả</a>
+                                    </li>
+                                    <li>
+                                        <a href="orderAccount?billStatus=1">Vận chuyển</a>
+                                    </li>
+                                    <li>
+                                        <a href="orderAccount?billStatus=2">Hoàn thành</a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${billStatus == 1}">
+                                    <li>
+                                        <a href="orderAccount?billStatus=0">Tất cả</a>
+                                    </li>
+                                    <li class="activeOrderNav">
+                                        <a href="orderAccount?billStatus=1">Vận chuyển</a>
+                                    </li>
+                                    <li>
+                                        <a href="orderAccount?billStatus=2">Hoàn thành</a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${billStatus == 2}">
+                                    <li>
+                                        <a href="orderAccount?billStatus=0">Tất cả</a>
+                                    </li>
+                                    <li>
+                                        <a href="orderAccount?billStatus=1">Vận chuyển</a>
+                                    </li>
+                                    <li class="activeOrderNav">
+                                        <a href="orderAccount?billStatus=2">Hoàn thành</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="Nhập đơn hàng">
+                            <button class="search-btn">Tìm kiếm</button>
+                        </div>
+                        <div class="all-order orderShow">
+
+                            <div class="bill section">
+                                <div class="bill-list">
+                                    <div class="title">
+                                        <h4>STT</h4>
+                                        <h4>Mã đơn hàng</h4>
+                                        <h4>Ngày đặt</h4>
+                                        <h4>Tình trạng</h4>
+                                        <h4>Phương thức</h4>
+                                    </div>
+                                    <c:forEach var="bill" items="${bills}" varStatus="index">
+                                        <div class="bill-item">
+                                            <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                            <p class="id">${bill.getName()}</p>
+                                            <p class="date">
+                                                <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                                <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
+                                            </p>
+
+                                            <p class="state">${bill.getStatus()}</p>
+                                            <p class="payment">${bill.getPayment()}</p>
+                                            <a href="showOrderDetail?id=${bill.getId()}">
+                                                <i class="fa-solid fa-clipboard detail"></i>
+                                            </a>
+<%--                                            <i class="fa-solid fa-xmark del"></i>--%>
+                                        </div>
+                                    </c:forEach>
+
                                 </div>
                             </div>
-                            <input type="submit" class="save" value="Lưu Thông Tin">
+
+                        </div>
+
+
+
+                        <div class="ship-order orderShow">
+                            <p>Bạn chưa có đơn hàng ship</p>
+                        </div>
+                        <div class="complete-order orderShow">
+                            <p>Bạn chưa có đơn hàng complete</p>
+                        </div>
+                    </div>
+                </c:if>
+
+                <c:if test="${billDetail != null}">
+                    <div class="bill_detail section">
+                        <div class="general">
+                            <p class="name">Người mua hàng: ${bill.getUser().getFullName()} </p>
+                            <p class="phone">Số điện thoại: ${bill.getUser().getPhone()} </p>
+                            <p class="email">Email: ${bill.getUser().getEmail()} </p>
+                            <p class="address">Địa chỉ: ${bill.getUser().getAddress()} </p>
+                            <p class="price">Giá: </p>
+                            <p class="bill_info">
+                                <span class="name">
+                                    Đơn hàng: ${bill.getName()}
+                                </span>
+                                <span class="status">
+                                    Tình trạng: ${bill.getStatus()}
+                                </span>
+                                <span class="payment">
+                                    Phương thức thanh toán: ${bill.getPayment()}
+                                </span>
+                            </p>
+                            <p class="date">Ngày đặt hàng:
+                                <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
+                            </p>
+                            <p class="more">
+                                <span>Ghi chú: ${bill.getNote()}
+                                </span>
+<%--                                <span>--%>
+<%--                                    <i class="fa-solid fa-clipboard detail"></i>--%>
+<%--                                </span>--%>
+                            </p>
+                        </div>
+
+                        <div class="bill-list">
+                            <div class="title">
+                                <h4>STT</h4>
+                                <h4>Tên sản phẩm</h4>
+                                <h4>Màu sắc</h4>
+                                <h4>Size</h4>
+                                <h4>Giá</h4>
+                                <h4>Số lượng</h4>
+                            </div>
+                            <c:forEach var="b" items="${billDetail}" varStatus="index">
+                                <div class="bill-item">
+                                    <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                    <p class="name">${b.getProduct().getProductDetail().getProduct().getName()}</p>
+                                    <p class="color">${b.getColor().getName()}</p>
+                                    <p class="size">${b.getSize().getName()}</p>
+                                    <p class="price">
+                                        <fmt:formatNumber value="${b.getPrice()}" type="currency"/>
+                                    </p>
+                                    <p class="quantỉty">${b.getQuantity()}</p>
+<%--                                    <i class="fa-solid fa-clipboard detail"></i>--%>
+<%--                                    <i class="fa-solid fa-xmark del"></i>--%>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:if>
+
+                <c:if test="${pass != null}">
+                    <div class="notice">
+                        <h3>Thay đổi mật khẩu</h3>
+                        <form action="changePass">
+                            <div class="holder">
+                                <label>Mật khẩu cũ</label>
+                                <input type="password" name="oldPass">
+                            </div>
+                            <div class="holder">
+                                <label>Mật khẩu mới</label>
+                                <input type="password" name="newPass">
+                            </div>
+                            <div class="holder">
+                                <label>Nhập lại mật khẩu mới</label>
+                                <input type="password" name="confirmPass">
+                            </div>
+                            <input type="submit" value="Xác nhận">
                         </form>
-                        <div class="avatar">
-                            <img src="assets/images/logo.PNG" alt="">
-                            <div class="selectImg">
-                                <input type="file" accept="image/*">
-                                <input type="submit" value="Lựa chọn ảnh">
-                            </div>
-                        </div>
                     </div>
-                </div>
+                </c:if>
 
-<%--                <div class="address">--%>
-<%--                    <div class="top">--%>
-<%--                        <h3>Địa chỉ của tôi</h3>--%>
-<%--                        <button class="btn-address">Thêm địa chỉ</button>--%>
-<%--                    </div>--%>
-<%--                    <div class="bottom">--%>
-<%--                        <p>Bạn chưa có địa chỉ</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-                <div class="order">
-                    <div class="nav">
-                        <ul>
-                            <li class="activeOrderNav">Tất cả</li>
-                            <li>Vận chuyển</li>
-                            <li>Hoàn thành</li>
-                        </ul>
-                    </div>
-                    <div class="search">
-                        <input type="text" placeholder="Nhập đơn hàng">
-                        <button class="search-btn">Tìm kiếm</button>
-                    </div>
-                    <div class="all-order orderShow">
-                        <p>Bạn chưa có đơn hàng all</p>
-                    </div>
-                    <div class="ship-order orderShow">
-                        <p>Bạn chưa có đơn hàng ship</p>
-                    </div>
-                    <div class="complete-order orderShow">
-                        <p>Bạn chưa có đơn hàng complete</p>
-                    </div>
-                </div>
-
-                <div class="notice">
-                    <h3>Thay đổi mật khẩu</h3>
-                    <form action="changePass">
-                        <div class="holder">
-                            <label>Mật khẩu cũ</label>
-                            <input type="password" name="oldPass">
-                        </div>
-                        <div class="holder">
-                            <label>Mật khẩu mới</label>
-                            <input type="password" name="newPass">
-                        </div>
-                        <div class="holder">
-                            <label>Nhập lại mật khẩu mới</label>
-                            <input type="password" name="confirmPass">
-                        </div>
-                        <input type="submit" value="Xác nhận">
-                    </form>
-                </div>
             </div>
         </div>
         <div class="modal">

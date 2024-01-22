@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
 import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.dao.*;
+import vn.hcmuaf.edu.fit.services.BillService2;
 import vn.hcmuaf.edu.fit.services.ProductService2;
 import vn.hcmuaf.edu.fit.services.RatingService;
 
@@ -40,6 +41,6 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        System.out.println(BillDetailDao2.getInstance().getAllBillDetail(1).get(0).getSize());
+        System.out.println(BillService2.getInstance().getAllBillDetail(1).get(0).getBill().getUser());
     }
 }

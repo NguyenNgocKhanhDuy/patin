@@ -72,8 +72,16 @@ public class BillService2 {
         return BillDao2.getInstance().getNewBill(user);
     }
 
-    public List<Bill> getAllBill() {
-        return BillDao.getInstance().getAllBill();
+    public List<Bill2> getAllBill() {
+        return BillDao2.getInstance().getAllBill();
+    }
+
+    public List<Bill2> getAllBillByUser(int id) {
+        return BillDao2.getInstance().getAllBillByUser(id);
+    }
+
+    public List<Bill2> getAllBillByUserAndStatus(int id, String status) {
+        return BillDao2.getInstance().getAllBillByUserAndStatus(id, status);
     }
 
     public LocalDateTime getCurrentDate() {
@@ -81,22 +89,42 @@ public class BillService2 {
         return localDate;
     }
 
-    public List<Bill> getBillPerPage(int currentPage, int productPerPage){
+    public List<Bill2> getBillPerPage(int currentPage, int productPerPage){
         int start;
         if (currentPage > 1) {
             start =  ((currentPage - 1) * productPerPage);
         } else {
             start = 0;
         }
-        return BillDao.getInstance().getBillPerPage(start);
+        return BillDao2.getInstance().getBillPerPage(start);
     }
 
-    public Bill getBill(int id){
-        return BillDao.getInstance().getBill(id);
+    public List<Bill2> getBillPerPageByUser(int currentPage, int productPerPage, int id){
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        return BillDao2.getInstance().getBillPerPageByUser(start, id);
     }
 
-    public List<BillDetail> getBillDetail(int id){
-        return BillDetailDao.getInstance().getBillDetail(id);
+    public List<Bill2> getBillPerPageByUserAndStatus(int currentPage, int productPerPage, int id, String status){
+        int start;
+        if (currentPage > 1) {
+            start =  ((currentPage - 1) * productPerPage);
+        } else {
+            start = 0;
+        }
+        return BillDao2.getInstance().getBillPerPageByUserAndStatus(start, id, status);
+    }
+
+    public Bill2 getBill(int id){
+        return BillDao2.getInstance().getBill(id);
+    }
+
+    public List<BillDetail2> getBillDetail(int id){
+        return BillDetailDao2.getInstance().getAllBillDetail(id);
     }
 
     public List<BillDetail2> getAllBillDetail(int id){

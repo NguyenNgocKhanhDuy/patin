@@ -42,12 +42,45 @@ public class BillDao2 {
             return handle.createQuery("SELECT * FROM bill").mapToBean(Bill2.class).stream().collect(Collectors.toList());
         });
         return bills;
+    }
 
+    public List<Bill2> getAllBillByUser(int id){
+        List<Bill2> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM bill WHERE user_id = :id")
+                    .bind("id", id).mapToBean(Bill2.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill2> getAllBillByUserAndStatus(int id, String status){
+        List<Bill2> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM bill WHERE user_id = :id AND status like :status ")
+                    .bind("id", id).bind("status", "%"+status+"%")
+                    .mapToBean(Bill2.class).stream().collect(Collectors.toList());
+        });
+        return bills;
     }
 
     public List<Bill2> getBillPerPage(int start) {
         List<Bill2> bills = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id LIMIT :start, 5").bind("start", start).mapToBean(Bill2.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill2> getBillPerPageByUser(int start, int id) {
+        List<Bill2> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id WHERE user_id = :id LIMIT :start, 5")
+                    .bind("id", id).bind("start", start).mapToBean(Bill2.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill2> getBillPerPageByUserAndStatus(int start, int id, String status) {
+        List<Bill2> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id WHERE user_id = :id AND status like :status LIMIT :start, 5")
+                    .bind("id", id).bind("start", start).bind("status", "%"+status+"%")
+                    .mapToBean(Bill2.class).stream().collect(Collectors.toList());
         });
         return bills;
     }
