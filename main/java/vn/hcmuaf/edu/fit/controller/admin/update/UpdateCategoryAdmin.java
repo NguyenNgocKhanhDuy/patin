@@ -1,7 +1,7 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.admin.update;
 
-import vn.hcmuaf.edu.fit.bean.Color;
-import vn.hcmuaf.edu.fit.dao.ColorDao;
+import vn.hcmuaf.edu.fit.bean.Category;
+import vn.hcmuaf.edu.fit.dao.CategoryDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "UpdateColorAdmin", value = "/updateColorAdmin")
-public class UpdateColorAdmin extends HttpServlet {
+@WebServlet(name = "UpdateCategoryAdmin", value = "/updateCategoryAdmin")
+public class UpdateCategoryAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id;
@@ -27,17 +27,24 @@ public class UpdateColorAdmin extends HttpServlet {
             try {
                 id = Integer.parseInt(request.getParameter("id"));
 
-                Color color = ColorDao.getInstance().getColorById(id);
-                color.setName(name);
-                ColorDao.getInstance().updateColor(color);
+                Category category = CategoryDao.getInstance().getCategory(id);
+                category.setName(name);
 
-                request.setAttribute("type", "success");
-                request.setAttribute("information", "Cập nhật thành công");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                if (CategoryDao.getInstance().updateCategory(category)){
+                    request.setAttribute("type", "success");
+                    request.setAttribute("information", "Cập nhật thành công");
+                    request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
+                }else {
+                    request.setAttribute("type", "error");
+                    request.setAttribute("information", "Lỗi sql");
+                    request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
+                }
+
+
             }catch (NumberFormatException e ){
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
             }
         }
 

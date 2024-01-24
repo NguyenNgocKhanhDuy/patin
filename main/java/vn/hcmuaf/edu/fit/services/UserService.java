@@ -156,6 +156,17 @@ public class UserService {
             return checkAddress(address);
         }
         return "";
+
+    }
+    public String checkForm(String fullName, String phone, String address) {
+        if (!checkFullName(fullName).equals("valid")) {
+            return checkFullName(fullName);
+        } else if (!checkPhone(phone).equals("valid")) {
+            return checkPhone(phone);
+        } else if (!checkAddress(address).equals("valid")) {
+            return checkAddress(address);
+        }
+        return "";
     }
     public String checkForm(String fullName, String email) {
         if (!checkFullName(fullName).equals("valid")) {
@@ -175,7 +186,9 @@ public class UserService {
     }
 
     public String checkDOB(int day, int month, int year) {
-        if (year >= 2005){
+        LocalDateTime dateTime = LocalDateTime.now();
+        int yearNow = dateTime.getYear();
+        if (yearNow - year >= 18){
             int dayMax = 0;
             switch (month){
                 case 1:

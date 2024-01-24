@@ -131,4 +131,12 @@ public class BillService2 {
         return BillDetailDao2.getInstance().getAllBillDetail(id);
     }
 
+
+    public boolean updateStatusBill(int id, String status) {
+        return BillDao2.getInstance().updateStatusBill(id, status);
+    }
+
+    public boolean deleteBill(int id) {
+        return BillDao2.getInstance().deleteBill(id) && BillDetailDao2.getInstance().deleteAllBillDetail(id);
+    }
 }

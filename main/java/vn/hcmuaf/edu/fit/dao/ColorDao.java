@@ -41,17 +41,18 @@ public class ColorDao {
         return colors;
     }
 
-    public void insertColor(Color color){
-        int id = getAllColor().size() + 1;
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO color(id, name) VALUES (:id, name)").bind("name", color.getName()).bind("id", id).execute();
+    public boolean insertColor(Color color){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO color(name) VALUES (:name)").bind("name", color.getName()).execute();
         });
+        return i == 1 ? true : false;
     }
 
-    public void updateColor(Color color){
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean updateColor(Color color){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE color SET name = :name WHERE id = :id").bind("name", color.getName()).bind("id", color.getId()).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public List<Color> getColorPerPage(int currentPage, int productPerPage) {
@@ -67,10 +68,11 @@ public class ColorDao {
         return color;
     }
 
-    public void deleteColor(int id) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean deleteColor(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM color WHERE id = ?").bind(0, id).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public int getIdByName(String name){

@@ -39,14 +39,18 @@
             <ul>
                 <c:if test="${sessionScope.auth != null}">
                     <li>
-                        <a href="">
+                        <a href="account.jsp">
                                 ${sessionScope.auth.getFullName()}
                         </a>
                         <ul class="sub_menu user_sub">
                             <li>
                                 <a href="account.jsp">Tài khoản</a>
                             </li>
-
+                            <c:if test="${sessionScope.auth.getRole() > 0}">
+                                <li>
+                                    <a href="showUserAdmin">Quản lý</a>
+                                </li>
+                            </c:if>
                             <li>
                                 <a href="logout">Đăng xuất</a>
                             </li>

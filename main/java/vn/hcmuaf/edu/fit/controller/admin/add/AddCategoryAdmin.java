@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.admin.add;
 
 import vn.hcmuaf.edu.fit.bean.Category;
 import vn.hcmuaf.edu.fit.bean.User;
@@ -27,11 +27,15 @@ public class AddCategoryAdmin extends HttpServlet {
         }else {
 
             Category category = new Category(0, name);
-            CategoryDao.getInstance().insertCategory(category);
-
-            request.setAttribute("type", "success");
-            request.setAttribute("information", "Thêm thành công");
-            request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
+            if (!CategoryDao.getInstance().insertCategory(category)){
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Lỗi sql");
+                request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
+            }else {
+                request.setAttribute("type", "success");
+                request.setAttribute("information", "Thêm thành công");
+                request.getRequestDispatcher("showCategoryAdmin").forward(request, response);
+            }
         }
     }
 

@@ -127,8 +127,8 @@ var userDetails = document.querySelectorAll(".user-item .detail");
 function showDetailUser() {
     for (let i = 0; i < userDetails.length; i++) {
         userDetails[i].addEventListener("click", function () {
-            modalDetail(document.querySelectorAll(".user-item .id")[i].textContent, "user")
-            modal.style.display = "flex";
+            modalDetail(document.querySelectorAll(".user-item .id")[i].value, "user")
+            modalEdit.style.display = "flex";
 
             // var modalEditUser = document.querySelector(".modal-Edituser");
             //
@@ -216,7 +216,7 @@ function showDetailBrand() {
         brandDetails[i].addEventListener("click", function () {
             modalDetail(document.querySelectorAll(".brand-item .id")[i].value, "brand");
 
-            modal.style.display = "flex";
+            modalEdit.style.display = "flex";
 
             // var modalEditBrand = document.querySelector(".modal-Editbrand");
             //
@@ -249,7 +249,7 @@ function showDetailColor() {
         colorDetails[i].addEventListener("click", function () {
             modalDetail(document.querySelectorAll(".color-item .id")[i].value, "color");
 
-            modal.style.display = "flex";
+            modalEdit.style.display = "flex";
 
             // var modalEditColor = document.querySelector(".modal-Editcolor");
             //
@@ -282,7 +282,7 @@ function showDetailSize() {
         sizeDetails[i].addEventListener("click", function () {
             modalDetail(document.querySelectorAll(".size-item .id")[i].value, "size");
 
-            modal.style.display = "flex";
+            modalEdit.style.display = "flex";
 
             // var modalEditSize = document.querySelector(".modal-Editsize");
             //
@@ -402,7 +402,7 @@ function addInModalUser(user) {
                 </div>
             </div>
             <div>
-                <input type="file">
+                <input type="file" name="file">
             </div>
         </div>
     </div>
@@ -469,7 +469,7 @@ function addInModalBrand(brand) {
     html += `
     <input type="hidden" name="id" value="${brand.id}">
     <input type="text" placeholder="Nhập tên danh mục" name="name" value="${brand.name}">
-    <button type="submit" class="add">Thêm</button>`
+    <button type="submit" class="add">Cập nhật</button>`
     document.querySelector(".modal-containerEditBrand form").innerHTML = html;
 }
 
@@ -477,16 +477,16 @@ function addInModalColor(color) {
     var html = `
     <input type="hidden" name="id" value="${color.id}">
     <input type="text" placeholder="Nhập tên màu sắc" name="name" value="${color.name}">
-    <button type="submit" class="add">Thêm</button>`
-    document.querySelector("modal-containerEditColor form").innerHTML = html;
+    <button type="submit" class="add">Cập nhật</button>`
+    document.querySelector(".modal-containerEditColor form").innerHTML = html;
 }
 
 function addInModalSize(size) {
     var html = ` 
     <input type="hidden" name="id" value="${size.id}">
     <input type="text" placeholder="Nhập số kích thước" name="name" value="${size.name}">
-    <button type="submit" class="add">Sửa</button>`
-    document.querySelector("modal-containerEditSize form").innerHTML = html
+    <button type="submit" class="add">Cập nhật</button>`
+    document.querySelector(".modal-containerEditSize form").innerHTML = html
 }
 
 var modal = document.querySelector(".modal");
@@ -509,7 +509,7 @@ var modalEditContainer = document.querySelector(".modal-edit .modal-container");
 var modalEditDel = document.querySelector(".modal-edit .modal-container .del");
 var add = document.querySelector(".right .search .add");
 add.addEventListener("click", function () {
-    modalEdit.style.display = "flex";
+    modal.style.display = "flex";
 })
 modalEdit.addEventListener("click", function () {
     modalEdit.style.display = "none";
@@ -691,3 +691,54 @@ modalEditContainer.addEventListener("click", function () {
 // modalContainerEditSize.addEventListener("click", function () {
 //     event.stopPropagation();
 // });
+
+function getColorDB() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `showColor`, true)
+    xhttp.responseType = 'json'
+    xhttp.send()
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var c = {}
+            c = xhttp.response
+            console.log(c)
+            addInColor(c)
+        }
+    };
+}
+function getSizeDB() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `showSize`, true)
+    xhttp.responseType = 'json'
+    xhttp.send()
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var c = {}
+            c = xhttp.response
+            console.log(c)
+            addInSize(c)
+        }
+    };
+}
+getColorDB()
+getSizeDB()
+function addInColor(c) {
+    var html = "";
+    for (let i = 0; i < c.length; i++) {
+        html += `<option value="${c[i].id}">${c[i].name}</option>`
+    }
+    var colors = document.querySelectorAll("select.color");
+    for (let i = 0; i < colors.length; i++) {
+        colors[i].innerHTML = html;
+    }
+}
+function addInSize(c) {
+    var html = "";
+    for (let i = 0; i < c.length; i++) {
+        html += `<option value="${c[i].id}">${c[i].name}</option>`
+    }
+    var sizes = document.querySelectorAll("select.size");
+    for (let i = 0; i < sizes.length; i++) {
+        sizes[i].innerHTML = html;
+    }
+}

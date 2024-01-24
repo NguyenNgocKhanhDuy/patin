@@ -41,6 +41,7 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        System.out.println(BillService2.getInstance().getAllBillDetail(1).get(0).getBill().getUser());
+        System.out.println(ProductService2.getInstance().getWishList(1));
     }
 }
+

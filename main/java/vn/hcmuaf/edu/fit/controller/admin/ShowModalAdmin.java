@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.admin;
 
 import com.google.gson.Gson;
 import vn.hcmuaf.edu.fit.bean.*;
@@ -6,6 +6,7 @@ import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.dao.ColorDao;
 import vn.hcmuaf.edu.fit.dao.SizeDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
+import vn.hcmuaf.edu.fit.services.ProductService2;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -44,8 +45,8 @@ public class ShowModalAdmin extends HttpServlet {
                     }else {
                         int idSize = SizeDao.getInstance().getIdByName(size);
                         int idColor = ColorDao.getInstance().getIdByName(color);
-                        Product product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
-//                        response.getWriter().println(gson.toJson(id+", "+idSize+", "+idColor));
+//                        Product product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
+                        ProductMain product = ProductService2.getInstance().getProductDetail(id, idSize, idColor);
                         response.getWriter().println(gson.toJson(product));
                     }
                 } else if (select.equals("brand")) {
@@ -61,10 +62,9 @@ public class ShowModalAdmin extends HttpServlet {
 
 
             }catch (NumberFormatException e) {
-                id = 0;
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                request.getRequestDispatcher("showUserAdmin").forward(request, response);
             }
 
         }

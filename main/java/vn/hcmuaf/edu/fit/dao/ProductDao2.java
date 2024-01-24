@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.dao;
 
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
@@ -56,6 +57,19 @@ public class ProductDao2 {
         List<ProductMain> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product.sale_percent as product_detail_product_salePercent, MIN(product_detail.price)*(1 - product.sale_percent) as minPrice, MAX(product_detail.price)*(1 - product.sale_percent) as maxPrice, image_product.url as img " +
                             "FROM image_product JOIN product on image_product.id_product = product.id JOIN product_detail ON product.id =product_detail.id_product " +
+                            "WHERE image_product.id = 1 " +
+                            "GROUP BY product.id " +
+                            "LIMIT ?, ?")
+                    .bind(0, start).bind(1, quantityPerPage)
+                    .mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
+
+    public List<ProductMain> getProductPerPageAdmin(int start, int quantityPerPage) {
+        List<ProductMain> products = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id as product_detail_product_id, product.name product_detail_product_name, product.sale_percent product_detail_product_salePercent, image_product.url as img " +
+                            "FROM image_product JOIN product on image_product.id_product = product.id  " +
                             "WHERE image_product.id = 1 " +
                             "GROUP BY product.id " +
                             "LIMIT ?, ?")
@@ -437,38 +451,64 @@ public class ProductDao2 {
                     .bind("id", id).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
         });
         return product;
+    }
 
+    public List<ProductMain> getAllProductDetailPerPage(int start, int id) {
+        List<ProductMain> product = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product_detail.quantity as product_detail_quantity, image_product.url as img, product_detail.price * (1-product.sale_percent) as product_detail_price, product.sale_percent as product_detail_product_salePercent, product.information as product_detail_product_information, " +
+                            "size.id as product_detail_size_id, size.name product_detail_size_name, color.id as product_detail_color_id, color.name as product_detail_color_name " +
+                            "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
+                            "WHERE product_detail.id_product = :id AND image_product.id = 1 " +
+                            "ORDER BY price asc " +
+                            "LIMIT :start, 5").bind("start", start)
+                    .bind("id", id).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+        });
+        return product;
     }
     public ProductMain getProductDetail(int id, int size, int color) {
-        ProductMain product = JDBIConnector.get().withHandle(handle -> {
+        List<ProductMain> product = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product_detail.quantity as product_detail_quantity, image_product.url as img, product_detail.price * (1-product.sale_percent) as product_detail_price, product.sale_percent as product_detail_product_salePercent, product.information as product_detail_product_information, " +
                             "size.id as product_detail_size_id, size.name product_detail_size_name, color.id as product_detail_color_id, color.name as product_detail_color_name " +
                             "FROM  image_product JOIN product on product.id = image_product.id_product JOIN product_detail on product.id = product_detail.id_product JOIN color on color.id = product_detail.id_color JOIN size on size.id = product_detail.id_size " +
                             "WHERE product_detail.id_product = :id AND product_detail.id_size = :size AND product_detail.id_color = :color AND image_product.id = 1 ")
                     .bind("id", id).bind("size", size).bind("color", color)
-                    .mapToBean(ProductMain.class).one();
+                    .mapToBean(ProductMain.class).stream().collect(Collectors.toList());
         });
-        return product;
+        if (product.size() != 1) return null;
+        return product.get(0);
     }
 
 
 
-    public List<ProductMain> getWishList(int userID, int productID) {
+    public List<ProductMain> getWishList(int userID) {
         List<ProductMain> products = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product.sale_percent as product_detail_product_salePercent, MIN(product_detail.price)*(1 - product.sale_percent) as minPrice, MAX(product_detail.price)*(1 - product.sale_percent) as maxPrice, image_product.url as img " +
                     "FROM product_detail JOIN product on product_detail.id_product = product.id JOIN image_product on product.id = image_product.id_product JOIN wish_list on product.id = wish_list.id_product " +
-                    "WHERE image_product.id = 1 AND wish_list.id_product = :product AND wish_list.id_user = :user " +
+                    "WHERE image_product.id = 1 AND wish_list.id_user = :user " +
                     "GROUP BY product.id ")
-                    .bind("product", productID).bind("user", userID).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+                    .bind("user", userID).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
         });
         return products;
     }
 
-    public void addWishList(int userID, int productID) {
-        JDBIConnector.get().withHandle(handle -> {
+    public List<ProductMain> getWishListPerPage(int start, int userID) {
+        List<ProductMain> products = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT product.id as product_detail_product_id, product.name as product_detail_product_name, product.sale_percent as product_detail_product_salePercent, MIN(product_detail.price)*(1 - product.sale_percent) as minPrice, MAX(product_detail.price)*(1 - product.sale_percent) as maxPrice, image_product.url as img " +
+                    "FROM product_detail JOIN product on product_detail.id_product = product.id JOIN image_product on product.id = image_product.id_product JOIN wish_list on product.id = wish_list.id_product " +
+                    "WHERE image_product.id = 1 AND wish_list.id_user = :user " +
+                    "GROUP BY product.id " +
+                            "LIMIT :start, 15")
+                    .bind("user", userID).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+        });
+        return products;
+    }
+
+    public boolean addWishList(int userID, int productID) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("INSERT INTO wish_list(id_user, id_product) VALUES (:user, :product) ")
                     .bind("user", userID).bind("product", productID).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public int reduceQuantity(int id, int size, int color, int newQuantity){
@@ -480,5 +520,78 @@ public class ProductDao2 {
         });
         return i;
     }
+
+    public boolean addProduct(Product2 product) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO product(name, hot, sale_percent, information) VALUES (:name, :hot, :sale, :information)")
+                    .bind("name", product.getName()).bind("hot", product.getHot()).bind("sale", product.getSalePercent()).bind("information", product.getInformation()).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public boolean addProduct(ProductDetail product) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO product(name, hot, sale_percent, information) VALUES (:name, :hot, :sale, :information)")
+                    .bind("name", product.getProduct().getName()).bind("hot", product.getProduct().getHot()).bind("sale", product.getProduct().getSalePercent()).bind("information", product.getProduct().getInformation()).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public boolean addProductDetail(ProductDetail product) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO product_detail(id_product, id_size, id_color, quantity, price) VALUES (:product, :size, :color, :quantity, :price)")
+                    .bind("product", product.getProduct().getId()).bind("size", product.getSize().getId()).bind("color", product.getColor().getId()).bind("quantity", product.getQuantity()).bind("price", product.getPrice()).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public int getIDNewProduct() {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT id from product ORDER BY id desc LIMIT 1").mapTo(Integer.class).one();
+        });
+        return i;
+    }
+
+    public boolean updateProduct(Product2 product) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE product SET name = :name, hot = :hot, sale_percent = :sale, information = :information WHERE id = :id")
+                    .bind("name", product.getName()).bind("hot", product.getHot()).bind("sale", product.getSalePercent())
+                    .bind("information", product.getInformation()).bind("id", product.getId()).execute();
+        });
+        return i==1 ? true:false;
+    }
+
+    public boolean updateProductDetail(ProductDetail product, int oldSize, int oldColor) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE product_detail SET id_size = :size, id_color = :color, quantity = :quantity, price = :price WHERE id_product = :id AND id_size = :old_size AND id_color = :old_color")
+                    .bind("size", product.getSize().getId()).bind("color", product.getColor().getId()).bind("quantity", product.getQuantity())
+                    .bind("price", product.getPrice()).bind("id", product.getProduct().getId())
+                    .bind("old_size", oldSize).bind("old_color", oldColor).execute();
+        });
+        return i==1 ? true:false;
+    }
+
+    public boolean deleteProduct(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM product WHERE id = :id").bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public boolean deleteProductDetailAll(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM product_detail WHERE id_product = :id").bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public boolean deleteProductDetail(int id, int size, int color) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM product_detail WHERE id_product = :id AND id_size = :size AND id_color = :color").bind("id", id)
+                    .bind("size", size).bind("color", color).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
 
 }

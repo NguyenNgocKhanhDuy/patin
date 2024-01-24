@@ -25,4 +25,36 @@ public class ImageProductDao2 {
         });
         return imageProducts;
     }
+
+    public boolean addFirstImage(String url, int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO image_product(id, url, id_product) VALUES (1, :url, :id)")
+                    .bind("url", url).bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+    public boolean addImage(String url, int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO image_product(url, id_product) VALUES (:url, :id)")
+                    .bind("url", url).bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+    public boolean deleteAllImageOfProduct(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM image_product WHERE id_product = :id").bind("id", id).execute();
+        });
+        return i > 0 ? true : false;
+
+    }
+
+    public boolean deleteImage(int id, int idProduct) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM image_product WHERE id = :id AND id_product  = :product").bind("id", id)
+                    .bind("product", idProduct).execute();
+        });
+        return i == 1 ? true : false;
+
+    }
 }

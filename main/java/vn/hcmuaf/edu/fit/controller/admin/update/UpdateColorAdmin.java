@@ -1,7 +1,8 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.admin.update;
 
-import vn.hcmuaf.edu.fit.bean.Size;
-import vn.hcmuaf.edu.fit.dao.SizeDao;
+import vn.hcmuaf.edu.fit.bean.Color;
+import vn.hcmuaf.edu.fit.dao.CategoryDao;
+import vn.hcmuaf.edu.fit.dao.ColorDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "UpdateSizeAdmin", value = "/updateSizeAdmin")
-public class UpdateSizeAdmin extends HttpServlet {
+@WebServlet(name = "UpdateColorAdmin", value = "/updateColorAdmin")
+public class UpdateColorAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id;
@@ -27,17 +28,24 @@ public class UpdateSizeAdmin extends HttpServlet {
             try {
                 id = Integer.parseInt(request.getParameter("id"));
 
-                Size size = SizeDao.getInstance().getSizeById(id);
-                size.setName(name);
-                SizeDao.getInstance().updateSize(size);
+                Color color = ColorDao.getInstance().getColorById(id);
+                color.setName(name);
 
-                request.setAttribute("type", "success");
-                request.setAttribute("information", "Cập nhật thành công");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                if (ColorDao.getInstance().updateColor(color)){
+                    request.setAttribute("type", "success");
+                    request.setAttribute("information", "Cập nhật thành công");
+                    request.getRequestDispatcher("showColorAdmin").forward(request, response);
+                }else {
+                    request.setAttribute("type", "error");
+                    request.setAttribute("information", "Lỗi sql");
+                    request.getRequestDispatcher("showColorAdmin").forward(request, response);
+                }
+
+
             }catch (NumberFormatException e ){
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi");
-                request.getRequestDispatcher("showAdmin").forward(request, response);
+                request.getRequestDispatcher("showColorAdmin").forward(request, response);
             }
         }
 

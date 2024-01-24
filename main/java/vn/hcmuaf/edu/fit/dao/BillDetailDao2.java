@@ -36,4 +36,11 @@ public class BillDetailDao2 implements Serializable {
         });
         return billDetails;
     }
+
+    public boolean deleteAllBillDetail(int id){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM bill_detail WHERE bill_id = :id").bind("id", id).execute();
+        });
+        return i > 0 ? true : false;
+    }
 }

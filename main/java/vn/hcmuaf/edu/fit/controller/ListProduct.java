@@ -106,12 +106,12 @@ public class ListProduct extends HttpServlet {
             }
 //            products = ProductService.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
             products = ProductService2.getInstance().getProductPerPageFilterPrice(currentPage, sort, min, max);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPrice(min, max) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPrice(min, max) / productPerPage));
             href += "min="+min+"&max="+max;
         } else if (!(min != minValue || max != maxValue) && isColorFilter) {
 //            products = ProductService.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
             products = ProductService2.getInstance().getProductPerPageFilterColor(currentPage, sort, colors);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColor(colors) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterColor(colors) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -122,7 +122,7 @@ public class ListProduct extends HttpServlet {
         } else if ((min != minValue || max != maxValue) && isColorFilter) {
 //            products = ProductService.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
             products = ProductService2.getInstance().getProductPerPageFilterPriceColor(currentPage, sort, min, max, colors);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColor(min, max, colors) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPriceColor(min, max, colors) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -133,7 +133,7 @@ public class ListProduct extends HttpServlet {
         }else {
 //            products = ProductService.getInstance().getProductPerPage(currentPage, sort, 15);
             products = ProductService2.getInstance().getProductPerPage(currentPage, sort, 15);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countAll() / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countAll() / productPerPage));
         }
 
         href += "&sort="+sort;

@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.admin.delete;
 
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.UserService;
@@ -13,22 +13,27 @@ import java.io.*;
 public class DeleteUserAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id;
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            UserService.getInstance().deleteUser(id);
-            request.setAttribute("type", "success");
-            request.setAttribute("information", "Xoá thành công");
-            request.getRequestDispatcher("showUserAdmin").forward(request, response);
+            if (UserService.getInstance().deleteUser(id)){
+                request.setAttribute("type", "success");
+                request.setAttribute("information", "Thêm thành công");
+                request.getRequestDispatcher("showUserAdmin").forward(request, response);
+            }else {
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Lỗi sql");
+                request.getRequestDispatcher("showUserAdmin").forward(request, response);
+            }
         }catch (NumberFormatException e){
             request.setAttribute("type", "error");
             request.setAttribute("information", "Lỗi null");
             request.getRequestDispatcher("showUserAdmin").forward(request, response);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

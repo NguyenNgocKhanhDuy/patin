@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.services;
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.Product2;
 import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.dao.ProductDao;
@@ -53,6 +54,14 @@ public class ProductService2 {
         }else {
             return ProductDao2.getInstance().getProductSortPerPage(start, sort);
         }
+    }
+
+    public List<ProductMain> getProductPerPageAdmin(int currentPage, String sort, int quantityPerPage) {
+        int start = getStartIndex(currentPage, quantityPerPage);
+        if ("".equals(sort)) {
+            return ProductDao2.getInstance().getProductPerPageAdmin(start, quantityPerPage);
+        }
+        return null;
     }
 
     public List<ProductMain> getProductPerPageByCategory(int currentPage, String sort, int category) {
@@ -142,6 +151,11 @@ public class ProductService2 {
         }
     }
 
+    public List<ProductMain> getAllProductDetailPerPage(int currentPage, int productPerPage, int id) {
+        int start = getStartIndex(currentPage, productPerPage);
+        return ProductDao2.getInstance().getAllProductDetailPerPage(start, id);
+    }
+
     public int countFilterPriceColor(int min, int max, String[] colors) {
         return ProductDao2.getInstance().countFilterPriceColor(min, max, colors);
     }
@@ -189,12 +203,16 @@ public class ProductService2 {
         return ProductDao2.getInstance().getAllProductDetail(id);
     }
 
-    public List<ProductMain> getWishList(int userID, int productID) {
-        return ProductDao2.getInstance().getWishList(userID, productID);
+    public List<ProductMain> getWishList(int userID) {
+        return ProductDao2.getInstance().getWishList(userID);
+    }
+    public List<ProductMain> getWishListPerPage(int currentPage, int userID) {
+        int start = getStartIndex(currentPage, 15);
+        return ProductDao2.getInstance().getWishList(userID);
     }
 
-    public void addWishList(int userID, int productID) {
-        ProductDao2.getInstance().addWishList(userID, productID);
+    public boolean addWishList(int userID, int productID) {
+        return ProductDao2.getInstance().addWishList(userID, productID);
     }
 
     public ProductMain getProductDetail(int id, int size, int color){
@@ -204,5 +222,39 @@ public class ProductService2 {
     public boolean reduceQuantity(int id, int size, int color, int amount) {
         int newQuanity = getQuantity(id, size, color) - amount;
         return ProductDao2.getInstance().reduceQuantity(id, size, color, newQuanity) != 1 ? false : true;
+    }
+    public boolean addProduct(Product2 product) {
+        return ProductDao2.getInstance().addProduct(product);
+    }
+
+    public boolean addProduct(ProductDetail product) {
+        return ProductDao2.getInstance().addProduct(product);
+    }
+
+    public boolean addProductDetail(ProductDetail product) {
+        return ProductDao2.getInstance().addProductDetail(product);
+    }
+
+    public int getIdNewProduct() {
+        return ProductDao2.getInstance().getIDNewProduct();
+    }
+
+    public boolean updateProduct(Product2 product) {
+        return ProductDao2.getInstance().updateProduct(product);
+    }
+    public boolean updateProductDetail(ProductDetail product, int oldSize, int oldColor) {
+        return ProductDao2.getInstance().updateProductDetail(product, oldSize, oldColor);
+    }
+
+    public boolean isExistProductDetail(int id, int size, int color) {
+        return ProductDao2.getInstance().getProductDetail(id, size, color) != null ? true : false;
+    }
+
+    public boolean deleleProductAll(int id){
+        return ProductDao2.getInstance().deleteProduct(id) && ProductDao2.getInstance().deleteProductDetailAll(id);
+    }
+
+    public boolean deleleProductDetail(int id, int size, int color){
+        return ProductDao2.getInstance().deleteProductDetail(id, size, color);
     }
 }

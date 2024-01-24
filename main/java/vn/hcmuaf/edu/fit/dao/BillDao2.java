@@ -100,4 +100,19 @@ public class BillDao2 {
         return i;
     }
 
+
+    public boolean updateStatusBill(int id, String status){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE bill SET status = :status WHERE id = :id").bind("status", status).bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+    public boolean deleteBill(int id){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM bill WHERE id = :id").bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
+
 }

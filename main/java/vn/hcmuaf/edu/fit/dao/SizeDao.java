@@ -44,17 +44,18 @@ public class SizeDao {
         return sizes;
     }
 
-    public void insertSize(Size size){
-        int id = getAllsize().size() + 1;
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO size(id, name) VALUES (:id, name)").bind("name", size.getName()).bind("id", id).execute();
+    public boolean insertSize(Size size){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO size(name) VALUES (:name)").bind("name", size.getName()).execute();
         });
+        return i == 1 ? true : false;
     }
 
-    public void updateSize(Size size){
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean updateSize(Size size){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE size SET name = :name WHERE id = :id").bind("name", size.getName()).bind("id", size.getId()).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public List<Size> getSizePerPage(int currentPage, int productPerPage) {
@@ -70,10 +71,11 @@ public class SizeDao {
         return size;
     }
 
-    public void deleteSize(int id) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean deleteSize(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM size WHERE id = ?").bind(0, id).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public int getIdByName(String name){

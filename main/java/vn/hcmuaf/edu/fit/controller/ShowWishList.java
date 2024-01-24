@@ -1,8 +1,10 @@
 package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.ProductService;
+import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,15 +17,32 @@ import java.util.List;
 public class ShowWishList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id ;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-            User user = (User) request.getSession().getAttribute("auth");
-            List<Product> productList = ProductService.getInstance().getWishList(user.getId(), id);
+        User user = (User) request.getSession().getAttribute("auth");
+        if (user == null){
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Đăng nhập để tiếp tục");
+            request.getRequestDispatcher("listProduct").forward(request, response);
+        }else {
+            int currentPage;
+            try {
+                currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            }catch (NumberFormatException e) {
+                currentPage = 1;
+            }
+
+            String href = "showWishList?";
+            request.setAttribute("href", href);
+
+            List<ProductMain> all = ProductService2.getInstance().getWishList(user.getId());
+
+            int totalPage = (int) Math.ceil(all.size() / 15.0);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("productPerPage", 15);
+
+            List<ProductMain> productList = ProductService2.getInstance().getWishListPerPage(currentPage, user.getId());
             request.setAttribute("list", productList);
             request.getRequestDispatcher("wishlist.jsp").forward(request, response);
-        }catch (NumberFormatException e){
-
         }
     }
 

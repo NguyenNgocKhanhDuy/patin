@@ -101,19 +101,19 @@
             <div class="product-list" id="product-list">
                 <c:forEach items="${list}" var="product">
                     <div class="product-item">
-                        <a href="productDetail?productID=${product.getId()}">
+                        <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
                             <img src= ${product.getImg()} >
-                            <h4 class="name"> ${product.getName()} </h4>
+                            <h4 class="name"> ${product.getProductDetail().getProduct().getName()} </h4>
                             <span class="price-section">
                                         <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
-                                            <c:if test="${product.getSalePercent() == 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() == 0}">
                                                 <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                                 </h5>
                                             </c:if>
-                                            <c:if test="${product.getSalePercent() != 0}">
+                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
                                                 <h5 class="origin">
-                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>
+                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
                                                 </h5>
                                                 <h5 class="price">
                                                     <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
@@ -135,10 +135,10 @@
 <%--                                <li><i class="fa-solid fa-heart like"></i></li>--%>
 <%--                            </ul>--%>
                         </a>
-                        <c:if test="${product.getSalePercent() != 0}">
+                        <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
                             <div class="sale">
                                 <p>
-                                    <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>
+                                    <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
                                 </p>
                                 <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
                             </div>

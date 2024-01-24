@@ -115,11 +115,11 @@ public class ListProductCategory extends HttpServlet {
                 max = maxValue;
             }
             products = ProductService2.getInstance().getProductPerPageFilterPriceByCategory(currentPage, sort, min, max, category);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceByCategory(min, max, category) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPriceByCategory(min, max, category) / productPerPage));
             href += "min="+min+"&max="+max;
         } else if (!(min != minValue || max != maxValue) && isColorFilter) {
             products = ProductService2.getInstance().getProductPerPageFilterColorByCategory(currentPage, sort, colors, category);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColorByCategory(colors, category) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterColorByCategory(colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -130,7 +130,7 @@ public class ListProductCategory extends HttpServlet {
         } else if ((min != minValue || max != maxValue) && isColorFilter) {
 
             products = ProductService2.getInstance().getProductPerPageFilterPriceColorByCategory(currentPage, sort, min, max, colors, category);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColorByCategory(min, max, colors, category) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPriceColorByCategory(min, max, colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -140,7 +140,7 @@ public class ListProductCategory extends HttpServlet {
 
         }else {
             products = ProductService2.getInstance().getProductPerPageByCategory(currentPage, sort, category);
-            totalPage = (int) Math.ceil((ProductService.getInstance().countAllByCategory(category) / productPerPage));
+            totalPage = (int) Math.ceil((ProductService2.getInstance().countAllByCategory(category) / productPerPage));
         }
 
         href += "&sort="+sort;
@@ -158,7 +158,7 @@ public class ListProductCategory extends HttpServlet {
 
         request.setAttribute("products", products);
 
-        request.getRequestDispatcher("/product_category.jsp").forward(request, response);
+        request.getRequestDispatcher("product_category.jsp").forward(request, response);
     }
 
     @Override

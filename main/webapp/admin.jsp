@@ -97,72 +97,143 @@
             <div class="left">
                 <div class="account">
                     <ul class="menu">
-                        <li class="activeAccountNav">
-                            <i class="fa-solid fa-bars-progress"></i>
-                            <span>Quản lý</span>
-                            <ul class="sub_menu showSubMenu">
-                                <li id="manageUser">
-                                    <c:if test="${users != null}">
-                                        <a href="showUserAdmin" class="activeAccountNav">
-                                            Quản lý người dùng
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${users == null}">
-                                        <a href="showUserAdmin">
-                                            Quản lý người dùng
-                                        </a>
-                                    </c:if>
-                                </li>
-                                <li id="manageProduct">
-                                    <c:if test="${products != null}">
-                                        <a href="showProductAdmin" class="activeAccountNav">
-                                            Quản lý sản phẩm
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${products == null}">
-                                        <a href="showProductAdmin">
-                                            Quản lý sản phẩm
-                                        </a>
-                                    </c:if>
-                                </li>
-                                <li id="manageBrand">
-                                    <c:if test="${categories != null}">
-                                        <a href="showCategoryAdmin" class="activeAccountNav">
-                                            Quản lý danh mục
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${categories == null}">
-                                        <a href="showCategoryAdmin">
-                                            Quản lý danh mục
-                                        </a>
-                                    </c:if>
-                                </li>
-                                <li id="manageColor">
-                                    <c:if test="${colors != null}">
-                                        <a href="showColorAdmin" class="activeAccountNav">
-                                            Quản lý màu sắc
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${colors == null}">
-                                        <a href="showColorAdmin">
-                                            Quản lý màu sắc
-                                        </a>
-                                    </c:if>
-                                </li>
-                                <li id="manageSize">
-                                    <c:if test="${sizes != null}">
-                                        <a href="showSizeAdmin" class="activeAccountNav">
-                                            Quản lý kích thước
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${sizes == null}">
-                                        <a href="showSizeAdmin">
-                                            Quản lý kích thước
-                                        </a>
-                                    </c:if>
-                                </li>
-                            </ul>
-                        </li>
+                        <c:if test="${bill == null}">
+                            <li class="activeAccountNav">
+                                <i class="fa-solid fa-bars-progress"></i>
+                                <span>Quản lý</span>
+                                <ul class="sub_menu showSubMenu">
+                                    <li>
+                                        <c:if test="${users != null}">
+                                            <a href="showUserAdmin" class="activeAccountNav">
+                                                Quản lý người dùng
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${users == null}">
+                                            <a href="showUserAdmin">
+                                                Quản lý người dùng
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${products != null || productDetail != null}">
+                                            <a href="showProductAdmin" class="activeAccountNav">
+                                                Quản lý sản phẩm
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${products == null && productDetail == null}">
+                                            <a href="showProductAdmin">
+                                                Quản lý sản phẩm
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${categories != null}">
+                                            <a href="showCategoryAdmin" class="activeAccountNav">
+                                                Quản lý danh mục
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${categories == null}">
+                                            <a href="showCategoryAdmin">
+                                                Quản lý danh mục
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${colors != null}">
+                                            <a href="showColorAdmin" class="activeAccountNav">
+                                                Quản lý màu sắc
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${colors == null}">
+                                            <a href="showColorAdmin">
+                                                Quản lý màu sắc
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${sizes != null}">
+                                            <a href="showSizeAdmin" class="activeAccountNav">
+                                                Quản lý kích thước
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${sizes == null}">
+                                            <a href="showSizeAdmin">
+                                                Quản lý kích thước
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                </ul>
+                            </li>
+                        </c:if>
+                        <c:if test="${bill != null}">
+                            <li>
+                                <i class="fa-solid fa-bars-progress"></i>
+                                <span>Quản lý</span>
+                                <ul class="sub_menu showSubMenu">
+                                    <li>
+                                        <c:if test="${users != null}">
+                                            <a href="showUserAdmin" class="activeAccountNav">
+                                                Quản lý người dùng
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${users == null}">
+                                            <a href="showUserAdmin">
+                                                Quản lý người dùng
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${products != null || productDetail != null}">
+                                            <a href="showProductAdmin" class="activeAccountNav">
+                                                Quản lý sản phẩm
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${products == null && productDetail == null}">
+                                            <a href="showProductAdmin">
+                                                Quản lý sản phẩm
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${categories != null}">
+                                            <a href="showCategoryAdmin" class="activeAccountNav">
+                                                Quản lý danh mục
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${categories == null}">
+                                            <a href="showCategoryAdmin">
+                                                Quản lý danh mục
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${colors != null}">
+                                            <a href="showColorAdmin" class="activeAccountNav">
+                                                Quản lý màu sắc
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${colors == null}">
+                                            <a href="showColorAdmin">
+                                                Quản lý màu sắc
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <li>
+                                        <c:if test="${sizes != null}">
+                                            <a href="showSizeAdmin" class="activeAccountNav">
+                                                Quản lý kích thước
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${sizes == null}">
+                                            <a href="showSizeAdmin">
+                                                Quản lý kích thước
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                </ul>
+                            </li>
+                        </c:if>
+
                         <li id="manageReport">
                             <c:if test="${bills != null}">
                                 <a href="showBillAdmin" class="activeAccountNav">
@@ -176,10 +247,6 @@
                                     <span>Báo cáo</span>
                                 </a>
                             </c:if>
-                        </li>
-                        <li id="manageAccount">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Tài khoản</span>
                         </li>
                     </ul>
                 </div>
@@ -198,9 +265,11 @@
                         <div class="search">
                             <input type="text" placeholder="Nhập tìm kiếm">
                             <button class="search-btn">Tìm kiếm</button>
-                            <div class="add">
-                                Thêm người dùng
-                            </div>
+                            <c:if test="${per > 1}">
+                                <div class="add">
+                                    Thêm người dùng
+                                </div>
+                            </c:if>
                         </div>
                         <div class="user-list">
                             <div class="title">
@@ -217,9 +286,11 @@
                                     <p class="email">${user.getEmail()}</p>
                                     <p class="phone">${user.getPhone()}</p>
                                     <i class="fa-solid fa-clipboard detail"></i>
-                                    <a href="deleteUserAdmin?id=${user.getId()}">
-                                        <i class="fa-solid fa-xmark del"></i>
-                                    </a>
+                                    <c:if test="${per > 1}">
+                                        <a href="deleteUserAdmin?id=${user.getId()}">
+                                            <i class="fa-solid fa-xmark del"></i>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </c:forEach>
                         </div>
@@ -232,15 +303,17 @@
                             <i class="fa-solid fa-shop"></i>
                             <div class="text">
                                 <h3>Tổng số sản phẩm</h3>
-                                <p class="totalProduct">${allProduct.size()}</p>
+                                <p class="totalProduct">${allProduct}</p>
                             </div>
                         </div>
                         <div class="search">
                             <input type="text" placeholder="Nhập tìm kiếm">
                             <button class="search-btn">Tìm kiếm</button>
-                            <div class="add">
-                                Thêm sản phẩm
-                            </div>
+                            <c:if test="${per > 1}">
+                                <div class="add">
+                                    Thêm sản phẩm
+                                </div>
+                            </c:if>
                         </div>
                         <div class="product-list">
                             <div class="title">
@@ -252,11 +325,15 @@
                                 <div class="product-item">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <img src="${product.getImg()}" alt="">
-                                    <p class="name">${product.getName()}</p>
-                                    <a href="showProductDetailAdmin?id=${product.getId()}">
+                                    <p class="name">${product.getProductDetail().getProduct().getName()}</p>
+                                    <a href="showProductDetailAdmin?id=${product.getProductDetail().getProduct().getId()}">
                                         <i class="fa-solid fa-clipboard detail"></i>
                                     </a>
-                                    <i class="fa-solid fa-xmark del"></i>
+                                    <c:if test="${per > 1}">
+                                        <a href="deleteProductAdmin?id=${product.getProductDetail().getProduct().getId()}">
+                                            <i class="fa-solid fa-xmark del"></i>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </c:forEach>
                         </div>
@@ -277,9 +354,11 @@
                             <div class="search">
                                 <input type="text" placeholder="Nhập tìm kiếm">
                                 <button class="search-btn">Tìm kiếm</button>
-                                <div class="add">
-                                    Thêm danh mục
-                                </div>
+                                <c:if test="${per > 1}">
+                                    <div class="add">
+                                        Thêm danh mục
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="brand-list">
@@ -292,10 +371,12 @@
                                     <input type="hidden" class="id" value="${category.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">${category.getName()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
-                                    <a href="deleteCategoryAdmin">
-                                        <i class="fa-solid fa-xmark del"></i>
-                                    </a>
+                                    <c:if test="${per > 1}">
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                        <a href="deleteCategoryAdmin?id=${category.getId()}">
+                                            <i class="fa-solid fa-xmark del"></i>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </c:forEach>
                         </div>
@@ -315,9 +396,11 @@
                             <div class="search">
                                 <input type="text" placeholder="Nhập tìm kiếm">
                                 <button class="search-btn">Tìm kiếm</button>
-                                <div class="add">
-                                    Thêm màu sắc
-                                </div>
+                                <c:if test="${per > 1}">
+                                    <div class="add">
+                                        Thêm màu sắc
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="color-list">
@@ -330,10 +413,12 @@
                                     <input type="hidden" class="id" value="${color.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">Màu ${color.getName()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
-                                    <a href="deleteColorAdmin">
-                                        <i class="fa-solid fa-xmark del"></i>
-                                    </a>
+                                    <c:if test="${per > 1}">
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                        <a href="deleteColorAdmin?id=${color.getId()}">
+                                            <i class="fa-solid fa-xmark del"></i>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </c:forEach>
                         </div>
@@ -353,9 +438,11 @@
                             <div class="search">
                                 <input type="text" placeholder="Nhập tìm kiếm">
                                 <button class="search-btn">Tìm kiếm</button>
-                                <div class="add">
-                                    Thêm kích thước
-                                </div>
+                                <c:if test="${per > 1}">
+                                    <div class="add">
+                                        Thêm kích thước
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="size-list">
@@ -368,10 +455,12 @@
                                     <input type="hidden" class="id" value="${size.getId()}">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
                                     <p class="name">Size ${size.getName()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
-                                    <a href="deleteSizeAdmin">
-                                        <i class="fa-solid fa-xmark del"></i>
-                                    </a>
+                                    <c:if test="${per > 1}">
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                        <a href="deleteSizeAdmin?id=${size.getId()}">
+                                            <i class="fa-solid fa-xmark del"></i>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </c:forEach>
                         </div>
@@ -415,18 +504,19 @@
                                         <p class="id">${bill.getName()}</p>
                                         <p class="email">${bill.getUser().getEmail()}</p>
                                         <p class="date">
-                                            ${bill.getDate().getDayOfMonth()}
-                                                /
-                                            ${bill.getDate().getMonthValue()}
-                                                /
-                                            ${bill.getDate().getYear()}
+                                            <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                            <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
                                         </p>
 
                                         <p class="state">${bill.getStatus()}</p>
                                         <a href="showBillDetailAdmin?id=${bill.getId()}">
                                             <i class="fa-solid fa-clipboard detail"></i>
                                         </a>
-                                        <i class="fa-solid fa-xmark del"></i>
+                                        <c:if test="${per > 1}">
+                                            <a href="deleteBillAdmin?id="${bill.getId()}>
+                                                <i class="fa-solid fa-xmark del"></i>
+                                            </a>
+                                        </c:if>
                                     </div>
                                 </c:forEach>
 
@@ -438,48 +528,51 @@
                 <c:if test="${productDetail != null}">
                     <div class="product_detail section">
                         <div class="general">
-                            <p class="name">Tên sản phẩm: ${productDetail.get(0).getName()}</p>
+                            <p class="name">Tên sản phẩm: ${product.getProductDetail().getProduct().getName()}</p>
                             <p class="price">
                             <span class="rangePrice">
                                 Giá:
-                                <fmt:formatNumber value="${productDetail.get(0).getMinPrice()}" type="currency"/>
+                                <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                      -
-                                <fmt:formatNumber value="${productDetail.get(productDetail.size()-1).getMinPrice()}" type="currency"/>
+                                <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
                             </span>
                                 <span class="salePercent">
                                 Giảm giá:
-                                    <fmt:formatNumber value="${productDetail.get(0).getSalePercent()}" type="percent"/>
+                                    <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
                             </span>
                             </p>
-                            <c:if test="${productDetail.get(0).getHot() == 1}">
+                            <c:if test="${product.getProductDetail().getProduct().getHot() == 1}">
                                 <p class="hot">Hot</p>
                             </c:if>
                             <p class="more">
                             <span>Thông tin:<br>-
-                            ${productDetail.get(0).getInformation()}
+                            ${product.getProductDetail().getProduct().getInformation()}
                             </span>
-                                <span>
-                                <i class="fa-solid fa-clipboard detail"></i>
-                            </span>
+                                <c:if test="${per > 1}">
+                                    <span>
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                    </span>
+                                </c:if>
                             </p>
                         </div>
                         <div class="img">
                             <c:forEach items="${images}" var="img">
+                                <input type="hidden" class="imgID" value="${img.getId()}">
                                 <img src="${img.getUrl()}" alt="">
                             </c:forEach>
                         </div>
-                        <c:if test="${images.size() < 5}">
+                        <c:if test="${images.size() < 5 && per > 1}">
                             <div class="addBox">
-                                    <div class="add">
+                                    <div class="add addImg">
                                         Thêm ảnh
                                     </div>
-                                    <div class="add">
+                                    <div class="add addProduct">
                                         Thêm sản phẩm
                                     </div>
                             </div>
                         </c:if>
-                        <c:if test="${images.size() == 5}">
-                            <div class="add rightBtn">
+                        <c:if test="${images.size() == 5 && per > 1}">
+                            <div class="add rightBtn addProduct">
                                 Thêm sản phẩm
                             </div>
                         </c:if>
@@ -492,28 +585,33 @@
                                 <h4>Giá giảm giá</h4>
                                 <h4>Số lượng</h4>
                             </div>
-                            <c:forEach var="product" varStatus="index" items="${productDetail}">
-                                <div class="product-item">
-                                    <input type="hidden" class="id" value="${product.getId()}">
-                                    <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
-                                    <p class="color">${product.getColor()}</p>
-                                    <p class="size">${product.getSize()}</p>
-                                    <p class="price">
-                                        <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
-                                    </p>
-                                    <p class="priceSale">
-                                        <fmt:formatNumber value="${product.getMinPrice() * (1 - product.getSalePercent())}" type="currency"/>
-                                    </p>
-                                    <p class="quantỉty">${product.getQuantity()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
-                                    <i class="fa-solid fa-xmark del"></i>
-                                </div>
-                            </c:forEach>
-
+                            <c:if test="${productDetail.size() > 0}">
+                                <c:forEach var="product" varStatus="index" items="${productDetail}">
+                                    <div class="product-item">
+                                        <input type="hidden" class="id" value="${product.getProductDetail().getProduct().getId()}">
+                                        <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                        <p class="color">${product.getProductDetail().getColor().getName()}</p>
+                                        <p class="size">${product.getProductDetail().getSize().getName()}</p>
+                                        <p class="price">
+                                            <fmt:formatNumber value="${product.getProductDetail().getPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
+                                        </p>
+                                        <p class="priceSale">
+                                            <fmt:formatNumber value="${product.getProductDetail().getPrice()}" type="currency"/>
+                                        </p>
+                                        <p class="quantỉty">${product.getProductDetail().getQuantity()}</p>
+                                        <c:if test="${per > 1}">
+                                            <i class="fa-solid fa-clipboard detail"></i>
+                                            <a href="deleteProductDetailAdmin?id=${product.getProductDetail().getProduct().getId()}&size=${product.getProductDetail().getSize().getName()}&color=${product.getProductDetail().getColor().getName()}">
+                                                <i class="fa-solid fa-xmark del"></i>
+                                            </a>
+                                        </c:if>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
                         </div>
-
                     </div>
                 </c:if>
+
 
                 <c:if test="${billDetail != null}">
                     <div class="bill_detail section">
@@ -535,18 +633,16 @@
                             </span>
                             </p>
                             <p class="date">Ngày đặt hàng:
-                                    ${bill.getDate().getDayOfMonth()}
-                                /
-                                    ${bill.getDate().getMonthValue()}
-                                /
-                                    ${bill.getDate().getYear()}
+                                <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
+
                             </p>
                             <p class="more">
                             <span>Ghi chú: ${bill.getNote()}
                             </span>
                                 <span>
-                                <i class="fa-solid fa-clipboard detail"></i>
-                            </span>
+                                    <i class="fa-solid fa-clipboard detail"></i>
+                                </span>
                             </p>
                         </div>
 
@@ -559,18 +655,18 @@
                                 <h4>Giá</h4>
                                 <h4>Số lượng</h4>
                             </div>
-                            <c:forEach var="bill" items="${billDetail}" varStatus="index">
+                            <c:forEach var="b" items="${billDetail}" varStatus="index">
                                 <div class="bill-item">
                                     <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
-                                    <p class="name">${bill.getProduct().getName()}</p>
-                                    <p class="color">${bill.getColor().getName()}</p>
-                                    <p class="size">${bill.getSize().getName()}</p>
+                                    <p class="name">${b.getProduct().getProductDetail().getProduct().getName()}</p>
+                                    <p class="color">${b.getColor().getName()}</p>
+                                    <p class="size">${b.getSize().getName()}</p>
                                     <p class="price">
-                                        <fmt:formatNumber value="${bill.getPrice()}" type="currency"/>
+                                        <fmt:formatNumber value="${b.getPrice()}" type="currency"/>
                                     </p>
-                                    <p class="quantỉty">${bill.getQuantity()}</p>
-                                    <i class="fa-solid fa-clipboard detail"></i>
-                                    <i class="fa-solid fa-xmark del"></i>
+                                    <p class="quantỉty">${b.getQuantity()}</p>
+<%--                                    <i class="fa-solid fa-clipboard detail"></i>--%>
+<%--                                    <i class="fa-solid fa-xmark del"></i>--%>
                                 </div>
                             </c:forEach>
                         </div>
@@ -668,31 +764,7 @@
 
 
 
-                <div class="person section">
-                    <div class="top">
-                        <h3>Thông tin tài khoản</h3>
-                        <div class="logout">Thoát</div>
-                    </div>
 
-                    <div class="info">
-                        <div class="holder">
-                            <label>Họ Tên</label>
-                            <input type="text" >
-                        </div>
-                        <div class="holder">
-                            <label>Email</label>
-                            <input type="email">
-                        </div>
-                        <div class="holder">
-                            <label>Mật khẩu</label>
-                            <input type="password">
-                        </div>
-
-                        <div class="save">
-                            Lưu
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -702,7 +774,7 @@
             <div class="modal-container modalConUser modal-containerUser">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Thêm người dùng</h3>
-                <form action="addUserAdmin">
+                <form action="addUserAdmin" method="post" enctype="multipart/form-data">
                     <div class="wrapper">
                         <div class="main">
                             <div class="hold">
@@ -767,7 +839,7 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="file">
+                                <input type="file" name="file">
                             </div>
 
                         </div>
@@ -777,11 +849,10 @@
             </div>
         </div>
         <div class="modal modal-edit modal-Edituser">
-
             <div class="modal-container modalConUser modal-containerEditUser">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Chi tiết</h3>
-                <form action="updateUserAdmin">
+                <form action="updateUserAdmin" method="post" enctype="multipart/form-data">
                     <div class="wrapper">
                         <div class="main">
                             <div class="hold">
@@ -795,7 +866,11 @@
                             </div>
                             <div class="hold">
                                 <label>Địa chỉ</label>
-                                <input type="text" name="phone">
+                                <input type="text" name="address">
+                            </div>
+                            <div class="hold">
+                                <label>Mật khẩu</label>
+                                <input type="password" name="password">
                             </div>
 
                         </div>
@@ -804,36 +879,55 @@
                                 <label>Số điện thoại</label>
                                 <input type="tel" name="phone">
                             </div>
-                            <div class="gender">
-                                <label>Giới tính:</label>
-                                <div class="selectGender">
-                                    <input type="radio" name="gender" checked = "true">
-                                    <label>Nam</label>
-                                    <input type="radio" name="gender">
-                                    <label>Nữ</label>
+                            <div class="box">
+                                <div class="gender">
+                                    <label>Giới tính:</label>
+                                    <div class="selectGender">
+                                        <input type="radio" name="gender" checked = "true" value="Nam">
+                                        <label>Nam</label>
+                                        <input type="radio" name="gender" value="Nữ">
+                                        <label>Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="role">
+                                    <label>Vai trò:</label>
+                                    <select name="role">
+                                        <option value="0" selected>Khách hàng</option>
+                                        <option value="1">Mod</option>
+                                        <option value="2">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="verify">
+                                    <label>Xác thực Email:</label>
+                                    <select name="verify">
+                                        <option value="0" selected>Chưa xác nhận</option>
+                                        <option value="1">Đã xác nhận</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="dob">
                                 <label>Ngày sinh:</label>
                                 <div class="dob-input">
                                     <select class="day" name="day">
-                                        <option>31</option>
                                     </select>
                                     <select class="month" name="month">
-                                        <option>12</option>
                                     </select>
                                     <select class="year" name="year">
-                                        <option>1900</option>
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <input type="file">
+                                <input type="file" name="file">
                             </div>
 
                         </div>
                     </div>
-                    <button type="submit" class="add">Cập nhật</button>
+                    <c:if test="${per < 2}">
+                        <button class="add">Cập nhật</button>
+                    </c:if>
+                    <c:if test="${per > 1}">
+                        <button type="submit" class="add">Cập nhật</button>
+                    </c:if>
                 </form>
             </div>
         </div>
@@ -844,108 +938,64 @@
             <div class="modal-container modalConProduct modal-containerProduct">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Thêm sản phẩm</h3>
-                <form>
+                <form action="addProductAdmin" method="post" enctype="multipart/form-data">
                     <div class="wrapper">
                         <div class="main">
                             <div class="hold">
                                 <label>Tên sản phẩm</label>
-                                <input type="text">
+                                <input type="text" name="name">
                             </div>
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Giá gốc</label>
-                                    <input type="text">
+                                    <input type="text" name="price">
                                 </div>
                                 <div class="hold">
                                     <label>Giảm giá</label>
-                                    <input type="text">
+                                    <input type="number" name="sale" placeholder="Chỉ nhập số. VD: 10">
                                 </div>
                             </div>
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Màu sắc</label>
-                                    <select name="color">
-                                        <option>Trắng</option>
+                                    <select class="color" name="color">
                                     </select>
                                 </div>
                                 <div class="hold">
                                     <label>Size</label>
-                                    <select name="size">
-                                        <option>27</option>
+                                    <select class="size" name="size">
                                     </select>
+                                </div>
+                                <div class="hold">
+                                    <label>Hot</label>
+                                    <input type="checkbox" name="hot" value="1">
                                 </div>
                             </div>
                         </div>
                         <div class="more">
                             <div class="hold">
                                 <label>Thông tin khác</label>
-                                <textarea></textarea>
+                                <textarea name="information"></textarea>
                             </div>
-                            <div class="chooseImg">
-                                <input type="file">
-                                <input type="file">
-                                <input type="file">
-                                <input type="file">
+
+                            <div class="hold-2">
+                                <div class="hold">
+                                    <label>Số lượng</label>
+                                    <input type="number" name="quantity" value="1">
+                                </div>
+                                <div>
+                                    <input type="file" name="file">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button class="add">Thêm</button>
+                    <button type="submit" class="add">Thêm</button>
                 </form>
             </div>
         </div>
         <div class="modal modal-edit modal-Editproduct">
-
             <div class="modal-container modalConProduct modal-containerEditProduct">
                 <i class="fa-solid fa-xmark del"></i>
-                <h3>Thêm sản phẩm</h3>
-                <form>
-                    <div class="wrapper">
-                        <div class="main">
-                            <div class="hold">
-                                <label>Tên sản phẩm</label>
-                                <input type="text">
-                            </div>
-                            <div class="hold-2">
-                                <div class="hold">
-                                    <label>Giá gốc</label>
-                                    <input type="text">
-                                </div>
-                                <div class="hold">
-                                    <label>Giảm giá</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="hold-2">
-                                <div class="hold">
-                                    <label>Màu sắc</label>
-                                    <!--                                <input type="text">-->
-                                    <select name="color">
-                                        <option>Trắng</option>
-                                    </select>
-                                </div>
-                                <div class="hold">
-                                    <label>Size</label>
-                                    <select name="size">
-                                        <option>27</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="more">
-                            <div class="hold">
-                                <label>Thông tin khác</label>
-                                <textarea></textarea>
-                            </div>
-                            <div class="chooseImg">
-                                <input type="file">
-                                <input type="file">
-                                <input type="file">
-                                <input type="file">
-                            </div>
-                        </div>
-                    </div>
-                    <button class="add">Thêm</button>
-                </form>
             </div>
         </div>
     </c:if>
@@ -1028,24 +1078,25 @@
             <div class="modal-container modalConProduct modal-containerEditProduct">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Chi tiết sản phẩm</h3>
-                <form>
+                <form action="updateProductAdmin" method="post">
                     <div class="wrapper">
                         <div class="main">
+                            <input type="hidden" name="id" value="${product.getProductDetail().getProduct().getId()}">
                             <div class="hold">
                                 <label>Tên sản phẩm</label>
-                                <input type="text" value="${productDetail.get(0).getName()}">
+                                <input type="text" name="name" value="${product.getProductDetail().getProduct().getName()}">
                             </div>
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Giảm giá</label>
-                                    <input type="text" value="${productDetail.get(0).getSalePercent()}">
+                                    <input type="number" name="sale" value="${Integer.valueOf((product.getProductDetail().getProduct().getSalePercent() * 100))}">
                                 </div>
                                 <div class="hold">
                                     <label>Hot</label>
-                                    <c:if test="${productDetail.get(0).getHot() == 1}">
+                                    <c:if test="${product.getProductDetail().getProduct().getHot() == 1}">
                                         <input type="checkbox" name="hot" checked>
                                     </c:if>
-                                    <c:if test="${productDetail.get(0).getHot() == 0}">
+                                    <c:if test="${product.getProductDetail().getProduct().getHot() == 0}">
                                         <input type="checkbox" name="hot">
                                     </c:if>
                                 </div>
@@ -1054,10 +1105,7 @@
                         <div class="more">
                             <div class="hold">
                                 <label>Thông tin khác</label>
-                                <textarea>${text}</textarea>
-                            </div>
-                            <div class="chooseImg">
-                                <input type="file">
+                                <textarea name="information">${text}</textarea>
                             </div>
                         </div>
                     </div>
@@ -1067,34 +1115,38 @@
         </div>
         <div class="modal-img">
             <div class="modal-img-container">
-                <div class="delImg">
-                    Xoá ảnh
-                </div>
-                <i id="closeModalImg" class="fa-solid fa-x"></i>
-                <i id="previousImg" class="fa-solid fa-left-long"></i>
-                <i id="nextImg" class="fa-solid fa-right-long"></i>
-                <img id="imageInModal" src="" alt="">
+                <form action="deleteImg" method="post">
+                    <c:if test="${per > 1}">
+                        <input type="submit" class="delImg" value="Xoá ảnh">
+                    </c:if>
+                    <c:if test="${per < 2}">
+                        <input type="hidden" class="delImg" value="Xoá ảnh">
+                    </c:if>
+                    <input type="hidden" name="id" value="${product.getProductDetail().getProduct().getId()}">
+                    <input type="hidden" name="idImg" id="idImg" value="">
+                    <i id="closeModalImg" class="fa-solid fa-x"></i>
+                    <i id="previousImg" class="fa-solid fa-left-long"></i>
+                    <i id="nextImg" class="fa-solid fa-right-long"></i>
+                    <img id="imageInModal" src="" alt="">
+                </form>
             </div>
         </div>
         <div class="modal modalAddDetail">
             <div class="modal-container modalConProduct">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Thêm sản phẩm</h3>
-                <form>
+                <form action="addProductDetail" method="post">
                     <div class="wrapper">
+                        <input type="hidden" name="id" value="${product.getProductDetail().getProduct().getId()}">
                         <div class="main">
-                            <div class="hold">
-                                <label>Tên sản phẩm</label>
-                                <input type="text">
-                            </div>
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Giá gốc</label>
-                                    <input type="text">
+                                    <input type="number" name="price">
                                 </div>
                                 <div class="hold">
                                     <label>Số lượng</label>
-                                    <input type="number">
+                                    <input type="number" name="quantity">
                                 </div>
                             </div>
                         </div>
@@ -1102,20 +1154,18 @@
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Màu sắc</label>
-                                    <select name="color">
-                                        <option>Trắng</option>
+                                    <select class="color" name="color">
                                     </select>
                                 </div>
                                 <div class="hold">
                                     <label>Size</label>
-                                    <select name="size">
-                                        <option>27</option>
+                                    <select class="size" name="size">
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="add">Thêm</button>
+                    <button type="submit" class="add">Thêm</button>
                 </form>
             </div>
         </div>
@@ -1123,7 +1173,7 @@
             <div class="modal-container modalConProduct">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Chi tiết sản phẩm</h3>
-                <form>
+                <form action="updateProductDetailAdmin" method="post">
                     <div class="wrapper">
                         <div class="main">
                             <div class="hold">
@@ -1159,6 +1209,37 @@
                         </div>
                     </div>
                     <button class="add">Cập nhật</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-addImg">
+            <div class="modal-container">
+                <i class="fa-solid fa-xmark del"></i>
+                <h3>Thêm ảnh</h3>
+                <form action="addImage" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${product.getProductDetail().getProduct().getId()}">
+                    <input type="file" name="file">
+                    <input type="submit" class="add" value="Thêm">
+                </form>
+            </div>
+        </div>
+
+    </c:if>
+
+    <c:if test="${billDetail != null}">
+        <div class="modal-bill">
+            <div class="modal-container">
+                <i class="fa-solid fa-xmark del"></i>
+                <h3>Cập nhật trạng thái đơn hàng</h3>
+                <form action="updateBillAdmin" method="post">
+                    <input type="hidden" name="id" value="${bill.getId()}">
+                    <select name="status">
+                        <option value="0">Đang xử lý</option>
+                        <option value="1">Đang giao</option>
+                        <option value="2">Đã giao</option>
+                    </select>
+                    <input type="submit" class="add" value="Cập nhật">
                 </form>
             </div>
         </div>

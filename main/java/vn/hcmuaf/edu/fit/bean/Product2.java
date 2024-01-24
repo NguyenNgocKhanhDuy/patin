@@ -14,7 +14,7 @@ public class Product2 implements Serializable {
     public Product2() {
     }
 
-    public Product2(int id, String name, int hot, double salePercent, int minPrice, int maxPrice, String information, String img) {
+    public Product2(int id, String name, int hot, double salePercent, String information) {
         this.id = id;
         this.name = name;
         this.hot = hot;

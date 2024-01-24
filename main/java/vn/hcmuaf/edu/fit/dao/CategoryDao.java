@@ -27,22 +27,23 @@ public class CategoryDao {
 
     public Category getCategory(int id) {
         Category category = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT name FROM category WHERE id = ?").bind(0, id).mapToBean(Category.class).one();
+            return handle.createQuery("SELECT * FROM category WHERE id = ?").bind(0, id).mapToBean(Category.class).one();
         });
         return category;
     }
 
-    public void insertCategory(Category category){
-        int id = getAllCategory().size() + 1;
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO category(id, name) VALUES (:id, name)").bind("name", category.getName()).bind("id", id).execute();
+    public boolean insertCategory(Category category){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO category(name) VALUES (:name)").bind("name", category.getName()).execute();
         });
+        return i == 1 ? true :false;
     }
 
-    public void updateCategory(Category category){
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean updateCategory(Category category){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE category SET name = :name WHERE id = :id").bind("name", category.getName()).bind("id", category.getId()).execute();
         });
+        return i == 1 ? true : false;
     }
 
     public List<Category> getCategoryPerPage(int currentPage, int productPerPage) {
@@ -57,9 +58,10 @@ public class CategoryDao {
         });
         return category;
     }
-    public void deleteCategory(int id) {
-        JDBIConnector.get().withHandle(handle -> {
+    public boolean deleteCategory(int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM category WHERE id = ?").bind(0, id).execute();
         });
+        return i == 1 ? true : false;
     }
 }

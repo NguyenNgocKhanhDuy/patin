@@ -40,8 +40,7 @@
                     </c:if>
                     <c:if test="${sessionScope.auth == null}">
                         <li>
-                            <a href=/login.jsp">
-                                <c:set var="location" value="home" scope="session"/>
+                            <a href="login.jsp">
                                 ĐĂNG NHẬP
                             </a>
                         </li>

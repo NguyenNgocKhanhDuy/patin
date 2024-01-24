@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.controller;
 
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.ProductService;
+import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -25,12 +26,19 @@ public class AddWishList extends HttpServlet {
                 request.setAttribute("information", "Đăng nhập để tiếp tục");
                 request.getRequestDispatcher("productDetail?productID="+id).forward(request, response);
             }else {
-                ProductService.getInstance().addWishList(user.getId(), id);
-                response.sendRedirect("showWishList?id="+id);
+                if (ProductService2.getInstance().addWishList(user.getId(), id)){
+                    response.sendRedirect("showWishList?id="+id);
+                }else {
+                    request.setAttribute("type", "error");
+                    request.setAttribute("information", "Lỗi");
+                    request.getRequestDispatcher("productDetail?productID="+id).forward(request, response);
+                }
             }
 
         }catch (NumberFormatException e ){
-
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Lỗi");
+            request.getRequestDispatcher("listProduct").forward(request, response);
         }
     }
 

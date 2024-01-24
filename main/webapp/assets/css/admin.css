@@ -946,7 +946,7 @@
 
 
 
-.modal {
+.modal, .modal-addImg {
     position: fixed;
     top: 0;
     left: 0;
@@ -965,6 +965,11 @@
     background-color: #fff;
     padding: 20px;
     position: relative;
+}
+
+.modal-addImg input[type=file]{
+    display: block;
+    margin: 40px auto;
 }
 
 .modal-container i.del {
@@ -1048,14 +1053,14 @@
     margin-bottom: 30px;
 }
 
-.modal-container .chooseImg {
-    margin: 0 auto;
-    width: fit-content;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 20px;
-}
+/*.modal-container .chooseImg {*/
+/*    margin: 0 auto;*/
+/*    width: fit-content;*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 1fr;*/
+/*    grid-template-rows: 1fr 1fr;*/
+/*    grid-gap: 20px;*/
+/*}*/
 
 .modal-container .add {
     display: block;
@@ -1168,7 +1173,7 @@
 .modalConProduct select {
     height: 100%;
     margin: 0 auto;
-    width: 50%;
+    width: 80%;
     padding: 6px;
     font-size: 16px;
     text-align: center;
@@ -1215,6 +1220,10 @@
     justify-content: center;
     align-items: center;
     display: none;
+}
+.modal-img img {
+    width: 700px;
+    object-fit: scale-down;
 }
 
  .modal-img i {

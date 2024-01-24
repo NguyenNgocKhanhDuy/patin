@@ -148,8 +148,9 @@
                 <c:if test="${pass == null && bills == null && billDetail == null}">
                     <div class="infomation">
                         <h3>Thông tin</h3>
-                        <div class="wrapper">
-                            <form action="userInformation" class="info">
+                        <form action="userInformation" class="info">
+                            <div class="wrapper">
+
                                 <div class="part name">
                                     <label>Tên:</label>
                                     <input type="text" name="fullname" value="${sessionScope.auth.getFullName()}">
@@ -190,15 +191,16 @@
                                     </div>
                                 </div>
                                 <input type="submit" class="save" value="Lưu Thông Tin">
-                            </form>
-                            <div class="avatar">
-                                <img src="assets/images/logo.PNG" alt="">
+
+                                <div class="avatar">
+                                <img src="${sessionScope.auth.getAvatar()}" alt="">
                                 <div class="selectImg">
-                                    <input type="file" accept="image/*">
+                                    <input type="file" accept="image/*" name="file">
                                     <input type="submit" value="Lựa chọn ảnh">
                                 </div>
                             </div>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </c:if>
 

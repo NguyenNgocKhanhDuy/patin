@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.account;
 
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.UserService;
@@ -57,14 +57,38 @@ public class UserInformation extends HttpServlet {
                     String dob =year+"-"+month+"-"+day;
                     Date date = Date.valueOf(dob);
                     user.setDob(date);
-//                    String dob =day+"/"+month+"/"+year+" 00:00";
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//                    LocalDateTime dateTime = LocalDateTime.parse(dob, formatter);
-//                    user.setDob(dateTime);
-                    UserService.getInstance().updateUser(user);
-                    request.setAttribute("type", "sucess");
-                    request.setAttribute("information", "Cập nhật thông tin thành công");
-                    request.getRequestDispatcher("account.jsp").forward(request, response);
+
+                    Part filePart = request.getPart("file");
+
+                    String avatar = "";
+
+                    if (filePart.getSize() != 0) {
+                        String fileName = filePart.getSubmittedFileName();
+                        ServletContext servletContext = getServletContext();
+                        File root = new File(servletContext.getRealPath("/") + "data/avatar");
+                        if (!root.exists()) root.mkdirs();
+
+                        System.out.println(root.getAbsolutePath());
+
+                        avatar = "data/avatar/" + fileName;
+
+                        for (Part part : request.getParts()) {
+                            part.write(root.getAbsolutePath() + "/" + fileName);
+                        }
+
+                    }
+                    user.setAvatar(avatar);
+
+                    if (UserService.getInstance().updateUser(user)){
+                        request.setAttribute("type", "success");
+                        request.setAttribute("information", "Thêm thành công");
+                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                    }else {
+                        request.setAttribute("type", "error");
+                        request.setAttribute("information", "Lỗi sql");
+                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                    }
+
                 }
 
             }catch (NumberFormatException e ){

@@ -1,12 +1,13 @@
 ﻿
 var listImg = document.querySelectorAll(".product_detail .img img");
+var listImgId = document.querySelectorAll(".product_detail .img .imgID");
 var imgModal = document.getElementById("imageInModal");
 var modalImg = document.querySelector(".modal-img");
 var closeModalImg = document.getElementById("closeModalImg");
 var modalImgContainer = document.querySelector(".modal-img-container");
 var nextImg = document.getElementById("nextImg");
 var previousImg = document.getElementById("previousImg");
-
+var idImg = document.querySelector("#idImg");
 
 closeModalImg.addEventListener("click", function () {
     modalImg.style.display = "none";
@@ -25,6 +26,7 @@ function clickImg() {
         listImg[i].addEventListener('click', function () {
             modalImg.style.display = "flex"
             imgModal.src = listImg[i].src
+            idImg.value = listImgId[i].value
         })
     }
 }
@@ -45,6 +47,7 @@ function chageImg() {
             index++;
         }
         imgModal.src = listImg[index].src;
+        idImg.value = listImgId[index].value
     }
 
     if (event.target.id == "previousImg") {
@@ -54,6 +57,7 @@ function chageImg() {
             index--;
         }
         imgModal.src = listImg[index].src;
+        idImg.value = listImgId[index].value
     }
 }
 
@@ -80,7 +84,7 @@ modalGeneralContainer.addEventListener("click", function () {
     event.stopPropagation();
 })
 
-var addDetail = document.querySelector(".product_detail .add");
+var addDetail = document.querySelector(".product_detail .addProduct");
 var modalAddDetail = document.querySelector(".modalAddDetail");
 var modalAddDetailCon = document.querySelector(".modalAddDetail .modal-container");
 var modalAddDetailDel = document.querySelector(".modalAddDetail .modal-container .del");
@@ -149,19 +153,18 @@ modalEditDetailContainer.addEventListener("click", function () {
 function addInModal(product) {
     var html =
                     `<div class="wrapper">
+                        <input type="hidden" name="id" value="${product.productDetail.product.id}">
+                        <input type="hidden" name="oldSize" value="${product.productDetail.size.id}">
+                        <input type="hidden" name="oldColor" value="${product.productDetail.color.id}">
                         <div class="main">
-                            <div class="hold">
-                                <label>Tên sản phẩm</label>
-                                <input type="text" name="name" value="${product.name}">
-                            </div>
                             <div class="hold-2">
                                 <div class="hold">
                                     <label>Giá gốc</label>
-                                    <input type="text" name="price" value="${product.minPrice}">
+                                    <input type="text" name="price" value="${product.productDetail.price / (1 - product.productDetail.product.salePercent)}">
                                 </div>
                                 <div class="hold">
                                     <label>Số lượng</label>
-                                    <input type="number" name="quantity" value="${product.quantity}">
+                                    <input type="number" name="quantity" value="${product.productDetail.quantity}">
                                 </div>
                             </div>
                         </div>
@@ -184,11 +187,11 @@ function addInModal(product) {
                     </div>
                     <button type="submit" class="add">Cập nhật</button>`
     document.querySelector(".modalEditDetail form").innerHTML = html;
-    getColorDB(product.color)
-    getSizeDB(product.size)
+    getColorDBForUpdate(product.productDetail.color.id)
+    getSizeDBForUpdate(product.productDetail.size.id)
 }
 
-function getColorDB(color) {
+function getColorDBForUpdate(color) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", `showColor`, true)
     xhttp.responseType = 'json'
@@ -198,11 +201,27 @@ function getColorDB(color) {
             var c = {}
             c = xhttp.response
             console.log(c)
-            addInColor(c, color)
+            addInColorForUpdate(c, color)
         }
     };
 }
-function getSizeDB(size) {
+
+function getColorDB() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `showColor`, true)
+    xhttp.responseType = 'json'
+    xhttp.send()
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var c = {}
+            c = xhttp.response
+            console.log(c)
+            addInColor(c)
+        }
+    };
+}
+getColorDB()
+function getSizeDBForUpdate(size) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", `showSize`, true)
     xhttp.responseType = 'json'
@@ -212,30 +231,92 @@ function getSizeDB(size) {
             var c = {}
             c = xhttp.response
             console.log(c)
-            addInSize(c, size)
+            addInSizeForUpdate(c, size)
         }
     };
 }
 
-function addInColor(c, color) {
+function getSizeDB() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `showSize`, true)
+    xhttp.responseType = 'json'
+    xhttp.send()
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var c = {}
+            c = xhttp.response
+            console.log(c)
+            addInSize(c)
+        }
+    };
+}
+
+getSizeDB()
+function addInColorForUpdate(c, color) {
     var html = "";
     for (let i = 0; i < c.length; i++) {
-        if (c[i].name == color){
+        if (c[i].id == color){
             html += `<option selected value="${c[i].id}">${c[i].name}</option>`
         }else {
             html += `<option value="${c[i].id}">${c[i].name}</option>`
         }
     }
-    document.querySelector(".modalEditDetail select.color").innerHTML = html
+    var colors = document.querySelectorAll("select.color");
+    for (let i = 0; i < colors.length; i++) {
+        colors[i].innerHTML = html;
+    }
 }
-function addInSize(c, size) {
+
+function addInColor(c) {
     var html = "";
     for (let i = 0; i < c.length; i++) {
-        if (c[i].name == size){
+        html += `<option value="${c[i].id}">${c[i].name}</option>`
+    }
+    var colors = document.querySelectorAll("select.color");
+    for (let i = 0; i < colors.length; i++) {
+        colors[i].innerHTML = html;
+    }
+}
+function addInSizeForUpdate(c, size) {
+    var html = "";
+    for (let i = 0; i < c.length; i++) {
+        if (c[i].id == size){
             html += `<option selected value="${c[i].id}">${c[i].name}</option>`
         }else {
             html += `<option value="${c[i].id}">${c[i].name}</option>`
         }
     }
-    document.querySelector(".modalEditDetail select.size").innerHTML = html
+    var sizes = document.querySelectorAll("select.size");
+    for (let i = 0; i < sizes.length; i++) {
+        sizes[i].innerHTML = html;
+    }
 }
+
+function addInSize(c) {
+    var html = "";
+    for (let i = 0; i < c.length; i++) {
+        html += `<option value="${c[i].id}">${c[i].name}</option>`
+    }
+    var sizes = document.querySelectorAll("select.size");
+    for (let i = 0; i < sizes.length; i++) {
+        sizes[i].innerHTML = html;
+    }
+}
+
+var modalAddImg = document.querySelector(".modal-addImg")
+var modalAddImgContainer = document.querySelector(".modal-addImg .modal-container")
+var modalAddImgDel = document.querySelector(".modal-addImg .modal-container .del")
+
+document.querySelector(".addImg").addEventListener("click", function () {
+    modalAddImg.style.display = "flex";
+})
+
+modalAddImg.addEventListener("click", function () {
+    modalAddImg.style.display = "none"
+})
+modalAddImgDel.addEventListener("click", function () {
+    modalAddImg.style.display = "none"
+})
+modalAddImgContainer.addEventListener("click", function () {
+    event.stopPropagation()
+})

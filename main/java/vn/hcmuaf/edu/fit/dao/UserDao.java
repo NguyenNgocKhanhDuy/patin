@@ -74,11 +74,11 @@ public class UserDao {
     public boolean addUser(User user) {
         String hashPass = hashPassword(user.getPassword());
         Integer i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO user(email, password, verify, fullname,phone, address, sex, dob, role) " +
-                            "VALUES (:id, :email, :password, :verify, :fullname, :phone, :address, :sex, :dob, :role)")
+            return handle.createUpdate("INSERT INTO user(email, password, verify, fullname,phone, address, sex, dob, avatar,role) " +
+                            "VALUES (:email, :password, :verify, :fullname, :phone, :address, :sex, :dob, :avatar,:role)")
                     .bind("email", user.getEmail()).bind("password", hashPass)
                     .bind("verify", user.getVerify()).bind("fullname", user.getFullName()).bind("phone", user.getPhone()).bind("address", user.getAddress())
-                    .bind("sex", user.getSex()).bind("dob", user.getDob())
+                    .bind("sex", user.getSex()).bind("dob", user.getDob()).bind("avatar", user.getAvatar())
                     .bind("role", user.getRole()).execute();
         });
         if (i == 1)
@@ -143,9 +143,9 @@ public class UserDao {
 
     public boolean updateUser(User user) {
         Integer i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob, role = :role, verify = :verify WHERE id = :id")
+            return handle.createUpdate("UPDATE user SET fullname = :fullname, address = :address, phone = :phone, sex = :sex, dob = :dob, avatar = :avatar, role = :role, verify = :verify WHERE id = :id")
                     .bind("id", user.getId()).bind("fullname", user.getFullName()).bind("address", user.getAddress()).bind("phone", user.getPhone())
-                    .bind("sex", user.getSex()).bind("dob", user.getDob()).bind("role", user.getRole()).bind("verify", user.getVerify())
+                    .bind("avatar", user.getAvatar()).bind("sex", user.getSex()).bind("dob", user.getDob()).bind("role", user.getRole()).bind("verify", user.getVerify())
                     .execute();
         });
         if(i == 1) return true;
