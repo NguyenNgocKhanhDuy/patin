@@ -205,7 +205,8 @@ public class ProductService {
         return ProductDao.getInstance().getWishList(userID);
     }
     public List<ProductMain> getWishListPerPage(int currentPage, int userID) {
-        return ProductDao.getInstance().getWishList(userID);
+        int start = getStartIndex(currentPage, 15);
+        return ProductDao.getInstance().getWishListPerPage(start,userID);
     }
 
     public boolean addWishList(int userID, int productID) {
