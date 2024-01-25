@@ -3,11 +3,10 @@ package vn.hcmuaf.edu.fit.bean;
 import org.jdbi.v3.core.mapper.Nested;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class ProductDetail implements Serializable {
     @Nested("product")
-    private Product2 product;
+    private Product product;
     @Nested("size")
     private Size size;
     @Nested("color")
@@ -18,7 +17,7 @@ public class ProductDetail implements Serializable {
     public ProductDetail() {
     }
 
-    public ProductDetail(Product2 product, Size size, Color color, int quantity, int price) {
+    public ProductDetail(Product product, Size size, Color color, int quantity, int price) {
         this.product = product;
         this.size = size;
         this.color = color;
@@ -27,12 +26,12 @@ public class ProductDetail implements Serializable {
     }
 
     @Nested("product")
-    public Product2 getProduct() {
+    public Product getProduct() {
         return product;
     }
 
     @Nested("product")
-    public void setProduct(Product2 product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

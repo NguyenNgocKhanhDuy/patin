@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.controller.admin.delete;
 
 import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.services.PermissionsService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -22,8 +23,9 @@ public class DeleteUserAdmin extends HttpServlet {
         try {
             id = Integer.parseInt(request.getParameter("id"));
             if (UserService.getInstance().deleteUser(id)){
+                PermissionsService.getPermissionsService().deletePer(id);
                 request.setAttribute("type", "success");
-                request.setAttribute("information", "Thêm thành công");
+                request.setAttribute("information", "Xoá thành công");
                 request.getRequestDispatcher("showUserAdmin").forward(request, response);
             }else {
                 request.setAttribute("type", "error");

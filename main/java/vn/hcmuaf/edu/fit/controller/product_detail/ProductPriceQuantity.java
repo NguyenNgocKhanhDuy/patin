@@ -1,4 +1,4 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.product_detail;
 
 import com.google.gson.Gson;
 import vn.hcmuaf.edu.fit.services.ProductService;
@@ -8,9 +8,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @WebServlet(name = "ProductPriceQuantity", value = "/productPriceQuantity")

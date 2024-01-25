@@ -161,4 +161,13 @@ public class RatingDao {
         return i;
     }
 
+    public boolean addInRatingLike(RatingLike ratingLike){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO rating_detail_like(rating_id, like, user_id) VALUES (:id, 1, :user)")
+                    .bind("id", ratingLike.getRating().getId()).bind("user", ratingLike.getUser().getId()).execute();
+        });
+        return i == 1 ? true : false;
+
+    }
+
 }

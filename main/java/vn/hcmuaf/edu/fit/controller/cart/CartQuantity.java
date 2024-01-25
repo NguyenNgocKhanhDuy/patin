@@ -40,9 +40,6 @@ public class CartQuantity extends HttpServlet {
             } else if (type.equals("plus")) {
                 cart.increase(id, size, color);
             }
-//        else if (type.equals("delete")) {
-//            cart.remove(id, size, color);
-//        }
 
             request.getSession().setAttribute("cart", cart);
 

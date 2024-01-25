@@ -1,5 +1,6 @@
 package vn.hcmuaf.edu.fit.controller;
 
+import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.cart.Cart;
 import vn.hcmuaf.edu.fit.cart.CartKey;
 
@@ -15,22 +16,30 @@ import java.util.List;
 public class ShowCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
-        if (cart == null) cart = new Cart();
+        User user = (User) request.getSession().getAttribute("auth");
+        if (user == null){
+            request.setAttribute("type", "error");
+            request.setAttribute("information", "Đăng nhập để tiếp tục");
+            request.getRequestDispatcher("showCart").forward(request, response);
+        }else {
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            if (cart == null) cart = new Cart();
 
-        List<CartKey> keys = new ArrayList<>();
+            List<CartKey> keys = new ArrayList<>();
 
-        for (CartKey ck: cart.getData().keySet()) {
-            keys.add(ck);
+            for (CartKey ck: cart.getData().keySet()) {
+                keys.add(ck);
+            }
+
+            request.setAttribute("data", cart.getData());
+            request.setAttribute("keys", keys);
+
+            request.setAttribute("type", request.getAttribute("type"));
+            request.setAttribute("information", request.getAttribute("information"));
+
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
 
-        request.setAttribute("data", cart.getData());
-        request.setAttribute("keys", keys);
-
-        request.setAttribute("type", request.getAttribute("type"));
-        request.setAttribute("information", request.getAttribute("information"));
-
-        request.getRequestDispatcher("/cart.jsp").forward(request, response);
     }
 
     @Override

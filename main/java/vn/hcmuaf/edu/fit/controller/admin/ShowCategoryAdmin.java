@@ -2,12 +2,7 @@ package vn.hcmuaf.edu.fit.controller.admin;
 
 import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.dao.CategoryDao;
-import vn.hcmuaf.edu.fit.dao.ColorDao;
-import vn.hcmuaf.edu.fit.dao.SizeDao;
-import vn.hcmuaf.edu.fit.services.BillService;
 import vn.hcmuaf.edu.fit.services.PermissionsService;
-import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,9 +54,6 @@ public class ShowCategoryAdmin extends HttpServlet {
             request.getRequestDispatcher("admin.jsp").forward(request, response);
 
         }
-
-
-
     }
 
     @Override

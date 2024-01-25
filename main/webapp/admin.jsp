@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
-    <title>Giỏ hàng</title>
+    <title>Quản lý</title>
     <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
@@ -26,16 +26,29 @@
 
                         </ul>
                     </li>
-                    <li><a href=lienHe.jsp>LIÊN HỆ</a></li>
+                    <li><a href=contact.jsp>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
                 <ul>
                     <c:if test="${sessionScope.auth != null}">
                         <li>
-                            <a href="">
+                            <a href="account.jsp">
                                     ${sessionScope.auth.getFullName()}
                             </a>
+                            <ul class="sub_menu user_sub">
+                                <li>
+                                    <a href="account.jsp">Tài khoản</a>
+                                </li>
+                                <c:if test="${sessionScope.auth.getRole() > 0}">
+                                    <li>
+                                        <a href="showUserAdmin">Quản lý</a>
+                                    </li>
+                                </c:if>
+                                <li>
+                                    <a href="logout">Đăng xuất</a>
+                                </li>
+                            </ul>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.auth == null}">
@@ -51,7 +64,7 @@
                         </li>
                     </c:if>
 
-                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
                     <li class="cartLink">
                         <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
                         <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
@@ -71,9 +84,7 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-                    <c:forEach var="i" items="${category}">
-                        <li><a href="product_category.html">${i.getName()}</a></li>
-                    </c:forEach>
+
                 </ul>
             </div>
             <div class="search">
@@ -97,7 +108,7 @@
             <div class="left">
                 <div class="account">
                     <ul class="menu">
-                        <c:if test="${bill == null}">
+                        <c:if test="${bills == null && billDetail == null}">
                             <li class="activeAccountNav">
                                 <i class="fa-solid fa-bars-progress"></i>
                                 <span>Quản lý</span>
@@ -165,83 +176,47 @@
                                 </ul>
                             </li>
                         </c:if>
-                        <c:if test="${bill != null}">
+                        <c:if test="${bills != null || billDetail != null}">
                             <li>
                                 <i class="fa-solid fa-bars-progress"></i>
                                 <span>Quản lý</span>
                                 <ul class="sub_menu showSubMenu">
                                     <li>
-                                        <c:if test="${users != null}">
-                                            <a href="showUserAdmin" class="activeAccountNav">
-                                                Quản lý người dùng
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${users == null}">
-                                            <a href="showUserAdmin">
-                                                Quản lý người dùng
-                                            </a>
-                                        </c:if>
+                                        <a href="showUserAdmin">
+                                            Quản lý người dùng
+                                        </a>
                                     </li>
                                     <li>
-                                        <c:if test="${products != null || productDetail != null}">
-                                            <a href="showProductAdmin" class="activeAccountNav">
-                                                Quản lý sản phẩm
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${products == null && productDetail == null}">
-                                            <a href="showProductAdmin">
-                                                Quản lý sản phẩm
-                                            </a>
-                                        </c:if>
+                                        <a href="showProductAdmin">
+                                            Quản lý sản phẩm
+                                        </a>
                                     </li>
                                     <li>
-                                        <c:if test="${categories != null}">
-                                            <a href="showCategoryAdmin" class="activeAccountNav">
-                                                Quản lý danh mục
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${categories == null}">
-                                            <a href="showCategoryAdmin">
-                                                Quản lý danh mục
-                                            </a>
-                                        </c:if>
+                                        <a href="showCategoryAdmin">
+                                            Quản lý danh mục
+                                        </a>
                                     </li>
                                     <li>
-                                        <c:if test="${colors != null}">
-                                            <a href="showColorAdmin" class="activeAccountNav">
-                                                Quản lý màu sắc
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${colors == null}">
-                                            <a href="showColorAdmin">
-                                                Quản lý màu sắc
-                                            </a>
-                                        </c:if>
+                                        <a href="showColorAdmin">
+                                            Quản lý màu sắc
+                                        </a>
                                     </li>
                                     <li>
-                                        <c:if test="${sizes != null}">
-                                            <a href="showSizeAdmin" class="activeAccountNav">
-                                                Quản lý kích thước
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${sizes == null}">
-                                            <a href="showSizeAdmin">
-                                                Quản lý kích thước
-                                            </a>
-                                        </c:if>
+                                        <a href="showSizeAdmin">
+                                            Quản lý kích thước
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                         </c:if>
-
                         <li id="manageReport">
-                            <c:if test="${bills != null}">
+                            <c:if test="${bills != null || billDetail != null}">
                                 <a href="showBillAdmin" class="activeAccountNav">
                                     <i class="fa-brands fa-wpforms"></i>
                                     <span>Báo cáo</span>
                                 </a>
                             </c:if>
-                            <c:if test="${bills == null}">
+                            <c:if test="${bills == null && billDetail == null}">
                                 <a href="showBillAdmin">
                                     <i class="fa-brands fa-wpforms"></i>
                                     <span>Báo cáo</span>
@@ -263,10 +238,14 @@
                             </div>
                         </div>
                         <div class="search">
-                            <input type="text" placeholder="Nhập tìm kiếm">
-                            <button class="search-btn">Tìm kiếm</button>
                             <c:if test="${per > 1}">
                                 <div class="add">
+                                    Thêm người dùng
+                                </div>
+                            </c:if>
+
+                            <c:if test="${per < 2}">
+                                <div class="add disabled">
                                     Thêm người dùng
                                 </div>
                             </c:if>
@@ -307,10 +286,14 @@
                             </div>
                         </div>
                         <div class="search">
-                            <input type="text" placeholder="Nhập tìm kiếm">
-                            <button class="search-btn">Tìm kiếm</button>
                             <c:if test="${per > 1}">
                                 <div class="add">
+                                    Thêm sản phẩm
+                                </div>
+                            </c:if>
+
+                            <c:if test="${per < 2}">
+                                <div class="add disabled">
                                     Thêm sản phẩm
                                 </div>
                             </c:if>
@@ -352,10 +335,13 @@
                                 </div>
                             </div>
                             <div class="search">
-                                <input type="text" placeholder="Nhập tìm kiếm">
-                                <button class="search-btn">Tìm kiếm</button>
                                 <c:if test="${per > 1}">
                                     <div class="add">
+                                        Thêm danh mục
+                                    </div>
+                                </c:if>
+                                <c:if test="${per < 2}">
+                                    <div class="add disabled">
                                         Thêm danh mục
                                     </div>
                                 </c:if>
@@ -394,10 +380,14 @@
                                 </div>
                             </div>
                             <div class="search">
-                                <input type="text" placeholder="Nhập tìm kiếm">
-                                <button class="search-btn">Tìm kiếm</button>
                                 <c:if test="${per > 1}">
                                     <div class="add">
+                                        Thêm màu sắc
+                                    </div>
+                                </c:if>
+
+                                <c:if test="${per < 2}">
+                                    <div class="add disabled">
                                         Thêm màu sắc
                                     </div>
                                 </c:if>
@@ -436,10 +426,14 @@
                                 </div>
                             </div>
                             <div class="search">
-                                <input type="text" placeholder="Nhập tìm kiếm">
-                                <button class="search-btn">Tìm kiếm</button>
                                 <c:if test="${per > 1}">
                                     <div class="add">
+                                        Thêm kích thước
+                                    </div>
+                                </c:if>
+
+                                <c:if test="${per < 2}">
+                                    <div class="add disabled">
                                         Thêm kích thước
                                     </div>
                                 </c:if>
@@ -471,25 +465,15 @@
                     <div class="report section">
                         <div class="tk_sale">
                             <div class="sale">
-                                <i class="fa-solid fa-chart-line"></i>
-                                <div class="text">
-                                    <p>Doanh thu hôm nay</p>
-                                    <h4 class="todaySale">0 VNĐ</h4>
-                                </div>
-                            </div>
-                            <div class="sale">
                                 <i class="fa-solid fa-chart-column"></i>
                                 <div class="text">
                                     <p>Tổng doanh thu</p>
-                                    <h4 class="totalSale">0 VNĐ</h4>
+                                    <h4 class="totalSale">${totalBillPrice}</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="bill section">
-                            <div class="search">
-                                <input type="text" placeholder="Nhập tìm kiếm">
-                                <button class="search-btn">Tìm kiếm</button>
-                            </div>
+
                             <div class="bill-list">
                                 <div class="title">
                                     <h4>STT</h4>
@@ -513,7 +497,7 @@
                                             <i class="fa-solid fa-clipboard detail"></i>
                                         </a>
                                         <c:if test="${per > 1}">
-                                            <a href="deleteBillAdmin?id="${bill.getId()}>
+                                            <a href="deleteBillAdmin?id=${bill.getId()}">
                                                 <i class="fa-solid fa-xmark del"></i>
                                             </a>
                                         </c:if>
@@ -553,6 +537,11 @@
                                         <i class="fa-solid fa-clipboard detail"></i>
                                     </span>
                                 </c:if>
+                                <c:if test="${per < 2}">
+                                    <span class="disabled">
+                                        <i class="fa-solid fa-clipboard detail"></i>
+                                    </span>
+                                </c:if>
                             </p>
                         </div>
                         <div class="img">
@@ -571,8 +560,23 @@
                                     </div>
                             </div>
                         </c:if>
+                        <c:if test="${images.size() < 5 && per < 2}">
+                            <div class="addBox">
+                                    <div class="add addImg disabled">
+                                        Thêm ảnh
+                                    </div>
+                                    <div class="add addProduct disabled">
+                                        Thêm sản phẩm
+                                    </div>
+                            </div>
+                        </c:if>
                         <c:if test="${images.size() == 5 && per > 1}">
                             <div class="add rightBtn addProduct">
+                                Thêm sản phẩm
+                            </div>
+                        </c:if>
+                        <c:if test="${images.size() == 5 && per < 2}">
+                            <div class="add rightBtn addProduct disabled">
                                 Thêm sản phẩm
                             </div>
                         </c:if>
@@ -601,7 +605,7 @@
                                         <p class="quantỉty">${product.getProductDetail().getQuantity()}</p>
                                         <c:if test="${per > 1}">
                                             <i class="fa-solid fa-clipboard detail"></i>
-                                            <a href="deleteProductDetailAdmin?id=${product.getProductDetail().getProduct().getId()}&size=${product.getProductDetail().getSize().getName()}&color=${product.getProductDetail().getColor().getName()}">
+                                            <a href="deleteProductDetailAdmin?id=${product.getProductDetail().getProduct().getId()}&size=${product.getProductDetail().getSize().getId()}&color=${product.getProductDetail().getColor().getId()}">
                                                 <i class="fa-solid fa-xmark del"></i>
                                             </a>
                                         </c:if>
@@ -674,8 +678,6 @@
                 </c:if>
 
                 <div class="pagination">
-                    <h1>TotalPage: ${totalPage}</h1>
-                    <h1>Current: ${currentPage}</h1>
                     <ul>
                         <c:if test="${currentPage == 1}">
                             <li id="previousPage" class="arrowPageLi"><a class="arrowPagea"><i class="fa-solid fa-angles-left"></i></a></li>
@@ -852,6 +854,7 @@
             <div class="modal-container modalConUser modal-containerEditUser">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Chi tiết</h3>
+                <input type="hidden" id="perUser" value="${per}">
                 <form action="updateUserAdmin" method="post" enctype="multipart/form-data">
                     <div class="wrapper">
                         <div class="main">
@@ -923,7 +926,7 @@
                         </div>
                     </div>
                     <c:if test="${per < 2}">
-                        <button class="add">Cập nhật</button>
+                        <button class="add disabled">Cập nhật</button>
                     </c:if>
                     <c:if test="${per > 1}">
                         <button type="submit" class="add">Cập nhật</button>
@@ -1228,11 +1231,12 @@
     </c:if>
 
     <c:if test="${billDetail != null}">
-        <div class="modal-bill">
+        <div class="modal modal-bill">
             <div class="modal-container">
                 <i class="fa-solid fa-xmark del"></i>
                 <h3>Cập nhật trạng thái đơn hàng</h3>
                 <form action="updateBillAdmin" method="post">
+                    <h3>Trạng thái</h3>
                     <input type="hidden" name="id" value="${bill.getId()}">
                     <select name="status">
                         <option value="0">Đang xử lý</option>
@@ -1269,26 +1273,21 @@
                 </p>
                 <p>
                     Số điện thoại:
-                    <a href="tel:+">+65 11.188.888</a>
+                    <a href="tel:+">0839151003</a>
                 </p>
 
                 <p>
                     Email:
-                    <a href="mailto:">patin@gmail.com</a>
+                    <a href="mailto:">21130035@st.hcmuaf.edu.vn</a>
                 </p>
             </div>
             <div class="subscribe">
-                <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
-                <div class="holder">
-                    <input type="email" id="email" placeholder="Nhập vào email của bạn ">
-                    <input type="submit" id="btn" value="Đăng Ký">
-                </div>
                 <div class="social-media">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -1298,11 +1297,14 @@
     <script src="${pageContext.request.contextPath}/assets/js/showDanhMuc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
-    <c:if test="${productDetail == null}">
+    <c:if test="${productDetail == null && billDetail == null}">
         <script src="${pageContext.request.contextPath}/assets/js/admin.js"></script>
     </c:if>
     <c:if test="${productDetail != null}">
         <script src="${pageContext.request.contextPath}/assets/js/adminModalImg.js"></script>
+    </c:if>
+    <c:if test="${billDetail != null}">
+        <script src="${pageContext.request.contextPath}/assets/js/adminModalBill.js"></script>
     </c:if>
     <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 </body>

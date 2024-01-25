@@ -1,12 +1,8 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.product_detail;
 
 import vn.hcmuaf.edu.fit.bean.*;
-import vn.hcmuaf.edu.fit.dao.ColorDao;
-import vn.hcmuaf.edu.fit.dao.ImageProductDao;
-import vn.hcmuaf.edu.fit.dao.RatingDao;
-import vn.hcmuaf.edu.fit.dao.SizeDao;
+import vn.hcmuaf.edu.fit.dao.*;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,8 +22,7 @@ public class ProductDetail extends HttpServlet {
 
             request.setAttribute("productID", productID);
 
-//        Product product = ProductService.getInstance().getProduct(productID);
-            List<ProductMain> products = ProductService2.getInstance().getAllProductDetail(productID);
+            List<ProductMain> products = ProductService.getInstance().getAllProductDetail(productID);
 
             String info = products.get(0).getProductDetail().getProduct().getInformation().replace("%", "<br>- ");
             products.get(0).getProductDetail().getProduct().setInformation(info);
@@ -37,9 +32,6 @@ public class ProductDetail extends HttpServlet {
             String href = "productDetail?productID="+productID;
             request.setAttribute("href", href);
 
-
-//        String info = product.getInformation().replace("%", "<br>");
-//        product.setInformation(info);
 
             List<Rating> ratings = RatingDao.getInstance().getAllRatingOfProduct(productID);
             request.setAttribute("ratings", ratings);
@@ -62,7 +54,7 @@ public class ProductDetail extends HttpServlet {
             List<Size> sizes = SizeDao.getInstance().getProductSize(productID);
             request.setAttribute("sizes", sizes);
 
-            List<ProductMain> orderProduct = ProductService2.getInstance().getRandomProduct(4);
+            List<ProductMain> orderProduct = ProductService.getInstance().getRandomProduct(4);
             request.setAttribute("orderProducts", orderProduct);
 
             int totalQuantity = 0;
@@ -70,7 +62,6 @@ public class ProductDetail extends HttpServlet {
                 totalQuantity += products.get(i).getProductDetail().getQuantity();
             }
 
-//        request.setAttribute("totalQuantity", ProductService.getInstance().getTotalQuantity(productID));
             request.setAttribute("totalQuantity", totalQuantity);
 
             request.setAttribute("type", request.getAttribute("type"));

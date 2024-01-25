@@ -1,8 +1,7 @@
 package vn.hcmuaf.edu.fit.controller.admin.update;
 
-import vn.hcmuaf.edu.fit.bean.Product2;
-import vn.hcmuaf.edu.fit.dao.ProductDao2;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.bean.Product;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -52,8 +51,8 @@ public class UpdateProductAdmin extends HttpServlet {
                     request.setAttribute("information", "Thông tin quá dài (Không được vượt quá 1000 kí tự)");
                     request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);
                 }else {
-                    Product2 product = new Product2(id, name, hotNum, sale, information);
-                    if (ProductService2.getInstance().updateProduct(product)){
+                    Product product = new Product(id, name, hotNum, sale, information);
+                    if (ProductService.getInstance().updateProduct(product)){
                         request.setAttribute("type", "success");
                         request.setAttribute("information", "Cập nhật thành công");
                         request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);

@@ -3,11 +3,8 @@ package vn.hcmuaf.edu.fit.controller;
 import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.cart.Cart;
 import vn.hcmuaf.edu.fit.cart.CartKey;
-import vn.hcmuaf.edu.fit.cart.CartProduct;
-import vn.hcmuaf.edu.fit.dao.ProductDao2;
 import vn.hcmuaf.edu.fit.services.BillService;
-import vn.hcmuaf.edu.fit.services.BillService2;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.services.ProductService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -22,6 +19,11 @@ import java.util.List;
 public class AddBill extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -52,7 +54,6 @@ public class AddBill extends HttpServlet {
                 user.setPhone(phone);
                 user.setAddress(address);
                 UserService.getInstance().updateUser(user);
-//                BillService.getInstance().insertBill(payment, note, user.getId(), cart);
 
                 if (payment.equals("cash")){
                     payment = "Trả tiền khi nhận";
@@ -63,16 +64,16 @@ public class AddBill extends HttpServlet {
                 } else if (payment.equals("Bank")) {
                     payment = "Chuyển khoản ngân hàng";
                 }
-                Bill2 bill = new Bill2(0, "", BillService2.getInstance().getCurrentDate(), "Đang xử lý", payment, note, user);
+                Bill bill = new Bill(0, "", BillService.getInstance().getCurrentDate(), "Đang xử lý", payment, note, user);
 
-                List<BillDetail2> listBill = new ArrayList<>();
+                List<BillDetail> listBill = new ArrayList<>();
 
-                BillService2.getInstance().addBill(bill);
+                BillService.getInstance().addBill(bill);
 
-                Bill2 newBill = BillService2.getInstance().getNewBill(user.getId());
+                Bill newBill = BillService.getInstance().getNewBill(user.getId());
 
                 for (CartKey ck : cart.getData().keySet()) {
-                    BillDetail2 billDetail = new BillDetail2();
+                    BillDetail billDetail = new BillDetail();
                     ProductMain product = cart.getData().get(ck).getProduct();
                     Size size = new Size();
                     Color color = new Color();
@@ -86,21 +87,17 @@ public class AddBill extends HttpServlet {
                     billDetail.setPrice(product.getProductDetail().getPrice());
                     billDetail.setQuantity(cart.getData().get(ck).getQuantity());
 
-                    ProductService2.getInstance().reduceQuantity(ck.getId(), ck.getSize(), ck.getColor(), cart.getData().get(ck).getQuantity());
+                    ProductService.getInstance().reduceQuantity(ck.getId(), ck.getSize(), ck.getColor(), cart.getData().get(ck).getQuantity());
 
                     listBill.add(billDetail);
                 }
 
-                BillService2.getInstance().addBillDetail(listBill);
-                BillService2.getInstance().updateName(BillService2.getInstance().generateName(newBill, listBill), newBill.getId());
+                BillService.getInstance().addBillDetail(listBill);
+                BillService.getInstance().updateName(BillService.getInstance().generateName(newBill, listBill), newBill.getId());
+                request.getSession().removeAttribute("cart");
 
                 request.getRequestDispatcher("paymentDetail").forward(request, response);
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

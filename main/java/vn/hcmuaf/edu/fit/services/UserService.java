@@ -42,6 +42,10 @@ public class UserService {
         return false;
     }
 
+    public User getUserByEmail(String email) {
+        return UserDao.getInstance().getUserByEmail(email).get(0);
+    }
+
     public boolean addUser(User user) {
        return UserDao.getInstance().addUser(user);
     }
@@ -64,7 +68,7 @@ public class UserService {
             int code = Integer.parseInt(randomCodeVerify());
             if (!UserDao.getInstance().isExitsCode(code)) {
                 insertVerifyCode(code, email);
-                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                return MailService.getInstance().sendMailVerify(email, String.valueOf(code));
             }
         }
     }
@@ -84,7 +88,7 @@ public class UserService {
         while (true){
             int code = Integer.parseInt(randomCodeVerify());
             if (!UserDao.getInstance().isExitsCodePass(code) && UserDao.getInstance().keyForgetPass(code, email)) {
-                return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                return MailService.getInstance().sendMailVerify(email, String.valueOf(code));
             }
         }
     }
@@ -110,7 +114,7 @@ public class UserService {
     }
 
     public String checkEmail(String email) {
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9\\.]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$");
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9\\.]+@[A-Za-z0-9]+([\\.A-Za-z0-9]+)$");
         Matcher matcher = pattern.matcher(email);
         if (email == null || "".equals(email)) {
             return "Email không được để trống";
@@ -242,4 +246,5 @@ public class UserService {
     public boolean deleteUser(int id) {
         return UserDao.getInstance().deleteUser(id);
     }
+
 }

@@ -1,10 +1,10 @@
 package vn.hcmuaf.edu.fit.controller.admin.add;
 
 import vn.hcmuaf.edu.fit.bean.Color;
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.Size;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -34,19 +34,19 @@ public class AddProductDetail extends HttpServlet {
                 color = Integer.parseInt(request.getParameter("color"));
                 size = Integer.parseInt(request.getParameter("size"));
 
-                Product2 product = new Product2();
+                Product product = new Product();
                 product.setId(id);
                 Size sizeOb = new Size();
                 sizeOb.setId(size);
                 Color colorOb = new Color();
                 colorOb.setId(color);
                 ProductDetail productDetail = new ProductDetail(product, sizeOb, colorOb, quantity, price);
-                if (ProductService2.getInstance().isExistProductDetail(id, size, color)){
+                if (ProductService.getInstance().isExistProductDetail(id, size, color)){
                     request.setAttribute("type", "error");
                     request.setAttribute("information", "Đã tồn tại sản phẩm");
                     request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);
                 }else {
-                    if (ProductService2.getInstance().addProductDetail(productDetail)){
+                    if (ProductService.getInstance().addProductDetail(productDetail)){
                         request.setAttribute("type", "success");
                         request.setAttribute("information", "Thêm thành công");
                         request.getRequestDispatcher("showProductDetailAdmin?id"+id).forward(request, response);

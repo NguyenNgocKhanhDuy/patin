@@ -1,10 +1,10 @@
 package vn.hcmuaf.edu.fit.controller.admin.update;
 
 import vn.hcmuaf.edu.fit.bean.Color;
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.ProductDetail;
 import vn.hcmuaf.edu.fit.bean.Size;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -38,7 +38,7 @@ public class UpdateProductDetailAdmin extends HttpServlet {
                 oldSize = Integer.parseInt(request.getParameter("oldSize"));
                 size = Integer.parseInt(request.getParameter("size"));
 
-                Product2 product = new Product2();
+                Product product = new Product();
                 product.setId(id);
                 Size sizeOb = new Size();
                 sizeOb.setId(size);
@@ -46,12 +46,12 @@ public class UpdateProductDetailAdmin extends HttpServlet {
                 colorOb.setId(color);
                 ProductDetail productDetail = new ProductDetail(product, sizeOb, colorOb, quantity, price);
                 if (oldColor != color || oldSize != size){
-                    if (ProductService2.getInstance().isExistProductDetail(id, size, color)){
+                    if (ProductService.getInstance().isExistProductDetail(id, size, color)){
                         request.setAttribute("type", "error");
                         request.setAttribute("information", "Đã tồn tại sản phẩm");
                         request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);
                     }else {
-                        if (ProductService2.getInstance().updateProductDetail(productDetail, oldSize, oldColor)){
+                        if (ProductService.getInstance().updateProductDetail(productDetail, oldSize, oldColor)){
                             request.setAttribute("type", "success");
                             request.setAttribute("information", "Cập nhật thành công");
                             request.getRequestDispatcher("showProductDetailAdmin?id"+id).forward(request, response);
@@ -62,7 +62,7 @@ public class UpdateProductDetailAdmin extends HttpServlet {
                         }
                     }
                 }else {
-                    if (ProductService2.getInstance().updateProductDetail(productDetail, oldSize, oldColor)){
+                    if (ProductService.getInstance().updateProductDetail(productDetail, oldSize, oldColor)){
                         request.setAttribute("type", "success");
                         request.setAttribute("information", "Cập nhật thành công");
                         request.getRequestDispatcher("showProductDetailAdmin?id"+id).forward(request, response);

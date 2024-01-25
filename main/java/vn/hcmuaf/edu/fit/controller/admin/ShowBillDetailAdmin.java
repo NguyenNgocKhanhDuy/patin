@@ -2,7 +2,6 @@ package vn.hcmuaf.edu.fit.controller.admin;
 
 import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.services.BillService;
-import vn.hcmuaf.edu.fit.services.BillService2;
 import vn.hcmuaf.edu.fit.services.PermissionsService;
 
 import javax.servlet.ServletException;
@@ -27,27 +26,26 @@ public class ShowBillDetailAdmin extends HttpServlet {
             int id;
             try {
                 id = Integer.parseInt(request.getParameter("id"));
-                Bill2 bill = BillService2.getInstance().getBill(id);
+                Bill bill = BillService.getInstance().getBill(id);
                 request.setAttribute("bill", bill);
-                List<BillDetail2> billDetail = BillService2.getInstance().getBillDetail(id);
+                List<BillDetail> billDetail = BillService.getInstance().getBillDetail(id);
                 request.setAttribute("billDetail", billDetail);
+                int totalBillPrice = BillService.getInstance().getTotalBill(id);
+                request.setAttribute("totalBillPrice", totalBillPrice);
+
 
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
 
             }catch (NumberFormatException e){
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi null");
-                request.getRequestDispatcher("showColorAdmin").forward(request, response);
+                request.getRequestDispatcher("showBillAdmin").forward(request, response);
             }
         }
-
-
-
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

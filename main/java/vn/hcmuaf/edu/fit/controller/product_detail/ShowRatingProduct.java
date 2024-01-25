@@ -1,12 +1,8 @@
-package vn.hcmuaf.edu.fit.controller;
+package vn.hcmuaf.edu.fit.controller.product_detail;
 
 import vn.hcmuaf.edu.fit.bean.*;
-import vn.hcmuaf.edu.fit.dao.ColorDao;
-import vn.hcmuaf.edu.fit.dao.ImageProductDao;
-import vn.hcmuaf.edu.fit.dao.RatingDao;
-import vn.hcmuaf.edu.fit.dao.SizeDao;
+import vn.hcmuaf.edu.fit.dao.*;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 import vn.hcmuaf.edu.fit.services.RatingService;
 
 import javax.servlet.*;
@@ -41,7 +37,7 @@ public class ShowRatingProduct extends HttpServlet {
             int totalPage = (int) Math.ceil((RatingDao.getInstance().getSizeAllRating(productID) / (3+0.0)));
             request.setAttribute("totalPage", totalPage);
 
-            List<ProductMain> products = ProductService2.getInstance().getAllProductDetail(productID);
+            List<ProductMain> products = ProductService.getInstance().getAllProductDetail(productID);
             request.setAttribute("products", products);
 
 
@@ -82,8 +78,7 @@ public class ShowRatingProduct extends HttpServlet {
             List<Size> sizes = SizeDao.getInstance().getProductSize(productID);
             request.setAttribute("sizes", sizes);
 
-//            List<Product> orderProduct = ProductService.getInstance().getRandomProduct(4);
-            List<ProductMain> orderProduct = ProductService2.getInstance().getRandomProduct(4);
+            List<ProductMain> orderProduct = ProductService.getInstance().getRandomProduct(4);
             request.setAttribute("orderProducts", orderProduct);
 
             int totalQuantity = 0;

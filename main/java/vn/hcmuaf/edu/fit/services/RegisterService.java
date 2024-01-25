@@ -12,35 +12,6 @@ public class RegisterService {
         return instance;
     }
 
-//    public String checkEmail(String email) {
-//        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9\\.]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$");
-//        Matcher matcher = pattern.matcher(email);
-//        if (email == null || "".equals(email)) {
-//            return "Email không được để trống";
-//        } else if (!matcher.matches()) {
-//            return "Email phải có định dạng \"[Tên email] @ [Tên miền]\"";
-//        }
-//        return "valid";
-//    }
-
-//    public String checkFullName(String fullName) {
-//        if (fullName == null || "".equals(fullName)) {
-//            return "Họ tên không được để trống";
-//        }
-//        return "valid";
-//    }
-
-//    public String checkPhone(String phone) {
-//        Pattern pattern = Pattern.compile("\\d{10}");
-//        Matcher matcher = pattern.matcher(phone);
-//        if (phone == null || "".equals(phone)) {
-//            return "Số điện thoại không được để trống";
-//        } else if (!matcher.matches()) {
-//            return "Số điện thoại chỉ chứa số và có độ dài là 10";
-//        }
-//        return "valid";
-//    }
-
     public String checkFormLogin(String fullName, String email, String phone) {
         if (!UserService.getInstance().checkFullName(fullName).equals("valid")) {
             return UserService.getInstance().checkFullName(fullName);

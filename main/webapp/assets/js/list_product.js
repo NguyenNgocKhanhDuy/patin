@@ -65,10 +65,6 @@ function changeCurrency(text) {
         style: 'currency',
         currency: 'VND'
     });
-    // textMax.value = parseFloat(textMax.value).toLocaleString('vi-VN', {
-    //     style: 'currency',
-    //     currency: 'VND'
-    // });
 }
 
 function changeCurrent(input) {
@@ -91,19 +87,6 @@ textMax.addEventListener("input", function () {
     changeCurrent(textMax)
 });
 
-// changeCurrency();
-
-
-// textMin.addEventListener("blur", function () {
-//     var value = this.value.replace(/,/g, '')
-//     if (this.value < minValue || this.value > changeToNumber(textMax.value)) {
-//         value = minValue;
-//     }
-//     this.value = parseFloat(value).toLocaleString('vi-VN', {
-//         style: 'currency',
-//         currency: 'VND'
-//     });
-// });
 
 
 function changeToNumber(currency) {
@@ -111,37 +94,6 @@ function changeToNumber(currency) {
 }
 
 
-// textMin.addEventListener("focus", function () {
-//     textMin.value = changeToNumber(textMin.value);
-// });
-//
-// var oldMin = minValue;
-// textMin.addEventListener("keydown", function () {
-//     oldMin = this.value;
-// })
-//
-//
-// textMax.addEventListener("blur", function () {
-//     var value = this.value.replace(/,/g, '')
-//     if (this.value < changeToNumber(textMin.value) || this.value > maxValue) {
-//         value = maxValue;
-//         console.log(valuey)
-//     }
-//     this.value = parseFloat(value).toLocaleString('vi-VN', {
-//         style: 'currency',
-//         currency: 'VND'
-//     });
-// });
-//
-// textMax.addEventListener("focus", function () {
-//     textMax.value = changeToNumber(textMax.value);
-// });
-//
-// var oldMax = maxValue;
-// textMax.addEventListener("keydown", function () {
-//     oldMax = this.value;
-//
-// })
 
 
 // COLOR

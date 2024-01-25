@@ -376,6 +376,7 @@
                                                         </c:if>
                                                     </c:forEach>
                                                     <c:if test="${isLike == 1}">
+                                                        <a href="likeRating?id=${rating.getId()}&productID=${productID}"></a>
                                                         <i class="fa-solid fa-thumbs-up isLike"></i>
                                                     </c:if>
                                                     <c:if test="${isLike != 1}">

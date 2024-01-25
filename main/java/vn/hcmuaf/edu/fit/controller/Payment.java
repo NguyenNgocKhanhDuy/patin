@@ -29,12 +29,25 @@ public class Payment extends HttpServlet {
         if (user == null || cart == null){
             response.getWriter().println("null");
         }else {
+
             request.setAttribute("user", user);
 
             List<CartKey> keys = new ArrayList<>();
+            boolean flag = true;
+            int quantity;
 
             for (CartKey ck: cart.getData().keySet()) {
                 keys.add(ck);
+                quantity = ProductService.getInstance().getQuantity(ck.getId(), ck.getSize(), ck.getColor());
+                if (cart.getData().get(ck).getQuantity() > quantity){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag == false){
+                request.setAttribute("type", "error");
+                request.setAttribute("information", "Có sản phẩm đã hết hàng");
+                request.getRequestDispatcher("showCart").forward(request, response);
             }
 
             request.setAttribute("data", cart.getData());

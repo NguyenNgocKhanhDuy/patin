@@ -2,14 +2,11 @@
 
 function showHide() {
     var mainMenuLi = document.querySelectorAll(".account ul.menu > li");
-    // var session = document.querySelectorAll(".right > div");
     for (let i = 0; i < mainMenuLi.length; i++) {
         mainMenuLi[i].addEventListener("click", function () {
             for (let j = 0; j < mainMenuLi.length; j++) {
-                // session[j].style.display = "none";
                 mainMenuLi[j].classList.remove("activeAccountNav");
             }
-            // session[i].style.display = "block";
             mainMenuLi[i].classList.add("activeAccountNav");
         })
     }
@@ -56,5 +53,14 @@ function initDoB(day, month, year) {
         yearSelect[i].innerHTML = htmlYear;
     }
 }
-initDoB(new Date().getDate(), new Date().getMonth()+1, new Date().getFullYear())
+var dobU =document.querySelector("#DOB").value
+if (dobU == 0){
+    initDoB(new Date().getDate(), new Date().getMonth()+1, new Date().getFullYear())
+}else{
+    var year = dobU.substring(0, 4)
+    var month = dobU.substring(5, 7);
+    var day = dobU.substring(8, 10);
+    initDoB(day, month, year)
+}
+
 

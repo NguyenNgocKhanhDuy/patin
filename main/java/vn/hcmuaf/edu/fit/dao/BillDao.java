@@ -1,10 +1,8 @@
 package vn.hcmuaf.edu.fit.dao;
 
 import vn.hcmuaf.edu.fit.bean.Bill;
-import vn.hcmuaf.edu.fit.bean.Color;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,19 +17,14 @@ public class BillDao {
         return instance;
     }
 
-    public int billSize(){
+
+    public int addBill(Bill bill) {
         Integer i = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT COUNT(*) FROM bill").mapTo(Integer.class).one();
+            return handle.createUpdate("INSERT INTO bill(name, date, status, payment, note, user_id) VALUES (:name, :date, :status, :payment, :note, :user)")
+                    .bind("name", bill.getName()).bind("date", bill.getDate()).bind("status", bill.getStatus()).bind("payment", bill.getPayment())
+                    .bind("note", bill.getNote()).bind("user", bill.getUser().getId()).execute();
         });
         return i;
-    }
-
-    public void insertBill(int id, String name, LocalDateTime date, String state, String payment, String note, int user) {
-        JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO bill(id, name, date, state, payment, note, user_id) VALUES (:id, :name, :date, :state, :payment, :note, :user)")
-                    .bind("id", id).bind("name", name).bind("date", date).bind("state", state).bind("payment", payment)
-                    .bind("note", note).bind("user", user).execute();
-        });
     }
 
 
@@ -47,12 +40,45 @@ public class BillDao {
             return handle.createQuery("SELECT * FROM bill").mapToBean(Bill.class).stream().collect(Collectors.toList());
         });
         return bills;
+    }
 
+    public List<Bill> getAllBillByUser(int id){
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM bill WHERE user_id = :id")
+                    .bind("id", id).mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill> getAllBillByUserAndStatus(int id, String status){
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM bill WHERE user_id = :id AND status like :status ")
+                    .bind("id", id).bind("status", "%"+status+"%")
+                    .mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
     }
 
     public List<Bill> getBillPerPage(int start) {
         List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id LIMIT :start, 5").bind("start", start).mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill> getBillPerPageByUser(int start, int id) {
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id WHERE user_id = :id LIMIT :start, 5")
+                    .bind("id", id).bind("start", start).mapToBean(Bill.class).stream().collect(Collectors.toList());
+        });
+        return bills;
+    }
+
+    public List<Bill> getBillPerPageByUserAndStatus(int start, int id, String status) {
+        List<Bill> bills = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT bill.*, user.email as user_email FROM bill JOIN user ON bill.user_id = user.id WHERE user_id = :id AND status like :status LIMIT :start, 5")
+                    .bind("id", id).bind("start", start).bind("status", "%"+status+"%")
+                    .mapToBean(Bill.class).stream().collect(Collectors.toList());
         });
         return bills;
     }
@@ -64,5 +90,27 @@ public class BillDao {
         });
         return bill;
     }
+
+    public int updateName(String name, int id) {
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE bill SET name = ? WHERE id = ?").bind(0, name).bind(1, id).execute();
+        });
+        return i;
+    }
+
+
+    public boolean updateStatusBill(int id, String status){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("UPDATE bill SET status = :status WHERE id = :id").bind("status", status).bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+    public boolean deleteBill(int id){
+        Integer i = JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM bill WHERE id = :id").bind("id", id).execute();
+        });
+        return i == 1 ? true : false;
+    }
+
 
 }

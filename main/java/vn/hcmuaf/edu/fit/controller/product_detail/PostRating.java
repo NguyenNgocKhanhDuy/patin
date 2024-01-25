@@ -1,10 +1,9 @@
 package vn.hcmuaf.edu.fit.controller.product_detail;
 
 import vn.hcmuaf.edu.fit.bean.ImageRating;
-import vn.hcmuaf.edu.fit.bean.Product2;
+import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.Rating;
 import vn.hcmuaf.edu.fit.bean.User;
-import vn.hcmuaf.edu.fit.dao.RatingDao;
 import vn.hcmuaf.edu.fit.services.RatingService;
 
 import javax.servlet.*;
@@ -44,7 +43,7 @@ public class PostRating extends HttpServlet {
                 point = Integer.parseInt(request.getParameter("rate"));
 
                 LocalDateTime date = LocalDateTime.now();
-                Product2 product = new Product2();
+                Product product = new Product();
                 product.setId(productID);
 
                 Rating rating = new Rating(0, point, content, date, 0, user, product);

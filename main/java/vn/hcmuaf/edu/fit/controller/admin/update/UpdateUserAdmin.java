@@ -1,6 +1,8 @@
 package vn.hcmuaf.edu.fit.controller.admin.update;
 
 import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.services.PermissionsService;
+import vn.hcmuaf.edu.fit.services.ResourcesService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -8,13 +10,27 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @WebServlet(name = "UpdateUserAdmin", value = "/updateUserAdmin")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class UpdateUserAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id;
+        String email = request.getParameter("email");
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
@@ -75,12 +91,28 @@ public class UpdateUserAdmin extends HttpServlet {
                                 part.write(root.getAbsolutePath() + "/" + fileName);
                             }
 
+                        }else {
+                            User userOld = UserService.getInstance().getUserByEmail(email);
+                            avatar = userOld.getAvatar();
                         }
                         user.setAvatar(avatar);
 
                         if (UserService.getInstance().updateUser(user)){
+                            List<Integer> rsID = ResourcesService.getInstance().getAllID();
+                            boolean flag = true;
+                            for (int i = 1; i <= role; i++) {
+                                for (int j = 0; j < rsID.size(); j++) {
+                                    flag = PermissionsService.getPermissionsService().updatePer(id, role);
+                                    if (flag == false){
+                                        request.setAttribute("type", "error");
+                                        request.setAttribute("information", "Lỗi sql");
+                                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                                        break;
+                                    }
+                                }
+                            }
                             request.setAttribute("type", "success");
-                            request.setAttribute("information", "Thêm thành công");
+                            request.setAttribute("information", "Cập nhật thành công");
                             request.getRequestDispatcher("showUserAdmin").forward(request, response);
                         }else {
                             request.setAttribute("type", "error");
@@ -106,12 +138,5 @@ public class UpdateUserAdmin extends HttpServlet {
                 request.getRequestDispatcher("showUserAdmin").forward(request, response);
             }
         }
-
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

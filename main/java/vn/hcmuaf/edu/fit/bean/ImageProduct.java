@@ -1,19 +1,22 @@
 package vn.hcmuaf.edu.fit.bean;
 
+import org.jdbi.v3.core.mapper.Nested;
+
 import java.io.Serializable;
 
 public class ImageProduct implements Serializable {
     private int id;
     private String url;
-    private int id_product;
+    @Nested("product")
+    private Product product;
 
     public ImageProduct() {
     }
 
-    public ImageProduct(int id, String url, int id_product) {
+    public ImageProduct(int id, String url, Product product) {
         this.id = id;
         this.url = url;
-        this.id_product = id_product;
+        this.product = product;
     }
 
     public int getId() {
@@ -32,12 +35,14 @@ public class ImageProduct implements Serializable {
         this.url = url;
     }
 
-    public int getId_product() {
-        return id_product;
+    @Nested("product")
+    public Product getProduct() {
+        return product;
     }
 
-    public void setId_product(int id_product) {
-        this.id_product = id_product;
+    @Nested("product")
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class ImageProduct implements Serializable {
         return "ImageProduct{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
-                ", id_product=" + id_product +
+                ", product=" + product +
                 '}';
     }
 }

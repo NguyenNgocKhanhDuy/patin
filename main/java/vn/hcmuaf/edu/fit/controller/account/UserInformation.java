@@ -13,9 +13,19 @@ import java.time.format.DateTimeFormatter;
 
 
 @WebServlet(name = "UserInformation", value = "/userInformation")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class UserInformation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fullName = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String sex = request.getParameter("gender");
@@ -76,17 +86,20 @@ public class UserInformation extends HttpServlet {
                             part.write(root.getAbsolutePath() + "/" + fileName);
                         }
 
+                    }else {
+                        User userOld = UserService.getInstance().getUserByEmail(user.getEmail());
+                        avatar = userOld.getAvatar();
                     }
                     user.setAvatar(avatar);
 
                     if (UserService.getInstance().updateUser(user)){
                         request.setAttribute("type", "success");
-                        request.setAttribute("information", "Thêm thành công");
-                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                        request.setAttribute("information", "Cập nhật thành công");
+                        request.getRequestDispatcher("account.jsp").forward(request, response);
                     }else {
                         request.setAttribute("type", "error");
                         request.setAttribute("information", "Lỗi sql");
-                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                        request.getRequestDispatcher("account.jsp").forward(request, response);
                     }
 
                 }
@@ -101,10 +114,5 @@ public class UserInformation extends HttpServlet {
                 request.getRequestDispatcher("account.jsp").forward(request, response);
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

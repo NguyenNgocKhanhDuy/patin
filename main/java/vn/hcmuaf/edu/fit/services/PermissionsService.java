@@ -1,6 +1,7 @@
 package vn.hcmuaf.edu.fit.services;
 
 import vn.hcmuaf.edu.fit.bean.Permissions;
+import vn.hcmuaf.edu.fit.dao.PermissionsDao;
 import vn.hcmuaf.edu.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -37,8 +38,16 @@ public class PermissionsService {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(PermissionsService.getPermissionsService().checkAccess("product", 2));
+    public boolean addPer(int rs, int id, int per){
+        return PermissionsDao.getInstance().addPermission(rs, id, per);
     }
+    public boolean updatePer(int id, int per){
+        return PermissionsDao.getInstance().updatePermission(id, per);
+    }
+
+    public boolean deletePer(int id){
+        return PermissionsDao.getInstance().deletePermission(id);
+    }
+
 
 }

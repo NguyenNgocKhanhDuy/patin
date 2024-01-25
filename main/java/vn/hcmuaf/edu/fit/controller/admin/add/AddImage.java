@@ -1,6 +1,6 @@
 package vn.hcmuaf.edu.fit.controller.admin.add;
 
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
+import vn.hcmuaf.edu.fit.dao.ImageProductDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -40,7 +40,7 @@ public class AddImage extends HttpServlet {
                     part.write(root.getAbsolutePath() + "/" + fileName);
                 }
 
-                if (ImageProductDao2.getInstance().addImage(url, id)){
+                if (ImageProductDao.getInstance().addImage(url, id)){
                     request.setAttribute("type", "success");
                     request.setAttribute("information", "Thêm thành công");
                     request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);

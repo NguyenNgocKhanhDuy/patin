@@ -27,7 +27,7 @@ public class SendMailContact extends HttpServlet {
 
         String editMess = "From: "+fullName+"\nEmail: "+email+"\nNội dung: \n"+message;
 
-        MailService.getInstance().sendMail("21130035@st.hcmuaf.edu.vn", editMess);
+        MailService.getInstance().sendMail(email, editMess);
         request.setAttribute("type", "success");
         request.setAttribute("information", "Gửi thành công");
         request.getRequestDispatcher("contact.jsp").forward(request, response);

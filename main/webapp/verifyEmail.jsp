@@ -11,7 +11,7 @@
 <%@ page isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
-    <title>Verify Email</title>
+    <title>Xác thực email</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/verifyEmail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
 </head>

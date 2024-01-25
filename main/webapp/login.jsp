@@ -45,7 +45,12 @@
                         </a>
                     </li>
                     <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
-                    <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li class="cartLink">
+                        <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                            <span class="amount">${sessionScope.cart.getData().size()}</span>
+                        </c:if>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -99,7 +104,7 @@
         </div>
     </div>
 
-    
+
     <footer>
         <div class="container">
             <div class="info">
@@ -109,26 +114,21 @@
                 </p>
                 <p>
                     Số điện thoại:
-                    <a href="tel:+">+65 11.188.888</a>
+                    <a href="tel:+">0839151003</a>
                 </p>
-    
+
                 <p>
                     Email:
-                    <a href="mailto:">patin@gmail.com</a>
+                    <a href="mailto:">21130035@st.hcmuaf.edu.vn</a>
                 </p>
             </div>
             <div class="subscribe">
-                <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
-                <div class="holder">
-                    <input type="email" id="email" placeholder="Nhập vào email của bạn ">
-                    <input type="submit" id="btn" value="Đăng Ký">
-                </div>
                 <div class="social-media">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest"></i></a></li>
                     </ul>
                 </div>
             </div>

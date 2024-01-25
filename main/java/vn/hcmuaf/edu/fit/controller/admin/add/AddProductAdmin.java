@@ -1,15 +1,13 @@
 package vn.hcmuaf.edu.fit.controller.admin.add;
 
 import vn.hcmuaf.edu.fit.bean.*;
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
-import vn.hcmuaf.edu.fit.services.ProductService2;
-import vn.hcmuaf.edu.fit.services.RatingService;
+import vn.hcmuaf.edu.fit.dao.ImageProductDao;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
-import java.util.StringTokenizer;
 
 
 @WebServlet(name = "AddProductAdmin", value = "/addProductAdmin")
@@ -60,15 +58,15 @@ public class AddProductAdmin extends HttpServlet {
                     Size sizeOb = new Size(size, "");
                     Color colorOb = new Color(color, "");
 
-                    Product2 product = new Product2(0, name, hotNum, sale, information);
-                    boolean flag = ProductService2.getInstance().addProduct(product);
-                    product.setId(ProductService2.getInstance().getIdNewProduct());
+                    Product product = new Product(0, name, hotNum, sale, information);
+                    boolean flag = ProductService.getInstance().addProduct(product);
+                    product.setId(ProductService.getInstance().getIdNewProduct());
 
                     ProductDetail productDetail = new ProductDetail(product, sizeOb, colorOb, quantity, price);
 
-                    flag = ProductService2.getInstance().addProductDetail(productDetail) && flag;
+                    flag = ProductService.getInstance().addProductDetail(productDetail) && flag;
 
-                    int id = ProductService2.getInstance().getIdNewProduct();
+                    int id = ProductService.getInstance().getIdNewProduct();
                     String imgUrl = "";
 
                     Part filePart = request.getPart("file");
@@ -88,7 +86,7 @@ public class AddProductAdmin extends HttpServlet {
                             part.write(root.getAbsolutePath() + "/" + fileName);
                         }
 
-                        if (ImageProductDao2.getInstance().addFirstImage(imgUrl, id) && flag){
+                        if (ImageProductDao.getInstance().addFirstImage(imgUrl, id) && flag){
                             request.setAttribute("type", "success");
                             request.setAttribute("information", "Thêm thành công");
                             request.getRequestDispatcher("showProductAdmin").forward(request, response);

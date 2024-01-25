@@ -70,7 +70,12 @@
                     </li>
                 </c:if>
                 <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
-                <li><a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li class="cartLink">
+                    <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                        <span class="amount">${sessionScope.cart.getData().size()}</span>
+                    </c:if>
+                </li>
             </ul>
         </div>
     </div>
@@ -178,53 +183,6 @@
                 <h3>Sản phẩm bán chạy</h3>
                 <div class="wrapper">
                     <div class="carousel" id="carousel">
-                        <%--                            <c:forEach items="${hotProducts}" var="product">--%>
-                        <%--                                <div class="product-item">--%>
-                        <%--                                    <a href="productDetail?productID=${product.getId()}">--%>
-                        <%--                                        <img src= ${product.getImg()} >--%>
-                        <%--                                        <h4 class="name"> ${product.getName()} </h4>--%>
-                        <%--                                        <span class="price-section">--%>
-                        <%--                                        <c:if test="${product.getMinPrice() == product.getMaxPrice()}">--%>
-                        <%--                                            <c:if test="${product.getSalePercent() == 0}">--%>
-                        <%--                                                <h5 class="price">--%>
-                        <%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-                        <%--                                                </h5>--%>
-                        <%--                                            </c:if>--%>
-                        <%--                                            <c:if test="${product.getSalePercent() != 0}">--%>
-                        <%--                                                 <h5 class="price">--%>
-                        <%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-                        <%--                                                 </h5>--%>
-                        <%--                                                <h5 class="origin">--%>
-                        <%--                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>--%>
-                        <%--                                                </h5>--%>
-                        <%--                                            </c:if>--%>
-                        <%--                                        </c:if>--%>
-                        <%--                                        <c:if test="${product.getMinPrice() != product.getMaxPrice()}">--%>
-                        <%--                                        <h5 class="price">--%>
-                        <%--                                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-                        <%--                                        </h5>--%>
-                        <%--                                            ---%>
-                        <%--                                            <h5 class="price">--%>
-                        <%--                                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>--%>
-                        <%--                                        </h5>--%>
-                        <%--                                        </c:if>--%>
-                        <%--                                    </span>--%>
-                        <%--                                        <ul>--%>
-                        <%--                                            <li><i class="fa-solid fa-heart like"></i></li>--%>
-                        <%--                                            <li><i class="fa-solid fa-cart-shopping cart"></i></li>--%>
-                        <%--                                        </ul>--%>
-                        <%--                                    </a>--%>
-                        <%--                                    <c:if test="${product.getSalePercent() != 0}">--%>
-                        <%--                                        <div class="sale">--%>
-                        <%--                                            <p>--%>
-                        <%--                                                <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>--%>
-                        <%--                                            </p>--%>
-                        <%--                                            <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">--%>
-                        <%--                                        </div>--%>
-                        <%--                                    </c:if>--%>
-                        <%--                                </div>--%>
-                        <%--                            </c:forEach>--%>
-
                         <c:forEach items="${hotProducts}" var="product">
                             <div class="product-item">
                                 <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
@@ -257,8 +215,16 @@
                                                     </c:if>
                                     </span>
                                     <ul>
-                                        <li><i class="fa-solid fa-heart like"></i></li>
-                                        <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+                                        <li>
+                                            <a href="showWishList">
+                                                <i class="fa-solid fa-heart like"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="showCart">
+                                                <i class="fa-solid fa-cart-shopping cart"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </a>
                                 <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
@@ -324,8 +290,16 @@
                                     </span>
 
                                 <ul>
-                                    <li><i class="fa-solid fa-heart like"></i></li>
-                                    <li><i class="fa-solid fa-cart-shopping cart"></i></li>
+                                    <li>
+                                        <a href="showWishList">
+                                            <i class="fa-solid fa-heart like"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="showCart">
+                                            <i class="fa-solid fa-cart-shopping cart"></i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </a>
                             <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
@@ -484,26 +458,21 @@
             </p>
             <p>
                 Số điện thoại:
-                <a href="tel:+">+65 11.188.888</a>
+                <a href="tel:+">0839151003</a>
             </p>
 
             <p>
                 Email:
-                <a href="mailto:">patin@gmail.com</a>
+                <a href="mailto:">21130035@st.hcmuaf.edu.vn</a>
             </p>
         </div>
         <div class="subscribe">
-            <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
-            <div class="holder">
-                <input type="email" id="email" placeholder="Nhập vào email của bạn ">
-                <input type="submit" id="btn" value="Đăng Ký">
-            </div>
             <div class="social-media">
                 <ul>
-                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -516,5 +485,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/list_product.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/goTop.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/preventClickLikeCart.js"></script>
 </body>
 </html>

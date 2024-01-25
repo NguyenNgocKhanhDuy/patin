@@ -5,8 +5,10 @@ import org.jdbi.v3.core.mapper.Nested;
 import java.io.Serializable;
 
 public class BillDetail implements Serializable {
+    @Nested("bill")
+    private Bill bill;
     @Nested("product")
-    private Product product;
+    private ProductMain product;
     @Nested("size")
     private Size size;
     @Nested("color")
@@ -17,7 +19,8 @@ public class BillDetail implements Serializable {
     public BillDetail() {
     }
 
-    public BillDetail(Product product, Size size, Color color, int quantity, int price) {
+    public BillDetail(Bill bill, ProductMain product, Size size, Color color, int quantity, int price) {
+        this.bill = bill;
         this.product = product;
         this.size = size;
         this.color = color;
@@ -25,13 +28,23 @@ public class BillDetail implements Serializable {
         this.price = price;
     }
 
+    @Nested("bill")
+    public Bill getBill() {
+        return bill;
+    }
+
+    @Nested("bill")
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
     @Nested("product")
-    public Product getProduct() {
+    public ProductMain getProduct() {
         return product;
     }
 
     @Nested("product")
-    public void setProduct(Product product) {
+    public void setProduct(ProductMain product) {
         this.product = product;
     }
 
@@ -74,7 +87,8 @@ public class BillDetail implements Serializable {
     @Override
     public String toString() {
         return "BillDetail{" +
-                "product=" + product +
+                "bill=" + bill +
+                ", product=" + product +
                 ", size=" + size +
                 ", color=" + color +
                 ", quantity=" + quantity +

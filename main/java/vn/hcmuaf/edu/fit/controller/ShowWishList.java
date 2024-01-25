@@ -1,10 +1,8 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -33,14 +31,14 @@ public class ShowWishList extends HttpServlet {
             String href = "showWishList?";
             request.setAttribute("href", href);
 
-            List<ProductMain> all = ProductService2.getInstance().getWishList(user.getId());
+            List<ProductMain> all = ProductService.getInstance().getWishList(user.getId());
 
             int totalPage = (int) Math.ceil(all.size() / 15.0);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("productPerPage", 15);
 
-            List<ProductMain> productList = ProductService2.getInstance().getWishListPerPage(currentPage, user.getId());
+            List<ProductMain> productList = ProductService.getInstance().getWishListPerPage(currentPage, user.getId());
             request.setAttribute("list", productList);
             request.getRequestDispatcher("wishlist.jsp").forward(request, response);
         }

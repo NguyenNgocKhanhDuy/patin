@@ -2,6 +2,7 @@ package vn.hcmuaf.edu.fit.services;
 
 import vn.hcmuaf.edu.fit.bean.ImageRating;
 import vn.hcmuaf.edu.fit.bean.Rating;
+import vn.hcmuaf.edu.fit.bean.RatingLike;
 import vn.hcmuaf.edu.fit.dao.RatingDao;
 
 import java.util.List;
@@ -54,5 +55,9 @@ public class RatingService {
         if (RatingDao.getInstance().updateContentRating(id) != 1)
             return false;
         return true;
+    }
+
+    public boolean addRatingLike(RatingLike ratingLike){
+        return RatingDao.getInstance().addInRatingLike(ratingLike);
     }
 }

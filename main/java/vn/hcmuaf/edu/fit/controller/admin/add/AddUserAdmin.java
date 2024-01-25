@@ -2,7 +2,9 @@ package vn.hcmuaf.edu.fit.controller.admin.add;
 
 import vn.hcmuaf.edu.fit.bean.ImageRating;
 import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.services.PermissionsService;
 import vn.hcmuaf.edu.fit.services.RatingService;
+import vn.hcmuaf.edu.fit.services.ResourcesService;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -11,6 +13,7 @@ import javax.servlet.annotation.*;
 import java.io.*;
 import java.sql.Date;
 import java.time.DateTimeException;
+import java.util.List;
 
 
 @WebServlet(name = "AddUserAdmin", value = "/addUserAdmin")
@@ -81,11 +84,28 @@ public class AddUserAdmin extends HttpServlet {
                                 part.write(root.getAbsolutePath() + "/" + fileName);
                             }
 
+                        }else {
+                            avatar = "http://localhost:8080/patin_shop/assets/images/logo.PNG";
                         }
 
                         User user = new User(0, email, password, verify, fullname, address, phone, sex, date, avatar, 0, role);
+                        response.getWriter().println(email);
 
                         if (UserService.getInstance().addUser(user)){
+                            int idNew = UserService.getInstance().getUserByEmail(email).getId();
+                            List<Integer> rsID = ResourcesService.getInstance().getAllID();
+                            boolean flag = true;
+                            for (int i = 1; i <= role; i++) {
+                                for (int j = 0; j < rsID.size(); j++) {
+                                    flag = PermissionsService.getPermissionsService().addPer(rsID.get(j), idNew, i);
+                                    if (flag == false){
+                                        request.setAttribute("type", "error");
+                                        request.setAttribute("information", "Lỗi sql");
+                                        request.getRequestDispatcher("showUserAdmin").forward(request, response);
+                                        break;
+                                    }
+                                }
+                            }
                             request.setAttribute("type", "success");
                             request.setAttribute("information", "Thêm thành công");
                             request.getRequestDispatcher("showUserAdmin").forward(request, response);

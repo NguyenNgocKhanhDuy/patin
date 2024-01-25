@@ -25,23 +25,36 @@
             <img src="${pageContext.request.contextPath}/assets/images/logo.PNG" alt="" class="logo">
             <nav>
                 <ul class="menu">
-                    <li><a href="index.jsp">TRANG CHỦ</a></li>
+                    <li><a href="home">TRANG CHỦ</a></li>
                     <li>
-                        <a href="#">SẢN PHẨM</a>
+                        <a href="listProduct">SẢN PHẨM</a>
                         <ul class="sub_menu list-category">
 
                         </ul>
                     </li>
-                    <li><a href=contact.html>LIÊN HỆ</a></li>
+                    <li><a href=contact.jsp>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
                 <ul>
                     <c:if test="${sessionScope.auth != null}">
                         <li>
-                            <a href="">
+                            <a href="account.jsp">
                                     ${sessionScope.auth.getFullName()}
                             </a>
+                            <ul class="sub_menu user_sub">
+                                <li>
+                                    <a href="account.jsp">Tài khoản</a>
+                                </li>
+                                <c:if test="${sessionScope.auth.getRole() > 0}">
+                                    <li>
+                                        <a href="showUserAdmin">Quản lý</a>
+                                    </li>
+                                </c:if>
+                                <li>
+                                    <a href="logout">Đăng xuất</a>
+                                </li>
+                            </ul>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.auth == null}">
@@ -56,7 +69,7 @@
                             </a>
                         </li>
                     </c:if>
-                    <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                    <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
                     <li class="cartLink">
                         <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
                         <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
@@ -165,53 +178,6 @@
                         </select>
                     </div>
                     <div class="product-list" id="product-list">
-<%--                        <c:forEach items="${products}" var="product">--%>
-<%--                            <div class="product-item">--%>
-<%--                                <a href="product_detail.html">--%>
-<%--                                    <img src= ${product.getImg()} >--%>
-<%--                                    <h4 class="name"> ${product.getName()} </h4>--%>
-<%--                                    <span class="price-section">--%>
-<%--                                        <c:if test="${product.getMinPrice() == product.getMaxPrice()}">--%>
-<%--                                            <c:if test="${product.getSalePercent() == 0}">--%>
-<%--                                                <h5 class="price">--%>
-<%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-<%--                                                </h5>--%>
-<%--                                            </c:if>--%>
-<%--                                            <c:if test="${product.getSalePercent() != 0}">--%>
-<%--                                                <h5 class="origin">--%>
-<%--                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getSalePercent())}" type="currency"/>--%>
-<%--                                                </h5>--%>
-<%--                                                <h5 class="price">--%>
-<%--                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-<%--                                                 </h5>--%>
-<%--                                            </c:if>--%>
-<%--                                        </c:if>--%>
-<%--                                        <c:if test="${product.getMinPrice() != product.getMaxPrice()}">--%>
-<%--                                        <h5 class="price">--%>
-<%--                                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>--%>
-<%--                                        </h5>--%>
-<%--                                            ---%>
-<%--                                            <h5 class="price">--%>
-<%--                                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>--%>
-<%--                                        </h5>--%>
-<%--                                        </c:if>--%>
-<%--                                    </span>--%>
-
-<%--                                    <ul>--%>
-<%--                                        <li><i class="fa-solid fa-heart like"></i></li>--%>
-<%--                                        <li><i class="fa-solid fa-cart-shopping cart"></i></li>--%>
-<%--                                    </ul>--%>
-<%--                                </a>--%>
-<%--                                <c:if test="${product.getSalePercent() != 0}">--%>
-<%--                                    <div class="sale">--%>
-<%--                                        <p>--%>
-<%--                                            <fmt:formatNumber value="${product.getSalePercent()}" type="percent"/>--%>
-<%--                                        </p>--%>
-<%--                                        <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">--%>
-<%--                                    </div>--%>
-<%--                                </c:if>--%>
-<%--                            </div>--%>
-<%--                        </c:forEach>--%>
                         <c:forEach items="${products}" var="product">
                             <div class="product-item">
                                 <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
@@ -399,26 +365,21 @@
                 </p>
                 <p>
                     Số điện thoại:
-                    <a href="tel:+">+65 11.188.888</a>
+                    <a href="tel:+">0839151003</a>
                 </p>
 
                 <p>
                     Email:
-                    <a href="mailto:">patin@gmail.com</a>
+                    <a href="mailto:">21130035@st.hcmuaf.edu.vn</a>
                 </p>
             </div>
             <div class="subscribe">
-                <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
-                <div class="holder">
-                    <input type="email" id="email" placeholder="Nhập vào email của bạn ">
-                    <input type="submit" id="btn" value="Đăng Ký">
-                </div>
                 <div class="social-media">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -429,6 +390,7 @@
     <script src="${pageContext.request.contextPath}/assets/js/category.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/search.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/product_category.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/popupNotice.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/goTop.js"></script>
     </body>
 </html>

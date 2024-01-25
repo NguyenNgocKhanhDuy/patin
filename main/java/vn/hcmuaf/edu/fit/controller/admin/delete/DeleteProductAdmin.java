@@ -1,7 +1,7 @@
 package vn.hcmuaf.edu.fit.controller.admin.delete;
 
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.dao.ImageProductDao;
+import vn.hcmuaf.edu.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,7 +21,7 @@ public class DeleteProductAdmin extends HttpServlet {
         int id;
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            if (ProductService2.getInstance().deleleProductAll(id) && ImageProductDao2.getInstance().deleteAllImageOfProduct(id)){
+            if (ProductService.getInstance().deleleProductAll(id) && ImageProductDao.getInstance().deleteAllImageOfProduct(id)){
                 request.setAttribute("type", "success");
                 request.setAttribute("information", "Xoá thành công");
                 request.getRequestDispatcher("showProductAdmin").forward(request, response);

@@ -14,12 +14,12 @@ public class Rating implements Serializable {
     @Nested("user")
     private User user;
     @Nested("product")
-    private Product2 product;
+    private Product product;
 
     public Rating() {
     }
 
-    public Rating(int id, int score, String content, LocalDateTime date, int like, User user, Product2 product) {
+    public Rating(int id, int score, String content, LocalDateTime date, int like, User user, Product product) {
         this.id = id;
         this.score = score;
         this.content = content;
@@ -80,12 +80,12 @@ public class Rating implements Serializable {
     }
 
     @Nested("product")
-    public Product2 getProduct() {
+    public Product getProduct() {
         return product;
     }
 
     @Nested("product")
-    public void setProduct(Product2 product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

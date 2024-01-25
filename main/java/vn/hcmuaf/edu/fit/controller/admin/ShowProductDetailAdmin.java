@@ -2,10 +2,8 @@ package vn.hcmuaf.edu.fit.controller.admin;
 
 import vn.hcmuaf.edu.fit.bean.*;
 import vn.hcmuaf.edu.fit.dao.ImageProductDao;
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
 import vn.hcmuaf.edu.fit.services.PermissionsService;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -28,9 +26,8 @@ public class ShowProductDetailAdmin extends HttpServlet {
             int id;
             try {
                 id = Integer.parseInt(request.getParameter("id"));
-                ProductMain product = ProductService2.getInstance().getProduct(id);
+                ProductMain product = ProductService.getInstance().getProduct(id);
                 request.setAttribute("product", product);
-//            List<Product> productDetail = ProductService.getInstance().getAllProductDetail(id);
 
                 String text = product.getProductDetail().getProduct().getInformation();
                 text = text.replace("%", "\r\n").trim();
@@ -51,16 +48,15 @@ public class ShowProductDetailAdmin extends HttpServlet {
 
                 double productPerPage = 5.0;
 
-                int totalPage = (int) Math.ceil(ProductService2.getInstance().getAllProductDetail(id).size()/ productPerPage);
+                int totalPage = (int) Math.ceil(ProductService.getInstance().getAllProductDetail(id).size()/ productPerPage);
                 request.setAttribute("totalPage", totalPage);
                 request.setAttribute("currentPage", currentPage);
                 request.setAttribute("productPerPage", (int) productPerPage);
 
-//            List<ProductMain> productDetail = ProductService2.getInstance().getAllProductDetail(id);
-                List<ProductMain> productDetail = ProductService2.getInstance().getAllProductDetailPerPage(currentPage, (int) productPerPage, id);
+                List<ProductMain> productDetail = ProductService.getInstance().getAllProductDetailPerPage(currentPage, (int) productPerPage, id);
                 request.setAttribute("productDetail", productDetail);
 
-                List<ImageProduct2> imageProducts = ImageProductDao2.getInstance().getAllImage(id);
+                List<ImageProduct> imageProducts = ImageProductDao.getInstance().getAllImage(id);
                 request.setAttribute("images", imageProducts);
 
                 request.getRequestDispatcher("admin.jsp").forward(request, response);

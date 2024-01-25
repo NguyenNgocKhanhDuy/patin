@@ -1,21 +1,18 @@
 package vn.hcmuaf.edu.fit.controller.admin.update;
 
-import vn.hcmuaf.edu.fit.bean.Bill2;
-import vn.hcmuaf.edu.fit.bean.BillDetail2;
-import vn.hcmuaf.edu.fit.services.BillService2;
+import vn.hcmuaf.edu.fit.services.BillService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
-import java.util.List;
 
 
 @WebServlet(name = "UpdateBillAdmin", value = "/updateBillAdmin")
 public class UpdateBillAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
@@ -33,7 +30,7 @@ public class UpdateBillAdmin extends HttpServlet {
             }else {
                 statusText = "Đã giao";
             }
-            if (BillService2.getInstance().updateStatusBill(id, statusText)){
+            if (BillService.getInstance().updateStatusBill(id, statusText)){
                 request.setAttribute("type", "success");
                 request.setAttribute("information", "Cập nhật thành công");
                 request.getRequestDispatcher("showBillDetailAdmin?id="+id).forward(request, response);

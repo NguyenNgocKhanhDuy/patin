@@ -1,10 +1,8 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,11 +55,9 @@ public class ListProductCategory extends HttpServlet {
             if (maxText == null) maxText = String.valueOf(maxValue);
 
             if (!minText.equals(minValue+"")) {
-//                minText = minText.substring(0, minText.length() - 2).replace(".", "");
                 minText = minText.replace(".", "");
             }
             if (!maxText.equals(maxValue+"")) {
-//                maxText = maxText.substring(0, maxText.length() - 2).replace(".", "");
                 maxText = maxText.replace(".", "");
             }
 
@@ -114,12 +110,12 @@ public class ListProductCategory extends HttpServlet {
                 min = minValue;
                 max = maxValue;
             }
-            products = ProductService2.getInstance().getProductPerPageFilterPriceByCategory(currentPage, sort, min, max, category);
-            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPriceByCategory(min, max, category) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterPriceByCategory(currentPage, sort, min, max, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceByCategory(min, max, category) / productPerPage));
             href += "min="+min+"&max="+max;
         } else if (!(min != minValue || max != maxValue) && isColorFilter) {
-            products = ProductService2.getInstance().getProductPerPageFilterColorByCategory(currentPage, sort, colors, category);
-            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterColorByCategory(colors, category) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterColorByCategory(currentPage, sort, colors, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterColorByCategory(colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -129,8 +125,8 @@ public class ListProductCategory extends HttpServlet {
 
         } else if ((min != minValue || max != maxValue) && isColorFilter) {
 
-            products = ProductService2.getInstance().getProductPerPageFilterPriceColorByCategory(currentPage, sort, min, max, colors, category);
-            totalPage = (int) Math.ceil((ProductService2.getInstance().countFilterPriceColorByCategory(min, max, colors, category) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageFilterPriceColorByCategory(currentPage, sort, min, max, colors, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countFilterPriceColorByCategory(min, max, colors, category) / productPerPage));
 
             String txt = "";
             for (int i = 0; i < colors.length; i++) {
@@ -139,8 +135,8 @@ public class ListProductCategory extends HttpServlet {
             href += "min="+min+"&max="+max+txt;
 
         }else {
-            products = ProductService2.getInstance().getProductPerPageByCategory(currentPage, sort, category);
-            totalPage = (int) Math.ceil((ProductService2.getInstance().countAllByCategory(category) / productPerPage));
+            products = ProductService.getInstance().getProductPerPageByCategory(currentPage, sort, category);
+            totalPage = (int) Math.ceil((ProductService.getInstance().countAllByCategory(category) / productPerPage));
         }
 
         href += "&sort="+sort;

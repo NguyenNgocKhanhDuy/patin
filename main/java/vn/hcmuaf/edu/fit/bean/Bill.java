@@ -12,22 +12,19 @@ public class Bill implements Serializable {
     private String status;
     private String payment;
     private String note;
-    @Nested()
-    private BillDetail billDetail;
     @Nested("user")
     private User user;
 
     public Bill() {
     }
 
-    public Bill(int id, String name, LocalDateTime date, String status, String payment, String note, BillDetail billDetail, User user) {
+    public Bill(int id, String name, LocalDateTime date, String status, String payment, String note, User user) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.status = status;
         this.payment = payment;
         this.note = note;
-        this.billDetail = billDetail;
         this.user = user;
     }
 
@@ -79,16 +76,6 @@ public class Bill implements Serializable {
         this.payment = payment;
     }
 
-    @Nested()
-    public BillDetail getBillDetail() {
-        return billDetail;
-    }
-
-    @Nested()
-    public void setBillDetail(BillDetail billDetail) {
-        this.billDetail = billDetail;
-    }
-
     @Nested("user")
     public User getUser() {
         return user;
@@ -107,7 +94,6 @@ public class Bill implements Serializable {
                 ", date=" + date +
                 ", status='" + status + '\'' +
                 ", note='" + note + '\'' +
-                ", billDetail=" + billDetail +
                 ", user=" + user +
                 '}';
     }

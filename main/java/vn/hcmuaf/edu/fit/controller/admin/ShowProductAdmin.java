@@ -1,11 +1,9 @@
 package vn.hcmuaf.edu.fit.controller.admin;
 
-import vn.hcmuaf.edu.fit.bean.Product;
 import vn.hcmuaf.edu.fit.bean.ProductMain;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.PermissionsService;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +25,7 @@ public class ShowProductAdmin extends HttpServlet {
             int per = PermissionsService.getPermissionsService().checkAccess(rsName, user.getId());
             request.setAttribute("per", per);
 
-            int all = ProductService2.getInstance().countAll();
+            int all = ProductService.getInstance().countAll();
             request.setAttribute("allProduct", all);
 
 
@@ -48,9 +46,7 @@ public class ShowProductAdmin extends HttpServlet {
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("productPerPage", (int) productPerPage);
 
-//        List<Product> products = ProductService.getInstance().getProductPerPage(currentPage, "", (int) productPerPage);
-            List<ProductMain> products = ProductService2.getInstance().getProductPerPage(currentPage, "", (int) productPerPage);
-//        List<ProductMain> products = ProductService2.getInstance().getProductPerPageAdmin(currentPage, "", (int) productPerPage);
+            List<ProductMain> products = ProductService.getInstance().getProductPerPage(currentPage, "", (int) productPerPage);
             request.setAttribute("products", products);
 
             request.setAttribute("type", request.getAttribute("type"));
@@ -58,10 +54,6 @@ public class ShowProductAdmin extends HttpServlet {
 
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
-
-
-//        List<Product> allProduct = ProductService.getInstance().getAllProduct();
-//        List<ProductMain> allProduct = ProductService2.getInstance().getAllProduct();
 
     }
 

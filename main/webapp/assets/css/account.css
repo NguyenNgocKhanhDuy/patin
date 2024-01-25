@@ -91,7 +91,7 @@
 
 #content .right .infomation .wrapper{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     font-size: 18px;
 
 }
@@ -218,35 +218,6 @@
     cursor: pointer;
 }
 
-/*#content .right .address {*/
-/*    min-height: 400px;*/
-/*    !*display: none;*!*/
-/*}*/
-
-/*#content .right .address .top {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: space-between;*/
-/*    font-size: 18px;*/
-/*    height: 80px;*/
-/*    border-bottom: 1px solid #ccc;*/
-/*}*/
-
-/*#content .right .address button {*/
-/*    width: 150px;*/
-/*    height: 40px;*/
-/*    background-color: #7fad39;*/
-/*    color: #fff;*/
-/*    font-size: 18px;*/
-/*    border: 1px solid #000;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#content .right .address .bottom {*/
-/*    padding-top: 30px;*/
-/*    font-size: 18px;*/
-/*}*/
-
 #content .right .order {
     min-height: 400px;
     /*display: none;*/
@@ -307,10 +278,7 @@
     font-size: 16px;
 }
 
-#content .right .order .orderShow:nth-last-child(1),
-#content .right .order .orderShow:nth-last-child(2) {
-    display: none;
-}
+
 /* BILL */
 #content .right .bill-list {
     margin-top: 40px;
@@ -392,10 +360,6 @@
     width: 90%;
 }
 
-#content .right .bill_detail .general p:last-child span:last-child {
-    font-size: 40px;
-    cursor: pointer;
-}
 
 #content .right .bill_detail .bill-list {
     margin-top: 40px;

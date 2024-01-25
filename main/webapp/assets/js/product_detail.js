@@ -183,13 +183,6 @@ minus.addEventListener("click", function () {
     var value = parseInt(inputQuantity.value);
     if (value > 1) {
         value--;
-        // boxQuantity.classList.remove("disabled");
-        // plus.classList.remove("disabledNoBg");
-        // inputQuantity.classList.remove("disabledNoBg");
-    }else {
-        // boxQuantity.classList.add("disabled");
-        // minus.classList.add("disabledNoBg");
-        // inputQuantity.classList.add("disabledNoBg");
     }
     inputQuantity.value = value;
 });
@@ -198,13 +191,6 @@ plus.addEventListener("click", function () {
     var value = parseInt(inputQuantity.value);
     if (value < parseInt(quantityDetail.textContent)) {
         value++;
-        // boxQuantity.classList.remove("disabled");
-        // minus.classList.remove("disabledNoBg");
-        // inputQuantity.classList.remove("disabledNoBg");
-    }else {
-        // boxQuantity.classList.add("disabled");
-        // plus.classList.add("disabledNoBg");
-        // inputQuantity.classList.add("disabledNoBg");
     }
     inputQuantity.value = value;
 });

@@ -9,7 +9,6 @@ function slideProduct() {
     var previous = document.getElementById("previous");
 
 // kích thước 1 item
-//     var itemWidth = items[0].clientWidth + 30;
     var itemWidth = 300;
 
     var step = itemWidth;

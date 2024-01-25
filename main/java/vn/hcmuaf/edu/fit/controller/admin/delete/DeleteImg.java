@@ -1,7 +1,6 @@
 package vn.hcmuaf.edu.fit.controller.admin.delete;
 
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
-import vn.hcmuaf.edu.fit.services.ProductService2;
+import vn.hcmuaf.edu.fit.dao.ImageProductDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,7 +12,7 @@ import java.io.*;
 public class DeleteImg extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
@@ -23,7 +22,7 @@ public class DeleteImg extends HttpServlet {
         try {
             id = Integer.parseInt(request.getParameter("id"));
             idImg = Integer.parseInt(request.getParameter("idImg"));
-            if (ImageProductDao2.getInstance().deleteImage(idImg, id)){
+            if (ImageProductDao.getInstance().deleteImage(idImg, id)){
                 request.setAttribute("type", "success");
                 request.setAttribute("information", "Xoá thành công");
                 request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);

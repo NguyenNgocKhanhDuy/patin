@@ -1270,3 +1270,14 @@
     opacity: 0.8;
     box-shadow: 0 0 4px 3px #ccc;
 }
+
+.disabled {
+    display: none !important;
+}
+
+.modal-bill select{
+    display: block;
+    margin: 40px auto;
+    font-size: 18px;
+    border: none;
+}

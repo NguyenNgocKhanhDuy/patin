@@ -6,7 +6,6 @@ import vn.hcmuaf.edu.fit.dao.CategoryDao;
 import vn.hcmuaf.edu.fit.dao.ColorDao;
 import vn.hcmuaf.edu.fit.dao.SizeDao;
 import vn.hcmuaf.edu.fit.services.ProductService;
-import vn.hcmuaf.edu.fit.services.ProductService2;
 import vn.hcmuaf.edu.fit.services.UserService;
 
 import javax.servlet.*;
@@ -46,7 +45,7 @@ public class ShowModalAdmin extends HttpServlet {
                         int idSize = SizeDao.getInstance().getIdByName(size);
                         int idColor = ColorDao.getInstance().getIdByName(color);
 //                        Product product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
-                        ProductMain product = ProductService2.getInstance().getProductDetail(id, idSize, idColor);
+                        ProductMain product = ProductService.getInstance().getProductDetail(id, idSize, idColor);
                         response.getWriter().println(gson.toJson(product));
                     }
                 } else if (select.equals("brand")) {

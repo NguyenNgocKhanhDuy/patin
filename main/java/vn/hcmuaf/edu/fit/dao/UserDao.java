@@ -46,7 +46,7 @@ public class UserDao {
 
     public List<User> getUserByEmail(String email) {
         List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT email " +
+            return handle.createQuery("SELECT id, email " +
                             "FROM user " +
                             "WHERE email = ?")
                     .bind(0, email)
@@ -196,6 +196,7 @@ public class UserDao {
         return user;
     }
 
+
     public boolean deleteUser(int id) {
         Integer i = JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM user WHERE id = ?").bind(0, id).execute();
@@ -203,5 +204,6 @@ public class UserDao {
         if(i == 1) return true;
         return false;
     }
+
 
 }

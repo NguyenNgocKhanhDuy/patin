@@ -1,7 +1,6 @@
 package vn.hcmuaf.edu.fit.controller.admin.delete;
 
-import vn.hcmuaf.edu.fit.dao.ImageProductDao2;
-import vn.hcmuaf.edu.fit.services.BillService2;
+import vn.hcmuaf.edu.fit.services.BillService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,19 +20,19 @@ public class DeleteBillAdmin extends HttpServlet {
         int id;
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            if (BillService2.getInstance().deleteBill(id)){
+            if (BillService.getInstance().deleteBill(id)){
                 request.setAttribute("type", "success");
                 request.setAttribute("information", "Xoá thành công");
-                request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);
+                request.getRequestDispatcher("showBillAdmin").forward(request, response);
             }else {
                 request.setAttribute("type", "error");
                 request.setAttribute("information", "Lỗi sql");
-                request.getRequestDispatcher("showProductDetailAdmin?id="+id).forward(request, response);
+                request.getRequestDispatcher("showBillAdmin").forward(request, response);
             }
         }catch (NumberFormatException e){
             request.setAttribute("type", "error");
             request.setAttribute("information", "Lỗi");
-            request.getRequestDispatcher("showProductAdmin").forward(request, response);
+            request.getRequestDispatcher("showBillAdmin").forward(request, response);
         }
     }
 }

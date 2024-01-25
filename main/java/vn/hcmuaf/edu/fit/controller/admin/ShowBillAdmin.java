@@ -1,10 +1,8 @@
 package vn.hcmuaf.edu.fit.controller.admin;
 
 import vn.hcmuaf.edu.fit.bean.Bill;
-import vn.hcmuaf.edu.fit.bean.Bill2;
 import vn.hcmuaf.edu.fit.bean.User;
 import vn.hcmuaf.edu.fit.services.BillService;
-import vn.hcmuaf.edu.fit.services.BillService2;
 import vn.hcmuaf.edu.fit.services.PermissionsService;
 
 import javax.servlet.ServletException;
@@ -28,8 +26,7 @@ public class ShowBillAdmin extends HttpServlet {
             request.setAttribute("per", per);
 
 
-//            List<Bill> allBill = BillService.getInstance().getAllBill();
-            List<Bill2> allBill = BillService2.getInstance().getAllBill();
+            List<Bill> allBill = BillService.getInstance().getAllBill();
             request.setAttribute("allBill", allBill);
 
 
@@ -50,8 +47,7 @@ public class ShowBillAdmin extends HttpServlet {
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("productPerPage", (int) productPerPage);
 
-//        List<Bill> bills = BillService.getInstance().getBillPerPage(currentPage, (int) productPerPage);
-            List<Bill2> bills = BillService2.getInstance().getBillPerPage(currentPage, (int) productPerPage);
+            List<Bill> bills = BillService.getInstance().getBillPerPage(currentPage, (int) productPerPage);
             request.setAttribute("bills", bills);
 
             request.setAttribute("type", request.getAttribute("type"));

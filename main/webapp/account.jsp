@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/account.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fontawesome/css/all.min.css">
-    <title>Giỏ hàng</title>
+    <title>Tài khoản</title>
     <fmt:setLocale value="vi_VN"/>
 </head>
 <body>
@@ -26,16 +26,29 @@
 
                         </ul>
                     </li>
-                    <li><a href=lienHe.jsp>LIÊN HỆ</a></li>
+                    <li><a href=contact.jsp>LIÊN HỆ</a></li>
                 </ul>
             </nav>
             <div class="user">
                 <ul>
                     <c:if test="${sessionScope.auth != null}">
                         <li>
-                            <a href="">
+                            <a href="#">
                                     ${sessionScope.auth.getFullName()}
                             </a>
+                            <ul class="sub_menu user_sub">
+                                <li>
+                                    <a href="#">Tài khoản</a>
+                                </li>
+                                <c:if test="${sessionScope.auth.getRole() > 0}">
+                                    <li>
+                                        <a href="showUserAdmin">Quản lý</a>
+                                    </li>
+                                </c:if>
+                                <li>
+                                    <a href="logout">Đăng xuất</a>
+                                </li>
+                            </ul>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.auth == null}">
@@ -71,9 +84,6 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul id="list-cate" class="list list-category hideCategory">
-                    <c:forEach var="i" items="${category}">
-                        <li><a href="product_category.html">${i.getName()}</a></li>
-                    </c:forEach>
                 </ul>
             </div>
             <div class="search">
@@ -89,6 +99,9 @@
     <div id="image">
         <div class="container-img">
             <img src="${pageContext.request.contextPath}/assets/images/patin.jpg" alt="">
+            <p class="breadcrumb">
+                <a href="#">Tài khoản</a>
+            </p>
         </div>
     </div>
 
@@ -148,8 +161,15 @@
                 <c:if test="${pass == null && bills == null && billDetail == null}">
                     <div class="infomation">
                         <h3>Thông tin</h3>
-                        <form action="userInformation" class="info">
+                        <form action="userInformation" method="post" enctype="multipart/form-data" class="info">
                             <div class="wrapper">
+                                <div class="avatar">
+                                    <img src="${sessionScope.auth.getAvatar()}" alt="">
+                                    <div class="selectImg">
+                                        <input type="file" accept="image/*" name="file">
+                                        <input type="submit" value="Lựa chọn ảnh">
+                                    </div>
+                                </div>
 
                                 <div class="part name">
                                     <label>Tên:</label>
@@ -157,7 +177,7 @@
                                 </div>
                                 <div class="part email">
                                     <label>Email: </label>
-                                    <input type="email" value="${sessionScope.auth.getEmail()}">
+                                    <input type="email" value="${sessionScope.auth.getEmail()}" readonly="readonly">
                                 </div>
                                 <div class="part phone">
                                     <label>Số điện thoại: </label>
@@ -170,40 +190,29 @@
                                 <div class="part gender">
                                     <label>Giới tính:</label>
                                     <div class="selectGender">
-                                        <input type="radio" name="gender" checked = "true">
+                                        <input type="radio" value="Nam" name="gender" checked = "true">
                                         <label>Nam</label>
-                                        <input type="radio" name="gender">
+                                        <input type="radio" value="Nữ" name="gender">
                                         <label>Nữ</label>
                                     </div>
                                 </div>
                                 <div class="part dob">
                                     <label>Ngày sinh:</label>
+                                    <input type="hidden" id="DOB" value="${sessionScope.auth.getDob() != null ? sessionScope.auth.getDob() : 0}">
                                     <div class="dob-input">
                                         <select class="day" name="day">
-                                            <option>31</option>
                                         </select>
                                         <select class="month" name="month">
-                                            <option>12</option>
                                         </select>
                                         <select class="year" name="year">
-                                            <option>1900</option>
                                         </select>
                                     </div>
                                 </div>
                                 <input type="submit" class="save" value="Lưu Thông Tin">
-
-                                <div class="avatar">
-                                <img src="${sessionScope.auth.getAvatar()}" alt="">
-                                <div class="selectImg">
-                                    <input type="file" accept="image/*" name="file">
-                                    <input type="submit" value="Lựa chọn ảnh">
-                                </div>
-                            </div>
                             </div>
                         </form>
                     </div>
                 </c:if>
-
 
 
                 <c:if test="${bills != null}">
@@ -245,51 +254,44 @@
                                 </c:if>
                             </ul>
                         </div>
-                        <div class="search">
-                            <input type="text" placeholder="Nhập đơn hàng">
-                            <button class="search-btn">Tìm kiếm</button>
-                        </div>
                         <div class="all-order orderShow">
+                            <c:if test="${bills.size() == 0}">
+                                <p>Bạn chưa có đơn hàng ship</p>
+                            </c:if>
 
-                            <div class="bill section">
-                                <div class="bill-list">
-                                    <div class="title">
-                                        <h4>STT</h4>
-                                        <h4>Mã đơn hàng</h4>
-                                        <h4>Ngày đặt</h4>
-                                        <h4>Tình trạng</h4>
-                                        <h4>Phương thức</h4>
-                                    </div>
-                                    <c:forEach var="bill" items="${bills}" varStatus="index">
-                                        <div class="bill-item">
-                                            <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
-                                            <p class="id">${bill.getName()}</p>
-                                            <p class="date">
-                                                <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
-                                                <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
-                                            </p>
-
-                                            <p class="state">${bill.getStatus()}</p>
-                                            <p class="payment">${bill.getPayment()}</p>
-                                            <a href="showOrderDetail?id=${bill.getId()}">
-                                                <i class="fa-solid fa-clipboard detail"></i>
-                                            </a>
-<%--                                            <i class="fa-solid fa-xmark del"></i>--%>
+                            <c:if test="${bills.size() > 0}">
+                                <div class="bill section">
+                                    <div class="bill-list">
+                                        <div class="title">
+                                            <h4>STT</h4>
+                                            <h4>Mã đơn hàng</h4>
+                                            <h4>Ngày đặt</h4>
+                                            <h4>Tình trạng</h4>
+                                            <h4>Phương thức</h4>
                                         </div>
-                                    </c:forEach>
+                                        <c:forEach var="bill" items="${bills}" varStatus="index">
+                                            <div class="bill-item">
+                                                <p class="index">${(currentPage - 1) * productPerPage + index.index + 1}</p>
+                                                <p class="id">${bill.getName()}</p>
+                                                <p class="date">
+                                                    <fmt:parseDate value="${bill.getDate()}" pattern="y-M-dd'T'H:m" var="myParseDate"/>
+                                                    <fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd HH:mm"/>
+                                                </p>
 
+                                                <p class="state">${bill.getStatus()}</p>
+                                                <p class="payment">${bill.getPayment()}</p>
+                                                <a href="showOrderDetail?id=${bill.getId()}">
+                                                    <i class="fa-solid fa-clipboard detail"></i>
+                                                </a>
+                                                    <%--                                            <i class="fa-solid fa-xmark del"></i>--%>
+                                            </div>
+                                        </c:forEach>
+
+                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
+                            </c:if>
 
 
-
-                        <div class="ship-order orderShow">
-                            <p>Bạn chưa có đơn hàng ship</p>
-                        </div>
-                        <div class="complete-order orderShow">
-                            <p>Bạn chưa có đơn hàng complete</p>
                         </div>
                     </div>
                 </c:if>
@@ -412,26 +414,21 @@
                 </p>
                 <p>
                     Số điện thoại:
-                    <a href="tel:+">+65 11.188.888</a>
+                    <a href="tel:+">0839151003</a>
                 </p>
 
                 <p>
                     Email:
-                    <a href="mailto:">patin@gmail.com</a>
+                    <a href="mailto:">21130035@st.hcmuaf.edu.vn</a>
                 </p>
             </div>
             <div class="subscribe">
-                <p>Đăng ký để nhận tin tức về sản phẩm mới nhất</p>
-                <div class="holder">
-                    <input type="email" id="email" placeholder="Nhập vào email của bạn ">
-                    <input type="submit" id="btn" value="Đăng Ký">
-                </div>
                 <div class="social-media">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest"></i></a></li>
                     </ul>
                 </div>
             </div>

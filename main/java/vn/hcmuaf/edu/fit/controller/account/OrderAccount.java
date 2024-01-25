@@ -1,9 +1,8 @@
 package vn.hcmuaf.edu.fit.controller.account;
 
-import vn.hcmuaf.edu.fit.bean.Bill2;
-import vn.hcmuaf.edu.fit.bean.BillDetail2;
+import vn.hcmuaf.edu.fit.bean.Bill;
 import vn.hcmuaf.edu.fit.bean.User;
-import vn.hcmuaf.edu.fit.services.BillService2;
+import vn.hcmuaf.edu.fit.services.BillService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,8 +20,6 @@ public class OrderAccount extends HttpServlet {
         int currentPage;
         try {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-
         }catch (NumberFormatException e ){
             currentPage = 1;
         }
@@ -39,16 +36,16 @@ public class OrderAccount extends HttpServlet {
             billStatus = 0;
         }
 
-        List<Bill2> allBills = new ArrayList<>();
-        List<Bill2> bills = new ArrayList<>();
+        List<Bill> allBills = new ArrayList<>();
+        List<Bill> bills = new ArrayList<>();
 
         if (!(billStatus == 0)){
             String status = billStatus == 1 ? "Đang giao" : "Đã giao";
-            allBills = BillService2.getInstance().getAllBillByUserAndStatus(user.getId(), status);
-            bills = BillService2.getInstance().getBillPerPageByUserAndStatus(currentPage,(int) productPerPage, user.getId(), status);
+            allBills = BillService.getInstance().getAllBillByUserAndStatus(user.getId(), status);
+            bills = BillService.getInstance().getBillPerPageByUserAndStatus(currentPage,(int) productPerPage, user.getId(), status);
         }else {
-            allBills = BillService2.getInstance().getAllBillByUser(user.getId());
-            bills = BillService2.getInstance().getBillPerPageByUser(currentPage, (int) productPerPage, user.getId());
+            allBills = BillService.getInstance().getAllBillByUser(user.getId());
+            bills = BillService.getInstance().getBillPerPageByUser(currentPage, (int) productPerPage, user.getId());
         }
 
         request.setAttribute("billStatus", billStatus);
