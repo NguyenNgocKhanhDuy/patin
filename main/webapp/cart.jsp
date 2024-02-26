@@ -108,99 +108,69 @@
 
     <div id="content">
         <div class="container">
-            <div class="title">
-                <h3>Sản phẩm</h3>
-                <h3>Kích cỡ</h3>
-                <h3>Màu sắc</h3>
-                <h3>Giá</h3>
-                <h3>Số lượng</h3>
-                <h3>Tổng cộng</h3>
-
-            </div>
-            <div class="product-list">
-                <c:set var="totalPrice" value="${totalPrice != null ? totalPrice : 0}"/>
-                <c:if test="${sessionScope.cart.getData().size() > 0 && sessionScope.cart != null}">
-                    <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
-                        <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
-                        <c:set var="totalPrice" value="${totalPrice + (product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
-                        <a href="productDetail?productID=${keys.get(index.index).getId()}" class="product-item">
-                            <input type="hidden" class="id" value="${keys.get(index.index).getId()}"/>
-                            <input type="hidden" class="size" value="${keys.get(index.index).getSize()}"/>
-                            <input type="hidden" class="color" value="${keys.get(index.index).getColor()}"/>
-                            <div class="img-name">
-                                <img src="${product.getImg()}" alt="">
-                                <p class="name">${product.getProductDetail().getProduct().getName()}</p>
-                            </div>
-                            <p class="size">${product.getProductDetail().getSize().getName()}</p>
-                            <p class="color">${product.getProductDetail().getColor().getName()}</p>
-                            <p class="price">
-                                <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice()}"/>
-                            </p>
-                            <div class="boxQuantity">
-                                <div class="quantity">
-                                    <i class="fa-solid fa-minus minus"></i>
-                                    <input type="number" value="${data.get(keys.get(index.index)).getQuantity()}">
-                                    <i class="fa-solid fa-plus plus"></i>
-                                </div>
-                            </div>
-                            <p class="total">
-                                <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
-                            </p>
-                            <i class="fa-solid fa-xmark del"></i>
-                        </a>
-                    </c:forEach>
-
-                </c:if>
-
-            </div>
-            <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
-                <div class="pay_total">
-                    <h3>Giỏ hàng</h3>
-                    <div class="price-total">
-                        <p>Tổng tiền</p>
-                        <p class="totalValue">
-                            <fmt:formatNumber type="currency" value="${totalPrice}"/>
-                        </p>
-                    </div>
-                    <a href="payment" class="checkout">Thanh toán</a>
+            <c:if test="${data.size() == 0}">
+                <p>Bạn chưa thêm sản phẩm vào giỏ hàng</p>
+            </c:if>
+            <c:if test="${data.size() > 0}">
+                <div class="title">
+                    <h3>Sản phẩm</h3>
+                    <h3>Kích cỡ</h3>
+                    <h3>Màu sắc</h3>
+                    <h3>Giá</h3>
+                    <h3>Số lượng</h3>
+                    <h3>Tổng cộng</h3>
                 </div>
+                <div class="product-list">
+                    <c:set var="totalPrice" value="${totalPrice != null ? totalPrice : 0}"/>
+                    <c:if test="${sessionScope.cart.getData().size() > 0 && sessionScope.cart != null}">
+                        <c:forEach begin="0" end="${data.size()-1}" varStatus="index">
+                            <c:set var="product" value="${data.get(keys.get(index.index)).getProduct()}"/>
+                            <c:set var="totalPrice" value="${totalPrice + (product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity())}"/>
+                            <a href="productDetail?productID=${keys.get(index.index).getId()}" class="product-item">
+                                <input type="hidden" class="id" value="${keys.get(index.index).getId()}"/>
+                                <input type="hidden" class="size" value="${keys.get(index.index).getSize()}"/>
+                                <input type="hidden" class="color" value="${keys.get(index.index).getColor()}"/>
+                                <div class="img-name">
+                                    <img src="${product.getImg()}" alt="">
+                                    <p class="name">${product.getProductDetail().getProduct().getName()}</p>
+                                </div>
+                                <p class="size">${product.getProductDetail().getSize().getName()}</p>
+                                <p class="color">${product.getProductDetail().getColor().getName()}</p>
+                                <p class="price">
+                                    <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice()}"/>
+                                </p>
+                                <div class="boxQuantity">
+                                    <div class="quantity">
+                                        <i class="fa-solid fa-minus minus"></i>
+                                        <input type="number" value="${data.get(keys.get(index.index)).getQuantity()}">
+                                        <i class="fa-solid fa-plus plus"></i>
+                                    </div>
+                                </div>
+                                <p class="total">
+                                    <fmt:formatNumber type="currency" value="${product.getProductDetail().getPrice() * data.get(keys.get(index.index)).getQuantity()}"/>
+                                </p>
+                                <i class="fa-solid fa-xmark del"></i>
+                            </a>
+                        </c:forEach>
+
+                    </c:if>
+
+                </div>
+                <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">
+                    <div class="pay_total">
+                        <h3>Giỏ hàng</h3>
+                        <div class="price-total">
+                            <p>Tổng tiền</p>
+                            <p class="totalValue">
+                                <fmt:formatNumber type="currency" value="${totalPrice}"/>
+                            </p>
+                        </div>
+                        <a href="payment" class="checkout">Thanh toán</a>
+                    </div>
+                </c:if>
             </c:if>
         </div>
     </div>
-
-<%--    <div class="modal">--%>
-<%--        <div class="modal-container">--%>
-<%--            <i class="fa-solid fa-xmark del"></i>--%>
-<%--            <h2>Chi tiết</h2>--%>
-<%--            <div class="modal-detail">--%>
-<%--                <div class="detail-info">--%>
-<%--                    <div class="detail-section">--%>
-<%--                        <h3 class="title">Màu sắc: </h3>--%>
-<%--                        <span class="selected color">Xanh dương</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="detail-section">--%>
-<%--                        <h3 class="title">Kích thước: </h3>--%>
-<%--                        <span class="selected size">34</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="detail-section">--%>
-<%--                        <h3 class="title">Số lượng: </h3>--%>
-<%--                        <span class="selected quantity">1</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="detail-section">--%>
-<%--                        <h3 class="title">Tổng giá: </h3>--%>
-<%--                        <span class="selected price">14,000,000đ</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="detail-note">--%>
-<%--                    <h3>Ghi chú</h3>--%>
-<%--                    <textarea class="note-content"></textarea>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="complete">--%>
-<%--                <span>Hoàn thành</span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 
     <div class="popup ${type != null ? type : "none"}">
         <c:if test="${type.equals(\"success\")}">

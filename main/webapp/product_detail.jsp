@@ -38,20 +38,29 @@
         </nav>
         <div class="user">
             <ul>
-                <input type="hidden" id="href" value="${href}">
                 <c:if test="${sessionScope.auth != null}">
                     <li>
-                        <a href="">
+                        <a href="account.jsp">
                                 ${sessionScope.auth.getFullName()}
                         </a>
+                        <ul class="sub_menu user_sub">
+                            <li>
+                                <a href="account.jsp">Tài khoản</a>
+                            </li>
+                            <c:if test="${sessionScope.auth.getRole() > 0}">
+                                <li>
+                                    <a href="showUserAdmin">Quản lý</a>
+                                </li>
+                            </c:if>
+                            <li>
+                                <a href="logout">Đăng xuất</a>
+                            </li>
+                        </ul>
                     </li>
                 </c:if>
-
                 <c:if test="${sessionScope.auth == null}">
                     <li>
-
                         <a href="login.jsp">
-                            <c:set var="location" value="${href}" scope="session"/>
                             ĐĂNG NHẬP
                         </a>
                     </li>
@@ -61,7 +70,7 @@
                         </a>
                     </li>
                 </c:if>
-                <li><a href="wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                <li><a href="showWishList"><i class="fa-solid fa-heart"></i></a></li>
                 <li class="cartLink">
                     <a href="showCart"><i class="fa-solid fa-cart-shopping"></i></a>
                     <c:if test="${sessionScope.cart != null && sessionScope.cart.getData().size() > 0}">

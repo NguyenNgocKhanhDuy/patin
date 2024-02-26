@@ -175,65 +175,62 @@
             <h3>Sản phẩm khác</h3>
             <div class="product-list" id="product-list">
                 <c:forEach items="${products}" var="product">
-        <div class="product-item">
-            <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
-                <img src= ${product.getImg()} >
-                <h4 class="name"> ${product.getProductDetail().getProduct().getName()} </h4>
-                <span class="price-section">
-                                        <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
-                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() == 0}">
-                                                <h5 class="price">
-                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
-                                                </h5>
-                                            </c:if>
-                                            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
-                                                 <h5 class="price">
-                                                    <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
-                                                 </h5>
-                                                <h5 class="origin">
-                                                    <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
-                                                </h5>
-                                            </c:if>
-                                        </c:if>
-                                        <c:if test="${product.getMinPrice() != product.getMaxPrice()}">
+                    <div class="product-item">
+                        <a href="productDetail?productID=${product.getProductDetail().getProduct().getId()}">
+                            <img src= ${product.getImg()} >
+                            <h4 class="name"> ${product.getProductDetail().getProduct().getName()} </h4>
+                            <span class="price-section">
+                                <c:if test="${product.getMinPrice() == product.getMaxPrice()}">
+                                    <c:if test="${product.getProductDetail().getProduct().getSalePercent() == 0}">
                                         <h5 class="price">
                                             <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                         </h5>
-                                            -
-                                            <h5 class="price">
-                                            <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
+                                    </c:if>
+                                    <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
+                                        <h5 class="price">
+                                            <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
                                         </h5>
-                                        </c:if>
-                                    </span>
-
-                <ul>
-                    <li>
-                        <a href="showWishList">
-                            <i class="fa-solid fa-heart like"></i>
+                                        <h5 class="origin">
+                                            <fmt:formatNumber value="${product.getMinPrice() / (1 - product.getProductDetail().getProduct().getSalePercent())}" type="currency"/>
+                                        </h5>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${product.getMinPrice() != product.getMaxPrice()}">
+                                    <h5 class="price">
+                                        <fmt:formatNumber value="${product.getMinPrice()}" type="currency"/>
+                                    </h5>
+                                    -
+                                    <h5 class="price">
+                                        <fmt:formatNumber value="${product.getMaxPrice()}" type="currency"/>
+                                    </h5>
+                                </c:if>
+                            </span>
+                            <ul>
+                                <li>
+                                    <a href="showWishList">
+                                        <i class="fa-solid fa-heart like"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="showCart">
+                                        <i class="fa-solid fa-cart-shopping cart"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </a>
-                    </li>
-                    <li>
-                        <a href="showCart">
-                            <i class="fa-solid fa-cart-shopping cart"></i>
-                        </a>
-                    </li>
-                </ul>
-            </a>
-            <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
-                <div class="sale">
-                    <p>
-                        <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
-                    </p>
-                    <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
-                </div>
-            </c:if>
-        </div>
-    </c:forEach>
+                        <c:if test="${product.getProductDetail().getProduct().getSalePercent() != 0}">
+                            <div class="sale">
+                                <p>
+                                    <fmt:formatNumber value="${product.getProductDetail().getProduct().getSalePercent()}" type="percent"/>
+                                </p>
+                                <img class="tag" src="${pageContext.request.contextPath}/assets/images/tag.png" alt="">
+                            </div>
+                        </c:if>
+                    </div>
+                </c:forEach>
             </div>
-
         </div>
         <div class="intro">
-
             <div class="box">
                 <div class="text">
                     <h4>Lợi ích trượt patin</h4>

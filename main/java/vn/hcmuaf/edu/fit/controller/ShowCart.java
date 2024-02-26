@@ -20,7 +20,7 @@ public class ShowCart extends HttpServlet {
         if (user == null){
             request.setAttribute("type", "error");
             request.setAttribute("information", "Đăng nhập để tiếp tục");
-            request.getRequestDispatcher("showCart").forward(request, response);
+            request.getRequestDispatcher("listProduct").forward(request, response);
         }else {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
             if (cart == null) cart = new Cart();

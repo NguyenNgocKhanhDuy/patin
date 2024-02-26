@@ -213,13 +213,13 @@
                             <c:if test="${bills != null || billDetail != null}">
                                 <a href="showBillAdmin" class="activeAccountNav">
                                     <i class="fa-brands fa-wpforms"></i>
-                                    <span>Báo cáo</span>
+                                    <span>Đơn hàng</span>
                                 </a>
                             </c:if>
                             <c:if test="${bills == null && billDetail == null}">
                                 <a href="showBillAdmin">
                                     <i class="fa-brands fa-wpforms"></i>
-                                    <span>Báo cáo</span>
+                                    <span>Đơn hàng</span>
                                 </a>
                             </c:if>
                         </li>
@@ -463,15 +463,6 @@
 
                 <c:if test="${bills != null}">
                     <div class="report section">
-                        <div class="tk_sale">
-                            <div class="sale">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <div class="text">
-                                    <p>Tổng doanh thu</p>
-                                    <h4 class="totalSale">${totalBillPrice}</h4>
-                                </div>
-                            </div>
-                        </div>
                         <div class="bill section">
 
                             <div class="bill-list">

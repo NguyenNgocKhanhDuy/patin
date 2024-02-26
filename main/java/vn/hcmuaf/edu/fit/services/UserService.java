@@ -56,7 +56,7 @@ public class UserService {
                 int code = Integer.parseInt(randomCodeVerify());
                 if (!UserDao.getInstance().isExitsCode(code)) {
                     insertVerifyCode(code, email);
-                    return MailService.getInstance().sendMailVerify("21130035@st.hcmuaf.edu.vn", String.valueOf(code));
+                    return MailService.getInstance().sendMailVerify(email, String.valueOf(code));
                 }
             }
         }

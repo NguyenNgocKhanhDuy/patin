@@ -256,7 +256,7 @@
                         </div>
                         <div class="all-order orderShow">
                             <c:if test="${bills.size() == 0}">
-                                <p>Bạn chưa có đơn hàng ship</p>
+                                <p>Bạn chưa có đơn hàng</p>
                             </c:if>
 
                             <c:if test="${bills.size() > 0}">

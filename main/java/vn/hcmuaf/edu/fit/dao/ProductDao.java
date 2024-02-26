@@ -497,7 +497,8 @@ public class ProductDao {
                     "WHERE image_product.id = 1 AND wish_list.id_user = :user " +
                     "GROUP BY product.id " +
                             "LIMIT :start, 15")
-                    .bind("user", userID).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
+                    .bind("user", userID)
+                    .bind("start", start).mapToBean(ProductMain.class).stream().collect(Collectors.toList());
         });
         return products;
     }

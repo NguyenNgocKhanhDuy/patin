@@ -1,13 +1,13 @@
 package vn.hcmuaf.edu.fit.controller;
 
-import vn.hcmuaf.edu.fit.services.MailService;
-import vn.hcmuaf.edu.fit.services.RegisterService;
-import vn.hcmuaf.edu.fit.services.UserService;
+import vn.hcmuaf.edu.fit.bean.User;
+import vn.hcmuaf.edu.fit.services.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
+import java.util.List;
 
 
 @WebServlet(name = "Register", value = "/doRegister")
@@ -34,6 +34,11 @@ public class Register extends HttpServlet {
         } else {
             String status = RegisterService.getInstance().register(email, pass, confirmPass, fullName, address, phone);
             if (status.equals("Đăng ký thành công")){
+                List<Integer> allRsID = ResourcesService.getInstance().getAllID();
+                int id = UserService.getInstance().getUserByEmail(email).getId();
+                for (int i = 0; i < allRsID.size(); i++) {
+                    PermissionsService.getPermissionsService().addPer(allRsID.get(i), id, 1);
+                }
                 request.getSession().setAttribute("timeStart", RegisterService.getInstance().getCurrentTime());
                 request.getSession().setAttribute("email", email);
                 request.getRequestDispatcher("verifyEmail.jsp").forward(request, response);
